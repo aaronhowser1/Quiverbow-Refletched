@@ -7,7 +7,7 @@ import org.apache.logging.log4j.Logger
 
 @Mod(QuiverBowRefletched.ID)
 object QuiverBowRefletched {
-    const val ID = "quiverbow-refletched"
+    const val ID = "quiverbow_refletched"
 
     // the logger for our mod
     val LOGGER: Logger = LogManager.getLogger(ID)
