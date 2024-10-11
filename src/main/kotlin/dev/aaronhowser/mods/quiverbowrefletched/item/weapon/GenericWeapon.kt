@@ -1,8 +1,8 @@
 package dev.aaronhowser.mods.quiverbowrefletched.item.weapon
 
-import dev.aaronhowser.mods.quiverbowrefletched.item.base.GenericWeapon
+import dev.aaronhowser.mods.quiverbowrefletched.item.base.WeaponBase
 
-class GenericWeapon(override val maxAmmo: Int) : GenericWeapon() {
+class GenericWeapon(maxAmmo: Int) : WeaponBase(maxAmmo) {
 
     //TODO: Nothing should use this, remove when nothing does
 
