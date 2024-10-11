@@ -1,15 +1,16 @@
 package dev.aaronhowser.mods.quiverbowrefletched.item
 
-import dev.aaronhowser.mods.quiverbowrefletched.item.base.WeaponBase
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.player.Player
+import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 
 class PowderKnuckle(
     val isModified: Boolean
-) : WeaponBase(
-    maxAmmo = 8
+) : Item(
+    Properties()
+        .stacksTo(1)
 ) {
 
     override fun onLeftClickEntity(stack: ItemStack, player: Player, entity: Entity): Boolean {

@@ -6,9 +6,9 @@ import net.neoforged.neoforge.registries.DeferredRegister
 object ModRegistries {
 
     private val registries: List<DeferredRegister<out Any>> = listOf(
+        ModDataComponents.DATA_COMPONENT_REGISTRY,
         ModItems.ITEM_REGISTRY,
-        ModCreativeTabs.TABS_REGISTRY,
-        ModDataComponents.DATA_COMPONENT_REGISTRY
+        ModCreativeTabs.TABS_REGISTRY
     )
 
     fun register(modBus: IEventBus) {
