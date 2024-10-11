@@ -8,27 +8,28 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.TooltipFlag
 
 abstract class WeaponBase(
-    val maxAmmo: Int
-) : Item(
-    Properties()
+    val maxAmmo: Int,
+    properties: Properties = Properties()
         .stacksTo(1)
         .component(
             ModDataComponents.AMMO_COUNT_COMPONENT.get(),
             0
         )
-) {
+) : Item(properties) {
 
-    fun getAmmo(stack: ItemStack): Int {
-        return stack.get(ModDataComponents.AMMO_COUNT_COMPONENT.get()) ?: 0
-    }
+    companion object {
+        fun getAmmo(stack: ItemStack): Int {
+            return stack.get(ModDataComponents.AMMO_COUNT_COMPONENT.get()) ?: 0
+        }
 
-    fun consumeAmmo(stack: ItemStack, amount: Int): Boolean {
-        val currentAmount = getAmmo(stack)
-        if (currentAmount < amount) return false
+        fun consumeAmmo(stack: ItemStack, amount: Int): Boolean {
+            val currentAmount = getAmmo(stack)
+            if (currentAmount < amount) return false
 
-        val newAmount = currentAmount - amount
-        stack.set(ModDataComponents.AMMO_COUNT_COMPONENT.get(), newAmount)
-        return true
+            val newAmount = currentAmount - amount
+            stack.set(ModDataComponents.AMMO_COUNT_COMPONENT.get(), newAmount)
+            return true
+        }
     }
 
     override fun getBarWidth(stack: ItemStack): Int {
