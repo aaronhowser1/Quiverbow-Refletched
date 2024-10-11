@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "L": {
+      "tag": "c:gems/lapis"
+    },
+    "P": {
+      "tag": "c:glass_panes/colorless"
+    }
+  },
+  "pattern": [
+    "P P",
+    "P P",
+    "PLP"
+  ],
+  "result": {
+    "count": 1,
+    "id": "quiverbow_refletched:lapis_magazine"
+  }
+}

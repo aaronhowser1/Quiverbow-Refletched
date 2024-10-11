@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "tag": "minecraft:wooden_buttons"
+    },
+    "G": {
+      "tag": "c:glass_panes/colorless"
+    },
+    "I": {
+      "tag": "c:ingots/iron"
+    }
+  },
+  "pattern": [
+    "GBG",
+    "G G",
+    "GIG"
+  ],
+  "result": {
+    "count": 1,
+    "id": "quiverbow_refletched:seed_jar"
+  }
+}

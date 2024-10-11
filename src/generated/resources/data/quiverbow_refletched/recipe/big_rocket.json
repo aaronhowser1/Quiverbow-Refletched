@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "L": {
+      "tag": "minecraft:planks"
+    },
+    "P": {
+      "item": "minecraft:paper"
+    },
+    "S": {
+      "tag": "c:strings"
+    },
+    "T": {
+      "item": "minecraft:tnt"
+    }
+  },
+  "pattern": [
+    "LPP",
+    "PTP",
+    "PPS"
+  ],
+  "result": {
+    "count": 1,
+    "id": "quiverbow_refletched:big_rocket"
+  }
+}

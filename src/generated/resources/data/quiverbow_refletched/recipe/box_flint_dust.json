@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "F": {
+      "item": "minecraft:flint"
+    },
+    "P": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "pattern": [
+    "FFF",
+    "FFF",
+    "FFP"
+  ],
+  "result": {
+    "count": 1,
+    "id": "quiverbow_refletched:box_flint_dust"
+  }
+}

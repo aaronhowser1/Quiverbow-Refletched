@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "I": {
+      "tag": "c:ingots/iron"
+    },
+    "P": {
+      "item": "minecraft:piston"
+    },
+    "S": {
+      "item": "minecraft:sticky_piston"
+    }
+  },
+  "pattern": [
+    "I I",
+    "IPI",
+    "ISI"
+  ],
+  "result": {
+    "count": 1,
+    "id": "quiverbow_refletched:sugar_engine_barrel"
+  }
+}

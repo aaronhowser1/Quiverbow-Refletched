@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "minecraft:ice"
+    },
+    "I": {
+      "tag": "c:ingots/iron"
+    },
+    "S": {
+      "tag": "c:slime_balls"
+    }
+  },
+  "pattern": [
+    "IIC",
+    "IIC",
+    "CCS"
+  ],
+  "result": {
+    "count": 1,
+    "id": "quiverbow_refletched:cold_iron_clip"
+  }
+}

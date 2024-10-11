@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "R": {
+      "item": "minecraft:firework_rocket"
+    },
+    "S": {
+      "tag": "c:strings"
+    }
+  },
+  "pattern": [
+    "RRR",
+    "RSR",
+    "RRR"
+  ],
+  "result": {
+    "count": 1,
+    "id": "quiverbow_refletched:rocket_bundle"
+  }
+}

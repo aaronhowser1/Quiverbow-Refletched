@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "I": {
+      "tag": "c:ingots/iron"
+    },
+    "O": {
+      "tag": "c:obsidians"
+    }
+  },
+  "pattern": [
+    "I I",
+    "I I",
+    "IOI"
+  ],
+  "result": {
+    "count": 1,
+    "id": "quiverbow_refletched:obsidian_magazine"
+  }
+}

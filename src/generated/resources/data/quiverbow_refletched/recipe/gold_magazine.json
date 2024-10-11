@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "G": {
+      "tag": "c:ingots/gold"
+    },
+    "I": {
+      "tag": "c:ingots/iron"
+    }
+  },
+  "pattern": [
+    "I I",
+    "I I",
+    "IGI"
+  ],
+  "result": {
+    "count": 1,
+    "id": "quiverbow_refletched:gold_magazine"
+  }
+}

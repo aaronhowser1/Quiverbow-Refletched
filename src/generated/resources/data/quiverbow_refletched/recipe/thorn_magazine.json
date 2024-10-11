@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "I": {
+      "tag": "c:ingots/iron"
+    },
+    "L": {
+      "tag": "c:leathers"
+    }
+  },
+  "pattern": [
+    "L L",
+    "L L",
+    "LIL"
+  ],
+  "result": {
+    "count": 1,
+    "id": "quiverbow_refletched:thorn_magazine"
+  }
+}

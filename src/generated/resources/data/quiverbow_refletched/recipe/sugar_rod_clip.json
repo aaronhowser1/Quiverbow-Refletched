@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "I": {
+      "tag": "c:ingots/iron"
+    },
+    "P": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "pattern": [
+    "P P",
+    "P P",
+    "PIP"
+  ],
+  "result": {
+    "count": 1,
+    "id": "quiverbow_refletched:sugar_rod_clip"
+  }
+}
