@@ -16,11 +16,13 @@ class EnderBowGuideProjectileRenderer(
         return OtherUtil.modResource("textures/entity/projectile/ender.png")
     }
 
-    override fun shouldRender(livingEntity: EnderBowGuideProjectile, camera: Frustum, camX: Double, camY: Double, camZ: Double): Boolean {
-        val owner = livingEntity.owner
+    override fun shouldRender(projectile: EnderBowGuideProjectile, camera: Frustum, camX: Double, camY: Double, camZ: Double): Boolean {
+        val owner = projectile.owner ?: return false
         if (owner != ClientUtil.localPlayer) return false
 
-        return super.shouldRender(livingEntity, camera, camX, camY, camZ)
+        if (projectile.distanceToSqr(owner.eyePosition) < 3 * 3) return false
+
+        return super.shouldRender(projectile, camera, camX, camY, camZ)
     }
 
 }

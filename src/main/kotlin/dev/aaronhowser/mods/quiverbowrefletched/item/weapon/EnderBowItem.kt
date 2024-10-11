@@ -27,6 +27,8 @@ class EnderBowItem : BowItem(
 
         if (level is ServerLevel) {
 
+            if (level.gameTime % 5 != 0L) return
+
             val projectileStack = livingEntity.getProjectile(stack)
             if (projectileStack.isEmpty) return
 
