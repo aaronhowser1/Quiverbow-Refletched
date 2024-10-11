@@ -46,7 +46,7 @@ class ModItemModelProvider(
             ModItems.OBSIDIAN_MAGAZINE,
             ModItems.GOLD_MAGAZINE,
             ModItems.THORN_MAGAZINE,
-            ModItems.LAPIS_MAGAZINE,
+//            ModItems.LAPIS_MAGAZINE,          //TODO: Needs special predicate
             ModItems.REDSTONE_MAGAZINE,
             ModItems.LARGE_NETHERRACK_MAGAZINE,
             ModItems.LARGE_REDSTONE_MAGAZINE,

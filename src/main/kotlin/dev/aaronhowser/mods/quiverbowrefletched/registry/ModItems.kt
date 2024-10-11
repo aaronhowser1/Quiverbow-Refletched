@@ -55,7 +55,7 @@ object ModItems {
 
     val ARROW_BUNDLE = basic("arrow_bundle")
     val ROCKET_BUNDLE = basic("rocket_bundle")
-    val SUGAR_ROD_CLIP = basic("clip_sugar_rod")
+    val SUGAR_ROD_CLIP = basic("sugar_rod_clip")
     val BIG_ROCKET = basic("big_rocket")
     val COLD_IRON_CLIP = basic("cold_iron_clip")
     val BOX_FLINT_DUST = basic("box_flint_dust")
