@@ -28,7 +28,7 @@ class ModLanguageProvider(
         addItem(ModItems.DRAGON_BOX, "Dragon Box")
         addItem(ModItems.FOUR_HEADED_DRAGON_BOX, "Four Headed Dragon Box")
         addItem(ModItems.LAPIS_COIL, "Lapis Coil")
-        addItem(ModItems.THORN_SPLITTER, "Thorn Splitter")
+        addItem(ModItems.THORN_SPITTER, "Thorn Splitter")
         addItem(ModItems.PROXIMITY_THORN_THROWER, "Proximity Thorn Thrower")
         addItem(ModItems.SUGAR_ENGINE, "Sugar Engine")
         addItem(ModItems.FIREWORKS_ROCKET_LAUNCHER, "Fireworks Rocket Launcher")

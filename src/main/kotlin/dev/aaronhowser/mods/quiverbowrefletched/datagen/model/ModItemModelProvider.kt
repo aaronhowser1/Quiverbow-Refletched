@@ -68,7 +68,7 @@ class ModItemModelProvider(
             ModItems.DRAGON_BOX,
             ModItems.FOUR_HEADED_DRAGON_BOX,
             ModItems.LAPIS_COIL,
-            ModItems.THORN_SPLITTER,
+            ModItems.THORN_SPITTER,
             ModItems.PROXIMITY_THORN_THROWER,
             ModItems.SUGAR_ENGINE,
             ModItems.FIREWORKS_ROCKET_LAUNCHER,
