@@ -17,7 +17,7 @@ class PowderKnuckle(
         if (player.level().isClientSide) return false
         if (entity !is LivingEntity) return false
 
-        if (!consumeAmmo(stack, 1)) return false
+        if (!player.isCreative && !consumeAmmo(stack, 1)) return false
 
         entity.remainingFireTicks = 2 * 20
         entity.level().explode(
@@ -26,7 +26,7 @@ class PowderKnuckle(
             entity.y,
             entity.z,
             1.5f,
-            Level.ExplosionInteraction.TNT
+            Level.ExplosionInteraction.MOB
         )
 
         return true
