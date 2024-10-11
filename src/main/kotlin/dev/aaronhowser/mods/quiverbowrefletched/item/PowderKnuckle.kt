@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.quiverbowrefletched.item
 
 import dev.aaronhowser.mods.quiverbowrefletched.item.base.WeaponBase
+import net.minecraft.ChatFormatting
 import net.minecraft.core.BlockPos
 import net.minecraft.network.chat.Component
 import net.minecraft.tags.BlockTags
@@ -124,9 +125,15 @@ class PowderKnuckle(
     ) {
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag)
 
-        tooltipComponents.add(Component.literal("Explosion with radius 1.5 on hit"))
-        tooltipComponents.add(Component.literal("Punch mobs or right-click mobs"))
-        tooltipComponents.add(Component.literal("Craft with up to 8 Gunpowder to reload"))
+        tooltipComponents.add(Component.literal("Explosion with radius $explosionRadius on hit").withStyle(ChatFormatting.GREEN))
+
+        if (isModified) {
+            tooltipComponents.add(Component.literal("Right-click block for 3x3x3 silk touch mining").withStyle(ChatFormatting.GREEN))
+        } else {
+            tooltipComponents.add(Component.literal("Punch mobs or right-click blocks").withStyle(ChatFormatting.GREEN))
+        }
+
+        tooltipComponents.add(Component.literal("Craft with up to 8 Gunpowder to reload").withStyle(ChatFormatting.YELLOW))
         tooltipComponents.add(Component.literal("Not safe to use"))
     }
 
