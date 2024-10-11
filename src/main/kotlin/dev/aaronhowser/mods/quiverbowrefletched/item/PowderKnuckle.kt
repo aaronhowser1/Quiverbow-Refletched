@@ -64,7 +64,7 @@ class PowderKnuckle(
             if (isModified) Level.ExplosionInteraction.NONE else Level.ExplosionInteraction.TNT
         )
 
-        if (isModified) {
+        if (isModified && player != null) {
             val clickedFace = context.clickedFace
             val centerOfVolumeToMine = clickedPos.relative(clickedFace, -1)
 
@@ -83,12 +83,13 @@ class PowderKnuckle(
     private fun mineBlock(
         level: Level,
         blockPos: BlockPos,
-        player: Player?,
+        player: Player,
         explosion: Explosion,
         tool: ItemStack
     ) {
-        val blockState = level.getBlockState(blockPos)
+        if (!level.mayInteract(player, blockPos)) return
 
+        val blockState = level.getBlockState(blockPos)
         if (blockState.isEmpty || !blockState.fluidState.isEmpty) return
         if (level.getBlockEntity(blockPos) != null) return
         if (blockState.requiresCorrectToolForDrops() && blockState.`is`(BlockTags.NEEDS_DIAMOND_TOOL)) return
@@ -101,7 +102,7 @@ class PowderKnuckle(
         )
         if (explosionResistance > 1000) return
 
-        if (player != null && !CommonHooks.canEntityDestroy(level, blockPos, player)) return
+        if (!CommonHooks.canEntityDestroy(level, blockPos, player)) return
 
         Block.dropResources(
             blockState,
