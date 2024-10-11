@@ -1,4 +1,4 @@
-package dev.aaronhowser.mods.quiverbowrefletched.item
+package dev.aaronhowser.mods.quiverbowrefletched.item.weapon
 
 import dev.aaronhowser.mods.quiverbowrefletched.item.base.WeaponBase
 

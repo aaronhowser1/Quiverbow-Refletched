@@ -1,8 +1,8 @@
 package dev.aaronhowser.mods.quiverbowrefletched.registry
 
 import dev.aaronhowser.mods.quiverbowrefletched.QuiverBowRefletched
-import dev.aaronhowser.mods.quiverbowrefletched.item.GenericWeapon
-import dev.aaronhowser.mods.quiverbowrefletched.item.PowderKnuckle
+import dev.aaronhowser.mods.quiverbowrefletched.item.weapon.GenericWeapon
+import dev.aaronhowser.mods.quiverbowrefletched.item.weapon.PowderKnuckle
 import net.minecraft.world.item.Item
 import net.neoforged.neoforge.registries.DeferredItem
 import net.neoforged.neoforge.registries.DeferredRegister
