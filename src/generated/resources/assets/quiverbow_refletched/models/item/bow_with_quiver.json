@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:item/generated",
+  "parent": "minecraft:item/bow",
   "overrides": [
     {
       "model": "quiverbow_refletched:item/bow_with_quiver_pulling_0",

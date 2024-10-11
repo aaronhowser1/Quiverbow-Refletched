@@ -111,9 +111,11 @@ class ModItemModelProvider(
     }
 
     private fun pullingItem(item: Item) {
-        var mainModel = weapon(item)    // The idle one when not being pulled TODO: Make this use parent of bow
-
         val itemRl = BuiltInRegistries.ITEM.getKey(item)
+
+        var mainModel = getBuilder("item/${itemRl.path}")
+            .parent(ModelFile.UncheckedModelFile(mcLoc("item/bow")))
+            .texture("layer0", modLoc("item/weapon/${itemRl.path}"))
 
         for (pullStage in 0..2) {
             val textureLoc = modLoc("item/weapon/${itemRl.path}_pulling_$pullStage")
