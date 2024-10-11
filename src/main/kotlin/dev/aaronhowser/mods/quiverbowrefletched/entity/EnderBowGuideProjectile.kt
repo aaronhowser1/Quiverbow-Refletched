@@ -1,4 +1,4 @@
-package dev.aaronhowser.mods.quiverbowrefletched.datagen.entity
+package dev.aaronhowser.mods.quiverbowrefletched.entity
 
 import dev.aaronhowser.mods.quiverbowrefletched.registry.ModEntityTypes
 import net.minecraft.world.entity.EntityType

@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.quiverbowrefletched.registry
 
 import dev.aaronhowser.mods.quiverbowrefletched.QuiverBowRefletched
-import dev.aaronhowser.mods.quiverbowrefletched.datagen.entity.EnderBowGuideProjectile
+import dev.aaronhowser.mods.quiverbowrefletched.entity.EnderBowGuideProjectile
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.MobCategory
