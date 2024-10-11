@@ -1,13 +1,13 @@
 package dev.aaronhowser.mods.quiverbowrefletched.event
 
 import dev.aaronhowser.mods.quiverbowrefletched.QuiverBowRefletched
+import dev.aaronhowser.mods.quiverbowrefletched.datagen.model.ModItemModelProvider
 import dev.aaronhowser.mods.quiverbowrefletched.entity.render.EnderBowGuideProjectileRenderer
 import dev.aaronhowser.mods.quiverbowrefletched.registry.ModEntityTypes
 import dev.aaronhowser.mods.quiverbowrefletched.registry.ModItems
 import net.minecraft.client.renderer.entity.EntityRendererProvider
 import net.minecraft.client.renderer.entity.EntityRenderers
 import net.minecraft.client.renderer.item.ItemProperties
-import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.EntityType
 import net.neoforged.api.distmarker.Dist
@@ -39,13 +39,27 @@ object ClientModBusEvents {
     @SubscribeEvent
     fun onModelRegistry(event: ModelEvent.RegisterAdditional) {
 
-        ItemProperties.register(
+        val pullPredicateItems = listOf(
             ModItems.ENDER_BOW.get(),
-            ResourceLocation.withDefaultNamespace("pulling")
-        ) { usedStack, _, entity, _ ->
-            if (entity == null) return@register 0.0f
+            ModItems.BOW_WITH_QUIVER.get()
+        )
 
-            return@register (usedStack.getUseDuration(entity) - entity.useItemRemainingTicks).toFloat() / 20.0f
+        for (item in pullPredicateItems) {
+            ItemProperties.register(
+                item,
+                ModItemModelProvider.pullAmount
+            ) { usedStack, _, entity, _ ->
+                if (entity == null) return@register 0.0f
+
+                return@register (usedStack.getUseDuration(entity) - entity.useItemRemainingTicks).toFloat() / 20.0f
+            }
+
+            ItemProperties.register(
+                item,
+                ModItemModelProvider.isPulling
+            ) { usedStack, _, entity, _ ->
+                if (entity != null && entity.isUsingItem && entity.useItem === usedStack) 1f else 0f
+            }
         }
 
     }

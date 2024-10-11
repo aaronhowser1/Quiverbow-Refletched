@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.quiverbowrefletched.datagen.model
 
 import dev.aaronhowser.mods.quiverbowrefletched.QuiverBowRefletched
 import dev.aaronhowser.mods.quiverbowrefletched.registry.ModItems
+import dev.aaronhowser.mods.quiverbowrefletched.util.OtherUtil
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.data.PackOutput
 import net.minecraft.resources.ResourceLocation
@@ -15,6 +16,11 @@ class ModItemModelProvider(
     output: PackOutput,
     existingFileHelper: ExistingFileHelper
 ) : ItemModelProvider(output, QuiverBowRefletched.ID, existingFileHelper) {
+
+    companion object {
+        val isPulling = OtherUtil.modResource("is_pulling")
+        val pullAmount = OtherUtil.modResource("pull_amount")
+    }
 
     private fun item(item: Item, subfolder: String): ItemModelBuilder {
         val itemRl = BuiltInRegistries.ITEM.getResourceKey(item).get().location()
@@ -124,17 +130,23 @@ class ModItemModelProvider(
                 .parent(ModelFile.UncheckedModelFile("item/generated"))
                 .texture("layer0", textureLoc)
 
-            mainModel = mainModel
+            var tempModel = mainModel
                 .override()
-                .predicate(mcLoc("pull"), 1f)
-                .predicate(
-                    mcLoc("pulling"), when (pullStage) {
-                        0 -> 0f
-                        1 -> 0.65f
-                        2 -> 0.9f
-                        else -> 0f
-                    }
-                )
+                .predicate(isPulling, 1f)
+
+            if (pullStage != 0) {
+                tempModel = tempModel
+                    .predicate(
+                        pullAmount,
+                        when (pullStage) {
+                            1 -> 0.65f
+                            2 -> 0.9f
+                            else -> error("Invalid pull stage")
+                        }
+                    )
+            }
+
+            mainModel = tempModel
                 .model(pullModel)
                 .end()
         }
