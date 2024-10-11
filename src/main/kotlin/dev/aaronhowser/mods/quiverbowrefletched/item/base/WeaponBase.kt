@@ -16,10 +16,21 @@ abstract class WeaponBase(
         )
 ) {
 
-    override fun getBarWidth(stack: ItemStack): Int {
-        val currentAmmo = stack.get(ModDataComponents.AMMO_COUNT_COMPONENT.get())?.amount ?: 0
+    fun getAmmo(stack: ItemStack): Int {
+        return stack.get(ModDataComponents.AMMO_COUNT_COMPONENT.get())?.amount ?: 0
+    }
 
-        return (currentAmmo / maxAmmo.toFloat() * 13).toInt()
+    fun consumeAmmo(stack: ItemStack, amount: Int): Boolean {
+        val currentAmount = getAmmo(stack)
+        if (currentAmount < amount) return false
+
+        val newAmount = currentAmount - amount
+        stack.set(ModDataComponents.AMMO_COUNT_COMPONENT.get(), AmmoCountItemComponent(newAmount))
+        return true
+    }
+
+    override fun getBarWidth(stack: ItemStack): Int {
+        return (getAmmo(stack) / maxAmmo.toFloat() * 13).toInt()
     }
 
     override fun isBarVisible(stack: ItemStack): Boolean {

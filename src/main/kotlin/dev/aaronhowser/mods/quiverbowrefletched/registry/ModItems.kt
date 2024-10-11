@@ -75,7 +75,7 @@ object ModItems {
     val POWDER_KNUCKLE: DeferredItem<PowderKnuckle> =
         register("powder_knuckle") { PowderKnuckle(isModified = false) }
     val MODIFIED_POWDER_KNUCKLE: DeferredItem<PowderKnuckle> =
-        register("modified_powder_knuckle") { PowderKnuckle(isModified = true) }
+        register("powder_knuckle_modified") { PowderKnuckle(isModified = true) }
     val NETHER_BELLOWS =
         basic("nether_bellows")
     val REDSTONE_SPRAYER =
