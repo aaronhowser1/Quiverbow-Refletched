@@ -1,20 +1,28 @@
 package dev.aaronhowser.mods.quiverbowrefletched.item
 
 import dev.aaronhowser.mods.quiverbowrefletched.item.base.WeaponBase
-import dev.aaronhowser.mods.quiverbowrefletched.util.ClientUtil
+import net.minecraft.core.BlockPos
 import net.minecraft.network.chat.Component
+import net.minecraft.tags.BlockTags
+import net.minecraft.world.InteractionResult
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.TooltipFlag
+import net.minecraft.world.item.context.UseOnContext
+import net.minecraft.world.item.enchantment.Enchantments
+import net.minecraft.world.level.Explosion
 import net.minecraft.world.level.Level
+import net.minecraft.world.level.block.Block
 
 class PowderKnuckle(
     val isModified: Boolean
 ) : WeaponBase(
     maxAmmo = 8
 ) {
+
+    val explosionRadius = 1.5f
 
     override fun onLeftClickEntity(stack: ItemStack, player: Player, entity: Entity): Boolean {
         if (player.level().isClientSide) return false
@@ -29,11 +37,79 @@ class PowderKnuckle(
             entity.x,
             entity.y,
             entity.z,
-            1.5f,
-            Level.ExplosionInteraction.MOB
+            explosionRadius,
+            Level.ExplosionInteraction.TNT
         )
 
         return true
+    }
+
+    override fun useOn(context: UseOnContext): InteractionResult {
+        val player = context.player
+        val canUse = player?.isCreative == true || consumeAmmo(context.itemInHand, 1)
+
+        if (!canUse) return InteractionResult.FAIL
+
+        val level = context.level
+        if (level.isClientSide) return InteractionResult.SUCCESS
+
+        val clickedPos = context.clickedPos
+        val explosion = level.explode(
+            player,
+            clickedPos.x + 0.5,
+            clickedPos.y + 0.5,
+            clickedPos.z + 0.5,
+            explosionRadius,
+            if (isModified) Level.ExplosionInteraction.NONE else Level.ExplosionInteraction.TNT
+        )
+
+        if (isModified) {
+            val clickedFace = context.clickedFace
+            val centerOfVolumeToMine = clickedPos.relative(clickedFace, -1)
+
+            val tool = context.itemInHand.copy()
+            tool.enchant(level.holderOrThrow(Enchantments.SILK_TOUCH), 1)
+
+            for (dX in -1..1) for (dY in -1..1) for (dz in -1..1) {
+                val blockPos = centerOfVolumeToMine.offset(dX, dY, dz)
+                mineBlock(level, blockPos, player, explosion, tool)
+            }
+        }
+
+        return InteractionResult.CONSUME
+    }
+
+    private fun mineBlock(
+        level: Level,
+        blockPos: BlockPos,
+        player: Player?,
+        explosion: Explosion,
+        tool: ItemStack
+    ) {
+        val blockState = level.getBlockState(blockPos)
+
+        if (blockState.isEmpty || !blockState.fluidState.isEmpty) return
+        if (level.getBlockEntity(blockPos) != null) return
+        if (blockState.requiresCorrectToolForDrops() && blockState.`is`(BlockTags.NEEDS_DIAMOND_TOOL)) return
+
+        val explosionResistance = blockState.block.getExplosionResistance(
+            blockState,
+            level,
+            blockPos,
+            explosion
+        )
+        if (explosionResistance > 1000) return
+
+        Block.dropResources(
+            blockState,
+            level,
+            blockPos,
+            null,
+            player,
+            tool
+        )
+
+        level.destroyBlock(blockPos, false, player)
     }
 
     override fun appendHoverText(
