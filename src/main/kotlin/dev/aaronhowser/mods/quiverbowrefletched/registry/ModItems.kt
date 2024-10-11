@@ -41,7 +41,7 @@ object ModItems {
     val LIGHTING_RED = basic("lighting_red")
     val SUNRAY = basic("sunray")
     val POWDER_KNUCKLE = basic("powder_knuckle")
-    val MODIFIED_POWER_KNUCKLE = basic("modified_power_knuckle")    // could probably be the same class
+    val MODIFIED_POWDER_KNUCKLE = basic("modified_power_knuckle")    // could probably be the same class
     val NETHER_BELLOWS = basic("nether_bellows")
     val REDSTONE_SPRAYER = basic("redstone_sprayer")
     val SOUL_CAIRN = basic("soul_cairn")
@@ -55,7 +55,7 @@ object ModItems {
 
     val ARROW_BUNDLE = basic("arrow_bundle")
     val ROCKET_BUNDLE = basic("rocket_bundle")
-    val CLIP_SIGAR_ROD = basic("clip_sugar_rod")
+    val SUGAR_ROD_CLIP = basic("clip_sugar_rod")
     val BIG_ROCKET = basic("big_rocket")
     val COLD_IRON_CLIP = basic("cold_iron_clip")
     val BOX_FLINT_DUST = basic("box_flint_dust")
