@@ -1,10 +1,13 @@
 package dev.aaronhowser.mods.quiverbowrefletched.item.weapon
 
+import dev.aaronhowser.mods.quiverbowrefletched.datagen.entity.EnderBowGuideProjectile
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.player.Player
+import net.minecraft.world.entity.projectile.Projectile
 import net.minecraft.world.item.BowItem
 import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.Items
 import net.minecraft.world.level.Level
 import net.neoforged.neoforge.common.Tags
 import net.neoforged.neoforge.event.EventHooks
@@ -36,24 +39,27 @@ class EnderBowItem : BowItem(
             val powerForTime = getPowerForTime(i)
 
             if (powerForTime > 0.1) {
-                val list = draw(stack, projectileStack, livingEntity)
-
-                if (list.isNotEmpty()) {
-                    shoot(
-                        level,
-                        livingEntity,
-                        livingEntity.usedItemHand,
-                        stack,
-                        list,
-                        powerForTime * 3f,
-                        1f,
-                        powerForTime == 1f,
-                        null
-                    )
-                }
-
+                shoot(
+                    level,
+                    livingEntity,
+                    livingEntity.usedItemHand,
+                    stack,
+                    listOf(Items.STICK.defaultInstance),
+                    powerForTime * 3f,
+                    1f,
+                    powerForTime == 1f,
+                    null
+                )
             }
         }
+    }
+
+    override fun createProjectile(level: Level, shooter: LivingEntity, weapon: ItemStack, ammo: ItemStack, isCrit: Boolean): Projectile {
+        if (ammo.item == Items.STICK) {
+            return EnderBowGuideProjectile(shooter)
+        }
+
+        return super.createProjectile(level, shooter, weapon, ammo, isCrit)
     }
 
 }
