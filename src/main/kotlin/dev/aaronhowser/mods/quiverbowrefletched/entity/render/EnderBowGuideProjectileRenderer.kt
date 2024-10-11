@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.quiverbowrefletched.entity.render
 
 import dev.aaronhowser.mods.quiverbowrefletched.entity.EnderBowGuideProjectile
 import dev.aaronhowser.mods.quiverbowrefletched.util.ClientUtil
+import dev.aaronhowser.mods.quiverbowrefletched.util.OtherUtil
 import net.minecraft.client.renderer.culling.Frustum
 import net.minecraft.client.renderer.entity.ArrowRenderer
 import net.minecraft.client.renderer.entity.EntityRendererProvider
@@ -12,7 +13,7 @@ class EnderBowGuideProjectileRenderer(
 ) : ArrowRenderer<EnderBowGuideProjectile>(context) {
 
     override fun getTextureLocation(p0: EnderBowGuideProjectile): ResourceLocation {
-        return ResourceLocation.withDefaultNamespace("textures/entity/projectiles/spectral_arrow.png")
+        return OtherUtil.modResource("textures/entity/projectile/ender.png")
     }
 
     override fun shouldRender(livingEntity: EnderBowGuideProjectile, camera: Frustum, camX: Double, camY: Double, camZ: Double): Boolean {
