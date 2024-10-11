@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "quiverbow_refletched:coin_tosser"
+    },
+    "I": {
+      "tag": "c:ingots/iron"
+    },
+    "S": {
+      "item": "minecraft:sticky_piston"
+    },
+    "T": {
+      "item": "minecraft:tripwire_hook"
+    }
+  },
+  "pattern": [
+    "CS ",
+    "TI ",
+    "I  "
+  ],
+  "result": {
+    "count": 1,
+    "id": "quiverbow_refletched:coin_tosser_modified"
+  }
+}

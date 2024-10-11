@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "I": {
+      "tag": "c:ingots/iron"
+    },
+    "L": {
+      "item": "minecraft:lever"
+    },
+    "P": {
+      "item": "minecraft:piston"
+    }
+  },
+  "pattern": [
+    "I I",
+    "IPI",
+    " L "
+  ],
+  "result": {
+    "count": 1,
+    "id": "quiverbow_refletched:coin_tosser"
+  }
+}

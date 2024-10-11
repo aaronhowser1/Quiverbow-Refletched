@@ -194,9 +194,45 @@ class ModRecipeProvider(
             .define('P', Items.STICKY_PISTON)
             .define('C', ModItems.AUTO_CROSSBOW)
             .unlockedBy("has_item", has(ModItems.AUTO_CROSSBOW)),
+        startRecipe(ModItems.COIN_TOSSER)
+            .pattern("I I")
+            .pattern("IPI")
+            .pattern(" L ")
+            .define('I', Tags.Items.INGOTS_IRON)
+            .define('P', Items.PISTON)
+            .define('L', Items.LEVER)
+            .unlockedBy("has_item", has(Tags.Items.INGOTS_GOLD)),
+        startRecipe(ModItems.MODIFIED_COIN_TOSSER)
+            .pattern("CS ")
+            .pattern("TI ")
+            .pattern("I  ")
+            .define('C', ModItems.COIN_TOSSER)
+            .define('S', Items.STICKY_PISTON)
+            .define('T', Items.TRIPWIRE_HOOK)
+            .define('I', Tags.Items.INGOTS_IRON)
+            .unlockedBy("has_item", has(ModItems.COIN_TOSSER)),
+        startRecipe(ModItems.DRAGON_BOX)
+            .pattern("ISs")
+            .pattern("FIs")
+            .pattern("ISs")
+            .define('I', Tags.Items.INGOTS_IRON)
+            .define('F', Items.FLINT_AND_STEEL)
+            .define('S', Items.STICK)
+            .define('s', Tags.Items.STRINGS)
+            .unlockedBy("has_item", has(ModItems.ROCKET_BUNDLE)),
+        startRecipe(ModItems.FOUR_HEADED_DRAGON_BOX)
+            .pattern("DDD")
+            .pattern("PDP")
+            .pattern("STS")
+            .define('D', ModItems.DRAGON_BOX)
+            .define('P', Items.PISTON)
+            .define('S', Items.STICKY_PISTON)
+            .define('T', Items.TRIPWIRE_HOOK)
+            .unlockedBy("has_item", has(ModItems.DRAGON_BOX)),
+
     )
 
-    val shapelessRecipes = listOf(
+    private val shapelessRecipes = listOf(
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.DOUBLE_CROSSBOW)
             .requires(ModItems.COMPACT_CROSSBOW)
             .requires(Items.STICKY_PISTON)
