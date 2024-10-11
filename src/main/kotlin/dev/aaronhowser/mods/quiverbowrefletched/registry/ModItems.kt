@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.quiverbowrefletched.registry
 
 import dev.aaronhowser.mods.quiverbowrefletched.QuiverBowRefletched
+import dev.aaronhowser.mods.quiverbowrefletched.item.weapon.EnderBowItem
 import dev.aaronhowser.mods.quiverbowrefletched.item.weapon.GenericWeapon
 import dev.aaronhowser.mods.quiverbowrefletched.item.weapon.PowderKnuckle
 import net.minecraft.world.item.Item
@@ -54,7 +55,7 @@ object ModItems {
     val BOW_WITH_QUIVER =
         register("bow_with_quiver") { GenericWeapon(maxAmmo = 256) }
     val ENDER_BOW =
-        register("ender_bow") { GenericWeapon(maxAmmo = 256) }
+        register("ender_bow") { EnderBowItem() }
     val ENDER_RIFLE =
         register("ender_rifle") { GenericWeapon(maxAmmo = 8) }
     val FROST_LANCER =
