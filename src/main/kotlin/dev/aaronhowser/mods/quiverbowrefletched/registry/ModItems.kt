@@ -73,9 +73,9 @@ object ModItems {
     val SUNRAY =
         basic("sunray")
     val POWDER_KNUCKLE: DeferredItem<PowderKnuckle> =
-        register("powder_knuckle", PowderKnuckle(isModified = false))
+        register("powder_knuckle") { PowderKnuckle(isModified = false) }
     val MODIFIED_POWDER_KNUCKLE: DeferredItem<PowderKnuckle> =
-        register("modified_powder_knuckle", PowderKnuckle(isModified = true))
+        register("modified_powder_knuckle") { PowderKnuckle(isModified = true) }
     val NETHER_BELLOWS =
         basic("nether_bellows")
     val REDSTONE_SPRAYER =
@@ -139,8 +139,8 @@ object ModItems {
         return ITEM_REGISTRY.registerSimpleItem(id)
     }
 
-    private fun <T : Item> register(id: String, item: T): DeferredItem<T> {
-        return ITEM_REGISTRY.registerItem(id) { item }
+    private fun <T : Item> register(id: String, itemBuilder: (Item.Properties) -> T): DeferredItem<T> {
+        return ITEM_REGISTRY.registerItem(id, itemBuilder)
     }
 
 }
