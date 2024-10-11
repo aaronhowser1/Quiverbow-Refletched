@@ -15,6 +15,7 @@ import net.minecraft.world.item.enchantment.Enchantments
 import net.minecraft.world.level.Explosion
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.Block
+import net.neoforged.neoforge.common.CommonHooks
 
 class PowderKnuckle(
     val isModified: Boolean
@@ -99,6 +100,8 @@ class PowderKnuckle(
             explosion
         )
         if (explosionResistance > 1000) return
+
+        if (player != null && !CommonHooks.canEntityDestroy(level, blockPos, player)) return
 
         Block.dropResources(
             blockState,
