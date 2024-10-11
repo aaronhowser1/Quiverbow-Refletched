@@ -6,12 +6,18 @@ import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.BowItem
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
+import net.neoforged.neoforge.common.Tags
 import net.neoforged.neoforge.event.EventHooks
+import java.util.function.Predicate
 
 class EnderBowItem : BowItem(
     Properties()
         .durability(256)
 ) {
+
+    override fun getAllSupportedProjectiles(bowStack: ItemStack): Predicate<ItemStack> {
+        return Predicate { checkedStack -> checkedStack.`is`(Tags.Items.INGOTS_IRON) }
+    }
 
     override fun onUseTick(level: Level, livingEntity: LivingEntity, stack: ItemStack, remainingUseDuration: Int) {
         super.onUseTick(level, livingEntity, stack, remainingUseDuration)
