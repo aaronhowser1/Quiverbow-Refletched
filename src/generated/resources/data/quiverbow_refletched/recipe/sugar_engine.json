@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "quiverbow_refletched:sugar_engine_barrel"
+    },
+    "M": {
+      "item": "quiverbow_refletched:sugar_engine_main_body"
+    }
+  },
+  "pattern": [
+    "B B",
+    "B B",
+    " M "
+  ],
+  "result": {
+    "count": 1,
+    "id": "quiverbow_refletched:sugar_engine"
+  }
+}

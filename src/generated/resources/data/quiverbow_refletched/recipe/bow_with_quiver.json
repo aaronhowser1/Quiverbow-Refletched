@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "L": {
+      "tag": "c:leathers"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    },
+    "s": {
+      "tag": "c:strings"
+    }
+  },
+  "pattern": [
+    "LSs",
+    "SLs",
+    "LSs"
+  ],
+  "result": {
+    "count": 1,
+    "id": "quiverbow_refletched:bow_with_quiver"
+  }
+}

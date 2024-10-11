@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "F": {
+      "item": "quiverbow_refletched:fireworks_rocket_launcher"
+    },
+    "I": {
+      "tag": "c:ingots/iron"
+    },
+    "O": {
+      "tag": "c:obsidians"
+    }
+  },
+  "pattern": [
+    "OOO",
+    "IFI",
+    "OOO"
+  ],
+  "result": {
+    "count": 1,
+    "id": "quiverbow_refletched:improved_rocket_launcher"
+  }
+}

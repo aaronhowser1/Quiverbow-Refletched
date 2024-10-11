@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "F": {
+      "item": "minecraft:flint_and_steel"
+    },
+    "I": {
+      "tag": "c:ingots/iron"
+    },
+    "P": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "pattern": [
+    "P  ",
+    "IP ",
+    "FIP"
+  ],
+  "result": {
+    "count": 1,
+    "id": "quiverbow_refletched:fireworks_rocket_launcher"
+  }
+}
