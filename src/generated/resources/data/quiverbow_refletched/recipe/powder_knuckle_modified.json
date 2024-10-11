@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "I": {
+      "tag": "c:ingots/iron"
+    },
+    "O": {
+      "tag": "c:obsidians"
+    },
+    "P": {
+      "item": "quiverbow_refletched:powder_knuckle"
+    }
+  },
+  "pattern": [
+    "OOO",
+    "OPO",
+    "I I"
+  ],
+  "result": {
+    "count": 1,
+    "id": "quiverbow_refletched:powder_knuckle_modified"
+  }
+}

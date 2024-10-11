@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "I": {
+      "tag": "c:ingots/iron"
+    },
+    "O": {
+      "tag": "c:obsidians"
+    },
+    "P": {
+      "item": "minecraft:piston"
+    },
+    "Q": {
+      "tag": "c:gems/quartz"
+    },
+    "R": {
+      "item": "quiverbow_refletched:ender_rifle"
+    },
+    "S": {
+      "item": "minecraft:sticky_piston"
+    }
+  },
+  "pattern": [
+    "QIQ",
+    "PRS",
+    " O "
+  ],
+  "result": {
+    "count": 1,
+    "id": "quiverbow_refletched:frost_lancer"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "I": {
+      "tag": "c:ingots/iron"
+    },
+    "L": {
+      "tag": "c:leathers"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "III",
+    "LSL",
+    "L L"
+  ],
+  "result": {
+    "count": 1,
+    "id": "quiverbow_refletched:powder_knuckle"
+  }
+}

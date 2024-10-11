@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "E": {
+      "item": "minecraft:end_stone"
+    },
+    "F": {
+      "item": "minecraft:flint_and_steel"
+    },
+    "O": {
+      "tag": "c:obsidians"
+    },
+    "T": {
+      "item": "minecraft:tripwire_hook"
+    }
+  },
+  "pattern": [
+    "E E",
+    "OFO",
+    "OTO"
+  ],
+  "result": {
+    "count": 1,
+    "id": "quiverbow_refletched:hidden_ender_pistol"
+  }
+}

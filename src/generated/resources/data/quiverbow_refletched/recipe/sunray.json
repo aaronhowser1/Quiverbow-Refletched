@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:beacon"
+    },
+    "D": {
+      "item": "minecraft:daylight_detector"
+    },
+    "O": {
+      "tag": "c:obsidians"
+    },
+    "R": {
+      "item": "minecraft:repeater"
+    },
+    "T": {
+      "item": "minecraft:tripwire_hook"
+    }
+  },
+  "pattern": [
+    "BD ",
+    "OOD",
+    " RT"
+  ],
+  "result": {
+    "count": 1,
+    "id": "quiverbow_refletched:sunray"
+  }
+}

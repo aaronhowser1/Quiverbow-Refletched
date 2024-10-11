@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "I": {
+      "tag": "c:ingots/iron"
+    },
+    "L": {
+      "item": "minecraft:lever"
+    },
+    "O": {
+      "tag": "c:obsidians"
+    },
+    "P": {
+      "item": "minecraft:piston"
+    }
+  },
+  "pattern": [
+    "O O",
+    "IPI",
+    "OLO"
+  ],
+  "result": {
+    "count": 1,
+    "id": "quiverbow_refletched:obsidian_spear_rifle"
+  }
+}

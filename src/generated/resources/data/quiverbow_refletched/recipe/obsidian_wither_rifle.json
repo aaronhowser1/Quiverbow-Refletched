@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "D": {
+      "tag": "c:gems/diamond"
+    },
+    "O": {
+      "tag": "c:obsidians"
+    },
+    "R": {
+      "item": "quiverbow_refletched:obsidian_spear_rifle"
+    },
+    "W": {
+      "item": "minecraft:nether_star"
+    }
+  },
+  "pattern": [
+    "ODO",
+    "ORO",
+    "OWO"
+  ],
+  "result": {
+    "count": 1,
+    "id": "quiverbow_refletched:obsidian_wither_rifle"
+  }
+}
