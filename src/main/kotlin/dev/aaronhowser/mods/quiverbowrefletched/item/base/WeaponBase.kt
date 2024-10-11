@@ -1,6 +1,5 @@
 package dev.aaronhowser.mods.quiverbowrefletched.item.base
 
-import dev.aaronhowser.mods.quiverbowrefletched.item.component.AmmoCountItemComponent
 import dev.aaronhowser.mods.quiverbowrefletched.registry.ModDataComponents
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
@@ -12,12 +11,12 @@ abstract class WeaponBase(
         .stacksTo(1)
         .component(
             ModDataComponents.AMMO_COUNT_COMPONENT.get(),
-            AmmoCountItemComponent(0)
+            0
         )
 ) {
 
     fun getAmmo(stack: ItemStack): Int {
-        return stack.get(ModDataComponents.AMMO_COUNT_COMPONENT.get())?.amount ?: 0
+        return stack.get(ModDataComponents.AMMO_COUNT_COMPONENT.get()) ?: 0
     }
 
     fun consumeAmmo(stack: ItemStack, amount: Int): Boolean {
@@ -25,7 +24,7 @@ abstract class WeaponBase(
         if (currentAmount < amount) return false
 
         val newAmount = currentAmount - amount
-        stack.set(ModDataComponents.AMMO_COUNT_COMPONENT.get(), AmmoCountItemComponent(newAmount))
+        stack.set(ModDataComponents.AMMO_COUNT_COMPONENT.get(), newAmount)
         return true
     }
 
