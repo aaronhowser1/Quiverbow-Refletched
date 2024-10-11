@@ -44,9 +44,6 @@ class PowderKnuckle(
     ) {
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag)
 
-        val amount = if (ClientUtil.playerIsCreative()) "∞" else getAmmo(stack).toString()
-
-        tooltipComponents.add(Component.literal("Gunpowder: $amount/$maxAmmo"))
         tooltipComponents.add(Component.literal("Explosion with radius 1.5 on hit"))
         tooltipComponents.add(Component.literal("Punch mobs or right-click mobs"))
         tooltipComponents.add(Component.literal("Craft with up to 8 Gunpowder to reload"))

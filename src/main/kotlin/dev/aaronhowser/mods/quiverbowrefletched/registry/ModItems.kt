@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.quiverbowrefletched.registry
 
 import dev.aaronhowser.mods.quiverbowrefletched.QuiverBowRefletched
+import dev.aaronhowser.mods.quiverbowrefletched.item.GenericWeapon
 import dev.aaronhowser.mods.quiverbowrefletched.item.PowderKnuckle
 import net.minecraft.world.item.Item
 import net.neoforged.neoforge.registries.DeferredItem
@@ -11,91 +12,91 @@ object ModItems {
     val ITEM_REGISTRY: DeferredRegister.Items = DeferredRegister.createItems(QuiverBowRefletched.ID)
 
     val COMPACT_CROSSBOW =
-        basic("compact_crossbow")
+        register("compact_crossbow") { GenericWeapon(maxAmmo = 1) }
     val DOUBLE_CROSSBOW =
-        basic("double_crossbow")
+        register("double_crossbow") { GenericWeapon(maxAmmo = 2) }
     val BLAZE_CROSSBOW =
-        basic("blaze_crossbow")
+        register("blaze_crossbow") { GenericWeapon(maxAmmo = 1) }
     val AUTO_CROSSBOW =
-        basic("auto_crossbow")
+        register("auto_crossbow") { GenericWeapon(maxAmmo = 8) }
     val IMPROVED_AUTO_CROSSBOW =
-        basic("auto_crossbow_improved")
+        register("auto_crossbow_improved") { GenericWeapon(maxAmmo = 16) }
     val COIN_TOSSER =
-        basic("coin_tosser")
+        register("coin_tosser") { GenericWeapon(maxAmmo = 72) }
     val MODIFIED_COIN_TOSSER =
-        basic("coin_tosser_modified")
+        register("coin_tosser_modified") { GenericWeapon(maxAmmo = 72) }
     val DRAGON_BOX =
-        basic("dragon_box")
+        register("dragon_box") { GenericWeapon(maxAmmo = 64) }
     val FOUR_HEADED_DRAGON_BOX =
-        basic("four_headed_dragon_box")
+        register("four_headed_dragon_box") { GenericWeapon(maxAmmo = 64) }
     val LAPIS_COIL =
-        basic("lapis_coil")
+        register("lapis_coil") { GenericWeapon(maxAmmo = 100) }
     val THORN_SPITTER =
-        basic("thorn_spitter")
+        register("thorn_spitter") { GenericWeapon(maxAmmo = 64) }
     val PROXIMITY_THORN_THROWER =
-        basic("proximity_thorn_thrower")
+        register("proximity_thorn_thrower") { GenericWeapon(maxAmmo = 64) }
     val SUGAR_ENGINE =
-        basic("sugar_engine")
+        register("sugar_engine") { GenericWeapon(maxAmmo = 200) }
     val FIREWORKS_ROCKET_LAUNCHER =
-        basic("fireworks_rocket_launcher")
+        register("fireworks_rocket_launcher") { GenericWeapon(maxAmmo = 1) }
     val IMPROVED_ROCKET_LAUNCHER =
-        basic("improved_rocket_launcher")
+        register("improved_rocket_launcher") { GenericWeapon(maxAmmo = 1) }
     val ARROW_MORTAR =
-        basic("arrow_mortar")
+        register("arrow_mortar") { GenericWeapon(maxAmmo = 8) }
     val DRAGON_MORTAR =
-        basic("dragon_mortar")
+        register("dragon_mortar") { GenericWeapon(maxAmmo = 8) }
     val SEEDLING =
-        basic("seedling")
+        register("seedling") { GenericWeapon(maxAmmo = 32) }
     val POTATOSSER =
-        basic("potatosser")
+        register("potatosser") { GenericWeapon(maxAmmo = 14) }
     val SNOW_CANNON =
-        basic("snow_cannon")
+        register("snow_cannon") { GenericWeapon(maxAmmo = 64) }
     val BOW_WITH_QUIVER =
-        basic("bow_with_quiver")
+        register("bow_with_quiver") { GenericWeapon(maxAmmo = 256) }
     val ENDER_BOW =
-        basic("ender_bow")
+        register("ender_bow") { GenericWeapon(maxAmmo = 256) }
     val ENDER_RIFLE =
-        basic("ender_rifle")
+        register("ender_rifle") { GenericWeapon(maxAmmo = 8) }
     val FROST_LANCER =
-        basic("frost_lancer")
+        register("frost_lancer") { GenericWeapon(maxAmmo = 4) }
     val OBSIDIAN_SPLINTER_PISTOL =
-        basic("obsidian_splinter_pistol")
+        register("obsidian_splinter_pistol") { GenericWeapon(maxAmmo = 16) }
     val OBSIDIAN_SPEAR_RIFLE =
-        basic("obsidian_spear_rifle")
+        register("obsidian_spear_rifle") { GenericWeapon(maxAmmo = 16) }
     val OBSIDIAN_WITHER_RIFLE =
-        basic("obsidian_wither_rifle")
+        register("obsidian_wither_rifle") { GenericWeapon(maxAmmo = 16) }
     val FEN_FIRE =
-        basic("fen_fire")
+        register("fen_fire") { GenericWeapon(maxAmmo = 32) }
     val FLINT_DUSTER =
-        basic("flint_duster")
+        register("flint_duster") { GenericWeapon(maxAmmo = 256) }
     val LIGHTNING_RED =
-        basic("lightning_red")
+        register("lightning_red") { GenericWeapon(maxAmmo = 16) }
     val SUNRAY =
-        basic("sunray")
+        register("sunray") { GenericWeapon(maxAmmo = 1) }
     val POWDER_KNUCKLE: DeferredItem<PowderKnuckle> =
         register("powder_knuckle") { PowderKnuckle(isModified = false) }
     val MODIFIED_POWDER_KNUCKLE: DeferredItem<PowderKnuckle> =
         register("powder_knuckle_modified") { PowderKnuckle(isModified = true) }
     val NETHER_BELLOWS =
-        basic("nether_bellows")
+        register("nether_bellows") { GenericWeapon(maxAmmo = 200) }
     val REDSTONE_SPRAYER =
-        basic("redstone_sprayer")
+        register("redstone_sprayer") { GenericWeapon(maxAmmo = 200) }
     val SOUL_CAIRN =
-        basic("soul_cairn")
+        register("soul_cairn") { GenericWeapon(maxAmmo = 1) }
     val AQUA_ACCELERATOR =
-        basic("aqua_accelerator")
+        register("aqua_accelerator") { GenericWeapon(maxAmmo = 1) }
     val SILKEN_SPINNER =
-        basic("silken_spinner")
+        register("silken_spinner") { GenericWeapon(maxAmmo = 8) }
     val SEED_SWEEPER =
-        basic("seed_sweeper")
+        register("seed_sweeper") { GenericWeapon(maxAmmo = 512) }
     val RAY_OF_HOPE =
-        basic("ray_of_hope")
+        register("ray_of_hope") { GenericWeapon(maxAmmo = 320) }
     val ENDER_RAIL_ACCELERATOR =
-        basic("ender_rail_accelerator")
+        register("ender_rail_accelerator") { GenericWeapon(maxAmmo = 1) }
     val ARMS_ASSISTANT_TARGETING_HELPER =
-        basic("arms_assistant_targeting_helper")
+        register("arms_assistant_targeting_helper") { GenericWeapon(maxAmmo = 1) }
     val HIDDEN_ENDER_PISTOL =
-        basic("hidden_ender_pistol")
+        register("hidden_ender_pistol") { GenericWeapon(maxAmmo = 8) }
 
     val ARROW_BUNDLE =
         basic("arrow_bundle")

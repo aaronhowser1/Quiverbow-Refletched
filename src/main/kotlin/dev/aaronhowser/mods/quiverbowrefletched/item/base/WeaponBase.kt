@@ -1,8 +1,11 @@
 package dev.aaronhowser.mods.quiverbowrefletched.item.base
 
 import dev.aaronhowser.mods.quiverbowrefletched.registry.ModDataComponents
+import dev.aaronhowser.mods.quiverbowrefletched.util.ClientUtil
+import net.minecraft.network.chat.Component
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.TooltipFlag
 
 abstract class WeaponBase(
     val maxAmmo: Int
@@ -34,6 +37,18 @@ abstract class WeaponBase(
 
     override fun isBarVisible(stack: ItemStack): Boolean {
         return true
+    }
+
+    override fun appendHoverText(
+        stack: ItemStack,
+        context: TooltipContext,
+        tooltipComponents: MutableList<Component>,
+        tooltipFlag: TooltipFlag
+    ) {
+        super.appendHoverText(stack, context, tooltipComponents, tooltipFlag)
+
+        val amount = if (ClientUtil.playerIsCreative()) "∞" else getAmmo(stack).toString()
+        tooltipComponents.add(Component.literal("Ammo: $amount/$maxAmmo"))
     }
 
 }
