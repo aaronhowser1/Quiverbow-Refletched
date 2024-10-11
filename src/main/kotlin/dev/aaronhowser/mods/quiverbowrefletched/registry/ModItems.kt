@@ -38,10 +38,10 @@ object ModItems {
     val OBSIDIAN_WITHER_RIFLE = basic("obsidian_wither_rifle")
     val FEN_FIRE = basic("fen_fire")
     val FLINT_DUSTER = basic("flint_duster")
-    val LIGHTING_RED = basic("lighting_red")
+    val LIGHTNING_RED = basic("lightning_red")
     val SUNRAY = basic("sunray")
     val POWDER_KNUCKLE = basic("powder_knuckle")
-    val MODIFIED_POWDER_KNUCKLE = basic("power_knuckle_modified")    // could probably be the same class
+    val MODIFIED_POWDER_KNUCKLE = basic("powder_knuckle_modified")    // could probably be the same class
     val NETHER_BELLOWS = basic("nether_bellows")
     val REDSTONE_SPRAYER = basic("redstone_sprayer")
     val SOUL_CAIRN = basic("soul_cairn")
@@ -49,7 +49,7 @@ object ModItems {
     val SILKEN_SPINNER = basic("silken_spinner")
     val SEED_SWEEPER = basic("seed_sweeper")
     val RAY_OF_HOPE = basic("ray_of_hope")
-    val ENDER_RAY_ACCELERATOR = basic("ender_ray_accelerator")
+    val ENDER_RAIL_ACCELERATOR = basic("ender_rail_accelerator")
     val ARMS_ASSISTANT_TARGETING_HELPER = basic("arms_assistant_targeting_helper")
     val HIDDEN_ENDER_PISTOL = basic("hidden_ender_pistol")
 

@@ -47,7 +47,7 @@ class ModLanguageProvider(
         addItem(ModItems.OBSIDIAN_WITHER_RIFLE, "Obsidian Wither Rifle")
         addItem(ModItems.FEN_FIRE, "Fen Fire")
         addItem(ModItems.FLINT_DUSTER, "Flint Duster")
-        addItem(ModItems.LIGHTING_RED, "Lighting Red")
+        addItem(ModItems.LIGHTNING_RED, "Lighting Red")
         addItem(ModItems.SUNRAY, "Sunray")
         addItem(ModItems.POWDER_KNUCKLE, "Powder Knuckle")
         addItem(ModItems.MODIFIED_POWDER_KNUCKLE, "Modified Powder Knuckle")
@@ -58,7 +58,7 @@ class ModLanguageProvider(
         addItem(ModItems.SILKEN_SPINNER, "Silken Spinner")
         addItem(ModItems.SEED_SWEEPER, "Seed Sweeper")
         addItem(ModItems.RAY_OF_HOPE, "Ray of Hope")
-        addItem(ModItems.ENDER_RAY_ACCELERATOR, "Ender Ray Accelerator")
+        addItem(ModItems.ENDER_RAIL_ACCELERATOR, "Ender Ray Accelerator")
         addItem(ModItems.ARMS_ASSISTANT_TARGETING_HELPER, "Arms Assistant Targeting Helper")
         addItem(ModItems.HIDDEN_ENDER_PISTOL, "Hidden Ender Pistol")
 

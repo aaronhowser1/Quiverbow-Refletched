@@ -87,7 +87,7 @@ class ModItemModelProvider(
             ModItems.OBSIDIAN_WITHER_RIFLE,
             ModItems.FEN_FIRE,
             ModItems.FLINT_DUSTER,
-            ModItems.LIGHTING_RED,
+            ModItems.LIGHTNING_RED,
             ModItems.SUNRAY,
             ModItems.POWDER_KNUCKLE,
             ModItems.MODIFIED_POWDER_KNUCKLE,
@@ -98,7 +98,7 @@ class ModItemModelProvider(
             ModItems.SILKEN_SPINNER,
             ModItems.SEED_SWEEPER,
             ModItems.RAY_OF_HOPE,
-            ModItems.ENDER_RAY_ACCELERATOR,
+            ModItems.ENDER_RAIL_ACCELERATOR,
             ModItems.ARMS_ASSISTANT_TARGETING_HELPER,
             ModItems.HIDDEN_ENDER_PISTOL,
         )
