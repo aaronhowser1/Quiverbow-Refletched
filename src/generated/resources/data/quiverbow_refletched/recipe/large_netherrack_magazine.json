@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "I": {
+      "tag": "c:ingots/iron"
+    },
+    "N": {
+      "item": "minecraft:nether_brick"
+    }
+  },
+  "pattern": [
+    "N N",
+    "N N",
+    "NIN"
+  ],
+  "result": {
+    "count": 1,
+    "id": "quiverbow_refletched:large_netherrack_magazine"
+  }
+}

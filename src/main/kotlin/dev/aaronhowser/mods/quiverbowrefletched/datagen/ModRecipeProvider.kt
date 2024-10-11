@@ -3,10 +3,7 @@ package dev.aaronhowser.mods.quiverbowrefletched.datagen
 import dev.aaronhowser.mods.quiverbowrefletched.registry.ModItems
 import net.minecraft.core.HolderLookup
 import net.minecraft.data.PackOutput
-import net.minecraft.data.recipes.RecipeCategory
-import net.minecraft.data.recipes.RecipeOutput
-import net.minecraft.data.recipes.RecipeProvider
-import net.minecraft.data.recipes.ShapedRecipeBuilder
+import net.minecraft.data.recipes.*
 import net.minecraft.tags.ItemTags
 import net.minecraft.world.item.Items
 import net.minecraft.world.level.ItemLike
@@ -22,6 +19,10 @@ class ModRecipeProvider(
 
         for (shapedRecipe in shapedRecipes) {
             shapedRecipe.save(recipeOutput)
+        }
+
+        for (shapelessRecipe in shapelessRecipes) {
+            shapelessRecipe.save(recipeOutput)
         }
 
     }
@@ -131,6 +132,76 @@ class ModRecipeProvider(
             .define('P', Tags.Items.GLASS_PANES_COLORLESS)
             .define('L', Tags.Items.GEMS_LAPIS)
             .unlockedBy("has_item", has(Items.LAPIS_LAZULI)),
+        startRecipe(ModItems.REDSTONE_MAGAZINE)
+            .pattern("I I")
+            .pattern("I I")
+            .pattern("IRI")
+            .define('I', Tags.Items.INGOTS_IRON)
+            .define('R', Tags.Items.DUSTS_REDSTONE)
+            .unlockedBy("has_item", has(Items.REDSTONE)),
+        startRecipe(ModItems.LARGE_NETHERRACK_MAGAZINE)
+            .pattern("N N")
+            .pattern("N N")
+            .pattern("NIN")
+            .define('N', Items.NETHER_BRICK)
+            .define('I', Tags.Items.INGOTS_IRON)
+            .unlockedBy("has_item", has(Items.NETHER_BRICK)),
+        startRecipe(ModItems.LARGE_REDSTONE_MAGAZINE)
+            .pattern("I I")
+            .pattern("I I")
+            .pattern("IRI")
+            .define('I', Tags.Items.INGOTS_IRON)
+            .define('R', Tags.Items.STORAGE_BLOCKS_REDSTONE)
+            .unlockedBy("has_item", has(Items.REDSTONE_BLOCK)),
+        //TODO: There's four Packed Up Arms Assistant recipes? What's the difference?
+        startRecipe(ModItems.ENDER_QUARTZ_CLIP)
+            .pattern("QQQ")
+            .pattern("IQI")
+            .pattern("III")
+            .define('Q', Tags.Items.GEMS_QUARTZ)
+            .define('I', Tags.Items.INGOTS_IRON)
+            .unlockedBy("has_item", has(Items.QUARTZ)),
+        startRecipe(ModItems.COMPACT_CROSSBOW)
+            .pattern("PTS")
+            .pattern("TPS")
+            .pattern("PTS")
+            .define('P', ItemTags.PLANKS)
+            .define('T', Items.STICK)
+            .define('S', Tags.Items.STRINGS)
+            .unlockedBy("has_item", has(Items.CROSSBOW)),
+        startRecipe(ModItems.BLAZE_CROSSBOW)
+            .pattern("BIB")
+            .pattern("ICI")
+            .pattern("BIB")
+            .define('B', Items.BLAZE_POWDER)
+            .define('I', Tags.Items.INGOTS_IRON)
+            .define('C', ModItems.COMPACT_CROSSBOW)
+            .unlockedBy("has_item", has(ModItems.COMPACT_CROSSBOW)),
+        startRecipe(ModItems.AUTO_CROSSBOW)
+            .pattern("III")
+            .pattern("PCP")
+            .pattern(" T ")
+            .define('I', Tags.Items.INGOTS_IRON)
+            .define('P', Items.PISTON)
+            .define('C', ModItems.COMPACT_CROSSBOW)
+            .define('T', Items.TRIPWIRE_HOOK)
+            .unlockedBy("has_item", has(ModItems.COMPACT_CROSSBOW)),
+        startRecipe(ModItems.IMPROVED_AUTO_CROSSBOW)
+            .pattern("III")
+            .pattern("PCP")
+            .pattern(" I ")
+            .define('I', Tags.Items.INGOTS_IRON)
+            .define('P', Items.STICKY_PISTON)
+            .define('C', ModItems.AUTO_CROSSBOW)
+            .unlockedBy("has_item", has(ModItems.AUTO_CROSSBOW)),
+    )
+
+    val shapelessRecipes = listOf(
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.DOUBLE_CROSSBOW)
+            .requires(ModItems.COMPACT_CROSSBOW)
+            .requires(Items.STICKY_PISTON)
+            .requires(Items.REPEATER)
+            .unlockedBy("has_item", has(ModItems.COMPACT_CROSSBOW)),
     )
 
 }

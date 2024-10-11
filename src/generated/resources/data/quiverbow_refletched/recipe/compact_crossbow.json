@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "P": {
+      "tag": "minecraft:planks"
+    },
+    "S": {
+      "tag": "c:strings"
+    },
+    "T": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "PTS",
+    "TPS",
+    "PTS"
+  ],
+  "result": {
+    "count": 1,
+    "id": "quiverbow_refletched:compact_crossbow"
+  }
+}

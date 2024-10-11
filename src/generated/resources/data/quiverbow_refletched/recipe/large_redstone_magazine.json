@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "I": {
+      "tag": "c:ingots/iron"
+    },
+    "R": {
+      "tag": "c:storage_blocks/redstone"
+    }
+  },
+  "pattern": [
+    "I I",
+    "I I",
+    "IRI"
+  ],
+  "result": {
+    "count": 1,
+    "id": "quiverbow_refletched:large_redstone_magazine"
+  }
+}
