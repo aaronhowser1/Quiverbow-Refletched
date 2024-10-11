@@ -1,6 +1,6 @@
-package example.examplemod
+package dev.aaronhowser.mods.quiverbowrefletched
 
-import example.examplemod.block.ModBlocks
+import dev.aaronhowser.mods.quiverbowrefletched.block.ModBlocks
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -45,11 +45,11 @@ object ExampleMod {
 
         val obj = runForDist(
             clientTarget = {
-                MOD_BUS.addListener(::onClientSetup)
+                MOD_BUS.addListener(ExampleMod::onClientSetup)
                 Minecraft.getInstance()
             },
             serverTarget = {
-                MOD_BUS.addListener(::onServerSetup)
+                MOD_BUS.addListener(ExampleMod::onServerSetup)
                 "test"
             })
 
