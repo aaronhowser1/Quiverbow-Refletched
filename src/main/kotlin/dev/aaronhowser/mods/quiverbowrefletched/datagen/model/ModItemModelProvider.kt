@@ -78,8 +78,6 @@ class ModItemModelProvider(
             ModItems.SEEDLING,
             ModItems.POTATOSSER,
             ModItems.SNOW_CANNON,
-            ModItems.BOW_WITH_QUIVER,
-            ModItems.ENDER_BOW,
             ModItems.ENDER_RIFLE,
             ModItems.FROST_LANCER,
             ModItems.OBSIDIAN_SPLINTER_PISTOL,
@@ -105,6 +103,38 @@ class ModItemModelProvider(
 
         for (weapon in weapons) {
             weapon(weapon.get())
+        }
+
+        pullingItem(ModItems.ENDER_BOW.get())
+        pullingItem(ModItems.BOW_WITH_QUIVER.get())
+
+    }
+
+    private fun pullingItem(item: Item) {
+        var mainModel = weapon(item)    // The idle one when not being pulled TODO: Make this use parent of bow
+
+        val itemRl = BuiltInRegistries.ITEM.getKey(item)
+
+        for (pullStage in 0..2) {
+            val textureLoc = modLoc("item/weapon/${itemRl.path}_pulling_$pullStage")
+
+            val pullModel = getBuilder(itemRl.toString() + "_pulling_" + pullStage)
+                .parent(ModelFile.UncheckedModelFile("item/generated"))
+                .texture("layer0", textureLoc)
+
+            mainModel = mainModel
+                .override()
+                .predicate(mcLoc("pull"), 1f)
+                .predicate(
+                    mcLoc("pulling"), when (pullStage) {
+                        0 -> 0f
+                        1 -> 0.65f
+                        2 -> 0.9f
+                        else -> 0f
+                    }
+                )
+                .model(pullModel)
+                .end()
         }
 
     }
