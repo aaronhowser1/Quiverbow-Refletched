@@ -57,6 +57,56 @@ class ModItemModelProvider(
             ammo(ammo.get())
         }
 
+        val weapons = listOf(
+            ModItems.COMPACT_CROSSBOW,
+            ModItems.DOUBLE_CROSSBOW,
+            ModItems.BLAZE_CROSSBOW,
+            ModItems.AUTO_CROSSBOW,
+            ModItems.IMPROVED_AUTO_CROSSBOW,
+            ModItems.COIN_TOSSER,
+            ModItems.MODIFIED_COIN_TOSSER,
+            ModItems.DRAGON_BOX,
+            ModItems.FOUR_HEADED_DRAGON_BOX,
+            ModItems.LAPIS_COIL,
+            ModItems.THORN_SPLITTER,
+            ModItems.PROXIMITY_THORN_THROWER,
+            ModItems.SUGAR_ENGINE,
+            ModItems.FIREWORKS_ROCKET_LAUNCHER,
+            ModItems.IMPROVED_ROCKET_LAUNCHER,
+            ModItems.ARROW_MORTAR,
+            ModItems.DRAGON_MORTAR,
+            ModItems.SEEDLING,
+            ModItems.POTATOSSER,
+            ModItems.SNOW_CANNON,
+            ModItems.BOW_WITH_QUIVER,
+            ModItems.ENDER_BOW,
+            ModItems.ENDER_RIFLE,
+            ModItems.FROST_LANCER,
+            ModItems.OBSIDIAN_SPLINTER_PISTOL,
+            ModItems.OBSIDIAN_SPEAR_RIFLE,
+            ModItems.OBSIDIAN_WITHER_RIFLE,
+            ModItems.FEN_FIRE,
+            ModItems.FLINT_DUSTER,
+            ModItems.LIGHTING_RED,
+            ModItems.SUNRAY,
+            ModItems.POWDER_KNUCKLE,
+            ModItems.MODIFIED_POWDER_KNUCKLE,
+            ModItems.NETHER_BELLOWS,
+            ModItems.REDSTONE_SPRAYER,
+            ModItems.SOUL_CAIRN,
+            ModItems.AQUA_ACCELERATOR,
+            ModItems.SILKEN_SPINNER,
+            ModItems.SEED_SWEEPER,
+            ModItems.RAY_OF_HOPE,
+            ModItems.ENDER_RAY_ACCELERATOR,
+            ModItems.ARMS_ASSISTANT_TARGETING_HELPER,
+            ModItems.HIDDEN_ENDER_PISTOL,
+        )
+
+        for (weapon in weapons) {
+            weapon(weapon.get())
+        }
+
     }
 
 }
