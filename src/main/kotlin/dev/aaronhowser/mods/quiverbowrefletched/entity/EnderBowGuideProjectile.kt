@@ -8,6 +8,7 @@ import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.entity.projectile.Arrow
 import net.minecraft.world.level.Level
+import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.phys.BlockHitResult
 import net.minecraft.world.phys.EntityHitResult
 
@@ -26,6 +27,21 @@ class EnderBowGuideProjectile(
 
     override fun onHitBlock(result: BlockHitResult) {
         super.discard()
+
+        if (this.level().getBlockState(result.blockPos).block != Blocks.TARGET) return
+
+        //TODO: Make this clientside
+        val owner = this.owner as? Player ?: return
+        level().playSound(
+            null,
+            owner.x,
+            owner.eyeY,
+            owner.z,
+            SoundEvents.ARROW_HIT_PLAYER,
+            SoundSource.PLAYERS,
+            0.18f,
+            0.45f * 2
+        )
     }
 
     override fun onHitEntity(result: EntityHitResult) {
