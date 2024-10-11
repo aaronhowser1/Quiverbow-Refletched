@@ -9,9 +9,7 @@ import net.minecraft.world.item.ItemStack
 class PowderKnuckle(
     val isModified: Boolean
 ) : WeaponBase(
-    8,
-    Properties()
-        .stacksTo(1)
+    maxAmmo = 8
 ) {
 
     override fun onLeftClickEntity(stack: ItemStack, player: Player, entity: Entity): Boolean {
