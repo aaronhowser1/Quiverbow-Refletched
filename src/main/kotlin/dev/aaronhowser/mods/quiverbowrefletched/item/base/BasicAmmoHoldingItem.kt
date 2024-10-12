@@ -13,7 +13,7 @@ abstract class BasicAmmoHoldingItem(
     properties: Properties = Properties()
         .stacksTo(1)
         .component(
-            ModDataComponents.AMMO_COUNT_COMPONENT.get(),
+            ModDataComponents.BASIC_AMMO_COMPONENT.get(),
             0
         )
 ) : Item(properties) {
@@ -24,11 +24,11 @@ abstract class BasicAmmoHoldingItem(
         }
 
         fun getAmmo(stack: ItemStack): Int {
-            return stack.getOrDefault(ModDataComponents.AMMO_COUNT_COMPONENT.get(), 0)
+            return stack.getOrDefault(ModDataComponents.BASIC_AMMO_COMPONENT.get(), 0)
         }
 
         fun setAmmo(stack: ItemStack, amount: Int) {
-            stack.set(ModDataComponents.AMMO_COUNT_COMPONENT.get(), amount)
+            stack.set(ModDataComponents.BASIC_AMMO_COMPONENT.get(), amount)
         }
 
         fun modifyAmmoCount(stack: ItemStack, amount: Int): Boolean {

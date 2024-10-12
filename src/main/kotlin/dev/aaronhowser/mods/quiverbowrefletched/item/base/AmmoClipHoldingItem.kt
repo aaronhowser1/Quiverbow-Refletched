@@ -23,30 +23,30 @@ abstract class AmmoClipHoldingItem(
     properties: Properties = Properties()
         .stacksTo(1)
         .component(
-            ModDataComponents.AMMO_CLIP_CONTENTS.get(),
+            ModDataComponents.ADVANCED_AMMO_COMPONENT.get(),
             ItemStackListComponent(1)
         )
 ) : Item(properties) {
 
     companion object {
         fun getClip(stack: ItemStack): ItemStack {
-            return stack.get(ModDataComponents.AMMO_CLIP_CONTENTS.get())?.items?.firstOrNull() ?: ItemStack.EMPTY
+            return stack.get(ModDataComponents.ADVANCED_AMMO_COMPONENT.get())?.items?.firstOrNull() ?: ItemStack.EMPTY
         }
 
         fun getClipAmmo(stack: ItemStack): Int {
             val clipStack = getClip(stack)
 
-            return clipStack.get(ModDataComponents.AMMO_COUNT_COMPONENT.get()) ?: -1
+            return clipStack.get(ModDataComponents.BASIC_AMMO_COMPONENT.get()) ?: -1
         }
 
         fun consumeClipAmmo(stack: ItemStack, amount: Int): Boolean {
             val clipStack = getClip(stack)
-            val currentAmount = clipStack.get(ModDataComponents.AMMO_COUNT_COMPONENT.get()) ?: return false
+            val currentAmount = clipStack.get(ModDataComponents.BASIC_AMMO_COMPONENT.get()) ?: return false
             if (currentAmount < amount) return false
 
             val newAmount = currentAmount - amount
-            clipStack.set(ModDataComponents.AMMO_COUNT_COMPONENT.get(), newAmount)
-            stack.set(ModDataComponents.AMMO_CLIP_CONTENTS.get(), ItemStackListComponent(clipStack))
+            clipStack.set(ModDataComponents.BASIC_AMMO_COMPONENT.get(), newAmount)
+            stack.set(ModDataComponents.ADVANCED_AMMO_COMPONENT.get(), ItemStackListComponent(clipStack))
             return true
         }
 
@@ -57,7 +57,7 @@ abstract class AmmoClipHoldingItem(
             if (!player.addItem(clipStack)) {
                 player.drop(clipStack, false)
             }
-            stack.set(ModDataComponents.AMMO_CLIP_CONTENTS.get(), ItemStackListComponent(1))
+            stack.set(ModDataComponents.ADVANCED_AMMO_COMPONENT.get(), ItemStackListComponent(1))
         }
     }
 
@@ -67,7 +67,7 @@ abstract class AmmoClipHoldingItem(
         val currentClip = getClip(gunStack)
         if (!currentClip.isEmpty) return false
 
-        gunStack.set(ModDataComponents.AMMO_CLIP_CONTENTS.get(), ItemStackListComponent(clipStack.copy()))
+        gunStack.set(ModDataComponents.ADVANCED_AMMO_COMPONENT.get(), ItemStackListComponent(clipStack.copy()))
         clipStack.shrink(1)
         return true
     }

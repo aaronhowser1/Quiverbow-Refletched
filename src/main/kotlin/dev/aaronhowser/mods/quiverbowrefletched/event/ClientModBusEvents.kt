@@ -81,7 +81,7 @@ object ClientModBusEvents {
                 item.get(),
                 ModItemModelProvider.isEmpty
             ) { usedStack, _, _, _ ->
-                if (usedStack.getOrDefault(ModDataComponents.AMMO_COUNT_COMPONENT, 0) == 0) 1f else 0f
+                if (usedStack.getOrDefault(ModDataComponents.BASIC_AMMO_COMPONENT, 0) == 0) 1f else 0f
             }
         }
 
@@ -91,7 +91,7 @@ object ClientModBusEvents {
         ) { usedStack, _, _, _ ->
             if (usedStack.item !is BasicAmmoHoldingItem) return@register 0f
             val maxAmmo = (usedStack.item as BasicAmmoHoldingItem).maxAmmo
-            val count = usedStack.getOrDefault(ModDataComponents.AMMO_COUNT_COMPONENT, 0)
+            val count = usedStack.getOrDefault(ModDataComponents.BASIC_AMMO_COMPONENT, 0)
             return@register count.toFloat() / maxAmmo.toFloat()
         }
 

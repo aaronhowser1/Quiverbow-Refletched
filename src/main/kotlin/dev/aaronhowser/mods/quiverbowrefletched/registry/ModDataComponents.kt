@@ -14,14 +14,14 @@ object ModDataComponents {
     val DATA_COMPONENT_REGISTRY: DeferredRegister.DataComponents =
         DeferredRegister.createDataComponents(Registries.DATA_COMPONENT_TYPE, QuiverBowRefletched.ID)
 
-    val AMMO_COUNT_COMPONENT: DeferredHolder<DataComponentType<*>, DataComponentType<Int>> =
+    val BASIC_AMMO_COMPONENT: DeferredHolder<DataComponentType<*>, DataComponentType<Int>> =
         DATA_COMPONENT_REGISTRY.registerComponentType("ammo_count") {
             it
                 .persistent(Codec.INT)
                 .networkSynchronized(ByteBufCodecs.VAR_INT)
         }
 
-    val AMMO_CLIP_CONTENTS: DeferredHolder<DataComponentType<*>, DataComponentType<ItemStackListComponent>> =
+    val ADVANCED_AMMO_COMPONENT: DeferredHolder<DataComponentType<*>, DataComponentType<ItemStackListComponent>> =
         DATA_COMPONENT_REGISTRY.registerComponentType("ammo_clip_contents") {
             it
                 .persistent(ItemStackListComponent.CODEC)
