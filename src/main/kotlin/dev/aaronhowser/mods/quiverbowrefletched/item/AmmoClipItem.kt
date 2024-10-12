@@ -29,16 +29,10 @@ class AmmoClipItem(
             for (iteratedStack in player.inventory.items) {
                 if (!iteratedStack.`is`(ammoTag)) continue
 
-                val currentAmmo = getAmmo(usedStack)
-                if (currentAmmo >= maxAmmo) break
-
-                val stackSize = iteratedStack.count
-
-                val remainingAmmo = maxAmmo - currentAmmo
-                val amountToInsert = minOf(remainingAmmo, stackSize)
-
-                iteratedStack.shrink(amountToInsert)
-                modifyAmmoCount(usedStack, amountToInsert)
+                while (iteratedStack.count > 0 && getAmmo(usedStack) < maxAmmo) {
+                    iteratedStack.shrink(1)
+                    modifyAmmoCount(usedStack, +1)
+                }
 
                 level.playSound(
                     null,
