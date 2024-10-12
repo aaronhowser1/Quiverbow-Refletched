@@ -7,7 +7,10 @@ import dev.aaronhowser.mods.quiverbowrefletched.registry.ModDataComponents
 import dev.aaronhowser.mods.quiverbowrefletched.registry.ModRecipeSerializers
 import net.minecraft.core.HolderLookup
 import net.minecraft.world.item.ItemStack
-import net.minecraft.world.item.crafting.*
+import net.minecraft.world.item.crafting.CraftingBookCategory
+import net.minecraft.world.item.crafting.CraftingInput
+import net.minecraft.world.item.crafting.CustomRecipe
+import net.minecraft.world.item.crafting.RecipeSerializer
 import net.minecraft.world.level.Level
 
 class InsertClipRecipe(
@@ -59,7 +62,7 @@ class InsertClipRecipe(
     }
 
     override fun canCraftInDimensions(x: Int, y: Int): Boolean {
-        return x > 2 && y > 2
+        return x * y > 2
     }
 
     override fun getSerializer(): RecipeSerializer<*> {

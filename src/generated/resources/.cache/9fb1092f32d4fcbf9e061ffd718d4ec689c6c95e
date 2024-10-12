@@ -1,4 +1,4 @@
-// 1.21.1	2024-10-11T20:28:37.0503518	Recipes
+// 1.21.1	2024-10-11T20:53:49.6203684	Recipes
 36fb6835da8ef97b15c3599401bb47d9f36e2d40 data/quiverbow_refletched/advancement/recipes/misc/aqua_accelerator.json
 3b90ee8d59bf123d25bbbd029917361cd44bd1f6 data/quiverbow_refletched/advancement/recipes/misc/arms_assistant_targeting_helper.json
 33bc683992f3eb09641fdb6e7199059bff4cf62c data/quiverbow_refletched/advancement/recipes/misc/arrow_bundle.json
@@ -81,6 +81,7 @@ b45d87091a2dad5034b8d8a1d70d5b603ea5ae1c data/quiverbow_refletched/recipe/ender_
 8d6c14970566d565e8e42ce080e9dfe617062b97 data/quiverbow_refletched/recipe/ender_rail_accelerator.json
 7105a8955bcf26e7f9d156e1002c2eb207595663 data/quiverbow_refletched/recipe/ender_rifle.json
 5f559dab180de56ad3adf2442815f15c1a3c8baa data/quiverbow_refletched/recipe/fen_fire.json
+cfdb12e311357c44b7db5069c29e752aeedbe5fd data/quiverbow_refletched/recipe/fill_clip.json
 0f55b8fddfc0943f22b1224ddbba171ad0dd8626 data/quiverbow_refletched/recipe/fireworks_rocket_launcher.json
 ba97b754a38570af3704dcbd33e927f3915c63ab data/quiverbow_refletched/recipe/flint_duster.json
 5c54919b0e45390e437e003d06efc9f5b8e5088e data/quiverbow_refletched/recipe/four_headed_dragon_box.json

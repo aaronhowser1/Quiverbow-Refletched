@@ -22,12 +22,29 @@ abstract class AmmoHoldingItem(
             return stack.getOrDefault(ModDataComponents.AMMO_COUNT_COMPONENT.get(), 0)
         }
 
+        fun getMaxAmmo(stack: ItemStack): Int {
+            return (stack.item as? AmmoHoldingItem)?.maxAmmo ?: 0
+        }
+
+        fun setAmmo(stack: ItemStack, amount: Int) {
+            stack.set(ModDataComponents.AMMO_COUNT_COMPONENT.get(), amount)
+        }
+
         fun consumeAmmo(stack: ItemStack, amount: Int): Boolean {
             val currentAmount = getAmmo(stack)
             if (currentAmount < amount) return false
 
             val newAmount = currentAmount - amount
-            stack.set(ModDataComponents.AMMO_COUNT_COMPONENT.get(), newAmount)
+            setAmmo(stack, newAmount)
+            return true
+        }
+
+        fun addAmmo(stack: ItemStack, amount: Int): Boolean {
+            val currentAmount = getAmmo(stack)
+            if (currentAmount + amount > getMaxAmmo(stack)) return false
+
+            val newAmount = currentAmount + amount
+            setAmmo(stack, newAmount)
             return true
         }
     }
