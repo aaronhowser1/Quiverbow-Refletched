@@ -59,12 +59,13 @@ class ModItemModelProvider(
             ModItems.BIG_ROCKET,
             ModItems.COLD_IRON_CLIP,
             ModItems.BOX_FLINT_DUST,
-//            ModItems.LAPIS_MAGAZINE,          //TODO: Needs special predicate
         )
 
         for (ammo in deferredAmmo) {
             ammo(ammo.get())
         }
+
+        lapisMagazine()
 
         val weapons = listOf(
             ModItems.COMPACT_CROSSBOW,
@@ -137,6 +138,32 @@ class ModItemModelProvider(
 
         for (item in possiblyEmptyItems) {
             ammoCanBeEmpty(item.get())
+        }
+
+    }
+
+    private fun lapisMagazine() {
+        val item = ModItems.LAPIS_MAGAZINE.get()
+        val itemRl = BuiltInRegistries.ITEM.getKey(item)
+
+        val textureString = "item/ammo/lapis_magazine_"
+
+        var emptyModel = getBuilder(itemRl.toString())
+            .parent(ModelFile.UncheckedModelFile("item/generated"))
+            .texture("layer0", modLoc(textureString + "0"))
+
+        for (filledStage in 1..6) {
+            val textureLoc = modLoc(textureString + filledStage)
+
+            val filledModel = getBuilder(itemRl.toString() + "_filled_" + filledStage)
+                .parent(ModelFile.UncheckedModelFile("item/generated"))
+                .texture("layer0", textureLoc)
+
+            emptyModel = emptyModel
+                .override()
+                .predicate(isEmpty, filledStage.toFloat() / 6)
+                .model(filledModel)
+                .end()
         }
 
     }
