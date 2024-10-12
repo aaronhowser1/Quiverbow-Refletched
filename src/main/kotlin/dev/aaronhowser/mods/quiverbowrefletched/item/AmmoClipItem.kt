@@ -25,18 +25,18 @@ class AmmoClipItem(
         if (!player.isSecondaryUseActive) return InteractionResultHolder.pass(usedStack)
 
         if (!level.isClientSide) {
-            for (stack in player.inventory.items) {
-                if (stack.`is`(ammoTag)) continue
+            for (iteratedStack in player.inventory.items) {
+                if (!iteratedStack.`is`(ammoTag)) continue
 
                 val currentAmmo = getAmmo(usedStack)
                 if (currentAmmo >= maxAmmo) break
 
-                val stackSize = stack.count
+                val stackSize = iteratedStack.count
 
                 val remainingAmmo = maxAmmo - currentAmmo
                 val amountToInsert = minOf(remainingAmmo, stackSize)
 
-                stack.shrink(amountToInsert)
+                iteratedStack.shrink(amountToInsert)
                 modifyAmmoCount(usedStack, amountToInsert)
 
                 level.playSound(
@@ -65,7 +65,7 @@ class AmmoClipItem(
 
 
     companion object {
-        val SUGAR = AmmoClipItem(64, ModItemTagsProvider.AMMO_SUGAR_ENGINE)
+        val SUGAR = AmmoClipItem(200, ModItemTagsProvider.AMMO_SUGAR_ENGINE)
         val SEED = AmmoClipItem(512, ModItemTagsProvider.AMMO_SEED_JAR) // TODO: This should be its own thing that remembers the seeds
         val OBSIDIAN = AmmoClipItem(16, ModItemTagsProvider.AMMO_OBSIDIAN)
         val GOLD = AmmoClipItem(72, ModItemTagsProvider.AMMO_GOLD_NUGGET)
