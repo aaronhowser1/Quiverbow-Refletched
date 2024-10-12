@@ -8,7 +8,10 @@ import net.minecraft.sounds.SoundSource
 import net.minecraft.tags.TagKey
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResultHolder
+import net.minecraft.world.entity.SlotAccess
 import net.minecraft.world.entity.player.Player
+import net.minecraft.world.inventory.ClickAction
+import net.minecraft.world.inventory.Slot
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.TooltipFlag
@@ -46,6 +49,37 @@ class AmmoClipItem(
         }
 
         return InteractionResultHolder.sidedSuccess(usedStack, level.isClientSide)
+    }
+
+    override fun overrideOtherStackedOnMe(
+        thisStack: ItemStack,
+        otherStack: ItemStack,
+        slot: Slot,
+        action: ClickAction,
+        player: Player,
+        access: SlotAccess
+    ): Boolean {
+        if (thisStack.count != 1) return false
+        if (action != ClickAction.SECONDARY || !slot.allowModification(player)) return false
+        if (getAmmo(thisStack) >= maxAmmo) return false
+        if (!otherStack.`is`(ammoTag)) return false
+
+        val amount = otherStack.count
+        val amountToInsert = minOf(maxAmmo - getAmmo(thisStack), amount)
+
+        modifyAmmoCount(thisStack, amountToInsert)
+        otherStack.shrink(amountToInsert)
+
+        player.level().playSound(
+            null,
+            player.blockPosition(),
+            SoundEvents.ITEM_PICKUP,
+            SoundSource.PLAYERS,
+            1f,
+            0.33f
+        )
+
+        return true
     }
 
     override fun appendHoverText(
