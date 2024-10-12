@@ -5,7 +5,6 @@ import dev.aaronhowser.mods.quiverbowrefletched.item.base.AmmoClipHoldingItem
 import dev.aaronhowser.mods.quiverbowrefletched.item.component.SingleStackComponent
 import dev.aaronhowser.mods.quiverbowrefletched.registry.ModDataComponents
 import dev.aaronhowser.mods.quiverbowrefletched.registry.ModRecipeSerializers
-import dev.aaronhowser.mods.quiverbowrefletched.registry.ModRecipeTypes
 import net.minecraft.core.HolderLookup
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.crafting.*
@@ -65,9 +64,5 @@ class InsertClipRecipe(
 
     override fun getSerializer(): RecipeSerializer<*> {
         return ModRecipeSerializers.INSERT_CLIP.get()
-    }
-
-    override fun getType(): RecipeType<*> {
-        return ModRecipeTypes.INSERT_CLIP.get()
     }
 }
