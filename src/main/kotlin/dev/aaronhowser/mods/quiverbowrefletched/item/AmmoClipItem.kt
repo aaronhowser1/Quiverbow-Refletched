@@ -70,6 +70,7 @@ class AmmoClipItem(
         modifyAmmoCount(thisStack, amountToInsert)
         otherStack.shrink(amountToInsert)
 
+        //TODO: Custom sound?
         player.level().playSound(
             null,
             player.blockPosition(),
