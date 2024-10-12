@@ -20,6 +20,7 @@ class ModItemModelProvider(
     companion object {
         val isPulling = OtherUtil.modResource("is_pulling")
         val pullAmount = OtherUtil.modResource("pull_amount")
+        val isEmpty = OtherUtil.modResource("is_empty")
     }
 
     private fun item(item: Item, subfolder: String): ItemModelBuilder {
@@ -48,15 +49,7 @@ class ModItemModelProvider(
             ModItems.BIG_ROCKET,
             ModItems.COLD_IRON_CLIP,
             ModItems.BOX_FLINT_DUST,
-            ModItems.SEED_JAR,
-            ModItems.OBSIDIAN_MAGAZINE,
-            ModItems.GOLD_MAGAZINE,
-            ModItems.THORN_MAGAZINE,
 //            ModItems.LAPIS_MAGAZINE,          //TODO: Needs special predicate
-            ModItems.REDSTONE_MAGAZINE,
-            ModItems.LARGE_NETHERRACK_MAGAZINE,
-            ModItems.LARGE_REDSTONE_MAGAZINE,
-            ModItems.ENDER_QUARTZ_CLIP
         )
 
         for (ammo in deferredAmmo) {
@@ -111,9 +104,45 @@ class ModItemModelProvider(
             weapon(weapon.get())
         }
 
-        pullingItem(ModItems.ENDER_BOW.get())
-        pullingItem(ModItems.BOW_WITH_QUIVER.get())
+        val pullingItems = listOf(
+            ModItems.ENDER_BOW,
+            ModItems.BOW_WITH_QUIVER
+        )
 
+        for (item in pullingItems) {
+            pullingItem(item.get())
+        }
+
+        val possiblyEmptyItems = listOf(
+            ModItems.GOLD_MAGAZINE,
+            ModItems.LARGE_NETHERRACK_MAGAZINE,
+            ModItems.LARGE_REDSTONE_MAGAZINE,
+            ModItems.OBSIDIAN_MAGAZINE,
+            ModItems.REDSTONE_MAGAZINE,
+            ModItems.SEED_JAR,
+            ModItems.SUGAR_ROD_CLIP,
+            ModItems.THORN_MAGAZINE,
+            ModItems.ENDER_QUARTZ_CLIP
+        )
+
+        for (item in possiblyEmptyItems) {
+            ammoCanBeEmpty(item.get())
+        }
+
+    }
+
+    private fun ammoCanBeEmpty(item: Item) {
+        val itemRl = BuiltInRegistries.ITEM.getKey(item)
+
+        val emptyModel = getBuilder(itemRl.toString() + "_empty")
+            .parent(ModelFile.UncheckedModelFile("item/generated"))
+            .texture("layer0", modLoc("item/ammo/${itemRl.path}_empty"))
+
+        ammo(item)
+            .override()
+            .predicate(isEmpty, 1f)
+            .model(emptyModel)
+            .end()
     }
 
     private fun pullingItem(item: Item) {

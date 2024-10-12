@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "quiverbow_refletched:item/ammo/large_redstone_magazine_empty"
+  }
+}
