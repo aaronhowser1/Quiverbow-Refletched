@@ -36,16 +36,16 @@ abstract class AmmoClipHoldingItem(
         fun getClipAmmo(stack: ItemStack): Int {
             val clipStack = getClip(stack)
 
-            return clipStack.get(ModDataComponents.AMMO_COUNT_COMPONENT.get()) ?: -1
+            return AmmoHoldingItem.getAmmo(clipStack)
         }
 
         fun consumeClipAmmo(stack: ItemStack, amount: Int): Boolean {
             val clipStack = getClip(stack)
-            val currentAmount = clipStack.get(ModDataComponents.AMMO_COUNT_COMPONENT.get()) ?: return false
+            val currentAmount = AmmoHoldingItem.getAmmo(clipStack)
             if (currentAmount < amount) return false
 
             val newAmount = currentAmount - amount
-            clipStack.set(ModDataComponents.AMMO_COUNT_COMPONENT.get(), newAmount)
+            AmmoHoldingItem.setAmmo(clipStack, newAmount)
             stack.set(ModDataComponents.AMMO_CLIP_CONTENTS.get(), ItemStackListComponent(clipStack))
             return true
         }

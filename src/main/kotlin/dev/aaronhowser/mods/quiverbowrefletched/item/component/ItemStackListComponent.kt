@@ -15,12 +15,14 @@ data class ItemStackListComponent(
     constructor(maxItems: Int) : this(maxItems, emptyList())
     constructor(itemStack: ItemStack) : this(1, listOf(itemStack))
 
+    fun getAmount(): Int = items.sumOf { it.count }
+
     companion object {
         val CODEC: Codec<ItemStackListComponent> =
             RecordCodecBuilder.create { instance ->
                 instance.group(
                     Codec.INT
-                        .fieldOf("maxItems")
+                        .fieldOf("max_items")
                         .forGetter(ItemStackListComponent::maxItems),
                     ItemStack.CODEC.listOf()
                         .fieldOf("items")

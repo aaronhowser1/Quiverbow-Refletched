@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.quiverbowrefletched.item.base
 
+import dev.aaronhowser.mods.quiverbowrefletched.item.component.ItemStackListComponent
 import dev.aaronhowser.mods.quiverbowrefletched.registry.ModDataComponents
 import dev.aaronhowser.mods.quiverbowrefletched.util.ClientUtil
 import net.minecraft.network.chat.Component
@@ -13,22 +14,22 @@ abstract class AmmoHoldingItem(
     properties: Properties = Properties()
         .stacksTo(1)
         .component(
-            ModDataComponents.AMMO_COUNT_COMPONENT.get(),
-            0
+            ModDataComponents.AMMO_CLIP_CONTENTS.get(),
+            ItemStackListComponent(maxAmmo)
         )
 ) : Item(properties) {
 
     companion object {
         fun getMaxAmmo(stack: ItemStack): Int {
-            return (stack.item as? AmmoHoldingItem)?.maxAmmo ?: 0
+            return (stack.item as? AmmoHoldingItem)?.maxAmmo ?: -1
         }
 
         fun getAmmo(stack: ItemStack): Int {
-            return stack.getOrDefault(ModDataComponents.AMMO_COUNT_COMPONENT.get(), 0)
+            return stack.get(ModDataComponents.AMMO_CLIP_CONTENTS.get())?.getAmount() ?: -1
         }
 
         fun setAmmo(stack: ItemStack, amount: Int) {
-            stack.set(ModDataComponents.AMMO_COUNT_COMPONENT.get(), amount)
+//            stack.set(ModDataComponents.AMMO_COUNT_COMPONENT.get(), amount)
         }
 
         fun modifyAmmoCount(stack: ItemStack, amount: Int): Boolean {
