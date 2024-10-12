@@ -16,8 +16,9 @@ import net.minecraft.world.level.Level
 
 class AmmoClipItem(
     maxAmmo: Int,
-    val ammoTag: TagKey<Item>
-) : AmmoHoldingItem(maxAmmo = maxAmmo) {
+    val ammoTag: TagKey<Item>,
+    barColor: Int
+) : AmmoHoldingItem(maxAmmo, barColor) {
 
     override fun use(level: Level, player: Player, usedHand: InteractionHand): InteractionResultHolder<ItemStack> {
         val usedStack = player.getItemInHand(usedHand)
@@ -65,16 +66,16 @@ class AmmoClipItem(
 
 
     companion object {
-        val SUGAR = AmmoClipItem(200, ModItemTagsProvider.AMMO_SUGAR_ENGINE)
-        val SEED = AmmoClipItem(512, ModItemTagsProvider.AMMO_SEED_JAR) // TODO: This should be its own thing that remembers the seeds
-        val OBSIDIAN = AmmoClipItem(16, ModItemTagsProvider.AMMO_OBSIDIAN)
-        val GOLD = AmmoClipItem(72, ModItemTagsProvider.AMMO_GOLD_NUGGET)
-        val THORN = AmmoClipItem(64, ModItemTagsProvider.AMMO_THORN)
-        val LAPIS = AmmoClipItem(150, ModItemTagsProvider.AMMO_LAPIS)
-        val REDSTONE = AmmoClipItem(64, ModItemTagsProvider.AMMO_REDSTONE)
-        val LARGE_NETHERRACK = AmmoClipItem(200, ModItemTagsProvider.AMMO_LARGE_NETHERRACK)
-        val LARGE_REDSTONE = AmmoClipItem(200, ModItemTagsProvider.AMMO_LARGE_REDSTONE)
-        val ENDER_QUARTZ = AmmoClipItem(8, ModItemTagsProvider.AMMO_QUARTZ)
+        val SUGAR = AmmoClipItem(200, ModItemTagsProvider.AMMO_SUGAR_ENGINE, 0x00FF00)
+        val SEED = AmmoClipItem(512, ModItemTagsProvider.AMMO_SEED_JAR, 0x00FF00) // TODO: This should be its own thing that remembers the seeds
+        val OBSIDIAN = AmmoClipItem(16, ModItemTagsProvider.AMMO_OBSIDIAN, 0x666666)
+        val GOLD = AmmoClipItem(72, ModItemTagsProvider.AMMO_GOLD_NUGGET, 0xFFD700)
+        val THORN = AmmoClipItem(64, ModItemTagsProvider.AMMO_THORN, 0x00FF00)
+        val LAPIS = AmmoClipItem(150, ModItemTagsProvider.AMMO_LAPIS, 0x0000FF)
+        val REDSTONE = AmmoClipItem(64, ModItemTagsProvider.AMMO_REDSTONE, 0xFF0000)
+        val LARGE_NETHERRACK = AmmoClipItem(200, ModItemTagsProvider.AMMO_LARGE_NETHERRACK, 0x800000)
+        val LARGE_REDSTONE = AmmoClipItem(200, ModItemTagsProvider.AMMO_LARGE_REDSTONE, 0xFF0000)
+        val ENDER_QUARTZ = AmmoClipItem(8, ModItemTagsProvider.AMMO_QUARTZ, 0xFFFFFF)
     }
 
 }

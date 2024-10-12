@@ -9,6 +9,7 @@ import net.minecraft.world.item.TooltipFlag
 
 abstract class AmmoHoldingItem(
     val maxAmmo: Int,
+    private val barColor: Int = 0x00FF00,
     properties: Properties = Properties()
         .stacksTo(1)
         .component(
@@ -47,6 +48,10 @@ abstract class AmmoHoldingItem(
 
     override fun isBarVisible(stack: ItemStack): Boolean {
         return true
+    }
+
+    override fun getBarColor(stack: ItemStack): Int {
+        return barColor
     }
 
     override fun appendHoverText(
