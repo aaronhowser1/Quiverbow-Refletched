@@ -42,6 +42,16 @@ class ModItemModelProvider(
 
     override fun registerModels() {
 
+        val basicItems = listOf(
+            ModItems.PACKED_UP_ARMS_ASSISTANT,
+            ModItems.SUGAR_ENGINE_BARREL,
+            ModItems.SUGAR_ENGINE_MAIN_BODY
+        )
+
+        for (item in basicItems) {
+            basicItem(item.get())
+        }
+
         val deferredAmmo = listOf(
             ModItems.ARROW_BUNDLE,
             ModItems.ROCKET_BUNDLE,
