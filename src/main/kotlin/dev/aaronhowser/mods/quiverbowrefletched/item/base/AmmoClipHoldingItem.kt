@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.quiverbowrefletched.item.base
 
 
+import dev.aaronhowser.mods.quiverbowrefletched.item.AmmoClipItem
 import dev.aaronhowser.mods.quiverbowrefletched.item.component.SingleStackComponent
 import dev.aaronhowser.mods.quiverbowrefletched.registry.ModDataComponents
 import net.minecraft.world.InteractionHand
@@ -11,6 +12,7 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 
 abstract class AmmoClipHoldingItem(
+    val clipItem: AmmoClipItem,
     properties: Properties = Properties()
         .stacksTo(1)
         .component(

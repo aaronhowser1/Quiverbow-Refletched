@@ -2,8 +2,8 @@ package dev.aaronhowser.mods.quiverbowrefletched.registry
 
 import dev.aaronhowser.mods.quiverbowrefletched.QuiverBowRefletched
 import dev.aaronhowser.mods.quiverbowrefletched.item.AmmoClipItem
+import dev.aaronhowser.mods.quiverbowrefletched.item.weapon.BowWithQuiverItem
 import dev.aaronhowser.mods.quiverbowrefletched.item.weapon.EnderBowItem
-import dev.aaronhowser.mods.quiverbowrefletched.item.weapon.GenericAmmoClipHoldingItem
 import dev.aaronhowser.mods.quiverbowrefletched.item.weapon.GenericAmmoHoldingItem
 import dev.aaronhowser.mods.quiverbowrefletched.item.weapon.PowderKnuckle
 import net.minecraft.world.item.Item
@@ -39,7 +39,7 @@ object ModItems {
     val PROXIMITY_THORN_THROWER =
         register("proximity_thorn_thrower") { GenericAmmoHoldingItem(maxAmmo = 64) }
     val SUGAR_ENGINE =
-        register("sugar_engine") { GenericAmmoClipHoldingItem() }
+        register("sugar_engine") { GenericAmmoHoldingItem(1) }
     val FIREWORKS_ROCKET_LAUNCHER =
         register("fireworks_rocket_launcher") { GenericAmmoHoldingItem(maxAmmo = 1) }
     val IMPROVED_ROCKET_LAUNCHER =
@@ -49,13 +49,13 @@ object ModItems {
     val DRAGON_MORTAR =
         register("dragon_mortar") { GenericAmmoHoldingItem(maxAmmo = 8) }
     val SEEDLING =
-        register("seedling") { GenericAmmoClipHoldingItem() }
+        register("seedling") { GenericAmmoHoldingItem(1) }
     val POTATOSSER =
         register("potatosser") { GenericAmmoHoldingItem(maxAmmo = 14) }
     val SNOW_CANNON =
         register("snow_cannon") { GenericAmmoHoldingItem(maxAmmo = 64) }
     val BOW_WITH_QUIVER =
-        register("bow_with_quiver") { GenericAmmoHoldingItem(maxAmmo = 256) }
+        register("bow_with_quiver") { BowWithQuiverItem() }
     val ENDER_BOW =
         register("ender_bow") { EnderBowItem() }
     val ENDER_RIFLE =
