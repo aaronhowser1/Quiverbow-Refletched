@@ -4,6 +4,7 @@ package dev.aaronhowser.mods.quiverbowrefletched.item.base
 import dev.aaronhowser.mods.quiverbowrefletched.item.AmmoClipItem
 import dev.aaronhowser.mods.quiverbowrefletched.item.component.ItemStackListComponent
 import dev.aaronhowser.mods.quiverbowrefletched.registry.ModDataComponents
+import net.minecraft.network.chat.Component
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.sounds.SoundSource
 import net.minecraft.world.InteractionHand
@@ -14,6 +15,7 @@ import net.minecraft.world.inventory.ClickAction
 import net.minecraft.world.inventory.Slot
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.level.Level
 
 abstract class AmmoClipHoldingItem(
@@ -65,7 +67,7 @@ abstract class AmmoClipHoldingItem(
         val currentClip = getClip(gunStack)
         if (!currentClip.isEmpty) return false
 
-        gunStack.set(ModDataComponents.AMMO_CLIP_CONTENTS.get(), ItemStackListComponent(clipStack))
+        gunStack.set(ModDataComponents.AMMO_CLIP_CONTENTS.get(), ItemStackListComponent(clipStack.copy()))
         clipStack.shrink(1)
         return true
     }
@@ -114,6 +116,17 @@ abstract class AmmoClipHoldingItem(
 
     override fun isBarVisible(stack: ItemStack): Boolean {
         return true
+    }
+
+    override fun appendHoverText(
+        stack: ItemStack,
+        context: TooltipContext,
+        tooltipComponents: MutableList<Component>,
+        tooltipFlag: TooltipFlag
+    ) {
+        val clipAmmoCount = getClipAmmo(stack)
+
+        tooltipComponents.add(Component.literal("Clip Ammo: $clipAmmoCount"))
     }
 
 }
