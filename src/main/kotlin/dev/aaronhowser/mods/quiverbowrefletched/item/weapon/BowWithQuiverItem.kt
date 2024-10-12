@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.quiverbowrefletched.item.weapon
 
-import dev.aaronhowser.mods.quiverbowrefletched.item.base.AmmoHoldingItem
+import dev.aaronhowser.mods.quiverbowrefletched.item.base.BasicAmmoHoldingItem
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.sounds.SoundSource
@@ -16,7 +16,7 @@ import net.minecraft.world.item.UseAnim
 import net.minecraft.world.level.Level
 import net.neoforged.neoforge.event.EventHooks
 
-class BowWithQuiverItem : AmmoHoldingItem(maxAmmo = 64) {
+class BowWithQuiverItem : BasicAmmoHoldingItem(maxAmmo = 64) {
 
     override fun getUseAnimation(stack: ItemStack): UseAnim = UseAnim.BOW
     override fun getUseDuration(stack: ItemStack, entity: LivingEntity): Int = 72000

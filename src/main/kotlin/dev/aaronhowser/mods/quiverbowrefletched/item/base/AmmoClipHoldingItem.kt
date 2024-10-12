@@ -107,11 +107,11 @@ abstract class AmmoClipHoldingItem(
     override fun getBarWidth(stack: ItemStack): Int {
         val clipStack = getClip(stack)
         val clipItem = clipStack.item
-        if (clipItem !is AmmoHoldingItem) return 0
+        if (clipItem !is BasicAmmoHoldingItem) return 0
 
         val maxAmmo = clipItem.maxAmmo
 
-        return (AmmoHoldingItem.getAmmo(clipStack) / maxAmmo.toFloat() * 13).toInt()
+        return (BasicAmmoHoldingItem.getAmmo(clipStack) / maxAmmo.toFloat() * 13).toInt()
     }
 
     override fun isBarVisible(stack: ItemStack): Boolean {

@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.quiverbowrefletched.item
 
-import dev.aaronhowser.mods.quiverbowrefletched.item.base.AmmoHoldingItem
+import dev.aaronhowser.mods.quiverbowrefletched.item.base.BasicAmmoHoldingItem
 import net.minecraft.network.chat.Component
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.sounds.SoundSource
@@ -20,7 +20,7 @@ class BasicAmmoClipItem(
     maxAmmo: Int,
     private val ammoItem: Item,
     barColor: Int
-) : AmmoHoldingItem(maxAmmo, barColor) {
+) : BasicAmmoHoldingItem(maxAmmo, barColor) {
 
     override fun use(level: Level, player: Player, usedHand: InteractionHand): InteractionResultHolder<ItemStack> {
         val usedStack = player.getItemInHand(usedHand)

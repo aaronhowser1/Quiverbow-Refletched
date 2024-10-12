@@ -3,7 +3,7 @@ package dev.aaronhowser.mods.quiverbowrefletched.event
 import dev.aaronhowser.mods.quiverbowrefletched.QuiverBowRefletched
 import dev.aaronhowser.mods.quiverbowrefletched.datagen.model.ModItemModelProvider
 import dev.aaronhowser.mods.quiverbowrefletched.entity.render.EnderBowGuideProjectileRenderer
-import dev.aaronhowser.mods.quiverbowrefletched.item.base.AmmoHoldingItem
+import dev.aaronhowser.mods.quiverbowrefletched.item.base.BasicAmmoHoldingItem
 import dev.aaronhowser.mods.quiverbowrefletched.registry.ModDataComponents
 import dev.aaronhowser.mods.quiverbowrefletched.registry.ModEntityTypes
 import dev.aaronhowser.mods.quiverbowrefletched.registry.ModItems
@@ -89,8 +89,8 @@ object ClientModBusEvents {
             ModItems.LAPIS_MAGAZINE.get(),
             ModItemModelProvider.percentFull
         ) { usedStack, _, _, _ ->
-            if (usedStack.item !is AmmoHoldingItem) return@register 0f
-            val maxAmmo = (usedStack.item as AmmoHoldingItem).maxAmmo
+            if (usedStack.item !is BasicAmmoHoldingItem) return@register 0f
+            val maxAmmo = (usedStack.item as BasicAmmoHoldingItem).maxAmmo
             val count = usedStack.getOrDefault(ModDataComponents.AMMO_COUNT_COMPONENT, 0)
             return@register count.toFloat() / maxAmmo.toFloat()
         }

@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.quiverbowrefletched.item.weapon
 
-import dev.aaronhowser.mods.quiverbowrefletched.item.base.AmmoHoldingItem
+import dev.aaronhowser.mods.quiverbowrefletched.item.base.BasicAmmoHoldingItem
 import dev.aaronhowser.mods.quiverbowrefletched.util.OtherUtil.isTrue
 import net.minecraft.ChatFormatting
 import net.minecraft.core.BlockPos
@@ -21,7 +21,7 @@ import net.neoforged.neoforge.common.CommonHooks
 
 class PowderKnuckle(
     val isModified: Boolean
-) : AmmoHoldingItem(
+) : BasicAmmoHoldingItem(
     maxAmmo = 8
 ) {
 

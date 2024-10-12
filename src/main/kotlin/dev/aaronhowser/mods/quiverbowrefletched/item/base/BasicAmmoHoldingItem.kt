@@ -7,7 +7,7 @@ import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.TooltipFlag
 
-abstract class AmmoHoldingItem(
+abstract class BasicAmmoHoldingItem(
     val maxAmmo: Int,
     private val barColor: Int = 0x00FF00,
     properties: Properties = Properties()
@@ -20,7 +20,7 @@ abstract class AmmoHoldingItem(
 
     companion object {
         fun getMaxAmmo(stack: ItemStack): Int {
-            return (stack.item as? AmmoHoldingItem)?.maxAmmo ?: 0
+            return (stack.item as? BasicAmmoHoldingItem)?.maxAmmo ?: 0
         }
 
         fun getAmmo(stack: ItemStack): Int {
