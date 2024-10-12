@@ -53,7 +53,7 @@ class InsertClipRecipe(
 
         if (weapon == null || clip == null) return ItemStack.EMPTY
 
-        weapon.set(ModDataComponents.AMMO_CLIP_COMPONENT.get(), SingleStackComponent(clip))
+//        weapon.set(ModDataComponents.AMMO_CLIP_COMPONENT.get(), SingleStackComponent(clip))
 
         return weapon
     }

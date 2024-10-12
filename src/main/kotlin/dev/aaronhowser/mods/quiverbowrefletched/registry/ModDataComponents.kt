@@ -2,7 +2,7 @@ package dev.aaronhowser.mods.quiverbowrefletched.registry
 
 import com.mojang.serialization.Codec
 import dev.aaronhowser.mods.quiverbowrefletched.QuiverBowRefletched
-import dev.aaronhowser.mods.quiverbowrefletched.item.component.SingleStackComponent
+import dev.aaronhowser.mods.quiverbowrefletched.item.component.WhitelistedItemStackListComponent
 import net.minecraft.core.component.DataComponentType
 import net.minecraft.core.registries.Registries
 import net.minecraft.network.codec.ByteBufCodecs
@@ -21,11 +21,11 @@ object ModDataComponents {
                 .networkSynchronized(ByteBufCodecs.VAR_INT)
         }
 
-    val AMMO_CLIP_COMPONENT: DeferredHolder<DataComponentType<*>, DataComponentType<SingleStackComponent>> =
-        DATA_COMPONENT_REGISTRY.registerComponentType("ammo_clip") {
+    val AMMO_CLIP_CONTENTS: DeferredHolder<DataComponentType<*>, DataComponentType<WhitelistedItemStackListComponent>> =
+        DATA_COMPONENT_REGISTRY.registerComponentType("ammo_clip_contents") {
             it
-                .persistent(SingleStackComponent.CODEC)
-                .networkSynchronized(SingleStackComponent.STREAM_CODEC)
+                .persistent(WhitelistedItemStackListComponent.CODEC)
+                .networkSynchronized(WhitelistedItemStackListComponent.STREAM_CODEC)
         }
 
 }

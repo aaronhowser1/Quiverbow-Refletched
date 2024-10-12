@@ -2,10 +2,7 @@ package dev.aaronhowser.mods.quiverbowrefletched.registry
 
 import dev.aaronhowser.mods.quiverbowrefletched.QuiverBowRefletched
 import dev.aaronhowser.mods.quiverbowrefletched.item.AmmoClipItem
-import dev.aaronhowser.mods.quiverbowrefletched.item.weapon.BowWithQuiverItem
-import dev.aaronhowser.mods.quiverbowrefletched.item.weapon.EnderBowItem
-import dev.aaronhowser.mods.quiverbowrefletched.item.weapon.GenericAmmoHoldingItem
-import dev.aaronhowser.mods.quiverbowrefletched.item.weapon.PowderKnuckle
+import dev.aaronhowser.mods.quiverbowrefletched.item.weapon.*
 import net.minecraft.world.item.Item
 import net.neoforged.neoforge.registries.DeferredItem
 import net.neoforged.neoforge.registries.DeferredRegister
@@ -13,6 +10,37 @@ import net.neoforged.neoforge.registries.DeferredRegister
 object ModItems {
 
     val ITEM_REGISTRY: DeferredRegister.Items = DeferredRegister.createItems(QuiverBowRefletched.ID)
+
+    val ARROW_BUNDLE =
+        basic("arrow_bundle")
+    val ROCKET_BUNDLE =
+        basic("rocket_bundle")
+    val SUGAR_ROD_CLIP =
+        register("sugar_rod_clip") { AmmoClipItem.SUGAR }
+    val BIG_ROCKET =
+        basic("big_rocket")
+    val COLD_IRON_CLIP =
+        basic("cold_iron_clip")
+    val BOX_FLINT_DUST =
+        basic("box_flint_dust")
+    val SEED_JAR =
+        register("seed_jar") { AmmoClipItem.SEED }
+    val OBSIDIAN_MAGAZINE =
+        register("obsidian_magazine") { AmmoClipItem.OBSIDIAN }
+    val GOLD_MAGAZINE =
+        register("gold_magazine") { AmmoClipItem.GOLD }
+    val THORN_MAGAZINE =
+        register("thorn_magazine") { AmmoClipItem.THORN }
+    val LAPIS_MAGAZINE =
+        register("lapis_magazine") { AmmoClipItem.LAPIS }
+    val REDSTONE_MAGAZINE =
+        register("redstone_magazine") { AmmoClipItem.REDSTONE }
+    val LARGE_NETHERRACK_MAGAZINE =
+        register("large_netherrack_magazine") { AmmoClipItem.LARGE_NETHERRACK }
+    val LARGE_REDSTONE_MAGAZINE =
+        register("large_redstone_magazine") { AmmoClipItem.LARGE_REDSTONE }
+    val ENDER_QUARTZ_CLIP =
+        register("ender_quartz_clip") { AmmoClipItem.ENDER_QUARTZ }
 
     val COMPACT_CROSSBOW =
         register("compact_crossbow") { GenericAmmoHoldingItem(maxAmmo = 1) }
@@ -39,7 +67,7 @@ object ModItems {
     val PROXIMITY_THORN_THROWER =
         register("proximity_thorn_thrower") { GenericAmmoHoldingItem(maxAmmo = 64) }
     val SUGAR_ENGINE =
-        register("sugar_engine") { GenericAmmoHoldingItem(1) }
+        register("sugar_engine") { GenericClipHoldingItem(SUGAR_ROD_CLIP.get()) }
     val FIREWORKS_ROCKET_LAUNCHER =
         register("fireworks_rocket_launcher") { GenericAmmoHoldingItem(maxAmmo = 1) }
     val IMPROVED_ROCKET_LAUNCHER =
@@ -100,38 +128,6 @@ object ModItems {
         register("arms_assistant_targeting_helper") { GenericAmmoHoldingItem(maxAmmo = 1) }
     val HIDDEN_ENDER_PISTOL =
         register("hidden_ender_pistol") { GenericAmmoHoldingItem(maxAmmo = 8) }
-
-
-    val ARROW_BUNDLE =
-        basic("arrow_bundle")
-    val ROCKET_BUNDLE =
-        basic("rocket_bundle")
-    val SUGAR_ROD_CLIP =
-        register("sugar_rod_clip") { AmmoClipItem.SUGAR }
-    val BIG_ROCKET =
-        basic("big_rocket")
-    val COLD_IRON_CLIP =
-        basic("cold_iron_clip")
-    val BOX_FLINT_DUST =
-        basic("box_flint_dust")
-    val SEED_JAR =
-        register("seed_jar") { AmmoClipItem.SEED }
-    val OBSIDIAN_MAGAZINE =
-        register("obsidian_magazine") { AmmoClipItem.OBSIDIAN }
-    val GOLD_MAGAZINE =
-        register("gold_magazine") { AmmoClipItem.GOLD }
-    val THORN_MAGAZINE =
-        register("thorn_magazine") { AmmoClipItem.THORN }
-    val LAPIS_MAGAZINE =
-        register("lapis_magazine") { AmmoClipItem.LAPIS }
-    val REDSTONE_MAGAZINE =
-        register("redstone_magazine") { AmmoClipItem.REDSTONE }
-    val LARGE_NETHERRACK_MAGAZINE =
-        register("large_netherrack_magazine") { AmmoClipItem.LARGE_NETHERRACK }
-    val LARGE_REDSTONE_MAGAZINE =
-        register("large_redstone_magazine") { AmmoClipItem.LARGE_REDSTONE }
-    val ENDER_QUARTZ_CLIP =
-        register("ender_quartz_clip") { AmmoClipItem.ENDER_QUARTZ }
 
     val SUGAR_ENGINE_MAIN_BODY =
         basic("sugar_engine_main_body")
