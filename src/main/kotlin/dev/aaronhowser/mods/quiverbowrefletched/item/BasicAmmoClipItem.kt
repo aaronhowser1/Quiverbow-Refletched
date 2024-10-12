@@ -91,17 +91,26 @@ class BasicAmmoClipItem(
         if (thisStack.count != 1) return false
         if (action != ClickAction.SECONDARY || !slot.allowModification(player)) return false
 
-        val thatStack = slot.item
-        if (!thatStack.isEmpty) return false
-
         val myAmmo = getAmmo(thisStack)
         if (myAmmo <= 0) return false
 
-        val amountToPlace = minOf(myAmmo, ammoItem.defaultInstance.maxStackSize)
-        val newStack = ItemStack(ammoItem, amountToPlace)
+        val thatStack = slot.item
 
-        slot.set(newStack)
-        modifyAmmoCount(thisStack, -amountToPlace)
+        if (thatStack.isEmpty) {
+            val amountToPlace = minOf(myAmmo, ammoItem.defaultInstance.maxStackSize)
+            val newStack = ItemStack(ammoItem, amountToPlace)
+
+            slot.set(newStack)
+            modifyAmmoCount(thisStack, -amountToPlace)
+        } else if (thatStack.`is`(ammoItem)) {
+            val amountThatCanFit = thatStack.maxStackSize - thatStack.count
+            val amountToPlace = minOf(amountThatCanFit, myAmmo)
+
+            if (amountToPlace <= 0) return false
+
+            thatStack.grow(amountToPlace)
+            modifyAmmoCount(thisStack, -amountToPlace)
+        } else return false
 
         return true
     }
