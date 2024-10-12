@@ -82,6 +82,30 @@ class BasicAmmoClipItem(
         return true
     }
 
+    override fun overrideStackedOnOther(
+        thisStack: ItemStack,
+        slot: Slot,
+        action: ClickAction,
+        player: Player
+    ): Boolean {
+        if (thisStack.count != 1) return false
+        if (action != ClickAction.SECONDARY || !slot.allowModification(player)) return false
+
+        val thatStack = slot.item
+        if (!thatStack.isEmpty) return false
+
+        val myAmmo = getAmmo(thisStack)
+        if (myAmmo <= 0) return false
+
+        val amountToPlace = minOf(myAmmo, ammoItem.defaultInstance.maxStackSize)
+        val newStack = ItemStack(ammoItem, amountToPlace)
+
+        slot.set(newStack)
+        modifyAmmoCount(thisStack, -amountToPlace)
+
+        return true
+    }
+
     override fun appendHoverText(
         stack: ItemStack,
         context: TooltipContext,
