@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.quiverbowrefletched.item.base
 
 
-import dev.aaronhowser.mods.quiverbowrefletched.item.AmmoClipItem
+import dev.aaronhowser.mods.quiverbowrefletched.item.BasicAmmoClipItem
 import dev.aaronhowser.mods.quiverbowrefletched.item.component.ItemStackListComponent
 import dev.aaronhowser.mods.quiverbowrefletched.registry.ModDataComponents
 import net.minecraft.network.chat.Component
@@ -19,7 +19,7 @@ import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.level.Level
 
 abstract class AmmoClipHoldingItem(
-    private val clipItem: AmmoClipItem,
+    private val clipItem: BasicAmmoClipItem,
     properties: Properties = Properties()
         .stacksTo(1)
         .component(

@@ -1,7 +1,8 @@
 package dev.aaronhowser.mods.quiverbowrefletched.registry
 
 import dev.aaronhowser.mods.quiverbowrefletched.QuiverBowRefletched
-import dev.aaronhowser.mods.quiverbowrefletched.item.AmmoClipItem
+import dev.aaronhowser.mods.quiverbowrefletched.item.BasicAmmoClipItem
+import dev.aaronhowser.mods.quiverbowrefletched.item.ammo.AdvancedAmmoClipItem
 import dev.aaronhowser.mods.quiverbowrefletched.item.weapon.*
 import net.minecraft.world.item.Item
 import net.neoforged.neoforge.registries.DeferredItem
@@ -16,7 +17,7 @@ object ModItems {
     val ROCKET_BUNDLE =
         basic("rocket_bundle")
     val SUGAR_ROD_CLIP =
-        register("sugar_rod_clip") { AmmoClipItem.SUGAR }
+        register("sugar_rod_clip") { BasicAmmoClipItem.SUGAR }
     val BIG_ROCKET =
         basic("big_rocket")
     val COLD_IRON_CLIP =
@@ -24,23 +25,23 @@ object ModItems {
     val BOX_FLINT_DUST =
         basic("box_flint_dust")
     val SEED_JAR =
-        register("seed_jar") { AmmoClipItem.SEED }
+        register("seed_jar") { AdvancedAmmoClipItem.SEED }
     val OBSIDIAN_MAGAZINE =
-        register("obsidian_magazine") { AmmoClipItem.OBSIDIAN }
+        register("obsidian_magazine") { BasicAmmoClipItem.OBSIDIAN }
     val GOLD_MAGAZINE =
-        register("gold_magazine") { AmmoClipItem.GOLD }
+        register("gold_magazine") { BasicAmmoClipItem.GOLD }
     val THORN_MAGAZINE =
-        register("thorn_magazine") { AmmoClipItem.THORN }
+        register("thorn_magazine") { BasicAmmoClipItem.THORN }
     val LAPIS_MAGAZINE =
-        register("lapis_magazine") { AmmoClipItem.LAPIS }
+        register("lapis_magazine") { BasicAmmoClipItem.LAPIS }
     val REDSTONE_MAGAZINE =
-        register("redstone_magazine") { AmmoClipItem.REDSTONE }
+        register("redstone_magazine") { BasicAmmoClipItem.REDSTONE }
     val LARGE_NETHERRACK_MAGAZINE =
-        register("large_netherrack_magazine") { AmmoClipItem.LARGE_NETHERRACK }
+        register("large_netherrack_magazine") { BasicAmmoClipItem.LARGE_NETHERRACK }
     val LARGE_REDSTONE_MAGAZINE =
-        register("large_redstone_magazine") { AmmoClipItem.LARGE_REDSTONE }
+        register("large_redstone_magazine") { BasicAmmoClipItem.LARGE_REDSTONE }
     val ENDER_QUARTZ_CLIP =
-        register("ender_quartz_clip") { AmmoClipItem.ENDER_QUARTZ }
+        register("ender_quartz_clip") { BasicAmmoClipItem.ENDER_QUARTZ }
 
     val COMPACT_CROSSBOW =
         register("compact_crossbow") { GenericAmmoHoldingItem(maxAmmo = 1) }

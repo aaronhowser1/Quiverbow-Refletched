@@ -1,11 +1,9 @@
 package dev.aaronhowser.mods.quiverbowrefletched.item
 
-import dev.aaronhowser.mods.quiverbowrefletched.datagen.tag.ModItemTagsProvider
 import dev.aaronhowser.mods.quiverbowrefletched.item.base.AmmoHoldingItem
 import net.minecraft.network.chat.Component
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.sounds.SoundSource
-import net.minecraft.tags.TagKey
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResultHolder
 import net.minecraft.world.entity.SlotAccess
@@ -14,12 +12,13 @@ import net.minecraft.world.inventory.ClickAction
 import net.minecraft.world.inventory.Slot
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.Items
 import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.level.Level
 
-class AmmoClipItem(
+class BasicAmmoClipItem(
     maxAmmo: Int,
-    val ammoTag: TagKey<Item>,
+    private val ammoItem: Item,
     barColor: Int
 ) : AmmoHoldingItem(maxAmmo, barColor) {
 
@@ -30,7 +29,7 @@ class AmmoClipItem(
 
         if (!level.isClientSide) {
             for (iteratedStack in player.inventory.items) {
-                if (!iteratedStack.`is`(ammoTag)) continue
+                if (!iteratedStack.`is`(ammoItem)) continue
 
                 while (iteratedStack.count > 0 && getAmmo(usedStack) < maxAmmo) {
                     iteratedStack.shrink(1)
@@ -62,7 +61,7 @@ class AmmoClipItem(
         if (thisStack.count != 1) return false
         if (action != ClickAction.SECONDARY || !slot.allowModification(player)) return false
         if (getAmmo(thisStack) >= maxAmmo) return false
-        if (!otherStack.`is`(ammoTag)) return false
+        if (!otherStack.`is`(ammoItem)) return false
 
         val amount = otherStack.count
         val amountToInsert = minOf(maxAmmo - getAmmo(thisStack), amount)
@@ -95,16 +94,15 @@ class AmmoClipItem(
 
 
     companion object {
-        val SUGAR = AmmoClipItem(200, ModItemTagsProvider.AMMO_SUGAR_ENGINE, 0x00FF00)
-        val SEED = AmmoClipItem(512, ModItemTagsProvider.AMMO_SEED_JAR, 0x00FF00) // TODO: This should be its own thing that remembers the seeds
-        val OBSIDIAN = AmmoClipItem(16, ModItemTagsProvider.AMMO_OBSIDIAN, 0x666666)
-        val GOLD = AmmoClipItem(72, ModItemTagsProvider.AMMO_GOLD_NUGGET, 0xFFD700)
-        val THORN = AmmoClipItem(64, ModItemTagsProvider.AMMO_THORN, 0x00FF00)
-        val LAPIS = AmmoClipItem(150, ModItemTagsProvider.AMMO_LAPIS, 0x0000FF)
-        val REDSTONE = AmmoClipItem(64, ModItemTagsProvider.AMMO_REDSTONE, 0xFF0000)
-        val LARGE_NETHERRACK = AmmoClipItem(200, ModItemTagsProvider.AMMO_LARGE_NETHERRACK, 0x800000)
-        val LARGE_REDSTONE = AmmoClipItem(200, ModItemTagsProvider.AMMO_LARGE_REDSTONE, 0xFF0000)
-        val ENDER_QUARTZ = AmmoClipItem(8, ModItemTagsProvider.AMMO_QUARTZ, 0xFFFFFF)
+        val SUGAR = BasicAmmoClipItem(200, Items.SUGAR_CANE, 0x00FF00)
+        val OBSIDIAN = BasicAmmoClipItem(16, Items.OBSIDIAN, 0x666666)
+        val GOLD = BasicAmmoClipItem(72, Items.GOLD_NUGGET, 0xFFD700)
+        val THORN = BasicAmmoClipItem(64, Items.CACTUS, 0x00FF00)
+        val LAPIS = BasicAmmoClipItem(150, Items.LAPIS_LAZULI, 0x0000FF)
+        val REDSTONE = BasicAmmoClipItem(64, Items.REDSTONE, 0xFF0000)
+        val LARGE_NETHERRACK = BasicAmmoClipItem(200, Items.NETHERRACK, 0x800000)
+        val LARGE_REDSTONE = BasicAmmoClipItem(200, Items.REDSTONE_BLOCK, 0xFF0000)
+        val ENDER_QUARTZ = BasicAmmoClipItem(8, Items.QUARTZ, 0xFFFFFF)
     }
 
 }

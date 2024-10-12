@@ -1,9 +1,7 @@
 package dev.aaronhowser.mods.quiverbowrefletched.recipe
 
-import dev.aaronhowser.mods.quiverbowrefletched.item.AmmoClipItem
+import dev.aaronhowser.mods.quiverbowrefletched.item.BasicAmmoClipItem
 import dev.aaronhowser.mods.quiverbowrefletched.item.base.AmmoClipHoldingItem
-import dev.aaronhowser.mods.quiverbowrefletched.item.component.SingleStackComponent
-import dev.aaronhowser.mods.quiverbowrefletched.registry.ModDataComponents
 import dev.aaronhowser.mods.quiverbowrefletched.registry.ModRecipeSerializers
 import net.minecraft.core.HolderLookup
 import net.minecraft.world.item.ItemStack
@@ -19,7 +17,7 @@ class InsertClipRecipe(
         var clip: ItemStack? = null
 
         for (stack in input.items()) {
-            if (stack.item is AmmoClipItem) {
+            if (stack.item is BasicAmmoClipItem) {
                 if (clip != null) return false
                 clip = stack.copy()
             }
@@ -40,7 +38,7 @@ class InsertClipRecipe(
         var clip: ItemStack? = null
 
         for (stack in input.items()) {
-            if (stack.item is AmmoClipItem) {
+            if (stack.item is BasicAmmoClipItem) {
                 if (clip != null) return ItemStack.EMPTY
                 clip = stack.copy()
             }

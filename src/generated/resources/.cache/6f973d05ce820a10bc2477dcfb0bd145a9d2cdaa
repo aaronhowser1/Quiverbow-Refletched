@@ -1,11 +1,1 @@
-// 1.21.1	2024-10-11T21:36:55.330917	Tags for minecraft:item mod id quiverbow_refletched
-d97007a2f31b9e0d151cae07867beaa6631b774b data/quiverbow_refletched/tags/item/ammo/gold_nugget.json
-5e121b35d07f3e1a93e75dc2fa848655ba1f276f data/quiverbow_refletched/tags/item/ammo/lapis.json
-cb052c1b45a1703a9eacda1a88e842ed581c52d2 data/quiverbow_refletched/tags/item/ammo/large_netherrack.json
-ab62b41355409d6fc4c51df5055b663acd7560f7 data/quiverbow_refletched/tags/item/ammo/large_redstone.json
-bbc92bcad334972f7543b63f7437513dd972548a data/quiverbow_refletched/tags/item/ammo/obsidian.json
-24e174c21c07ff8f8087a9d8be081a6d28547d93 data/quiverbow_refletched/tags/item/ammo/quartz.json
-e4bdd6e5cbb6d2426148261f063c7a950f0e3bf4 data/quiverbow_refletched/tags/item/ammo/redstone.json
-788e6e34a201c014ae3783bc128afbd75443273b data/quiverbow_refletched/tags/item/ammo/seed_jar.json
-ae04d39bb2814ecd1c59187a973ca73151f64b30 data/quiverbow_refletched/tags/item/ammo/sugar_engine.json
-c095f8874cffbf2969e1be61cc544b251b81feaa data/quiverbow_refletched/tags/item/ammo/thorn.json
+// 1.21.1	2024-10-12T18:37:40.5166795	Tags for minecraft:item mod id quiverbow_refletched
