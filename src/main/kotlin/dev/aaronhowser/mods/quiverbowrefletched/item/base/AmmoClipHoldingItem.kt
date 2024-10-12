@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.quiverbowrefletched.item.base
 
 
+import dev.aaronhowser.mods.quiverbowrefletched.item.component.SingleStackComponent
 import dev.aaronhowser.mods.quiverbowrefletched.registry.ModDataComponents
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
@@ -10,13 +11,13 @@ abstract class AmmoClipHoldingItem(
         .stacksTo(1)
         .component(
             ModDataComponents.AMMO_CLIP_COMPONENT.get(),
-            ItemStack.EMPTY
+            SingleStackComponent.EMPTY
         )
 ) : Item(properties) {
 
     companion object {
         fun getClip(stack: ItemStack): ItemStack {
-            return stack.get(ModDataComponents.AMMO_CLIP_COMPONENT.get()) ?: ItemStack.EMPTY
+            return stack.get(ModDataComponents.AMMO_CLIP_COMPONENT.get())?.stack ?: ItemStack.EMPTY
         }
 
         fun getClipAmmo(stack: ItemStack): Int {
@@ -32,7 +33,7 @@ abstract class AmmoClipHoldingItem(
 
             val newAmount = currentAmount - amount
             clipStack.set(ModDataComponents.AMMO_COUNT_COMPONENT.get(), newAmount)
-            stack.set(ModDataComponents.AMMO_CLIP_COMPONENT.get(), clipStack)
+            stack.set(ModDataComponents.AMMO_CLIP_COMPONENT.get(), SingleStackComponent(clipStack))
             return true
         }
     }
