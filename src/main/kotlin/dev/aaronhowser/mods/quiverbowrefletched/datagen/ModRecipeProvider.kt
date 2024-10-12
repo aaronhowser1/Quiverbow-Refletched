@@ -1,6 +1,8 @@
 package dev.aaronhowser.mods.quiverbowrefletched.datagen
 
+import dev.aaronhowser.mods.quiverbowrefletched.recipe.InsertClipRecipe
 import dev.aaronhowser.mods.quiverbowrefletched.registry.ModItems
+import dev.aaronhowser.mods.quiverbowrefletched.util.OtherUtil
 import net.minecraft.core.HolderLookup
 import net.minecraft.data.PackOutput
 import net.minecraft.data.recipes.*
@@ -25,35 +27,37 @@ class ModRecipeProvider(
             shapelessRecipe.save(recipeOutput)
         }
 
+        insertClipRecipe.save(recipeOutput, OtherUtil.modResource("insert_clip"))
+
     }
 
-    private fun startRecipe(result: ItemLike): ShapedRecipeBuilder {
+    private fun shapedRecipe(result: ItemLike): ShapedRecipeBuilder {
         return ShapedRecipeBuilder.shaped(RecipeCategory.MISC, result)
     }
 
     private val shapedRecipes = listOf(
-        startRecipe(ModItems.ARROW_BUNDLE)
+        shapedRecipe(ModItems.ARROW_BUNDLE)
             .pattern("AAA")
             .pattern("ASA")
             .pattern("AAA")
             .define('A', Items.ARROW)
             .define('S', Tags.Items.STRINGS)
             .unlockedBy("has_item", has(Items.ARROW)),
-        startRecipe(ModItems.ROCKET_BUNDLE)
+        shapedRecipe(ModItems.ROCKET_BUNDLE)
             .pattern("RRR")
             .pattern("RSR")
             .pattern("RRR")
             .define('R', Items.FIREWORK_ROCKET)
             .define('S', Tags.Items.STRINGS)
             .unlockedBy("has_item", has(Items.FIREWORK_ROCKET)),
-        startRecipe(ModItems.SUGAR_ROD_CLIP)
+        shapedRecipe(ModItems.SUGAR_ROD_CLIP)
             .pattern("P P")
             .pattern("P P")
             .pattern("PIP")
             .define('P', ItemTags.PLANKS)
             .define('I', Tags.Items.INGOTS_IRON)
             .unlockedBy("has_item", has(Items.SUGAR_CANE)),
-        startRecipe(ModItems.SUGAR_ENGINE_MAIN_BODY)
+        shapedRecipe(ModItems.SUGAR_ENGINE_MAIN_BODY)
             .pattern("RIR")
             .pattern("ROR")
             .pattern("TPN")
@@ -64,7 +68,7 @@ class ModRecipeProvider(
             .define('P', ItemTags.PLANKS)
             .define('N', Items.PISTON)
             .unlockedBy("has_item", has(Items.SUGAR_CANE)),
-        startRecipe(ModItems.SUGAR_ENGINE_BARREL)
+        shapedRecipe(ModItems.SUGAR_ENGINE_BARREL)
             .pattern("I I")
             .pattern("IPI")
             .pattern("ISI")
@@ -72,7 +76,7 @@ class ModRecipeProvider(
             .define('P', Items.PISTON)
             .define('S', Items.STICKY_PISTON)
             .unlockedBy("has_item", has(Items.SUGAR_CANE)),
-        startRecipe(ModItems.BIG_ROCKET)
+        shapedRecipe(ModItems.BIG_ROCKET)
             .pattern("LPP")
             .pattern("PTP")
             .pattern("PPS")
@@ -81,7 +85,7 @@ class ModRecipeProvider(
             .define('T', Items.TNT)
             .define('S', Tags.Items.STRINGS)
             .unlockedBy("has_item", has(Items.FIREWORK_ROCKET)),
-        startRecipe(ModItems.COLD_IRON_CLIP)
+        shapedRecipe(ModItems.COLD_IRON_CLIP)
             .pattern("IIC")
             .pattern("IIC")
             .pattern("CCS")
@@ -89,14 +93,14 @@ class ModRecipeProvider(
             .define('C', Items.ICE)
             .define('S', Tags.Items.SLIME_BALLS)
             .unlockedBy("has_item", has(Items.ICE)),
-        startRecipe(ModItems.BOX_FLINT_DUST)
+        shapedRecipe(ModItems.BOX_FLINT_DUST)
             .pattern("FFF")
             .pattern("FFF")
             .pattern("FFP")
             .define('F', Items.FLINT)
             .define('P', ItemTags.PLANKS)
             .unlockedBy("has_item", has(Items.FLINT)),
-        startRecipe(ModItems.SEED_JAR)
+        shapedRecipe(ModItems.SEED_JAR)
             .pattern("GBG")
             .pattern("G G")
             .pattern("GIG")
@@ -104,49 +108,49 @@ class ModRecipeProvider(
             .define('B', ItemTags.WOODEN_BUTTONS)
             .define('I', Tags.Items.INGOTS_IRON)
             .unlockedBy("has_item", has(Items.WHEAT_SEEDS)),
-        startRecipe(ModItems.OBSIDIAN_MAGAZINE)
+        shapedRecipe(ModItems.OBSIDIAN_MAGAZINE)
             .pattern("I I")
             .pattern("I I")
             .pattern("IOI")
             .define('I', Tags.Items.INGOTS_IRON)
             .define('O', Tags.Items.OBSIDIANS)
             .unlockedBy("has_item", has(Items.OBSIDIAN)),
-        startRecipe(ModItems.GOLD_MAGAZINE)
+        shapedRecipe(ModItems.GOLD_MAGAZINE)
             .pattern("I I")
             .pattern("I I")
             .pattern("IGI")
             .define('I', Tags.Items.INGOTS_IRON)
             .define('G', Tags.Items.INGOTS_GOLD)
             .unlockedBy("has_item", has(Items.GOLD_INGOT)),
-        startRecipe(ModItems.THORN_MAGAZINE)
+        shapedRecipe(ModItems.THORN_MAGAZINE)
             .pattern("L L")
             .pattern("L L")
             .pattern("LIL")
             .define('L', Tags.Items.LEATHERS)
             .define('I', Tags.Items.INGOTS_IRON)
             .unlockedBy("has_item", has(Items.LEATHER)),
-        startRecipe(ModItems.LAPIS_MAGAZINE)
+        shapedRecipe(ModItems.LAPIS_MAGAZINE)
             .pattern("P P")
             .pattern("P P")
             .pattern("PLP")
             .define('P', Tags.Items.GLASS_PANES_COLORLESS)
             .define('L', Tags.Items.GEMS_LAPIS)
             .unlockedBy("has_item", has(Items.LAPIS_LAZULI)),
-        startRecipe(ModItems.REDSTONE_MAGAZINE)
+        shapedRecipe(ModItems.REDSTONE_MAGAZINE)
             .pattern("I I")
             .pattern("I I")
             .pattern("IRI")
             .define('I', Tags.Items.INGOTS_IRON)
             .define('R', Tags.Items.DUSTS_REDSTONE)
             .unlockedBy("has_item", has(Items.REDSTONE)),
-        startRecipe(ModItems.LARGE_NETHERRACK_MAGAZINE)
+        shapedRecipe(ModItems.LARGE_NETHERRACK_MAGAZINE)
             .pattern("N N")
             .pattern("N N")
             .pattern("NIN")
             .define('N', Items.NETHER_BRICK)
             .define('I', Tags.Items.INGOTS_IRON)
             .unlockedBy("has_item", has(Items.NETHER_BRICK)),
-        startRecipe(ModItems.LARGE_REDSTONE_MAGAZINE)
+        shapedRecipe(ModItems.LARGE_REDSTONE_MAGAZINE)
             .pattern("I I")
             .pattern("I I")
             .pattern("IRI")
@@ -154,14 +158,14 @@ class ModRecipeProvider(
             .define('R', Tags.Items.STORAGE_BLOCKS_REDSTONE)
             .unlockedBy("has_item", has(Items.REDSTONE_BLOCK)),
         //TODO: There's four Packed Up Arms Assistant recipes? What's the difference?
-        startRecipe(ModItems.ENDER_QUARTZ_CLIP)
+        shapedRecipe(ModItems.ENDER_QUARTZ_CLIP)
             .pattern("QQQ")
             .pattern("IQI")
             .pattern("III")
             .define('Q', Tags.Items.GEMS_QUARTZ)
             .define('I', Tags.Items.INGOTS_IRON)
             .unlockedBy("has_item", has(Items.QUARTZ)),
-        startRecipe(ModItems.COMPACT_CROSSBOW)
+        shapedRecipe(ModItems.COMPACT_CROSSBOW)
             .pattern("PTS")
             .pattern("TPS")
             .pattern("PTS")
@@ -169,7 +173,7 @@ class ModRecipeProvider(
             .define('T', Items.STICK)
             .define('S', Tags.Items.STRINGS)
             .unlockedBy("has_item", has(Items.CROSSBOW)),
-        startRecipe(ModItems.BLAZE_CROSSBOW)
+        shapedRecipe(ModItems.BLAZE_CROSSBOW)
             .pattern("BIB")
             .pattern("ICI")
             .pattern("BIB")
@@ -177,7 +181,7 @@ class ModRecipeProvider(
             .define('I', Tags.Items.INGOTS_IRON)
             .define('C', ModItems.COMPACT_CROSSBOW)
             .unlockedBy("has_item", has(ModItems.COMPACT_CROSSBOW)),
-        startRecipe(ModItems.AUTO_CROSSBOW)
+        shapedRecipe(ModItems.AUTO_CROSSBOW)
             .pattern("III")
             .pattern("PCP")
             .pattern(" T ")
@@ -186,7 +190,7 @@ class ModRecipeProvider(
             .define('C', ModItems.COMPACT_CROSSBOW)
             .define('T', Items.TRIPWIRE_HOOK)
             .unlockedBy("has_item", has(ModItems.COMPACT_CROSSBOW)),
-        startRecipe(ModItems.IMPROVED_AUTO_CROSSBOW)
+        shapedRecipe(ModItems.IMPROVED_AUTO_CROSSBOW)
             .pattern("III")
             .pattern("PCP")
             .pattern(" I ")
@@ -194,7 +198,7 @@ class ModRecipeProvider(
             .define('P', Items.STICKY_PISTON)
             .define('C', ModItems.AUTO_CROSSBOW)
             .unlockedBy("has_item", has(ModItems.AUTO_CROSSBOW)),
-        startRecipe(ModItems.COIN_TOSSER)
+        shapedRecipe(ModItems.COIN_TOSSER)
             .pattern("I I")
             .pattern("IPI")
             .pattern(" L ")
@@ -202,7 +206,7 @@ class ModRecipeProvider(
             .define('P', Items.PISTON)
             .define('L', Items.LEVER)
             .unlockedBy("has_item", has(Tags.Items.INGOTS_GOLD)),
-        startRecipe(ModItems.MODIFIED_COIN_TOSSER)
+        shapedRecipe(ModItems.MODIFIED_COIN_TOSSER)
             .pattern("CS ")
             .pattern("TI ")
             .pattern("I  ")
@@ -211,7 +215,7 @@ class ModRecipeProvider(
             .define('T', Items.TRIPWIRE_HOOK)
             .define('I', Tags.Items.INGOTS_IRON)
             .unlockedBy("has_item", has(ModItems.COIN_TOSSER)),
-        startRecipe(ModItems.DRAGON_BOX)
+        shapedRecipe(ModItems.DRAGON_BOX)
             .pattern("ISs")
             .pattern("FIs")
             .pattern("ISs")
@@ -220,7 +224,7 @@ class ModRecipeProvider(
             .define('S', Items.STICK)
             .define('s', Tags.Items.STRINGS)
             .unlockedBy("has_item", has(ModItems.ROCKET_BUNDLE)),
-        startRecipe(ModItems.FOUR_HEADED_DRAGON_BOX)
+        shapedRecipe(ModItems.FOUR_HEADED_DRAGON_BOX)
             .pattern("DDD")
             .pattern("PDP")
             .pattern("STS")
@@ -229,7 +233,7 @@ class ModRecipeProvider(
             .define('S', Items.STICKY_PISTON)
             .define('T', Items.TRIPWIRE_HOOK)
             .unlockedBy("has_item", has(ModItems.DRAGON_BOX)),
-        startRecipe(ModItems.LAPIS_COIL)
+        shapedRecipe(ModItems.LAPIS_COIL)
             .pattern("I I")
             .pattern("RPR")
             .pattern(" L ")
@@ -238,7 +242,7 @@ class ModRecipeProvider(
             .define('P', Items.PISTON)
             .define('L', Items.LEVER)
             .unlockedBy("has_item", has(Items.LAPIS_LAZULI)),
-        startRecipe(ModItems.THORN_SPITTER)
+        shapedRecipe(ModItems.THORN_SPITTER)
             .pattern("BIB")
             .pattern("PHP")
             .pattern("STS")
@@ -249,7 +253,7 @@ class ModRecipeProvider(
             .define('S', Items.STICKY_PISTON)
             .define('T', Items.TRIPWIRE_HOOK)
             .unlockedBy("has_item", has(Items.CACTUS)),
-        startRecipe(ModItems.PROXIMITY_THORN_THROWER)
+        shapedRecipe(ModItems.PROXIMITY_THORN_THROWER)
             .pattern("IHI")
             .pattern("BPB")
             .pattern("TSI")
@@ -260,14 +264,14 @@ class ModRecipeProvider(
             .define('T', Items.TRIPWIRE_HOOK)
             .define('S', Items.STICKY_PISTON)
             .unlockedBy("has_item", has(Items.CACTUS)),
-        startRecipe(ModItems.SUGAR_ENGINE)
+        shapedRecipe(ModItems.SUGAR_ENGINE)
             .pattern("B B")
             .pattern("B B")
             .pattern(" M ")
             .define('B', ModItems.SUGAR_ENGINE_BARREL)
             .define('M', ModItems.SUGAR_ENGINE_MAIN_BODY)
             .unlockedBy("has_item", has(Items.SUGAR_CANE)),
-        startRecipe(ModItems.FIREWORKS_ROCKET_LAUNCHER)
+        shapedRecipe(ModItems.FIREWORKS_ROCKET_LAUNCHER)
             .pattern("P  ")
             .pattern("IP ")
             .pattern("FIP")
@@ -275,7 +279,7 @@ class ModRecipeProvider(
             .define('I', Tags.Items.INGOTS_IRON)
             .define('F', Items.FLINT_AND_STEEL)
             .unlockedBy("has_item", has(Items.FIREWORK_ROCKET)),
-        startRecipe(ModItems.IMPROVED_ROCKET_LAUNCHER)
+        shapedRecipe(ModItems.IMPROVED_ROCKET_LAUNCHER)
             .pattern("OOO")
             .pattern("IFI")
             .pattern("OOO")
@@ -283,7 +287,7 @@ class ModRecipeProvider(
             .define('I', Tags.Items.INGOTS_IRON)
             .define('F', ModItems.FIREWORKS_ROCKET_LAUNCHER)
             .unlockedBy("has_item", has(ModItems.FIREWORKS_ROCKET_LAUNCHER)),
-        startRecipe(ModItems.ARROW_MORTAR)
+        shapedRecipe(ModItems.ARROW_MORTAR)
             .pattern("IPI")
             .pattern("ISR")
             .pattern("TSR")
@@ -293,7 +297,7 @@ class ModRecipeProvider(
             .define('R', Items.REPEATER)
             .define('T', Items.TRIPWIRE_HOOK)
             .unlockedBy("has_item", has(Items.ARROW)),
-        startRecipe(ModItems.DRAGON_MORTAR)
+        shapedRecipe(ModItems.DRAGON_MORTAR)
             .pattern("IPI")
             .pattern("ISR")
             .pattern("TSF")
@@ -304,7 +308,7 @@ class ModRecipeProvider(
             .define('T', Items.TRIPWIRE_HOOK)
             .define('F', Items.FLINT_AND_STEEL)
             .unlockedBy("has_item", has(Items.FIREWORK_ROCKET)),
-        startRecipe(ModItems.SEEDLING)
+        shapedRecipe(ModItems.SEEDLING)
             .pattern("SMS")
             .pattern("SMS")
             .pattern("TPS")
@@ -313,7 +317,7 @@ class ModRecipeProvider(
             .define('T', Items.TRIPWIRE_HOOK)
             .define('P', Items.PISTON)
             .unlockedBy("has_item", has(Items.MELON_SEEDS)),
-        startRecipe(ModItems.POTATOSSER)
+        shapedRecipe(ModItems.POTATOSSER)
             .pattern("BDB")
             .pattern("FPB")
             .pattern("TSI")
@@ -325,7 +329,7 @@ class ModRecipeProvider(
             .define('S', Items.STICKY_PISTON)
             .define('I', Tags.Items.INGOTS_IRON)
             .unlockedBy("has_item", has(Items.POTATO)),
-        startRecipe(ModItems.SNOW_CANNON)
+        shapedRecipe(ModItems.SNOW_CANNON)
             .pattern("WPW")
             .pattern("WSW")
             .pattern("WTW")
@@ -334,7 +338,7 @@ class ModRecipeProvider(
             .define('S', Items.STICKY_PISTON)
             .define('T', Items.TRIPWIRE_HOOK)
             .unlockedBy("has_item", has(Items.SNOWBALL)),
-        startRecipe(ModItems.BOW_WITH_QUIVER)
+        shapedRecipe(ModItems.BOW_WITH_QUIVER)
             .pattern("LSs")
             .pattern("SLs")
             .pattern("LSs")
@@ -342,7 +346,7 @@ class ModRecipeProvider(
             .define('S', Items.STICK)
             .define('s', Tags.Items.STRINGS)
             .unlockedBy("has_item", has(Items.BOW)),
-        startRecipe(ModItems.ENDER_BOW)
+        shapedRecipe(ModItems.ENDER_BOW)
             .pattern("ESs")
             .pattern("SIs")
             .pattern("ESs")
@@ -351,7 +355,7 @@ class ModRecipeProvider(
             .define('I', Tags.Items.INGOTS_IRON)
             .define('s', Tags.Items.STRINGS)
             .unlockedBy("has_item", has(Items.BOW)),
-        startRecipe(ModItems.ENDER_RIFLE)
+        shapedRecipe(ModItems.ENDER_RIFLE)
             .pattern("EIE")
             .pattern("PST")
             .pattern("OIO")
@@ -362,7 +366,7 @@ class ModRecipeProvider(
             .define('T', Items.TRIPWIRE_HOOK)
             .define('O', Tags.Items.OBSIDIANS)
             .unlockedBy("has_item", has(Items.BOW)),
-        startRecipe(ModItems.FROST_LANCER)
+        shapedRecipe(ModItems.FROST_LANCER)
             .pattern("QIQ")
             .pattern("PRS")
             .pattern(" O ")
@@ -373,7 +377,7 @@ class ModRecipeProvider(
             .define('S', Items.STICKY_PISTON)
             .define('O', Tags.Items.OBSIDIANS)
             .unlockedBy("has_item", has(ModItems.ENDER_RIFLE)),
-        startRecipe(ModItems.OBSIDIAN_SPLINTER_PISTOL)
+        shapedRecipe(ModItems.OBSIDIAN_SPLINTER_PISTOL)
             .pattern(" IO")
             .pattern("IPI")
             .pattern("OFT")
@@ -383,7 +387,7 @@ class ModRecipeProvider(
             .define('F', Items.FLINT_AND_STEEL)
             .define('T', Items.TRIPWIRE_HOOK)
             .unlockedBy("has_item", has(Items.FLINT_AND_STEEL)),
-        startRecipe(ModItems.OBSIDIAN_SPEAR_RIFLE)
+        shapedRecipe(ModItems.OBSIDIAN_SPEAR_RIFLE)
             .pattern("O O")
             .pattern("IPI")
             .pattern("OLO")
@@ -392,7 +396,7 @@ class ModRecipeProvider(
             .define('P', Items.PISTON)
             .define('L', Items.LEVER)
             .unlockedBy("has_item", has(Items.OBSIDIAN)),
-        startRecipe(ModItems.OBSIDIAN_WITHER_RIFLE)
+        shapedRecipe(ModItems.OBSIDIAN_WITHER_RIFLE)
             .pattern("ODO")
             .pattern("ORO")
             .pattern("OWO")
@@ -401,7 +405,7 @@ class ModRecipeProvider(
             .define('R', ModItems.OBSIDIAN_SPEAR_RIFLE)
             .define('W', Items.NETHER_STAR)
             .unlockedBy("has_item", has(Items.NETHER_STAR)),
-        startRecipe(ModItems.FEN_FIRE)
+        shapedRecipe(ModItems.FEN_FIRE)
             .pattern("TI ")
             .pattern("I I")
             .pattern(" TS")
@@ -409,7 +413,7 @@ class ModRecipeProvider(
             .define('I', Tags.Items.INGOTS_IRON)
             .define('S', Items.STICKY_PISTON)
             .unlockedBy("has_item", has(Items.GLOWSTONE)),
-        startRecipe(ModItems.FLINT_DUSTER)
+        shapedRecipe(ModItems.FLINT_DUSTER)
             .pattern("QHQ")
             .pattern("QPQ")
             .pattern("TSI")
@@ -420,7 +424,7 @@ class ModRecipeProvider(
             .define('S', Items.STICKY_PISTON)
             .define('I', Tags.Items.INGOTS_IRON)
             .unlockedBy("has_item", has(Items.QUARTZ_BLOCK)),
-        startRecipe(ModItems.LIGHTNING_RED)
+        shapedRecipe(ModItems.LIGHTNING_RED)
             .pattern("Q Q")
             .pattern("QIQ")
             .pattern("QTQ")
@@ -428,7 +432,7 @@ class ModRecipeProvider(
             .define('I', Tags.Items.INGOTS_IRON)
             .define('T', Items.TRIPWIRE_HOOK)
             .unlockedBy("has_item", has(Items.QUARTZ)),
-        startRecipe(ModItems.SUNRAY)
+        shapedRecipe(ModItems.SUNRAY)
             .pattern("BD ")
             .pattern("OOD")
             .pattern(" RT")
@@ -438,7 +442,7 @@ class ModRecipeProvider(
             .define('R', Items.REPEATER)
             .define('T', Items.TRIPWIRE_HOOK)
             .unlockedBy("has_item", has(Items.BEACON)),
-        startRecipe(ModItems.POWDER_KNUCKLE)
+        shapedRecipe(ModItems.POWDER_KNUCKLE)
             .pattern("III")
             .pattern("LSL")
             .pattern("L L")
@@ -446,7 +450,7 @@ class ModRecipeProvider(
             .define('L', Tags.Items.LEATHERS)
             .define('S', Items.STICK)
             .unlockedBy("has_item", has(Items.IRON_INGOT)),
-        startRecipe(ModItems.MODIFIED_POWDER_KNUCKLE)
+        shapedRecipe(ModItems.MODIFIED_POWDER_KNUCKLE)
             .pattern("OOO")
             .pattern("OPO")
             .pattern("I I")
@@ -454,7 +458,7 @@ class ModRecipeProvider(
             .define('P', ModItems.POWDER_KNUCKLE)
             .define('I', Tags.Items.INGOTS_IRON)
             .unlockedBy("has_item", has(ModItems.POWDER_KNUCKLE)),
-        startRecipe(ModItems.NETHER_BELLOWS)
+        shapedRecipe(ModItems.NETHER_BELLOWS)
             .pattern("OPO")
             .pattern("OSO")
             .pattern("FTR")
@@ -465,7 +469,7 @@ class ModRecipeProvider(
             .define('T', Items.TRIPWIRE_HOOK)
             .define('R', Items.REPEATER)
             .unlockedBy("has_item", has(Items.FLINT_AND_STEEL)),
-        startRecipe(ModItems.REDSTONE_SPRAYER)
+        shapedRecipe(ModItems.REDSTONE_SPRAYER)
             .pattern("IPI")
             .pattern("RSR")
             .pattern("ITI")
@@ -475,7 +479,7 @@ class ModRecipeProvider(
             .define('S', Items.STICKY_PISTON)
             .define('T', Items.TRIPWIRE_HOOK)
             .unlockedBy("has_item", has(Items.REDSTONE)),
-        startRecipe(ModItems.SOUL_CAIRN)
+        shapedRecipe(ModItems.SOUL_CAIRN)
             .pattern("E E")
             .pattern("EPE")
             .pattern("OTO")
@@ -484,7 +488,7 @@ class ModRecipeProvider(
             .define('O', Tags.Items.OBSIDIANS)
             .define('T', Items.TRIPWIRE_HOOK)
             .unlockedBy("has_item", has(Items.END_STONE)),
-        startRecipe(ModItems.AQUA_ACCELERATOR)
+        shapedRecipe(ModItems.AQUA_ACCELERATOR)
             .pattern("IHI")
             .pattern("GPG")
             .pattern("ITI")
@@ -494,7 +498,7 @@ class ModRecipeProvider(
             .define('P', Items.PISTON)
             .define('T', Items.TRIPWIRE_HOOK)
             .unlockedBy("has_item", has(Items.WATER_BUCKET)),
-        startRecipe(ModItems.SILKEN_SPINNER)
+        shapedRecipe(ModItems.SILKEN_SPINNER)
             .pattern("IHI")
             .pattern("GPG")
             .pattern("TSI")
@@ -505,7 +509,7 @@ class ModRecipeProvider(
             .define('T', Items.TRIPWIRE_HOOK)
             .define('S', Items.STICKY_PISTON)
             .unlockedBy("has_item", has(Items.STRING)),
-        startRecipe(ModItems.SEED_SWEEPER)
+        shapedRecipe(ModItems.SEED_SWEEPER)
             .pattern(" I ")
             .pattern("IPI")
             .pattern(" IT")
@@ -513,7 +517,7 @@ class ModRecipeProvider(
             .define('P', Items.PISTON)
             .define('T', Items.TRIPWIRE_HOOK)
             .unlockedBy("has_item", has(Items.WHEAT_SEEDS)),
-        startRecipe(ModItems.RAY_OF_HOPE)
+        shapedRecipe(ModItems.RAY_OF_HOPE)
             .pattern("BI ")
             .pattern("ICO")
             .pattern(" OT")
@@ -523,7 +527,7 @@ class ModRecipeProvider(
             .define('O', Tags.Items.OBSIDIANS)
             .define('T', Items.TRIPWIRE_HOOK)
             .unlockedBy("has_item", has(Items.BEACON)),
-        startRecipe(ModItems.ENDER_RAIL_ACCELERATOR)
+        shapedRecipe(ModItems.ENDER_RAIL_ACCELERATOR)
             .pattern("ORO")
             .pattern("OEO")
             .pattern("TIO")
@@ -534,7 +538,7 @@ class ModRecipeProvider(
             .define('I', Tags.Items.INGOTS_IRON)
             .unlockedBy("has_item", has(Items.ENDER_CHEST)),
         //TODO: Several other recipes for ender rail accelerator, no idea what difference is
-        startRecipe(ModItems.ARMS_ASSISTANT_TARGETING_HELPER)
+        shapedRecipe(ModItems.ARMS_ASSISTANT_TARGETING_HELPER)
             .pattern("NI ")
             .pattern("IRI")
             .pattern(" IT")
@@ -543,7 +547,7 @@ class ModRecipeProvider(
             .define('R', Items.REPEATER)
             .define('T', Items.TRIPWIRE_HOOK)
             .unlockedBy("has_item", has(Items.NOTE_BLOCK)),
-        startRecipe(ModItems.HIDDEN_ENDER_PISTOL)
+        shapedRecipe(ModItems.HIDDEN_ENDER_PISTOL)
             .pattern("E E")
             .pattern("OFO")
             .pattern("OTO")
@@ -561,5 +565,7 @@ class ModRecipeProvider(
             .requires(Items.REPEATER)
             .unlockedBy("has_item", has(ModItems.COMPACT_CROSSBOW)),
     )
+
+    private val insertClipRecipe = SpecialRecipeBuilder.special(::InsertClipRecipe)
 
 }

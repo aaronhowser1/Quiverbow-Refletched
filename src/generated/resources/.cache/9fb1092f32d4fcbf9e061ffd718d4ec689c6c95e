@@ -1,4 +1,4 @@
-// 1.21.1	2024-10-11T00:01:36.1847514	Recipes
+// 1.21.1	2024-10-11T20:28:37.0503518	Recipes
 36fb6835da8ef97b15c3599401bb47d9f36e2d40 data/quiverbow_refletched/advancement/recipes/misc/aqua_accelerator.json
 3b90ee8d59bf123d25bbbd029917361cd44bd1f6 data/quiverbow_refletched/advancement/recipes/misc/arms_assistant_targeting_helper.json
 33bc683992f3eb09641fdb6e7199059bff4cf62c data/quiverbow_refletched/advancement/recipes/misc/arrow_bundle.json
@@ -88,6 +88,7 @@ ba97b754a38570af3704dcbd33e927f3915c63ab data/quiverbow_refletched/recipe/flint_
 d3c636cd0b6fc8df5237218fe1d702c9be54811d data/quiverbow_refletched/recipe/gold_magazine.json
 9d6d2e290a69e6eeb0a57561a995771c6307cc13 data/quiverbow_refletched/recipe/hidden_ender_pistol.json
 666f8bfeec33653f68ab7e872a4b1469747062aa data/quiverbow_refletched/recipe/improved_rocket_launcher.json
+d2b642b00a1f0c8654ec0f423e05a32361d6ad18 data/quiverbow_refletched/recipe/insert_clip.json
 673f65a9eef43b5a52bdd8bd0190207d98d574e3 data/quiverbow_refletched/recipe/lapis_coil.json
 6dc309c7bf5f84c40a7ebf1c531a34663a97f97e data/quiverbow_refletched/recipe/lapis_magazine.json
 be1ac3cfa4ae8f6cb51ac6f75c6051d9056ed987 data/quiverbow_refletched/recipe/large_netherrack_magazine.json
