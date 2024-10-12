@@ -4,37 +4,37 @@
     {
       "model": "quiverbow_refletched:item/lapis_magazine_filled_1",
       "predicate": {
-        "quiverbow_refletched:is_empty": 0.16666667
+        "quiverbow_refletched:percent_full": 0.16666667
       }
     },
     {
       "model": "quiverbow_refletched:item/lapis_magazine_filled_2",
       "predicate": {
-        "quiverbow_refletched:is_empty": 0.33333334
+        "quiverbow_refletched:percent_full": 0.33333334
       }
     },
     {
       "model": "quiverbow_refletched:item/lapis_magazine_filled_3",
       "predicate": {
-        "quiverbow_refletched:is_empty": 0.5
+        "quiverbow_refletched:percent_full": 0.5
       }
     },
     {
       "model": "quiverbow_refletched:item/lapis_magazine_filled_4",
       "predicate": {
-        "quiverbow_refletched:is_empty": 0.6666667
+        "quiverbow_refletched:percent_full": 0.6666667
       }
     },
     {
       "model": "quiverbow_refletched:item/lapis_magazine_filled_5",
       "predicate": {
-        "quiverbow_refletched:is_empty": 0.8333333
+        "quiverbow_refletched:percent_full": 0.8333333
       }
     },
     {
       "model": "quiverbow_refletched:item/lapis_magazine_filled_6",
       "predicate": {
-        "quiverbow_refletched:is_empty": 1.0
+        "quiverbow_refletched:percent_full": 1.0
       }
     }
   ],

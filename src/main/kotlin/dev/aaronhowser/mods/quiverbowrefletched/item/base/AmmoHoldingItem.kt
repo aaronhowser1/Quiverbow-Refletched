@@ -7,7 +7,7 @@ import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.TooltipFlag
 
-abstract class WeaponBase(
+abstract class AmmoHoldingItem(
     val maxAmmo: Int,
     properties: Properties = Properties()
         .stacksTo(1)

@@ -21,6 +21,7 @@ class ModItemModelProvider(
         val isPulling = OtherUtil.modResource("is_pulling")
         val pullAmount = OtherUtil.modResource("pull_amount")
         val isEmpty = OtherUtil.modResource("is_empty")
+        val percentFull = OtherUtil.modResource("percent_full")
     }
 
     private fun item(item: Item, subfolder: String): ItemModelBuilder {
@@ -161,7 +162,7 @@ class ModItemModelProvider(
 
             emptyModel = emptyModel
                 .override()
-                .predicate(isEmpty, filledStage.toFloat() / 6)
+                .predicate(percentFull, filledStage.toFloat() / 6)
                 .model(filledModel)
                 .end()
         }
