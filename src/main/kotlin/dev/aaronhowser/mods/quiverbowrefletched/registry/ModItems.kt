@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.quiverbowrefletched.registry
 
 import dev.aaronhowser.mods.quiverbowrefletched.QuiverBowRefletched
+import dev.aaronhowser.mods.quiverbowrefletched.item.ammo.AmmoItem
 import dev.aaronhowser.mods.quiverbowrefletched.item.weapon.EnderBowItem
 import dev.aaronhowser.mods.quiverbowrefletched.item.weapon.GenericWeapon
 import dev.aaronhowser.mods.quiverbowrefletched.item.weapon.PowderKnuckle
@@ -104,7 +105,7 @@ object ModItems {
     val ROCKET_BUNDLE =
         basic("rocket_bundle")
     val SUGAR_ROD_CLIP =
-        basic("sugar_rod_clip")
+        register("sugar_rod_clip") { AmmoItem(maxAmmo = 200) }
     val BIG_ROCKET =
         basic("big_rocket")
     val COLD_IRON_CLIP =
@@ -112,23 +113,23 @@ object ModItems {
     val BOX_FLINT_DUST =
         basic("box_flint_dust")
     val SEED_JAR =
-        basic("seed_jar")
+        register("seed_jar") { AmmoItem(maxAmmo = 512) }
     val OBSIDIAN_MAGAZINE =
-        basic("obsidian_magazine")
+        register("obsidian_magazine") { AmmoItem(maxAmmo = 16) }
     val GOLD_MAGAZINE =
-        basic("gold_magazine")
+        register("gold_magazine") { AmmoItem(maxAmmo = 72) }
     val THORN_MAGAZINE =
-        basic("thorn_magazine")
+        register("thorn_magazine")  { AmmoItem(maxAmmo = 64) }
     val LAPIS_MAGAZINE =
-        basic("lapis_magazine")
+        register("lapis_magazine") { AmmoItem(maxAmmo = 150) }
     val REDSTONE_MAGAZINE =
-        basic("redstone_magazine")
+        register("redstone_magazine")  { AmmoItem(maxAmmo = 64) }
     val LARGE_NETHERRACK_MAGAZINE =
-        basic("large_netherrack_magazine")
+        register("large_netherrack_magazine")  { AmmoItem(maxAmmo = 200) }
     val LARGE_REDSTONE_MAGAZINE =
-        basic("large_redstone_magazine")
+        register("large_redstone_magazine")  { AmmoItem(maxAmmo = 200) }
     val ENDER_QUARTZ_CLIP =
-        basic("ender_quartz_clip")
+        register("ender_quartz_clip")  { AmmoItem(maxAmmo = 8) }
 
     val SUGAR_ENGINE_MAIN_BODY =
         basic("sugar_engine_main_body")

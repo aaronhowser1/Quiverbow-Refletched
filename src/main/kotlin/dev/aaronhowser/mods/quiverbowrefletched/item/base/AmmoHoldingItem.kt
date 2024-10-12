@@ -19,7 +19,7 @@ abstract class AmmoHoldingItem(
 
     companion object {
         fun getAmmo(stack: ItemStack): Int {
-            return stack.get(ModDataComponents.AMMO_COUNT_COMPONENT.get()) ?: 0
+            return stack.getOrDefault(ModDataComponents.AMMO_COUNT_COMPONENT.get(), 0)
         }
 
         fun consumeAmmo(stack: ItemStack, amount: Int): Boolean {
