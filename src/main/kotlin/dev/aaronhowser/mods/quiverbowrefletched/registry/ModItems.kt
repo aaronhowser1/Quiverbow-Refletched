@@ -6,11 +6,7 @@ import dev.aaronhowser.mods.quiverbowrefletched.item.weapon.EnderBowItem
 import dev.aaronhowser.mods.quiverbowrefletched.item.weapon.GenericAmmoClipHoldingItem
 import dev.aaronhowser.mods.quiverbowrefletched.item.weapon.GenericAmmoHoldingItem
 import dev.aaronhowser.mods.quiverbowrefletched.item.weapon.PowderKnuckle
-import net.minecraft.advancements.critereon.ItemPredicate
-import net.minecraft.tags.TagKey
 import net.minecraft.world.item.Item
-import net.minecraft.world.item.Items
-import net.neoforged.neoforge.common.Tags
 import net.neoforged.neoforge.registries.DeferredItem
 import net.neoforged.neoforge.registries.DeferredRegister
 
@@ -105,20 +101,13 @@ object ModItems {
     val HIDDEN_ENDER_PISTOL =
         register("hidden_ender_pistol") { GenericAmmoHoldingItem(maxAmmo = 8) }
 
-    private fun ammo(vararg item: Item): ItemPredicate {
-        return ItemPredicate.Builder.item().of(*item).build()
-    }
-
-    private fun ammo(itemTag: TagKey<Item>): ItemPredicate {
-        return ItemPredicate.Builder.item().of(itemTag).build()
-    }
 
     val ARROW_BUNDLE =
         basic("arrow_bundle")
     val ROCKET_BUNDLE =
         basic("rocket_bundle")
     val SUGAR_ROD_CLIP =
-        register("sugar_rod_clip") { AmmoClipItem(maxAmmo = 200, ammoPredicate = ammo(Items.SUGAR_CANE)) }
+        register("sugar_rod_clip") { AmmoClipItem.SUGAR }
     val BIG_ROCKET =
         basic("big_rocket")
     val COLD_IRON_CLIP =
@@ -126,23 +115,23 @@ object ModItems {
     val BOX_FLINT_DUST =
         basic("box_flint_dust")
     val SEED_JAR =
-        register("seed_jar") { AmmoClipItem(maxAmmo = 512, ammoPredicate = ammo(Tags.Items.SEEDS)) }
+        register("seed_jar") { AmmoClipItem.SEED }
     val OBSIDIAN_MAGAZINE =
-        register("obsidian_magazine") { AmmoClipItem(maxAmmo = 16, ammoPredicate = ammo(Items.OBSIDIAN)) }
+        register("obsidian_magazine") { AmmoClipItem.OBSIDIAN }
     val GOLD_MAGAZINE =
-        register("gold_magazine") { AmmoClipItem(maxAmmo = 72, ammoPredicate = ammo(Tags.Items.NUGGETS_GOLD)) }
+        register("gold_magazine") { AmmoClipItem.GOLD }
     val THORN_MAGAZINE =
-        register("thorn_magazine") { AmmoClipItem(maxAmmo = 64, ammoPredicate = ammo(Items.CACTUS)) }
+        register("thorn_magazine") { AmmoClipItem.THORN }
     val LAPIS_MAGAZINE =
-        register("lapis_magazine") { AmmoClipItem(maxAmmo = 150, ammoPredicate = ammo(Tags.Items.GEMS_LAPIS)) }
+        register("lapis_magazine") { AmmoClipItem.LAPIS }
     val REDSTONE_MAGAZINE =
-        register("redstone_magazine") { AmmoClipItem(maxAmmo = 64, ammoPredicate = ammo(Tags.Items.DUSTS_REDSTONE)) }
+        register("redstone_magazine") { AmmoClipItem.REDSTONE }
     val LARGE_NETHERRACK_MAGAZINE =
-        register("large_netherrack_magazine") { AmmoClipItem(maxAmmo = 200, ammo(Tags.Items.NETHERRACKS)) }
+        register("large_netherrack_magazine") { AmmoClipItem.LARGE_NETHERRACK }
     val LARGE_REDSTONE_MAGAZINE =
-        register("large_redstone_magazine") { AmmoClipItem(maxAmmo = 200, ammoPredicate = ammo(Tags.Items.STORAGE_BLOCKS_REDSTONE)) }
+        register("large_redstone_magazine") { AmmoClipItem.LARGE_REDSTONE }
     val ENDER_QUARTZ_CLIP =
-        register("ender_quartz_clip") { AmmoClipItem(maxAmmo = 8, ammoPredicate = ammo(Tags.Items.GEMS_QUARTZ)) }
+        register("ender_quartz_clip") { AmmoClipItem.ENDER_QUARTZ }
 
     val SUGAR_ENGINE_MAIN_BODY =
         basic("sugar_engine_main_body")
