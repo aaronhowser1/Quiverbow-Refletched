@@ -11,16 +11,6 @@ class AmmoClipItem(
     val ammoPredicate: ItemPredicate
 ) : AmmoHoldingItem(maxAmmo = maxAmmo) {
 
-    companion object {
-        fun getAmmoPredicate(stack: ItemStack): ItemPredicate {
-            return if (stack.item is AmmoClipItem) {
-                (stack.item as AmmoClipItem).ammoPredicate
-            } else {
-                ItemPredicate.Builder.item().of().build()
-            }
-        }
-    }
-
     override fun appendHoverText(
         stack: ItemStack,
         context: TooltipContext,

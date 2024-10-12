@@ -1,7 +1,6 @@
 package dev.aaronhowser.mods.quiverbowrefletched.registry
 
 import dev.aaronhowser.mods.quiverbowrefletched.QuiverBowRefletched
-import dev.aaronhowser.mods.quiverbowrefletched.recipe.FillClipRecipe
 import dev.aaronhowser.mods.quiverbowrefletched.recipe.InsertClipRecipe
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.world.item.crafting.RecipeSerializer
@@ -17,8 +16,5 @@ object ModRecipeSerializers {
 
     val INSERT_CLIP: DeferredHolder<RecipeSerializer<*>, SimpleCraftingRecipeSerializer<InsertClipRecipe>> =
         RECIPE_SERIALIZERS_REGISTRY.register("insert_clip", Supplier { SimpleCraftingRecipeSerializer { InsertClipRecipe() } })
-
-    val FILL_CLIP: DeferredHolder<RecipeSerializer<*>, SimpleCraftingRecipeSerializer<FillClipRecipe>> =
-        RECIPE_SERIALIZERS_REGISTRY.register("fill_clip", Supplier { SimpleCraftingRecipeSerializer { FillClipRecipe() } })
 
 }

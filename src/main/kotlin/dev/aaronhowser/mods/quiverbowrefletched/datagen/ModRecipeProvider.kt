@@ -1,6 +1,5 @@
 package dev.aaronhowser.mods.quiverbowrefletched.datagen
 
-import dev.aaronhowser.mods.quiverbowrefletched.recipe.FillClipRecipe
 import dev.aaronhowser.mods.quiverbowrefletched.recipe.InsertClipRecipe
 import dev.aaronhowser.mods.quiverbowrefletched.registry.ModItems
 import dev.aaronhowser.mods.quiverbowrefletched.util.OtherUtil
@@ -29,7 +28,6 @@ class ModRecipeProvider(
         }
 
         insertClipRecipe.save(recipeOutput, OtherUtil.modResource("insert_clip"))
-        fillClipRecipe.save(recipeOutput, OtherUtil.modResource("fill_clip"))
 
     }
 
@@ -569,6 +567,5 @@ class ModRecipeProvider(
     )
 
     private val insertClipRecipe = SpecialRecipeBuilder.special(::InsertClipRecipe)
-    private val fillClipRecipe = SpecialRecipeBuilder.special(::FillClipRecipe)
 
 }
