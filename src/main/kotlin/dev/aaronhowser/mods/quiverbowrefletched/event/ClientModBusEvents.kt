@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.quiverbowrefletched.event
 import dev.aaronhowser.mods.quiverbowrefletched.QuiverBowRefletched
 import dev.aaronhowser.mods.quiverbowrefletched.datagen.model.ModItemModelProvider
 import dev.aaronhowser.mods.quiverbowrefletched.entity.render.EnderBowGuideProjectileRenderer
+import dev.aaronhowser.mods.quiverbowrefletched.registry.ModDataComponents
 import dev.aaronhowser.mods.quiverbowrefletched.registry.ModEntityTypes
 import dev.aaronhowser.mods.quiverbowrefletched.registry.ModItems
 import net.minecraft.client.renderer.entity.EntityRendererProvider
@@ -40,13 +41,13 @@ object ClientModBusEvents {
     fun onModelRegistry(event: ModelEvent.RegisterAdditional) {
 
         val pullPredicateItems = listOf(
-            ModItems.ENDER_BOW.get(),
-            ModItems.BOW_WITH_QUIVER.get()
+            ModItems.ENDER_BOW,
+            ModItems.BOW_WITH_QUIVER
         )
 
         for (item in pullPredicateItems) {
             ItemProperties.register(
-                item,
+                item.get(),
                 ModItemModelProvider.pullAmount
             ) { usedStack, _, entity, _ ->
                 if (entity == null) return@register 0.0f
@@ -55,10 +56,31 @@ object ClientModBusEvents {
             }
 
             ItemProperties.register(
-                item,
+                item.get(),
                 ModItemModelProvider.isPulling
             ) { usedStack, _, entity, _ ->
                 if (entity != null && entity.isUsingItem && entity.useItem === usedStack) 1f else 0f
+            }
+        }
+
+        val possiblyEmptyItems = listOf(
+            ModItems.GOLD_MAGAZINE,
+            ModItems.LARGE_NETHERRACK_MAGAZINE,
+            ModItems.LARGE_REDSTONE_MAGAZINE,
+            ModItems.OBSIDIAN_MAGAZINE,
+            ModItems.REDSTONE_MAGAZINE,
+            ModItems.SEED_JAR,
+            ModItems.SUGAR_ROD_CLIP,
+            ModItems.THORN_MAGAZINE,
+            ModItems.ENDER_QUARTZ_CLIP
+        )
+
+        for (item in possiblyEmptyItems) {
+            ItemProperties.register(
+                item.get(),
+                ModItemModelProvider.isEmpty
+            ) { usedStack, _, _, _ ->
+                if (usedStack.getOrDefault(ModDataComponents.AMMO_COUNT_COMPONENT, 0) == 0) 1f else 0f
             }
         }
 
