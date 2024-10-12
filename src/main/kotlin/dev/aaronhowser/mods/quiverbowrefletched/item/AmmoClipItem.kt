@@ -83,20 +83,6 @@ class AmmoClipItem(
         return true
     }
 
-    override fun overrideStackedOnOther(
-        thisStack: ItemStack,
-        slot: Slot,
-        action: ClickAction,
-        player: Player
-    ): Boolean {
-        val otherStack = slot.item
-        if (!otherStack.isEmpty) return false
-
-//        TODO()
-
-        return false
-    }
-
     override fun appendHoverText(
         stack: ItemStack,
         context: TooltipContext,

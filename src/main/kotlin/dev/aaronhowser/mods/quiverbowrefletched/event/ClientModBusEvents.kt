@@ -4,6 +4,7 @@ import dev.aaronhowser.mods.quiverbowrefletched.QuiverBowRefletched
 import dev.aaronhowser.mods.quiverbowrefletched.datagen.model.ModItemModelProvider
 import dev.aaronhowser.mods.quiverbowrefletched.entity.render.EnderBowGuideProjectileRenderer
 import dev.aaronhowser.mods.quiverbowrefletched.item.base.AmmoHoldingItem
+import dev.aaronhowser.mods.quiverbowrefletched.registry.ModDataComponents
 import dev.aaronhowser.mods.quiverbowrefletched.registry.ModEntityTypes
 import dev.aaronhowser.mods.quiverbowrefletched.registry.ModItems
 import net.minecraft.client.renderer.entity.EntityRendererProvider
@@ -80,7 +81,7 @@ object ClientModBusEvents {
                 item.get(),
                 ModItemModelProvider.isEmpty
             ) { usedStack, _, _, _ ->
-                if ((AmmoHoldingItem.getAmmo(usedStack)) == 0) 1f else 0f
+                if (usedStack.getOrDefault(ModDataComponents.AMMO_COUNT_COMPONENT, 0) == 0) 1f else 0f
             }
         }
 
@@ -89,9 +90,9 @@ object ClientModBusEvents {
             ModItemModelProvider.percentFull
         ) { usedStack, _, _, _ ->
             if (usedStack.item !is AmmoHoldingItem) return@register 0f
-            val maxAmmo = AmmoHoldingItem.getMaxAmmo(usedStack)
-            val heldAmmo = AmmoHoldingItem.getAmmo(usedStack)
-            return@register heldAmmo.toFloat() / maxAmmo.toFloat()
+            val maxAmmo = (usedStack.item as AmmoHoldingItem).maxAmmo
+            val count = usedStack.getOrDefault(ModDataComponents.AMMO_COUNT_COMPONENT, 0)
+            return@register count.toFloat() / maxAmmo.toFloat()
         }
 
     }
