@@ -47,15 +47,14 @@ class FillClipRecipe(
 
         val ammoPredicate = AmmoClipItem.getAmmoPredicate(clipStack)
         val ammoStacks = input.items().filter { it != clipStack && ammoPredicate.test(it) }
+        val ammoTotalAmount = ammoStacks.sumOf { it.count }
 
         val clipMaxAmmo = AmmoHoldingItem.getMaxAmmo(clipStack)
 
-        for (ammoStack in ammoStacks) {
-            while (ammoStack.count > 0 && AmmoHoldingItem.getAmmo(clipStack) < clipMaxAmmo) {
-                ammoStack.shrink(1)
-                AmmoHoldingItem.addAmmo(clipStack, 1)
-            }
-        }
+        AmmoHoldingItem.setAmmo(
+            clipStack,
+            minOf(clipMaxAmmo, AmmoHoldingItem.getAmmo(clipStack) + ammoTotalAmount)
+        )
 
         return clipStack
     }
