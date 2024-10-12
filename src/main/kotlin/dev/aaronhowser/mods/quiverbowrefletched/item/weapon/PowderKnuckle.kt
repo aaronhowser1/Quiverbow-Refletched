@@ -30,7 +30,7 @@ class PowderKnuckle(
         if (player.level().isClientSide) return false
         if (entity !is LivingEntity) return false
 
-        val canShoot = player.isCreative || consumeAmmo(stack, 1)
+        val canShoot = player.isCreative || modifyAmmoCount(stack, -1)
         if (!canShoot) return false
 
         entity.remainingFireTicks = 2 * 20
@@ -48,7 +48,7 @@ class PowderKnuckle(
 
     override fun useOn(context: UseOnContext): InteractionResult {
         val player = context.player
-        val canUse = player?.isCreative == true || consumeAmmo(context.itemInHand, 1)
+        val canUse = player?.isCreative == true || modifyAmmoCount(context.itemInHand, -1)
 
         if (!canUse) return InteractionResult.FAIL
 
