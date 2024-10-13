@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.quiverbowrefletched.item.weapon
 
 import dev.aaronhowser.mods.quiverbowrefletched.item.ammo.AdvancedAmmoClipItem
+import dev.aaronhowser.mods.quiverbowrefletched.registry.ModItems
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.sounds.SoundSource
@@ -26,6 +27,33 @@ class BowWithQuiverItem : AdvancedAmmoClipItem(
 
     override fun getUseAnimation(stack: ItemStack): UseAnim = UseAnim.BOW
     override fun getUseDuration(stack: ItemStack, entity: LivingEntity): Int = 72000
+
+    override fun insertAmmo(
+        thisStack: ItemStack,
+        otherStack: ItemStack,
+        player: Player
+    ): Boolean {
+        if (!otherStack.`is`(ModItems.ARROW_BUNDLE)) return super.insertAmmo(thisStack, otherStack, player)
+
+        val maxAmmo = getMaxAmmoAmount(thisStack)
+        val currentAmmo = getAmmoCount(thisStack)
+        if (currentAmmo >= maxAmmo) return false
+
+        val bundleArrows = getAmmoStacks(otherStack)
+
+        for (arrowStack in bundleArrows) {
+            val mutableArrowStack = arrowStack.copy()
+            insertAmmo(thisStack, mutableArrowStack, player)
+
+            //TODO: Make sure this part works
+            if (!mutableArrowStack.isEmpty) {
+                if (!player.addItem(mutableArrowStack)) player.drop(mutableArrowStack, false)
+            }
+        }
+
+        otherStack.shrink(1)
+        return true
+    }
 
     override fun use(level: Level, player: Player, usedHand: InteractionHand): InteractionResultHolder<ItemStack> {
         val usedStack = player.getItemInHand(usedHand)
@@ -55,6 +83,8 @@ class BowWithQuiverItem : AdvancedAmmoClipItem(
         val powerForTime = BowItem.getPowerForTime(i)
         if (powerForTime < 0.1) return
 
+        //TODO: Use a random arrow, and remove it from the quiver
+
         (Items.BOW as BowItem).shoot(
             level,
             livingEntity,
@@ -80,5 +110,7 @@ class BowWithQuiverItem : AdvancedAmmoClipItem(
 
         livingEntity.awardStat(Stats.ITEM_USED[this])
     }
+
+    //Todo: RegisterItemDecorationsEvent for ammo durability bar to be separate from the bow's actual durability
 
 }
