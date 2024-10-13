@@ -1,8 +1,9 @@
 package dev.aaronhowser.mods.quiverbowrefletched.registry
 
 import dev.aaronhowser.mods.quiverbowrefletched.QuiverBowRefletched
-import dev.aaronhowser.mods.quiverbowrefletched.item.ammo.BasicAmmoClipItem
 import dev.aaronhowser.mods.quiverbowrefletched.item.ammo.AdvancedAmmoClipItem
+import dev.aaronhowser.mods.quiverbowrefletched.item.ammo.ArrowBundleItem
+import dev.aaronhowser.mods.quiverbowrefletched.item.ammo.BasicAmmoClipItem
 import dev.aaronhowser.mods.quiverbowrefletched.item.weapon.*
 import net.minecraft.world.item.Item
 import net.neoforged.neoforge.registries.DeferredItem
@@ -13,7 +14,7 @@ object ModItems {
     val ITEM_REGISTRY: DeferredRegister.Items = DeferredRegister.createItems(QuiverBowRefletched.ID)
 
     val ARROW_BUNDLE =
-        register("arrow_bundle") { AdvancedAmmoClipItem.SEED_JAR }
+        register("arrow_bundle") { ArrowBundleItem() }
     val ROCKET_BUNDLE =
         basic("rocket_bundle")
     val SUGAR_ROD_CLIP =
