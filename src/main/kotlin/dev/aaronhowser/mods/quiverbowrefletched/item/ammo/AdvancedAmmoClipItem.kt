@@ -118,13 +118,10 @@ class AdvancedAmmoClipItem(
         if (otherStack.isEmpty) {
             val ammoStack = ammoStacks.lastOrNull() ?: return false
 
-            slot.set(
-                ammoStack.copy()
-            )
-
+            slot.set(ammoStack.copy())
             setAmmo(thisStack, ammoStacks.dropLast(1))
         } else if (ammoStacks.any { ItemStack.isSameItemSameComponents(it, otherStack) }) {
-            val lastMatchingStack = ammoStacks.lastOrNull() { ItemStack.isSameItemSameComponents(it, otherStack) }
+            val lastMatchingStack = ammoStacks.lastOrNull { ItemStack.isSameItemSameComponents(it, otherStack) }
             val stackToPlace = lastMatchingStack?.copy() ?: return false
 
             val amountThatCanFit = otherStack.maxStackSize - otherStack.count
