@@ -1,6 +1,5 @@
 package dev.aaronhowser.mods.quiverbowrefletched.datagen
 
-import dev.aaronhowser.mods.quiverbowrefletched.recipe.InsertClipRecipe
 import dev.aaronhowser.mods.quiverbowrefletched.registry.ModItems
 import dev.aaronhowser.mods.quiverbowrefletched.util.OtherUtil
 import net.minecraft.core.HolderLookup
@@ -26,9 +25,6 @@ class ModRecipeProvider(
         for (shapelessRecipe in shapelessRecipes) {
             shapelessRecipe.save(recipeOutput)
         }
-
-        insertClipRecipe.save(recipeOutput, OtherUtil.modResource("insert_clip"))
-
     }
 
     private fun shapedRecipe(result: ItemLike): ShapedRecipeBuilder {
@@ -565,7 +561,5 @@ class ModRecipeProvider(
             .requires(Items.REPEATER)
             .unlockedBy("has_item", has(ModItems.COMPACT_CROSSBOW)),
     )
-
-    private val insertClipRecipe = SpecialRecipeBuilder.special(::InsertClipRecipe)
 
 }
