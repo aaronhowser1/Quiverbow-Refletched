@@ -116,8 +116,8 @@ object ModItems {
         register("redstone_sprayer") { GenericAmmoHoldingItem(maxAmmo = 200) }
     val SOUL_CAIRN =
         register("soul_cairn") { GenericAmmoHoldingItem(maxAmmo = 1) }
-    val AQUA_ACCELERATOR =
-        register("aqua_accelerator") { GenericAmmoHoldingItem(maxAmmo = 1) }
+    val AQUA_ACCELERATOR: DeferredItem<AquaAccelerator> =
+        register("aqua_accelerator") { AquaAccelerator() }
     val SILKEN_SPINNER =
         register("silken_spinner") { GenericAmmoHoldingItem(maxAmmo = 8) }
     val SEED_SWEEPER =
