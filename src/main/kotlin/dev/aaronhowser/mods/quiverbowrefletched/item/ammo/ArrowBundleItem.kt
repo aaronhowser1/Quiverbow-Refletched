@@ -12,7 +12,7 @@ import net.minecraft.world.item.TooltipFlag
 
 class ArrowBundleItem(
     properties: Properties = Properties()
-        .stacksTo(1)
+        .stacksTo(64)
         .component(
             ModDataComponents.ADVANCED_AMMO_COMPONENT.get(),
             ItemStackListComponent(
@@ -24,7 +24,8 @@ class ArrowBundleItem(
 
     companion object {
         fun getStackWithArrows(list: List<ItemStack>): ItemStack {
-            require(list.sumOf { it.count } == 8) { "Arrow bundle must contain exactly 8 arrows" }
+            val amountOfArrows = list.sumOf { it.count }
+            require(amountOfArrows == 8) { "Arrow bundle must contain exactly 8 arrows, it has $amountOfArrows instead" }
             require(list.all { it.`is`(ItemTags.ARROWS) }) { "Arrow bundle must contain only arrows" }
 
             val stack = ModItems.ARROW_BUNDLE.toStack()

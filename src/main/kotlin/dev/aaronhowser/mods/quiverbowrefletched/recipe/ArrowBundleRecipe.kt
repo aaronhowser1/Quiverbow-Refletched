@@ -27,7 +27,7 @@ class ArrowBundleRecipe(
     }
 
     override fun assemble(input: CraftingInput, registries: HolderLookup.Provider): ItemStack {
-        val arrows = input.items().filter { it.`is`(ItemTags.ARROWS) }
+        val arrows = input.items().mapNotNull { if (it.`is`(ItemTags.ARROWS)) it.copyWithCount(1) else null }
         if (arrows.size != 8) return ItemStack.EMPTY
 
         return ArrowBundleItem.getStackWithArrows(OtherUtil.flattenStacks(arrows))
