@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.quiverbowrefletched.item.ammo
 import dev.aaronhowser.mods.quiverbowrefletched.item.component.ItemStackListComponent
 import dev.aaronhowser.mods.quiverbowrefletched.registry.ModDataComponents
 import dev.aaronhowser.mods.quiverbowrefletched.util.OtherUtil
+import net.minecraft.network.chat.Component
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.sounds.SoundSource
 import net.minecraft.tags.TagKey
@@ -12,6 +13,7 @@ import net.minecraft.world.inventory.ClickAction
 import net.minecraft.world.inventory.Slot
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.TooltipFlag
 import net.neoforged.neoforge.common.Tags
 
 class AdvancedAmmoClipItem(
@@ -110,6 +112,31 @@ class AdvancedAmmoClipItem(
 
     override fun getBarColor(stack: ItemStack): Int {
         return barColor
+    }
+
+    override fun appendHoverText(
+        stack: ItemStack,
+        context: TooltipContext,
+        tooltipComponents: MutableList<Component>,
+        tooltipFlag: TooltipFlag
+    ) {
+        super.appendHoverText(stack, context, tooltipComponents, tooltipFlag)
+
+        val ammoCount = getAmmoCount(stack)
+        val maxAmmo = getMaxAmmoAmount(stack)
+
+        tooltipComponents.add(
+            Component.literal("$ammoCount / $maxAmmo")
+        )
+
+        for (ammoStack in getAmmoStacks(stack)) {
+            tooltipComponents.add(
+                Component
+                    .literal("• ${ammoStack.count}x ")
+                    .append(ammoStack.displayName)
+            )
+        }
+
     }
 
 }
