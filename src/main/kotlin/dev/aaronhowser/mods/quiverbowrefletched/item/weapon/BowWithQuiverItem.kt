@@ -2,10 +2,10 @@ package dev.aaronhowser.mods.quiverbowrefletched.item.weapon
 
 import dev.aaronhowser.mods.quiverbowrefletched.item.ammo.AdvancedAmmoClipItem
 import dev.aaronhowser.mods.quiverbowrefletched.registry.ModItems
+import dev.aaronhowser.mods.quiverbowrefletched.util.OtherUtil
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.sounds.SoundSource
-import net.minecraft.stats.Stats
 import net.minecraft.tags.ItemTags
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResultHolder
@@ -17,6 +17,7 @@ import net.minecraft.world.item.Items
 import net.minecraft.world.item.UseAnim
 import net.minecraft.world.level.Level
 import net.neoforged.neoforge.event.EventHooks
+import kotlin.random.Random
 
 class BowWithQuiverItem : AdvancedAmmoClipItem(
     maxAmmo = 64,
@@ -74,8 +75,6 @@ class BowWithQuiverItem : AdvancedAmmoClipItem(
         if (livingEntity !is Player) return
         if (level !is ServerLevel) return
 
-        val ammoStacks = getAmmoStacks(stack)
-
         var i = this.getUseDuration(stack, livingEntity) - timeLeft
         i = EventHooks.onArrowLoose(stack, level, livingEntity, i, true)
         if (i < 0) return
@@ -83,14 +82,20 @@ class BowWithQuiverItem : AdvancedAmmoClipItem(
         val powerForTime = BowItem.getPowerForTime(i)
         if (powerForTime < 0.1) return
 
-        //TODO: Use a random arrow, and remove it from the quiver
+        val ammoStacks = getAmmoStacks(stack)
+
+        val randomArrowIndex = Random.nextInt(ammoStacks.size)
+        val randomArrowStack = ammoStacks[randomArrowIndex].copyWithCount(1)
+        ammoStacks[randomArrowIndex].shrink(1)
+
+        setAmmo(stack, OtherUtil.flattenStacks(ammoStacks))
 
         (Items.BOW as BowItem).shoot(
             level,
             livingEntity,
             livingEntity.usedItemHand,
             stack,
-            ammoStacks,
+            listOf(randomArrowStack),
             powerForTime * 3f,
             1f,
             powerForTime == 1f,
@@ -108,7 +113,7 @@ class BowWithQuiverItem : AdvancedAmmoClipItem(
             1.0f / (level.getRandom().nextFloat() * 0.4f + 1.2f) + powerForTime * 0.5f
         )
 
-        livingEntity.awardStat(Stats.ITEM_USED[this])
+
     }
 
     //Todo: RegisterItemDecorationsEvent for ammo durability bar to be separate from the bow's actual durability

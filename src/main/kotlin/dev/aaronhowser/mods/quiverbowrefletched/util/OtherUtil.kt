@@ -14,7 +14,7 @@ object OtherUtil {
 
     fun flattenStacks(input: List<ItemStack>): List<ItemStack> {
         @Suppress("NAME_SHADOWING") // Shadowing is intentional, since we don't want to touch the original stacks
-        val input = input.map { it.copy() }
+        val input = input.mapNotNull { if (it.isEmpty) null else it.copy() }
         val output = mutableListOf<ItemStack>()
 
         for (stack in input) {
