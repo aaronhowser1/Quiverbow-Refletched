@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.quiverbowrefletched.item.base
 
 
-import dev.aaronhowser.mods.quiverbowrefletched.item.BasicAmmoClipItem
+import dev.aaronhowser.mods.quiverbowrefletched.item.ammo.BasicAmmoClipItem
 import dev.aaronhowser.mods.quiverbowrefletched.item.component.ItemStackListComponent
 import dev.aaronhowser.mods.quiverbowrefletched.registry.ModDataComponents
 import net.minecraft.network.chat.Component

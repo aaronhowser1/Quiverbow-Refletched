@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.quiverbowrefletched.recipe
 
-import dev.aaronhowser.mods.quiverbowrefletched.item.BasicAmmoClipItem
+import dev.aaronhowser.mods.quiverbowrefletched.item.ammo.BasicAmmoClipItem
 import dev.aaronhowser.mods.quiverbowrefletched.item.base.AmmoClipHoldingItem
 import dev.aaronhowser.mods.quiverbowrefletched.registry.ModRecipeSerializers
 import net.minecraft.core.HolderLookup

@@ -1,4 +1,4 @@
-package dev.aaronhowser.mods.quiverbowrefletched.item
+package dev.aaronhowser.mods.quiverbowrefletched.item.ammo
 
 import dev.aaronhowser.mods.quiverbowrefletched.item.base.BasicAmmoHoldingItem
 import net.minecraft.network.chat.Component

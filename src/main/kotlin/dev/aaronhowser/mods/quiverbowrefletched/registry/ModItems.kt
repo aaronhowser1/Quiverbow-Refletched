@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.quiverbowrefletched.registry
 
 import dev.aaronhowser.mods.quiverbowrefletched.QuiverBowRefletched
-import dev.aaronhowser.mods.quiverbowrefletched.item.BasicAmmoClipItem
+import dev.aaronhowser.mods.quiverbowrefletched.item.ammo.BasicAmmoClipItem
 import dev.aaronhowser.mods.quiverbowrefletched.item.ammo.AdvancedAmmoClipItem
 import dev.aaronhowser.mods.quiverbowrefletched.item.weapon.*
 import net.minecraft.world.item.Item
