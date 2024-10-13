@@ -63,7 +63,11 @@ open class AdvancedAmmoClipItem(
 
     }
 
-    private fun insertAmmo(thisStack: ItemStack, otherStack: ItemStack): Boolean {
+    protected open fun insertAmmo(
+        thisStack: ItemStack,
+        otherStack: ItemStack,
+        player: Player
+    ): Boolean {
         if (!otherStack.`is`(allowedAmmoTag)) return false
 
         val maxAmmo = getMaxAmmoAmount(thisStack)
@@ -72,12 +76,13 @@ open class AdvancedAmmoClipItem(
         val currentAmmo = getAmmoCount(thisStack)
         if (currentAmmo >= maxAmmo) return false
 
-        //TODO: Make sure this doesn't allow exceeding the max amount
+        val amountToInsert = minOf(maxAmmo - currentAmmo, otherStack.count)
 
         val currentAmmoStacks = getAmmoStacks(thisStack)
         val newAmmoStacks = OtherUtil.flattenStacks(currentAmmoStacks + otherStack)
 
         setAmmo(thisStack, newAmmoStacks)
+        otherStack.shrink(amountToInsert)
         return true
     }
 
@@ -91,7 +96,7 @@ open class AdvancedAmmoClipItem(
     ): Boolean {
         if (action != ClickAction.SECONDARY || !slot.allowModification(player)) return false
 
-        if (!insertAmmo(thisStack, otherStack)) return false
+        if (!insertAmmo(thisStack, otherStack, player)) return false
 
         //TODO: Custom reload sound?
         player.level().playSound(
