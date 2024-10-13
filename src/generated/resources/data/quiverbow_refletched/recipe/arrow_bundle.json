@@ -1,21 +1,4 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "A": {
-      "item": "minecraft:arrow"
-    },
-    "S": {
-      "tag": "c:strings"
-    }
-  },
-  "pattern": [
-    "AAA",
-    "ASA",
-    "AAA"
-  ],
-  "result": {
-    "count": 1,
-    "id": "quiverbow_refletched:arrow_bundle"
-  }
+  "type": "quiverbow_refletched:arrow_bundle",
+  "category": "misc"
 }

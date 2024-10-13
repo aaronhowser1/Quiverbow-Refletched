@@ -9,7 +9,8 @@ object ModRegistries {
         ModItems.ITEM_REGISTRY,
         ModDataComponents.DATA_COMPONENT_REGISTRY,
         ModCreativeTabs.TABS_REGISTRY,
-        ModEntityTypes.ENTITY_TYPE_REGISTRY
+        ModEntityTypes.ENTITY_TYPE_REGISTRY,
+        ModRecipeSerializers.RECIPE_SERIALIZERS_REGISTRY
     )
 
     fun register(modBus: IEventBus) {

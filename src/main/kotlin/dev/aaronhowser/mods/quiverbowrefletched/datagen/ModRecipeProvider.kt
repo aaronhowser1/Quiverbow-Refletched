@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.quiverbowrefletched.datagen
 
+import dev.aaronhowser.mods.quiverbowrefletched.recipe.ArrowBundleRecipe
 import dev.aaronhowser.mods.quiverbowrefletched.registry.ModItems
 import dev.aaronhowser.mods.quiverbowrefletched.util.OtherUtil
 import net.minecraft.core.HolderLookup
@@ -25,6 +26,8 @@ class ModRecipeProvider(
         for (shapelessRecipe in shapelessRecipes) {
             shapelessRecipe.save(recipeOutput)
         }
+
+        arrowBundleRecipe.save(recipeOutput, OtherUtil.modResource("arrow_bundle"))
     }
 
     private fun shapedRecipe(result: ItemLike): ShapedRecipeBuilder {
@@ -32,13 +35,6 @@ class ModRecipeProvider(
     }
 
     private val shapedRecipes = listOf(
-        shapedRecipe(ModItems.ARROW_BUNDLE)
-            .pattern("AAA")
-            .pattern("ASA")
-            .pattern("AAA")
-            .define('A', Items.ARROW)
-            .define('S', Tags.Items.STRINGS)
-            .unlockedBy("has_item", has(Items.ARROW)),
         shapedRecipe(ModItems.ROCKET_BUNDLE)
             .pattern("RRR")
             .pattern("RSR")
@@ -561,5 +557,7 @@ class ModRecipeProvider(
             .requires(Items.REPEATER)
             .unlockedBy("has_item", has(ModItems.COMPACT_CROSSBOW)),
     )
+
+    private val arrowBundleRecipe = SpecialRecipeBuilder.special(::ArrowBundleRecipe)
 
 }

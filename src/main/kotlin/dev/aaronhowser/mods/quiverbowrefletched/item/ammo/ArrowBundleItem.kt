@@ -2,7 +2,9 @@ package dev.aaronhowser.mods.quiverbowrefletched.item.ammo
 
 import dev.aaronhowser.mods.quiverbowrefletched.item.component.ItemStackListComponent
 import dev.aaronhowser.mods.quiverbowrefletched.registry.ModDataComponents
+import dev.aaronhowser.mods.quiverbowrefletched.registry.ModItems
 import net.minecraft.network.chat.Component
+import net.minecraft.tags.ItemTags
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
@@ -19,6 +21,24 @@ class ArrowBundleItem(
             )
         )
 ) : Item(properties) {
+
+    companion object {
+        fun getStackWithArrows(list: List<ItemStack>): ItemStack {
+            require(list.sumOf { it.count } == 8) { "Arrow bundle must contain exactly 8 arrows" }
+            require(list.all { it.`is`(ItemTags.ARROWS) }) { "Arrow bundle must contain only arrows" }
+
+            val stack = ModItems.ARROW_BUNDLE.toStack()
+            stack.set(
+                ModDataComponents.ADVANCED_AMMO_COMPONENT.get(),
+                ItemStackListComponent(
+                    8,
+                    list
+                )
+            )
+
+            return stack
+        }
+    }
 
     override fun appendHoverText(
         stack: ItemStack,
