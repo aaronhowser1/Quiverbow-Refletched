@@ -16,20 +16,24 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.TooltipFlag
 import net.neoforged.neoforge.common.Tags
 
-class AdvancedAmmoClipItem(
-    maxAmmo: Int,
+open class AdvancedAmmoClipItem(
+    protected val maxAmmo: Int,
     private val barColor: Int,
     private val allowedAmmoTag: TagKey<Item>,
-    properties: Properties = Properties()
-        .stacksTo(1)
-        .component(
-            ModDataComponents.ADVANCED_AMMO_COMPONENT.get(),
-            ItemStackListComponent(maxAmmo)
-        )
+    properties: Properties = getDefaultProperties(maxAmmo)
 ) : Item(properties) {
 
     companion object {
-        val SEED = AdvancedAmmoClipItem(512, 0x00FF00, Tags.Items.SEEDS)
+
+        fun getDefaultProperties(maxAmmo: Int): Properties =
+            Properties()
+                .stacksTo(1)
+                .component(
+                    ModDataComponents.ADVANCED_AMMO_COMPONENT.get(),
+                    ItemStackListComponent(maxAmmo)
+                )
+
+        val SEED_JAR = AdvancedAmmoClipItem(512, 0x00FF00, Tags.Items.SEEDS)
 
         fun setAmmo(clipStack: ItemStack, ammoStacks: List<ItemStack>) {
             clipStack.set(

@@ -13,7 +13,7 @@ object ModItems {
     val ITEM_REGISTRY: DeferredRegister.Items = DeferredRegister.createItems(QuiverBowRefletched.ID)
 
     val ARROW_BUNDLE =
-        basic("arrow_bundle")
+        register("arrow_bundle") { AdvancedAmmoClipItem.SEED_JAR }
     val ROCKET_BUNDLE =
         basic("rocket_bundle")
     val SUGAR_ROD_CLIP =
@@ -25,7 +25,7 @@ object ModItems {
     val BOX_FLINT_DUST =
         basic("box_flint_dust")
     val SEED_JAR =
-        register("seed_jar") { AdvancedAmmoClipItem.SEED }
+        register("seed_jar") { AdvancedAmmoClipItem.SEED_JAR }
     val OBSIDIAN_MAGAZINE =
         register("obsidian_magazine") { BasicAmmoClipItem.OBSIDIAN }
     val GOLD_MAGAZINE =

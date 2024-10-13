@@ -1,10 +1,11 @@
 package dev.aaronhowser.mods.quiverbowrefletched.item.weapon
 
-import dev.aaronhowser.mods.quiverbowrefletched.item.base.BasicAmmoHoldingItem
+import dev.aaronhowser.mods.quiverbowrefletched.item.ammo.AdvancedAmmoClipItem
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.sounds.SoundSource
 import net.minecraft.stats.Stats
+import net.minecraft.tags.ItemTags
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResultHolder
 import net.minecraft.world.entity.LivingEntity
@@ -16,7 +17,12 @@ import net.minecraft.world.item.UseAnim
 import net.minecraft.world.level.Level
 import net.neoforged.neoforge.event.EventHooks
 
-class BowWithQuiverItem : BasicAmmoHoldingItem(maxAmmo = 64) {
+class BowWithQuiverItem : AdvancedAmmoClipItem(
+    maxAmmo = 64,
+    barColor = 0x00FF00,
+    allowedAmmoTag = ItemTags.ARROWS,
+    properties = getDefaultProperties(64).durability(384)
+) {
 
     override fun getUseAnimation(stack: ItemStack): UseAnim = UseAnim.BOW
     override fun getUseDuration(stack: ItemStack, entity: LivingEntity): Int = 72000
@@ -24,7 +30,7 @@ class BowWithQuiverItem : BasicAmmoHoldingItem(maxAmmo = 64) {
     override fun use(level: Level, player: Player, usedHand: InteractionHand): InteractionResultHolder<ItemStack> {
         val usedStack = player.getItemInHand(usedHand)
 
-        val canUseBow = getAmmo(usedStack) <= 0 || player.hasInfiniteMaterials()
+        val canUseBow = getAmmoCount(usedStack) > 0 || player.hasInfiniteMaterials()
         if (!canUseBow) return InteractionResultHolder.fail(usedStack)
 
         val interactionResultHolder: InteractionResultHolder<ItemStack>? =
@@ -40,8 +46,7 @@ class BowWithQuiverItem : BasicAmmoHoldingItem(maxAmmo = 64) {
         if (livingEntity !is Player) return
         if (level !is ServerLevel) return
 
-        //TODO: Maybe this could store a list of actual items inserted? That way it can use tipped arrows etc
-        val arrowStack = Items.ARROW.defaultInstance
+        val ammoStacks = getAmmoStacks(stack)
 
         var i = this.getUseDuration(stack, livingEntity) - timeLeft
         i = EventHooks.onArrowLoose(stack, level, livingEntity, i, true)
@@ -55,7 +60,7 @@ class BowWithQuiverItem : BasicAmmoHoldingItem(maxAmmo = 64) {
             livingEntity,
             livingEntity.usedItemHand,
             stack,
-            listOf(arrowStack),
+            ammoStacks,
             powerForTime * 3f,
             1f,
             powerForTime == 1f,
@@ -74,8 +79,6 @@ class BowWithQuiverItem : BasicAmmoHoldingItem(maxAmmo = 64) {
         )
 
         livingEntity.awardStat(Stats.ITEM_USED[this])
-
-        modifyAmmoCount(stack, -1)
     }
 
 }
