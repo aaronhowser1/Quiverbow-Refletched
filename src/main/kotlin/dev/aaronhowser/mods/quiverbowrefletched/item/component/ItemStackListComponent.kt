@@ -39,4 +39,24 @@ data class ItemStackListComponent(
 
     }
 
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is ItemStackListComponent) return false
+
+        if (maxAmount != other.maxAmount) return false
+
+        if (this.stacks.size != other.stacks.size) return false
+        for (i in stacks.indices) {
+            if (!ItemStack.isSameItemSameComponents(stacks[i], other.stacks[i])) return false
+        }
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = maxAmount
+        result = 31 * result + stacks.hashCode()
+        return result
+    }
+
 }
