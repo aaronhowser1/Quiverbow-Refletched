@@ -19,7 +19,7 @@ class ArrowBundleRecipe(
 ) : CustomRecipe(craftingCategory) {
 
     override fun matches(input: CraftingInput, level: Level): Boolean {
-        if (input.width() < 3 || input.height() < 3) return false
+        if (input.width() != 3 || input.height() != 3) return false
         if (!input.getItem(1, 1).`is`(Tags.Items.STRINGS)) return false
 
         val arrows = input.items().filter { it.`is`(ItemTags.ARROWS) }
