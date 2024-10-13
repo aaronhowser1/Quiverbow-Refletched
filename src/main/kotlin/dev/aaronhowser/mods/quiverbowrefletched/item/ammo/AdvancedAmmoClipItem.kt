@@ -129,12 +129,18 @@ class AdvancedAmmoClipItem(
             Component.literal("$ammoCount / $maxAmmo")
         )
 
-        for (ammoStack in getAmmoStacks(stack)) {
+        if (!tooltipFlag.hasShiftDown()) {
             tooltipComponents.add(
-                Component
-                    .literal("• ${ammoStack.count}x ")
-                    .append(ammoStack.displayName)
+                Component.literal("Hold SHIFT for more info")
             )
+        } else {
+            for (ammoStack in getAmmoStacks(stack)) {
+                tooltipComponents.add(
+                    Component
+                        .literal("• ${ammoStack.count}x ")
+                        .append(ammoStack.displayName)
+                )
+            }
         }
 
     }
