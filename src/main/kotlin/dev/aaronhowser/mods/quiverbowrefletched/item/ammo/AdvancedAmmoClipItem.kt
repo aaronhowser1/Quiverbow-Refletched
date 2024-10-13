@@ -102,6 +102,53 @@ class AdvancedAmmoClipItem(
         return true
     }
 
+    override fun overrideStackedOnOther(
+        thisStack: ItemStack,
+        slot: Slot,
+        action: ClickAction,
+        player: Player
+    ): Boolean {
+        if (thisStack.count != 1) return false
+        if (action != ClickAction.SECONDARY || !slot.allowModification(player)) return false
+
+        val ammoStacks = getAmmoStacks(thisStack)
+        if (ammoStacks.isEmpty()) return false
+
+        val otherStack = slot.item
+        if (otherStack.isEmpty) {
+            val ammoStack = ammoStacks.lastOrNull() ?: return false
+
+            slot.set(
+                ammoStack.copy()
+            )
+
+            setAmmo(thisStack, ammoStacks.dropLast(1))
+        } else if (ammoStacks.any { ItemStack.isSameItemSameComponents(it, otherStack) }) {
+            val lastMatchingStack = ammoStacks.lastOrNull() { ItemStack.isSameItemSameComponents(it, otherStack) }
+            val stackToPlace = lastMatchingStack?.copy() ?: return false
+
+            val amountThatCanFit = otherStack.maxStackSize - otherStack.count
+            val amountToPlace = minOf(amountThatCanFit, stackToPlace.count)
+
+            if (amountToPlace <= 0) return false
+
+            otherStack.grow(amountToPlace)
+            stackToPlace.shrink(amountToPlace)
+
+            val newAmmoStacks = OtherUtil.flattenStacks(
+                if (stackToPlace.isEmpty) {
+                    ammoStacks - lastMatchingStack
+                } else {
+                    ammoStacks - lastMatchingStack + stackToPlace
+                }
+            )
+
+            setAmmo(thisStack, newAmmoStacks)
+        } else return false
+
+        return true
+    }
+
     override fun isBarVisible(stack: ItemStack): Boolean {
         return true
     }
