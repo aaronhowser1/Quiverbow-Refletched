@@ -8,30 +8,32 @@ import net.minecraft.network.codec.StreamCodec
 import net.minecraft.world.item.ItemStack
 
 data class ItemStackListComponent(
-    val maxItems: Int,
-    val items: List<ItemStack>
+    val maxAmount: Int,
+    val stacks: List<ItemStack>
 ) {
 
     constructor(maxItems: Int) : this(maxItems, emptyList())
     constructor(itemStack: ItemStack) : this(1, listOf(itemStack))
+
+    fun getTotalAmount(): Int = stacks.sumOf { it.count }
 
     companion object {
         val CODEC: Codec<ItemStackListComponent> =
             RecordCodecBuilder.create { instance ->
                 instance.group(
                     Codec.INT
-                        .fieldOf("maxItems")
-                        .forGetter(ItemStackListComponent::maxItems),
+                        .fieldOf("max_amount")
+                        .forGetter(ItemStackListComponent::maxAmount),
                     ItemStack.CODEC.listOf()
-                        .fieldOf("items")
-                        .forGetter(ItemStackListComponent::items)
+                        .fieldOf("stacks")
+                        .forGetter(ItemStackListComponent::stacks)
                 ).apply(instance, ::ItemStackListComponent)
             }
 
         val STREAM_CODEC: StreamCodec<RegistryFriendlyByteBuf, ItemStackListComponent> =
             StreamCodec.composite(
-                ByteBufCodecs.INT, ItemStackListComponent::maxItems,
-                ItemStack.STREAM_CODEC.apply(ByteBufCodecs.list()), ItemStackListComponent::items,
+                ByteBufCodecs.INT, ItemStackListComponent::maxAmount,
+                ItemStack.STREAM_CODEC.apply(ByteBufCodecs.list()), ItemStackListComponent::stacks,
                 ::ItemStackListComponent
             )
 

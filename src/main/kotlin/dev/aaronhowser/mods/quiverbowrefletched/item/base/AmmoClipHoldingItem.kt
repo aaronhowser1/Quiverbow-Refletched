@@ -30,7 +30,7 @@ abstract class AmmoClipHoldingItem(
 
     companion object {
         fun getClip(stack: ItemStack): ItemStack {
-            return stack.get(ModDataComponents.ADVANCED_AMMO_COMPONENT.get())?.items?.firstOrNull() ?: ItemStack.EMPTY
+            return stack.get(ModDataComponents.ADVANCED_AMMO_COMPONENT.get())?.stacks?.firstOrNull() ?: ItemStack.EMPTY
         }
 
         fun getClipAmmo(stack: ItemStack): Int {
