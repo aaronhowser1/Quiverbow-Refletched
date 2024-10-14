@@ -9,6 +9,7 @@ import dev.aaronhowser.mods.quiverbowrefletched.registry.ModEntityTypes
 import dev.aaronhowser.mods.quiverbowrefletched.registry.ModItems
 import net.minecraft.client.renderer.entity.EntityRendererProvider
 import net.minecraft.client.renderer.entity.EntityRenderers
+import net.minecraft.client.renderer.entity.ThrownItemRenderer
 import net.minecraft.client.renderer.item.ItemProperties
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.EntityType
@@ -36,6 +37,7 @@ object ClientModBusEvents {
         }
 
         registerEntityRenderer(ModEntityTypes.ENDER_BOW_GUIDE_PROJECTILE, ::EnderBowGuideProjectileRenderer)
+        registerEntityRenderer(ModEntityTypes.AQUA_ACCELERATOR_PROJECTILE, ::ThrownItemRenderer)
     }
 
     @SubscribeEvent

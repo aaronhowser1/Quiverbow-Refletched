@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.quiverbowrefletched.item.weapon
 
+import dev.aaronhowser.mods.quiverbowrefletched.entity.AquaAcceleratorProjectile
 import dev.aaronhowser.mods.quiverbowrefletched.item.base.BasicAmmoHoldingItem
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResultHolder
@@ -26,6 +27,26 @@ class AquaAccelerator : BasicAmmoHoldingItem(
         if (tryRefill(level, player, usedStack)) {
             return InteractionResultHolder.sidedSuccess(usedStack, level.isClientSide)
         }
+
+        if (getAmmo(usedStack) <= 0) {
+            return InteractionResultHolder.fail(usedStack)
+        }
+
+        val projectile = AquaAcceleratorProjectile(player)
+        level.addFreshEntity(projectile)
+        projectile.shootFromRotation(
+            player,
+            player.xRot,
+            player.yRot,
+            0.0f,
+            1.5f,
+            1.0f
+        )
+
+        setAmmo(
+            usedStack,
+            getAmmo(usedStack) - 1
+        )
 
         return super.use(level, player, usedHand)
     }
