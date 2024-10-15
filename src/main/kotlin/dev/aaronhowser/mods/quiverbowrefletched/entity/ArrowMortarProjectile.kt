@@ -14,7 +14,6 @@ import net.minecraft.world.phys.BlockHitResult
 import net.minecraft.world.phys.EntityHitResult
 import net.minecraft.world.phys.Vec3
 import thedarkcolour.kotlinforforge.neoforge.forge.vectorutil.v3d.toVec3
-import kotlin.random.Random
 
 class ArrowMortarProjectile(
     entityType: EntityType<ArrowMortarProjectile>,
@@ -70,7 +69,6 @@ class ArrowMortarProjectile(
 
             level().addFreshEntity(projectile)
         }
-
     }
 
     override fun onHitBlock(result: BlockHitResult) {
