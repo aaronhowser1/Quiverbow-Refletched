@@ -11,7 +11,8 @@ import net.neoforged.neoforge.registries.DeferredRegister
 
 object ModItems {
 
-    val ITEM_REGISTRY: DeferredRegister.Items = DeferredRegister.createItems(QuiverBowRefletched.ID)
+    val ITEM_REGISTRY: DeferredRegister.Items =
+        DeferredRegister.createItems(QuiverBowRefletched.ID)
 
     val ARROW_BUNDLE: DeferredItem<ArrowBundleItem> =
         register("arrow_bundle") { ArrowBundleItem() }
