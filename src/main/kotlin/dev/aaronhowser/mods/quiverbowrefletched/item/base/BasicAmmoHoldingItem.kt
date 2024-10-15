@@ -23,27 +23,27 @@ abstract class BasicAmmoHoldingItem(
             return (stack.item as? BasicAmmoHoldingItem)?.maxAmmo ?: 0
         }
 
-        fun getAmmo(stack: ItemStack): Int {
+        fun getAmmoCount(stack: ItemStack): Int {
             return stack.getOrDefault(ModDataComponents.BASIC_AMMO_COMPONENT.get(), 0)
         }
 
-        fun setAmmo(stack: ItemStack, amount: Int) {
+        fun setAmmoCount(stack: ItemStack, amount: Int) {
             stack.set(ModDataComponents.BASIC_AMMO_COMPONENT.get(), amount)
         }
 
         fun modifyAmmoCount(stack: ItemStack, amount: Int): Boolean {
-            val currentAmount = getAmmo(stack)
+            val currentAmount = getAmmoCount(stack)
             val newAmount = currentAmount + amount
 
             if (newAmount !in 0..getMaxAmmo(stack)) return false
 
-            setAmmo(stack, newAmount)
+            setAmmoCount(stack, newAmount)
             return true
         }
     }
 
     override fun getBarWidth(stack: ItemStack): Int {
-        return (getAmmo(stack) / maxAmmo.toFloat() * 13).toInt()
+        return (getAmmoCount(stack) / maxAmmo.toFloat() * 13).toInt()
     }
 
     override fun isBarVisible(stack: ItemStack): Boolean {
@@ -62,7 +62,7 @@ abstract class BasicAmmoHoldingItem(
     ) {
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag)
 
-        val amount = if (ClientUtil.playerIsCreative()) "∞" else getAmmo(stack).toString()
+        val amount = if (ClientUtil.playerIsCreative()) "∞" else getAmmoCount(stack).toString()
         tooltipComponents.add(Component.literal("Ammo: $amount/$maxAmmo"))
     }
 

@@ -136,11 +136,11 @@ class PowderKnuckle(
     ): Boolean {
         if (thisStack.count != 1) return false
         if (action != ClickAction.SECONDARY || !slot.allowModification(player)) return false
-        if (getAmmo(thisStack) >= maxAmmo) return false
+        if (getAmmoCount(thisStack) >= maxAmmo) return false
         if (!otherStack.`is`(Tags.Items.GUNPOWDERS)) return false
 
         val amount = otherStack.count
-        val amountToInsert = minOf(maxAmmo - getAmmo(thisStack), amount)
+        val amountToInsert = minOf(maxAmmo - getAmmoCount(thisStack), amount)
 
         modifyAmmoCount(thisStack, amountToInsert)
         otherStack.shrink(amountToInsert)

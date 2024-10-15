@@ -28,7 +28,7 @@ class AquaAccelerator : BasicAmmoHoldingItem(
             return InteractionResultHolder.sidedSuccess(usedStack, level.isClientSide)
         }
 
-        if (getAmmo(usedStack) <= 0 && !player.hasInfiniteMaterials()) {
+        if (getAmmoCount(usedStack) <= 0 && !player.hasInfiniteMaterials()) {
             return InteractionResultHolder.fail(usedStack)
         }
 
@@ -44,9 +44,9 @@ class AquaAccelerator : BasicAmmoHoldingItem(
         )
 
         if (!player.hasInfiniteMaterials()) {
-            setAmmo(
+            modifyAmmoCount(
                 usedStack,
-                getAmmo(usedStack) - 1
+                -1
             )
         }
 
@@ -57,7 +57,7 @@ class AquaAccelerator : BasicAmmoHoldingItem(
     private fun tryRefill(level: Level, player: Player, usedStack: ItemStack): Boolean {
         if (player.isSecondaryUseActive) return false
 
-        val canRefill = getAmmo(usedStack) < getMaxAmmo(usedStack)
+        val canRefill = getAmmoCount(usedStack) < getMaxAmmo(usedStack)
         if (!canRefill) return false
 
         val blockHitResult = getPlayerPOVHitResult(level, player, ClipContext.Fluid.SOURCE_ONLY)
@@ -75,12 +75,7 @@ class AquaAccelerator : BasicAmmoHoldingItem(
         }
         level.gameEvent(player, GameEvent.FLUID_PICKUP, blockPos)
 
-        setAmmo(
-            usedStack,
-            getAmmo(usedStack) + 1
-        )
-
-        return true
+        return modifyAmmoCount(usedStack, 1)
     }
 
 }

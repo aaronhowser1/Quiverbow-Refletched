@@ -20,7 +20,7 @@ class SilkenSpinner : BasicAmmoHoldingItem(
     ): InteractionResultHolder<ItemStack> {
         val usedStack = player.getItemInHand(usedHand)
 
-        if (getAmmo(usedStack) <= 0 && !player.hasInfiniteMaterials()) {
+        if (!player.hasInfiniteMaterials() && !modifyAmmoCount(usedStack, -1)) {
             return InteractionResultHolder.fail(usedStack)
         }
 
@@ -34,13 +34,6 @@ class SilkenSpinner : BasicAmmoHoldingItem(
             1.5f,
             1.0f
         )
-
-        if (!player.hasInfiniteMaterials()) {
-            setAmmo(
-                usedStack,
-                getAmmo(usedStack) - 1
-            )
-        }
 
         return InteractionResultHolder.sidedSuccess(usedStack, level.isClientSide)
     }

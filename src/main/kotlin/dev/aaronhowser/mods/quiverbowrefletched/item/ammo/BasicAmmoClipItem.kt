@@ -31,7 +31,7 @@ class BasicAmmoClipItem(
             for (iteratedStack in player.inventory.items) {
                 if (!iteratedStack.`is`(ammoItem)) continue
 
-                while (iteratedStack.count > 0 && getAmmo(usedStack) < maxAmmo) {
+                while (iteratedStack.count > 0 && getAmmoCount(usedStack) < maxAmmo) {
                     iteratedStack.shrink(1)
                     modifyAmmoCount(usedStack, +1)
                 }
@@ -60,11 +60,11 @@ class BasicAmmoClipItem(
     ): Boolean {
         if (thisStack.count != 1) return false
         if (action != ClickAction.SECONDARY || !slot.allowModification(player)) return false
-        if (getAmmo(thisStack) >= maxAmmo) return false
+        if (getAmmoCount(thisStack) >= maxAmmo) return false
         if (!otherStack.`is`(ammoItem)) return false
 
         val amount = otherStack.count
-        val amountToInsert = minOf(maxAmmo - getAmmo(thisStack), amount)
+        val amountToInsert = minOf(maxAmmo - getAmmoCount(thisStack), amount)
 
         modifyAmmoCount(thisStack, amountToInsert)
         otherStack.shrink(amountToInsert)
@@ -91,7 +91,7 @@ class BasicAmmoClipItem(
         if (thisStack.count != 1) return false
         if (action != ClickAction.SECONDARY || !slot.allowModification(player)) return false
 
-        val myAmmo = getAmmo(thisStack)
+        val myAmmo = getAmmoCount(thisStack)
         if (myAmmo <= 0) return false
 
         val thatStack = slot.item
@@ -121,7 +121,7 @@ class BasicAmmoClipItem(
         tooltipComponents: MutableList<Component>,
         tooltipFlag: TooltipFlag
     ) {
-        val amount = getAmmo(stack)
+        val amount = getAmmoCount(stack)
         tooltipComponents.add(Component.literal("Ammo: $amount/$maxAmmo"))
     }
 
