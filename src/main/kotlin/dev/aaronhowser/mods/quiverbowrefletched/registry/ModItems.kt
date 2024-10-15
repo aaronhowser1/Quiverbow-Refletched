@@ -13,35 +13,35 @@ object ModItems {
 
     val ITEM_REGISTRY: DeferredRegister.Items = DeferredRegister.createItems(QuiverBowRefletched.ID)
 
-    val ARROW_BUNDLE =
+    val ARROW_BUNDLE: DeferredItem<ArrowBundleItem> =
         register("arrow_bundle") { ArrowBundleItem() }
     val ROCKET_BUNDLE =
         basic("rocket_bundle")
-    val SUGAR_ROD_CLIP =
+    val SUGAR_ROD_CLIP: DeferredItem<BasicAmmoClipItem> =
         register("sugar_rod_clip") { BasicAmmoClipItem.SUGAR }
     val BIG_ROCKET =
         basic("big_rocket")
     val COLD_IRON_CLIP =
         basic("cold_iron_clip")
-    val BOX_FLINT_DUST =
+    val BOX_FLINT_DUST: DeferredItem<Item> =
         register("box_flint_dust") { Item(Item.Properties().stacksTo(8)) }
-    val SEED_JAR =
+    val SEED_JAR: DeferredItem<AdvancedAmmoClipItem> =
         register("seed_jar") { AdvancedAmmoClipItem.SEED_JAR }
-    val OBSIDIAN_MAGAZINE =
+    val OBSIDIAN_MAGAZINE: DeferredItem<BasicAmmoClipItem> =
         register("obsidian_magazine") { BasicAmmoClipItem.OBSIDIAN }
-    val GOLD_MAGAZINE =
+    val GOLD_MAGAZINE: DeferredItem<BasicAmmoClipItem> =
         register("gold_magazine") { BasicAmmoClipItem.GOLD }
-    val THORN_MAGAZINE =
+    val THORN_MAGAZINE: DeferredItem<BasicAmmoClipItem> =
         register("thorn_magazine") { BasicAmmoClipItem.THORN }
-    val LAPIS_MAGAZINE =
+    val LAPIS_MAGAZINE: DeferredItem<BasicAmmoClipItem> =
         register("lapis_magazine") { BasicAmmoClipItem.LAPIS }
-    val REDSTONE_MAGAZINE =
+    val REDSTONE_MAGAZINE: DeferredItem<BasicAmmoClipItem> =
         register("redstone_magazine") { BasicAmmoClipItem.REDSTONE }
-    val LARGE_NETHERRACK_MAGAZINE =
+    val LARGE_NETHERRACK_MAGAZINE: DeferredItem<BasicAmmoClipItem> =
         register("large_netherrack_magazine") { BasicAmmoClipItem.LARGE_NETHERRACK }
-    val LARGE_REDSTONE_MAGAZINE =
+    val LARGE_REDSTONE_MAGAZINE: DeferredItem<BasicAmmoClipItem> =
         register("large_redstone_magazine") { BasicAmmoClipItem.LARGE_REDSTONE }
-    val ENDER_QUARTZ_CLIP =
+    val ENDER_QUARTZ_CLIP: DeferredItem<BasicAmmoClipItem> =
         register("ender_quartz_clip") { BasicAmmoClipItem.ENDER_QUARTZ }
 
     val COMPACT_CROSSBOW =
@@ -84,7 +84,7 @@ object ModItems {
         register("potatosser") { GenericAmmoHoldingItem(maxAmmo = 14) }
     val SNOW_CANNON =
         register("snow_cannon") { GenericAmmoHoldingItem(maxAmmo = 64) }
-    val BOW_WITH_QUIVER =
+    val BOW_WITH_QUIVER: DeferredItem<BowWithQuiver> =
         register("bow_with_quiver") { BowWithQuiver() }
     val ENDER_BOW: DeferredItem<EnderBow> =
         register("ender_bow") { EnderBow() }
@@ -100,7 +100,7 @@ object ModItems {
         register("obsidian_wither_rifle") { GenericAmmoHoldingItem(maxAmmo = 16) }
     val FEN_FIRE =
         register("fen_fire") { GenericAmmoHoldingItem(maxAmmo = 32) }
-    val FLINT_DUSTER =
+    val FLINT_DUSTER: DeferredItem<FlintDuster> =
         register("flint_duster") { FlintDuster() }
     val LIGHTNING_RED =
         register("lightning_red") { GenericAmmoHoldingItem(maxAmmo = 16) }
@@ -131,9 +131,9 @@ object ModItems {
     val HIDDEN_ENDER_PISTOL =
         register("hidden_ender_pistol") { GenericAmmoHoldingItem(maxAmmo = 8) }
 
-    val SUGAR_ENGINE_MAIN_BODY =
+    val SUGAR_ENGINE_MAIN_BODY: DeferredItem<Item> =
         basic("sugar_engine_main_body")
-    val SUGAR_ENGINE_BARREL =
+    val SUGAR_ENGINE_BARREL: DeferredItem<Item> =
         basic("sugar_engine_barrel")
     val PACKED_UP_ARMS_ASSISTANT =
         basic("packed_up_arms_assistant")
