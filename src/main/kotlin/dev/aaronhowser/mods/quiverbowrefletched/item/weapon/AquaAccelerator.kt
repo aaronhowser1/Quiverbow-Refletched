@@ -24,7 +24,7 @@ class AquaAccelerator : BasicAmmoHoldingItem(
     ): InteractionResultHolder<ItemStack> {
         val usedStack = player.getItemInHand(usedHand)
 
-        if (tryRefill(level, player, usedStack)) {
+        if (tryRefillFromWaterSource(level, player, usedStack)) {
             return InteractionResultHolder.sidedSuccess(usedStack, level.isClientSide)
         }
 
@@ -47,7 +47,7 @@ class AquaAccelerator : BasicAmmoHoldingItem(
     }
 
     //TODO: Allow refilling from water tanks?
-    private fun tryRefill(level: Level, player: Player, usedStack: ItemStack): Boolean {
+    private fun tryRefillFromWaterSource(level: Level, player: Player, usedStack: ItemStack): Boolean {
         if (player.isSecondaryUseActive) return false
 
         val canRefill = getAmmoCount(usedStack) < getMaxAmmo(usedStack)
