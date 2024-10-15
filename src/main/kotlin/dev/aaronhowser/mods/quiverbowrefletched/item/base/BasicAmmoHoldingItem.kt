@@ -32,6 +32,9 @@ abstract class BasicAmmoHoldingItem(
             stack.set(ModDataComponents.BASIC_AMMO_COMPONENT.get(), amount)
         }
 
+        /**
+         * @return true if the entity successfully uses the ammo, either because they have infinite or the ammo was used
+         */
         fun entityUse(
             livingEntity: LivingEntity,
             stack: ItemStack,
