@@ -55,16 +55,7 @@ class FenFireBlock(
         context: CollisionContext
     ): VoxelShape {
         val facing = state.getValue(FACING)
-
-        return when (facing) {
-            Direction.DOWN -> box(1.0, 0.0, 1.0, 15.0, 1.0, 15.0)
-            Direction.UP -> box(1.0, 15.0, 1.0, 15.0, 16.0, 15.0)
-            Direction.NORTH -> box(1.0, 1.0, 0.0, 15.0, 15.0, 1.0)
-            Direction.SOUTH -> box(1.0, 1.0, 15.0, 15.0, 15.0, 16.0)
-            Direction.WEST -> box(0.0, 1.0, 1.0, 1.0, 15.0, 15.0)
-            Direction.EAST -> box(15.0, 1.0, 1.0, 16.0, 15.0, 15.0)
-            else -> box(0.0, 0.0, 0.0, 16.0, 16.0, 16.0)
-        }
+        return shapes[facing] ?: shapes[Direction.DOWN]!!
     }
 
     override fun codec(): MapCodec<FenFireBlock> {
@@ -73,5 +64,15 @@ class FenFireBlock(
 
     companion object {
         private val CODEC = simpleCodec(::FenFireBlock)
+
+        private val shapes: Map<Direction, VoxelShape> = mapOf(
+            Direction.DOWN to box(1.0, 0.0, 1.0, 15.0, 1.0, 15.0),
+            Direction.UP to box(1.0, 15.0, 1.0, 15.0, 16.0, 15.0),
+            Direction.NORTH to box(1.0, 1.0, 0.0, 15.0, 15.0, 1.0),
+            Direction.SOUTH to box(1.0, 1.0, 15.0, 15.0, 15.0, 16.0),
+            Direction.WEST to box(0.0, 1.0, 1.0, 1.0, 15.0, 15.0),
+            Direction.EAST to box(15.0, 1.0, 1.0, 16.0, 15.0, 15.0),
+        )
+
     }
 }
