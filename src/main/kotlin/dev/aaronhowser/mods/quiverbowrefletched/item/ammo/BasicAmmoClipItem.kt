@@ -102,7 +102,11 @@ class BasicAmmoClipItem(
 
             slot.set(newStack)
             modifyAmmoCount(thisStack, -amountToPlace)
-        } else if (thatStack.`is`(ammoItem)) {
+
+            return true
+        }
+
+        if (thatStack.`is`(ammoItem)) {
             val amountThatCanFit = thatStack.maxStackSize - thatStack.count
             val amountToPlace = minOf(amountThatCanFit, myAmmo)
 
@@ -110,9 +114,11 @@ class BasicAmmoClipItem(
 
             thatStack.grow(amountToPlace)
             modifyAmmoCount(thisStack, -amountToPlace)
-        } else return false
 
-        return true
+            return true
+        }
+
+        return false
     }
 
     override fun appendHoverText(

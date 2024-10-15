@@ -137,7 +137,11 @@ open class AdvancedAmmoClipItem(
 
             slot.set(ammoStack.copy())
             setAmmo(thisStack, ammoStacks.dropLast(1))
-        } else if (ammoStacks.any { ItemStack.isSameItemSameComponents(it, otherStack) }) {
+
+            return true
+        }
+
+        if (ammoStacks.any { ItemStack.isSameItemSameComponents(it, otherStack) }) {
             val lastMatchingStack = ammoStacks.lastOrNull { ItemStack.isSameItemSameComponents(it, otherStack) }
             val stackToPlace = lastMatchingStack?.copy() ?: return false
 
@@ -158,9 +162,11 @@ open class AdvancedAmmoClipItem(
             )
 
             setAmmo(thisStack, newAmmoStacks)
-        } else return false
 
-        return true
+            return true
+        }
+
+        return false
     }
 
     override fun isBarVisible(stack: ItemStack): Boolean {
