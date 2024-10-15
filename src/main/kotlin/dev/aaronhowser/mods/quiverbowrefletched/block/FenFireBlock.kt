@@ -1,14 +1,20 @@
 package dev.aaronhowser.mods.quiverbowrefletched.block
 
 import com.mojang.serialization.MapCodec
+import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.world.item.context.BlockPlaceContext
+import net.minecraft.world.level.BlockGetter
+import net.minecraft.world.level.LevelReader
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.DirectionalBlock
+import net.minecraft.world.level.block.RenderShape
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.StateDefinition
 import net.minecraft.world.level.material.PushReaction
+import net.minecraft.world.phys.shapes.CollisionContext
+import net.minecraft.world.phys.shapes.VoxelShape
 
 class FenFireBlock(
     properties: Properties = Blocks.GLOWSTONE
@@ -31,6 +37,34 @@ class FenFireBlock(
 
     override fun getStateForPlacement(context: BlockPlaceContext): BlockState {
         return defaultBlockState().setValue(FACING, context.clickedFace.opposite)
+    }
+
+    override fun canSurvive(state: BlockState, level: LevelReader, pos: BlockPos): Boolean {
+        val direction = state.getValue(FACING)
+        return Block.canSupportCenter(level, pos.relative(direction), direction.opposite)
+    }
+
+    override fun getRenderShape(state: BlockState): RenderShape {
+        return RenderShape.MODEL
+    }
+
+    override fun getShape(
+        state: BlockState,
+        level: BlockGetter,
+        pos: BlockPos,
+        context: CollisionContext
+    ): VoxelShape {
+        val facing = state.getValue(FACING)
+
+        return when (facing) {
+            Direction.DOWN -> box(1.0, 0.0, 1.0, 15.0, 1.0, 15.0)
+            Direction.UP -> box(1.0, 15.0, 1.0, 15.0, 16.0, 15.0)
+            Direction.NORTH -> box(1.0, 1.0, 0.0, 15.0, 15.0, 1.0)
+            Direction.SOUTH -> box(1.0, 1.0, 15.0, 15.0, 15.0, 16.0)
+            Direction.WEST -> box(0.0, 1.0, 1.0, 1.0, 15.0, 15.0)
+            Direction.EAST -> box(15.0, 1.0, 1.0, 16.0, 15.0, 15.0)
+            else -> box(0.0, 0.0, 0.0, 16.0, 16.0, 16.0)
+        }
     }
 
     override fun codec(): MapCodec<FenFireBlock> {
