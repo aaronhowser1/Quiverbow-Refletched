@@ -21,7 +21,6 @@ import kotlin.random.Random
 
 class BowWithQuiver : AdvancedAmmoClipItem(
     maxAmmo = 64,
-    barColor = 0x00FF00,
     allowedAmmoTag = ItemTags.ARROWS,
     properties = getDefaultProperties(64).durability(384)
 ) {

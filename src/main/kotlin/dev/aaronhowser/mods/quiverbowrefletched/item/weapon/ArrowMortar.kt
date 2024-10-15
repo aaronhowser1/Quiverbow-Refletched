@@ -14,7 +14,6 @@ import kotlin.random.Random
 
 class ArrowMortar : AdvancedAmmoClipItem(
     maxAmmo = 16,
-    barColor = 0x00FF00,
     ammoPredicate = ItemPredicate.Builder.item().of(ModItems.ARROW_BUNDLE).build(),
     properties = getDefaultProperties(64).durability(384)
 ) {

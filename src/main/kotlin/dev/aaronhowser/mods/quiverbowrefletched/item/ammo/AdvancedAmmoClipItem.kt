@@ -19,14 +19,14 @@ import net.neoforged.neoforge.common.Tags
 
 open class AdvancedAmmoClipItem(
     protected val maxAmmo: Int,
-    private val barColor: Int,
+    private val barColor: Int = 0x00FF00,
     private val ammoPredicate: ItemPredicate,
     properties: Properties = getDefaultProperties(maxAmmo)
 ) : Item(properties) {
 
     constructor(
         maxAmmo: Int,
-        barColor: Int,
+        barColor: Int = 0x00FF00,
         allowedAmmoTag: TagKey<Item>,
         properties: Properties = getDefaultProperties(maxAmmo)
     ) : this(maxAmmo, barColor, ItemPredicate.Builder.item().of(allowedAmmoTag).build(), properties)
@@ -41,7 +41,7 @@ open class AdvancedAmmoClipItem(
                     ItemStackListComponent(maxAmmo)
                 )
 
-        val SEED_JAR = AdvancedAmmoClipItem(512, 0x00FF00, Tags.Items.SEEDS)
+        val SEED_JAR = AdvancedAmmoClipItem(maxAmmo = 512, allowedAmmoTag = Tags.Items.SEEDS)
 
         fun setAmmo(clipStack: ItemStack, ammoStacks: List<ItemStack>) {
             clipStack.set(

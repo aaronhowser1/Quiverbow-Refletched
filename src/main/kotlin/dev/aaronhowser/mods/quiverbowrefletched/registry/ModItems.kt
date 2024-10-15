@@ -99,8 +99,8 @@ object ModItems {
         register("obsidian_spear_rifle") { GenericAmmoHoldingItem(maxAmmo = 16) }
     val OBSIDIAN_WITHER_RIFLE =
         register("obsidian_wither_rifle") { GenericAmmoHoldingItem(maxAmmo = 16) }
-    val FEN_FIRE =
-        register("fen_fire") { GenericAmmoHoldingItem(maxAmmo = 32) }
+    val FEN_FIRE: DeferredItem<FenFire> =
+        register("fen_fire") { FenFire() }
     val FLINT_DUSTER: DeferredItem<FlintDuster> =
         register("flint_duster") { FlintDuster() }
     val LIGHTNING_RED =
