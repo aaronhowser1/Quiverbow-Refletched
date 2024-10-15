@@ -7,6 +7,7 @@ import net.minecraft.world.effect.MobEffectInstance
 import net.minecraft.world.effect.MobEffects
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.LivingEntity
+import net.minecraft.world.entity.item.ItemEntity
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.Items
@@ -80,6 +81,16 @@ class SilkenSpinnerProjectile(
 
         if (blockNext.canBeReplaced()) {
             level().setBlockAndUpdate(posNext, Blocks.COBWEB.defaultBlockState())
+        } else {
+            val cobwebDrop = ItemEntity(
+                level(),
+                posNext.x.toDouble() + 0.5,
+                posNext.y.toDouble() + 0.5,
+                posNext.z.toDouble() + 0.5,
+                Items.COBWEB.defaultInstance
+            )
+
+            level().addFreshEntity(cobwebDrop)
         }
     }
 
