@@ -28,7 +28,7 @@ class AquaAccelerator : BasicAmmoHoldingItem(
             return InteractionResultHolder.sidedSuccess(usedStack, level.isClientSide)
         }
 
-        if (getAmmo(usedStack) <= 0) {
+        if (getAmmo(usedStack) <= 0 && !player.hasInfiniteMaterials()) {
             return InteractionResultHolder.fail(usedStack)
         }
 
@@ -43,12 +43,14 @@ class AquaAccelerator : BasicAmmoHoldingItem(
             1.0f
         )
 
-        setAmmo(
-            usedStack,
-            getAmmo(usedStack) - 1
-        )
+        if (!player.hasInfiniteMaterials()) {
+            setAmmo(
+                usedStack,
+                getAmmo(usedStack) - 1
+            )
+        }
 
-        return super.use(level, player, usedHand)
+        return InteractionResultHolder.sidedSuccess(usedStack, level.isClientSide)
     }
 
     //TODO: Allow refilling from water tanks?

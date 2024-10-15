@@ -119,7 +119,7 @@ object ModItems {
     val AQUA_ACCELERATOR: DeferredItem<AquaAccelerator> =
         register("aqua_accelerator") { AquaAccelerator() }
     val SILKEN_SPINNER =
-        register("silken_spinner") { GenericAmmoHoldingItem(maxAmmo = 8) }
+        register("silken_spinner") { SilkenSpinner() }
     val SEED_SWEEPER =
         register("seed_sweeper") { GenericAmmoHoldingItem(maxAmmo = 512) }
     val RAY_OF_HOPE =
