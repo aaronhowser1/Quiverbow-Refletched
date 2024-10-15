@@ -32,15 +32,17 @@ class AquaAcceleratorProjectile(
         val posNext = posHit.relative(sideHit)
         val blockNext = level().getBlockState(posNext)
 
-        if (!blockNext.canBeReplaced(Fluids.WATER)) return
+        if (blockNext.canBeReplaced(Fluids.WATER)) {
+            (defaultItem as BucketItem).emptyContents(
+                owner as? Player,
+                level(),
+                posNext,
+                null,
+                null
+            )
+        }
 
-        (defaultItem as BucketItem).emptyContents(
-            owner as? Player,
-            level(),
-            posNext,
-            null,
-            null
-        )
+        this.discard()
     }
 
     override fun getDefaultItem(): Item {
