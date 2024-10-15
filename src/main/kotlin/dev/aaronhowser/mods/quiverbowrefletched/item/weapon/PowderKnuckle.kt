@@ -5,11 +5,16 @@ import dev.aaronhowser.mods.quiverbowrefletched.util.OtherUtil.isTrue
 import net.minecraft.ChatFormatting
 import net.minecraft.core.BlockPos
 import net.minecraft.network.chat.Component
+import net.minecraft.sounds.SoundEvents
+import net.minecraft.sounds.SoundSource
 import net.minecraft.tags.BlockTags
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.LivingEntity
+import net.minecraft.world.entity.SlotAccess
 import net.minecraft.world.entity.player.Player
+import net.minecraft.world.inventory.ClickAction
+import net.minecraft.world.inventory.Slot
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.item.context.UseOnContext
@@ -18,6 +23,7 @@ import net.minecraft.world.level.Explosion
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.Block
 import net.neoforged.neoforge.common.CommonHooks
+import net.neoforged.neoforge.common.Tags
 
 class PowderKnuckle(
     val isModified: Boolean
@@ -25,7 +31,9 @@ class PowderKnuckle(
     maxAmmo = 8
 ) {
 
-    val explosionRadius = 1.5f
+    companion object {
+        private const val EXPLOSION_RADIUS = 1.5f
+    }
 
     override fun onLeftClickEntity(stack: ItemStack, player: Player, entity: Entity): Boolean {
         if (player.level().isClientSide) return false
@@ -40,7 +48,7 @@ class PowderKnuckle(
             entity.x,
             entity.y,
             entity.z,
-            explosionRadius,
+            EXPLOSION_RADIUS,
             Level.ExplosionInteraction.TNT
         )
 
@@ -62,7 +70,7 @@ class PowderKnuckle(
             clickedPos.x + 0.5,
             clickedPos.y + 0.5,
             clickedPos.z + 0.5,
-            explosionRadius,
+            EXPLOSION_RADIUS,
             if (isModified) Level.ExplosionInteraction.NONE else Level.ExplosionInteraction.TNT
         )
 
@@ -118,6 +126,37 @@ class PowderKnuckle(
         level.destroyBlock(blockPos, false, player)
     }
 
+    override fun overrideOtherStackedOnMe(
+        thisStack: ItemStack,
+        otherStack: ItemStack,
+        slot: Slot,
+        action: ClickAction,
+        player: Player,
+        access: SlotAccess
+    ): Boolean {
+        if (thisStack.count != 1) return false
+        if (action != ClickAction.SECONDARY || !slot.allowModification(player)) return false
+        if (getAmmo(thisStack) >= maxAmmo) return false
+        if (!otherStack.`is`(Tags.Items.GUNPOWDERS)) return false
+
+        val amount = otherStack.count
+        val amountToInsert = minOf(maxAmmo - getAmmo(thisStack), amount)
+
+        modifyAmmoCount(thisStack, amountToInsert)
+        otherStack.shrink(amountToInsert)
+
+        player.level().playSound(
+            null,
+            player.blockPosition(),
+            SoundEvents.ITEM_PICKUP,
+            SoundSource.PLAYERS,
+            1f,
+            0.33f
+        )
+
+        return true
+    }
+
     override fun appendHoverText(
         stack: ItemStack,
         context: TooltipContext,
@@ -126,7 +165,7 @@ class PowderKnuckle(
     ) {
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag)
 
-        tooltipComponents.add(Component.literal("Explosion with radius $explosionRadius on hit").withStyle(ChatFormatting.GREEN))
+        tooltipComponents.add(Component.literal("Explosion with radius $EXPLOSION_RADIUS on hit").withStyle(ChatFormatting.GREEN))
 
         if (isModified) {
             tooltipComponents.add(Component.literal("Right-click block for 3x3x3 silk touch mining").withStyle(ChatFormatting.GREEN))
@@ -134,7 +173,6 @@ class PowderKnuckle(
             tooltipComponents.add(Component.literal("Punch mobs or right-click blocks").withStyle(ChatFormatting.GREEN))
         }
 
-        tooltipComponents.add(Component.literal("Craft with up to 8 Gunpowder to reload").withStyle(ChatFormatting.YELLOW))
         tooltipComponents.add(Component.literal("Not safe to use"))
     }
 
