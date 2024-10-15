@@ -1,10 +1,7 @@
 package dev.aaronhowser.mods.quiverbowrefletched.registry
 
 import dev.aaronhowser.mods.quiverbowrefletched.QuiverBowRefletched
-import dev.aaronhowser.mods.quiverbowrefletched.entity.AquaAcceleratorProjectile
-import dev.aaronhowser.mods.quiverbowrefletched.entity.ArrowMortarProjectile
-import dev.aaronhowser.mods.quiverbowrefletched.entity.EnderBowGuideProjectile
-import dev.aaronhowser.mods.quiverbowrefletched.entity.SilkenSpinnerProjectile
+import dev.aaronhowser.mods.quiverbowrefletched.entity.*
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.MobCategory
@@ -45,6 +42,16 @@ object ModEntityTypes {
             )
                 .sized(0.5f, 0.5f)
                 .build("silken_spinner_shot")
+        })
+
+    val FEN_FIRE_PROJECTILE: DeferredHolder<EntityType<*>, EntityType<FenFireProjectile>> =
+        ENTITY_TYPE_REGISTRY.register("fen_fire_shot", Supplier {
+            EntityType.Builder.of(
+                ::FenFireProjectile,
+                MobCategory.MISC
+            )
+                .sized(0.5f, 0.5f)
+                .build("fen_fire_shot")
         })
 
     val ARROW_MORTAR_PROJECTILE: DeferredHolder<EntityType<*>, EntityType<ArrowMortarProjectile>> =

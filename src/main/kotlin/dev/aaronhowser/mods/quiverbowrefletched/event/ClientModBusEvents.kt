@@ -42,7 +42,7 @@ object ClientModBusEvents {
 
         registerEntityRenderer(ModEntityTypes.AQUA_ACCELERATOR_PROJECTILE, ::ThrownItemRenderer)
         registerEntityRenderer(ModEntityTypes.SILKEN_SPINNER_PROJECTILE, ::ThrownItemRenderer)
-
+        registerEntityRenderer(ModEntityTypes.FEN_FIRE_PROJECTILE, ::ThrownItemRenderer)
     }
 
     @SubscribeEvent

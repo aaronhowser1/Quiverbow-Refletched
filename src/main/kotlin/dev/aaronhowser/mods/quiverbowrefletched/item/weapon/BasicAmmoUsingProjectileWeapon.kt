@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.quiverbowrefletched.item.weapon
 
+import dev.aaronhowser.mods.quiverbowrefletched.entity.FenFireProjectile
 import dev.aaronhowser.mods.quiverbowrefletched.entity.SilkenSpinnerProjectile
 import dev.aaronhowser.mods.quiverbowrefletched.item.base.BasicAmmoHoldingItem
 import net.minecraft.sounds.SoundEvents
@@ -89,19 +90,18 @@ class BasicAmmoUsingProjectileWeapon private constructor(
 
     companion object {
         val SILKEN_SPINNER = BasicAmmoUsingProjectileWeapon(
-            projectileSupplier = { player -> SilkenSpinnerProjectile(player) },
+            projectileSupplier = ::SilkenSpinnerProjectile,
             reloadItems = mapOf(Items.COBWEB to 1),
             maxAmmo = 8,
             barColor = 0x999999
         )
 
         val FEN_FIRE = BasicAmmoUsingProjectileWeapon(
-            projectileSupplier = { player -> SilkenSpinnerProjectile(player) },
+            projectileSupplier = ::FenFireProjectile,
             reloadItems = mapOf(Items.GLOWSTONE to 4, Items.GLOWSTONE_DUST to 1),
             maxAmmo = 32,
             barColor = 0xFFA500
         )
-
     }
 
 }
