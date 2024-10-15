@@ -48,6 +48,8 @@ class FlintDuster : BasicAmmoHoldingItem(
         val amountNeededForFullAmmo = (maxAmmo - getAmmoCount(thisStack)) / AMMO_PER_FLINT_BOX
         val amountToInsert = minOf(amountNeededForFullAmmo, otherStackSize)
 
+        if (amountToInsert <= 0) return false
+
         modifyAmmoCount(
             thisStack,
             (amountToInsert * AMMO_PER_FLINT_BOX).coerceAtMost(maxAmmo)

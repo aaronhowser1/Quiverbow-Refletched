@@ -70,6 +70,8 @@ class BasicAmmoUsingProjectileWeapon private constructor(
         val otherStackSize = otherStack.count
         val itemsToTake = minOf(itemsNeededForMax, otherStackSize)
 
+        if (itemsToTake <= 0) return false
+
         otherStack.shrink(itemsToTake)
         modifyAmmoCount(thisStack, itemsToTake * ammoPerItem)
 
