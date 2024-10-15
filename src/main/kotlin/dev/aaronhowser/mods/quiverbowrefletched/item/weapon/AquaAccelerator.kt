@@ -28,7 +28,7 @@ class AquaAccelerator : BasicAmmoHoldingItem(
             return InteractionResultHolder.sidedSuccess(usedStack, level.isClientSide)
         }
 
-        if (getAmmoCount(usedStack) <= 0 && !player.hasInfiniteMaterials()) {
+        if (!entityUse(player, usedStack)) {
             return InteractionResultHolder.fail(usedStack)
         }
 
@@ -42,13 +42,6 @@ class AquaAccelerator : BasicAmmoHoldingItem(
             1.5f,
             1.0f
         )
-
-        if (!player.hasInfiniteMaterials()) {
-            modifyAmmoCount(
-                usedStack,
-                -1
-            )
-        }
 
         return InteractionResultHolder.sidedSuccess(usedStack, level.isClientSide)
     }

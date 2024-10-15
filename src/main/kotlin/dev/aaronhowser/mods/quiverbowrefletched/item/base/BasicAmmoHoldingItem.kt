@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.quiverbowrefletched.item.base
 import dev.aaronhowser.mods.quiverbowrefletched.registry.ModDataComponents
 import dev.aaronhowser.mods.quiverbowrefletched.util.ClientUtil
 import net.minecraft.network.chat.Component
+import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.TooltipFlag
@@ -29,6 +30,16 @@ abstract class BasicAmmoHoldingItem(
 
         fun setAmmoCount(stack: ItemStack, amount: Int) {
             stack.set(ModDataComponents.BASIC_AMMO_COMPONENT.get(), amount)
+        }
+
+        fun entityUse(
+            livingEntity: LivingEntity,
+            stack: ItemStack,
+            amount: Int = 1
+        ): Boolean {
+            require(amount > 0) { "Amount must be a positive number" }
+            if (livingEntity.hasInfiniteMaterials()) return true
+            return modifyAmmoCount(stack, -amount)
         }
 
         fun modifyAmmoCount(stack: ItemStack, amount: Int): Boolean {

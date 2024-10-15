@@ -1,7 +1,6 @@
 package dev.aaronhowser.mods.quiverbowrefletched.item.weapon
 
 import dev.aaronhowser.mods.quiverbowrefletched.item.base.BasicAmmoHoldingItem
-import dev.aaronhowser.mods.quiverbowrefletched.util.OtherUtil.isTrue
 import net.minecraft.ChatFormatting
 import net.minecraft.core.BlockPos
 import net.minecraft.network.chat.Component
@@ -39,7 +38,7 @@ class PowderKnuckle(
         if (player.level().isClientSide) return false
         if (entity !is LivingEntity) return false
 
-        val canShoot = player.hasInfiniteMaterials() || modifyAmmoCount(stack, -1)
+        val canShoot = entityUse(player, stack)
         if (!canShoot) return false
 
         entity.remainingFireTicks = 2 * 20
@@ -56,9 +55,9 @@ class PowderKnuckle(
     }
 
     override fun useOn(context: UseOnContext): InteractionResult {
-        val player = context.player
-        val canUse = player?.hasInfiniteMaterials().isTrue || modifyAmmoCount(context.itemInHand, -1)
+        val player = context.player ?: return InteractionResult.FAIL
 
+        val canUse = entityUse(player, context.itemInHand)
         if (!canUse) return InteractionResult.FAIL
 
         val level = context.level
@@ -74,7 +73,7 @@ class PowderKnuckle(
             if (isModified) Level.ExplosionInteraction.NONE else Level.ExplosionInteraction.TNT
         )
 
-        if (isModified && player != null) {
+        if (isModified) {
             val clickedFace = context.clickedFace
             val centerOfVolumeToMine = clickedPos.relative(clickedFace, -1)
 
