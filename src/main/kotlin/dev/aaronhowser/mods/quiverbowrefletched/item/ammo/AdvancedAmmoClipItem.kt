@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.quiverbowrefletched.item.ammo
 import dev.aaronhowser.mods.quiverbowrefletched.item.component.ItemStackListComponent
 import dev.aaronhowser.mods.quiverbowrefletched.registry.ModDataComponents
 import dev.aaronhowser.mods.quiverbowrefletched.util.OtherUtil
+import net.minecraft.advancements.critereon.ItemPredicate
 import net.minecraft.network.chat.Component
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.sounds.SoundSource
@@ -19,9 +20,16 @@ import net.neoforged.neoforge.common.Tags
 open class AdvancedAmmoClipItem(
     protected val maxAmmo: Int,
     private val barColor: Int,
-    private val allowedAmmoTag: TagKey<Item>,
+    private val ammoPredicate: ItemPredicate,
     properties: Properties = getDefaultProperties(maxAmmo)
 ) : Item(properties) {
+
+    constructor(
+        maxAmmo: Int,
+        barColor: Int,
+        allowedAmmoTag: TagKey<Item>,
+        properties: Properties = getDefaultProperties(maxAmmo)
+    ) : this(maxAmmo, barColor, ItemPredicate.Builder.item().of(allowedAmmoTag).build(), properties)
 
     companion object {
 
@@ -68,7 +76,7 @@ open class AdvancedAmmoClipItem(
         otherStack: ItemStack,
         player: Player
     ): Boolean {
-        if (!otherStack.`is`(allowedAmmoTag)) return false
+        if (!ammoPredicate.test(otherStack)) return false
 
         val maxAmmo = getMaxAmmoAmount(thisStack)
         if (maxAmmo <= 0) return false
