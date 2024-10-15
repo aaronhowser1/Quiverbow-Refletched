@@ -1,27 +1,30 @@
 {
   "variants": {
     "facing=down": {
-      "model": "quiverbow_refletched:block/fen_fire_down",
-      "x": 270
+      "model": "quiverbow_refletched:block/fen_fire_down"
     },
     "facing=east": {
       "model": "quiverbow_refletched:block/fen_fire_east",
-      "y": 90
+      "x": 90,
+      "y": 270
     },
     "facing=north": {
-      "model": "quiverbow_refletched:block/fen_fire_north"
+      "model": "quiverbow_refletched:block/fen_fire_north",
+      "x": 90,
+      "y": 180
     },
     "facing=south": {
       "model": "quiverbow_refletched:block/fen_fire_south",
-      "y": 180
+      "x": 90
     },
     "facing=up": {
       "model": "quiverbow_refletched:block/fen_fire_up",
-      "x": 90
+      "x": 180
     },
     "facing=west": {
       "model": "quiverbow_refletched:block/fen_fire_west",
-      "y": 270
+      "x": 90,
+      "y": 90
     }
   }
 }

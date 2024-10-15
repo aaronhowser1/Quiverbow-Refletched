@@ -22,7 +22,7 @@ class FenFireBlock(
 ) : DirectionalBlock(properties) {
 
     init {
-        registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.UP))
+        registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.DOWN))
     }
 
     override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
