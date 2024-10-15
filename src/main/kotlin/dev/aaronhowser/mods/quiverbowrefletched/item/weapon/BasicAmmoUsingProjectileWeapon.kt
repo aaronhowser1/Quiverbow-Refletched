@@ -2,10 +2,15 @@ package dev.aaronhowser.mods.quiverbowrefletched.item.weapon
 
 import dev.aaronhowser.mods.quiverbowrefletched.entity.SilkenSpinnerProjectile
 import dev.aaronhowser.mods.quiverbowrefletched.item.base.BasicAmmoHoldingItem
+import net.minecraft.sounds.SoundEvents
+import net.minecraft.sounds.SoundSource
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResultHolder
+import net.minecraft.world.entity.SlotAccess
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.entity.projectile.Projectile
+import net.minecraft.world.inventory.ClickAction
+import net.minecraft.world.inventory.Slot
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
@@ -46,7 +51,39 @@ class BasicAmmoUsingProjectileWeapon private constructor(
         return InteractionResultHolder.sidedSuccess(usedStack, level.isClientSide)
     }
 
+    override fun overrideOtherStackedOnMe(
+        thisStack: ItemStack,
+        otherStack: ItemStack,
+        slot: Slot,
+        action: ClickAction,
+        player: Player,
+        access: SlotAccess
+    ): Boolean {
+        if (thisStack.count != 1) return false
+        if (action != ClickAction.SECONDARY || !slot.allowModification(player)) return false
+        if (getAmmoCount(thisStack) >= maxAmmo) return false
+        if (otherStack.item !in reloadItems) return false
 
+        val ammoPerItem = reloadItems[otherStack.item] ?: return false
+        val itemsNeededForMax = (maxAmmo - getAmmoCount(thisStack)) / ammoPerItem
+
+        val otherStackSize = otherStack.count
+        val itemsToTake = minOf(itemsNeededForMax, otherStackSize)
+
+        otherStack.shrink(itemsToTake)
+        modifyAmmoCount(thisStack, itemsToTake * ammoPerItem)
+
+        player.level().playSound(
+            null,
+            player.blockPosition(),
+            SoundEvents.ITEM_PICKUP,
+            SoundSource.PLAYERS,
+            1f,
+            0.33f
+        )
+
+        return true
+    }
 
     companion object {
         val SILKEN_SPINNER = BasicAmmoUsingProjectileWeapon(
