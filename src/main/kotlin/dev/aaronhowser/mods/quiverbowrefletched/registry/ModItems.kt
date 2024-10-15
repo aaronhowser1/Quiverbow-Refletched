@@ -99,8 +99,8 @@ object ModItems {
         register("obsidian_spear_rifle") { GenericAmmoHoldingItem(maxAmmo = 16) }
     val OBSIDIAN_WITHER_RIFLE =
         register("obsidian_wither_rifle") { GenericAmmoHoldingItem(maxAmmo = 16) }
-    val FEN_FIRE: DeferredItem<FenFire> =
-        register("fen_fire") { FenFire() }
+    val FEN_FIRE: DeferredItem<BasicAmmoUsingProjectileWeapon> =
+        register("fen_fire") { BasicAmmoUsingProjectileWeapon.FEN_FIRE }
     val FLINT_DUSTER: DeferredItem<FlintDuster> =
         register("flint_duster") { FlintDuster() }
     val LIGHTNING_RED =
@@ -119,8 +119,8 @@ object ModItems {
         register("soul_cairn") { GenericAmmoHoldingItem(maxAmmo = 1) }
     val AQUA_ACCELERATOR: DeferredItem<AquaAccelerator> =
         register("aqua_accelerator") { AquaAccelerator() }
-    val SILKEN_SPINNER: DeferredItem<SilkenSpinner> =
-        register("silken_spinner") { SilkenSpinner() }
+    val SILKEN_SPINNER: DeferredItem<BasicAmmoUsingProjectileWeapon> =
+        register("silken_spinner") { BasicAmmoUsingProjectileWeapon.SILKEN_SPINNER }
     val SEED_SWEEPER =
         register("seed_sweeper") { GenericAmmoHoldingItem(maxAmmo = 512) }
     val RAY_OF_HOPE =
