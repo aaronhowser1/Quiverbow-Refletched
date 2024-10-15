@@ -74,8 +74,8 @@ object ModItems {
         register("fireworks_rocket_launcher") { GenericAmmoHoldingItem(maxAmmo = 1) }
     val IMPROVED_ROCKET_LAUNCHER =
         register("improved_rocket_launcher") { GenericAmmoHoldingItem(maxAmmo = 1) }
-    val ARROW_MORTAR =
-        register("arrow_mortar") { GenericAmmoHoldingItem(maxAmmo = 8) }
+    val ARROW_MORTAR: DeferredItem<ArrowMortar> =
+        register("arrow_mortar") { ArrowMortar() }
     val DRAGON_MORTAR =
         register("dragon_mortar") { GenericAmmoHoldingItem(maxAmmo = 8) }
     val SEEDLING =

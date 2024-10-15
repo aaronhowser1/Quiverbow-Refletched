@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.quiverbowrefletched.event
 
 import dev.aaronhowser.mods.quiverbowrefletched.QuiverBowRefletched
 import dev.aaronhowser.mods.quiverbowrefletched.datagen.model.ModItemModelProvider
+import dev.aaronhowser.mods.quiverbowrefletched.entity.render.ArrowMortarProjectileRenderer
 import dev.aaronhowser.mods.quiverbowrefletched.entity.render.EnderBowGuideProjectileRenderer
 import dev.aaronhowser.mods.quiverbowrefletched.item.base.BasicAmmoHoldingItem
 import dev.aaronhowser.mods.quiverbowrefletched.registry.ModDataComponents
@@ -37,6 +38,8 @@ object ClientModBusEvents {
         }
 
         registerEntityRenderer(ModEntityTypes.ENDER_BOW_GUIDE_PROJECTILE, ::EnderBowGuideProjectileRenderer)
+        registerEntityRenderer(ModEntityTypes.ARROW_MORTAR_PROJECTILE, ::ArrowMortarProjectileRenderer)
+
         registerEntityRenderer(ModEntityTypes.AQUA_ACCELERATOR_PROJECTILE, ::ThrownItemRenderer)
         registerEntityRenderer(ModEntityTypes.SILKEN_SPINNER_PROJECTILE, ::ThrownItemRenderer)
 
