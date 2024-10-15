@@ -17,7 +17,7 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
 import net.minecraft.world.level.Level
 
-class BasicAmmoUsingProjectileWeapon private constructor(
+class BasicAmmoUsingProjectileWeapon(
     private val projectileSupplier: (Player) -> Projectile,
     private val reloadItems: Map<Item, Int>,
     maxAmmo: Int,
