@@ -86,7 +86,7 @@ object ModItems {
         register("snow_cannon") { GenericAmmoHoldingItem(maxAmmo = 64) }
     val BOW_WITH_QUIVER =
         register("bow_with_quiver") { BowWithQuiver() }
-    val ENDER_BOW =
+    val ENDER_BOW: DeferredItem<EnderBow> =
         register("ender_bow") { EnderBow() }
     val ENDER_RIFLE =
         register("ender_rifle") { GenericAmmoHoldingItem(maxAmmo = 8) }
@@ -118,7 +118,7 @@ object ModItems {
         register("soul_cairn") { GenericAmmoHoldingItem(maxAmmo = 1) }
     val AQUA_ACCELERATOR: DeferredItem<AquaAccelerator> =
         register("aqua_accelerator") { AquaAccelerator() }
-    val SILKEN_SPINNER =
+    val SILKEN_SPINNER: DeferredItem<SilkenSpinner> =
         register("silken_spinner") { SilkenSpinner() }
     val SEED_SWEEPER =
         register("seed_sweeper") { GenericAmmoHoldingItem(maxAmmo = 512) }
