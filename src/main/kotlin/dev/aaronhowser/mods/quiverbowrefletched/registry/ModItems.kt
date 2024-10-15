@@ -24,7 +24,7 @@ object ModItems {
     val COLD_IRON_CLIP =
         basic("cold_iron_clip")
     val BOX_FLINT_DUST =
-        basic("box_flint_dust")
+        register("box_flint_dust") { Item(Item.Properties().stacksTo(8)) }
     val SEED_JAR =
         register("seed_jar") { AdvancedAmmoClipItem.SEED_JAR }
     val OBSIDIAN_MAGAZINE =
@@ -101,7 +101,7 @@ object ModItems {
     val FEN_FIRE =
         register("fen_fire") { GenericAmmoHoldingItem(maxAmmo = 32) }
     val FLINT_DUSTER =
-        register("flint_duster") { GenericAmmoHoldingItem(maxAmmo = 256) }
+        register("flint_duster") { FlintDuster() }
     val LIGHTNING_RED =
         register("lightning_red") { GenericAmmoHoldingItem(maxAmmo = 16) }
     val SUNRAY =
