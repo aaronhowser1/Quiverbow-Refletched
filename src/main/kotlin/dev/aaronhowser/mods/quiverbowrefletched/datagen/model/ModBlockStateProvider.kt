@@ -46,8 +46,8 @@ class ModBlockStateProvider(
                     .withExistingParent("fen_fire_${facing.name.lowercase()}", mcLoc("block/thin_block"))
                     .texture("texture", texture)
                     .element()
-                    .from(0f, 0f, 0f)
-                    .to(16f, 1f, 16f)
+                    .from(1f, 0f, 1f)
+                    .to(15f, 1f, 15f)
                     .textureAll("#texture")
                     .end()
 
