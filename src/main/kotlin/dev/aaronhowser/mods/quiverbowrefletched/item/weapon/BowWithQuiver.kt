@@ -19,7 +19,7 @@ import net.minecraft.world.level.Level
 import net.neoforged.neoforge.event.EventHooks
 import kotlin.random.Random
 
-class BowWithQuiverItem : AdvancedAmmoClipItem(
+class BowWithQuiver : AdvancedAmmoClipItem(
     maxAmmo = 64,
     barColor = 0x00FF00,
     allowedAmmoTag = ItemTags.ARROWS,

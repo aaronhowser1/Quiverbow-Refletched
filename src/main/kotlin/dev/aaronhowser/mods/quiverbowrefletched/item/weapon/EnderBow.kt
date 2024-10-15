@@ -13,7 +13,7 @@ import net.neoforged.neoforge.common.Tags
 import net.neoforged.neoforge.event.EventHooks
 import java.util.function.Predicate
 
-class EnderBowItem : BowItem(
+class EnderBow : BowItem(
     Properties()
         .durability(256)
 ) {

@@ -85,9 +85,9 @@ object ModItems {
     val SNOW_CANNON =
         register("snow_cannon") { GenericAmmoHoldingItem(maxAmmo = 64) }
     val BOW_WITH_QUIVER =
-        register("bow_with_quiver") { BowWithQuiverItem() }
+        register("bow_with_quiver") { BowWithQuiver() }
     val ENDER_BOW =
-        register("ender_bow") { EnderBowItem() }
+        register("ender_bow") { EnderBow() }
     val ENDER_RIFLE =
         register("ender_rifle") { GenericAmmoHoldingItem(maxAmmo = 8) }
     val FROST_LANCER =
