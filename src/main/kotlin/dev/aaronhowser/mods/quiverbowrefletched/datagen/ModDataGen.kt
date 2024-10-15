@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.quiverbowrefletched.datagen
 
 import dev.aaronhowser.mods.quiverbowrefletched.QuiverBowRefletched
+import dev.aaronhowser.mods.quiverbowrefletched.datagen.model.ModBlockStateProvider
 import dev.aaronhowser.mods.quiverbowrefletched.datagen.model.ModItemModelProvider
 import dev.aaronhowser.mods.quiverbowrefletched.datagen.tag.ModBlockTagsProvider
 import dev.aaronhowser.mods.quiverbowrefletched.datagen.tag.ModItemTagsProvider
@@ -31,6 +32,10 @@ object ModDataGen {
         val itemModelProvider = generator.addProvider(
             event.includeClient(),
             ModItemModelProvider(output, existingFileHelper)
+        )
+        val blockModelProvider = generator.addProvider(
+            event.includeClient(),
+            ModBlockStateProvider(output, existingFileHelper)
         )
 
         val recipeProvider = generator.addProvider(

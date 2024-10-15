@@ -1,0 +1,27 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "quiverbow_refletched:block/fen_fire_down",
+      "x": 270
+    },
+    "facing=east": {
+      "model": "quiverbow_refletched:block/fen_fire_east",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "quiverbow_refletched:block/fen_fire_north"
+    },
+    "facing=south": {
+      "model": "quiverbow_refletched:block/fen_fire_south",
+      "y": 180
+    },
+    "facing=up": {
+      "model": "quiverbow_refletched:block/fen_fire_up",
+      "x": 90
+    },
+    "facing=west": {
+      "model": "quiverbow_refletched:block/fen_fire_west",
+      "y": 270
+    }
+  }
+}

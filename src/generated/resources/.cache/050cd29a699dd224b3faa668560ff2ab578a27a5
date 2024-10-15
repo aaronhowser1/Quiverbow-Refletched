@@ -1,0 +1,9 @@
+// 1.21.1	2024-10-15T17:19:41.0438956	Block States: quiverbow_refletched
+1b5cce68cbbc7ee293a868a8b6a961a069c4bcd8 assets/quiverbow_refletched/blockstates/fen_fire_block.json
+b2defae8e51cd9b11e25add2698347c856bd051f assets/quiverbow_refletched/models/block/fen_fire_down.json
+b2defae8e51cd9b11e25add2698347c856bd051f assets/quiverbow_refletched/models/block/fen_fire_east.json
+b2defae8e51cd9b11e25add2698347c856bd051f assets/quiverbow_refletched/models/block/fen_fire_north.json
+b2defae8e51cd9b11e25add2698347c856bd051f assets/quiverbow_refletched/models/block/fen_fire_south.json
+b2defae8e51cd9b11e25add2698347c856bd051f assets/quiverbow_refletched/models/block/fen_fire_up.json
+b2defae8e51cd9b11e25add2698347c856bd051f assets/quiverbow_refletched/models/block/fen_fire_west.json
+6029a7b57e2a9acc79853f4de8ca6b9fccd9b5a4 assets/quiverbow_refletched/models/item/fen_fire_block.json
