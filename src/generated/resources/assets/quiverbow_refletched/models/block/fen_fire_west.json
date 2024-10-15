@@ -35,6 +35,7 @@
     }
   ],
   "textures": {
+    "particle": "minecraft:block/glowstone",
     "texture": "minecraft:block/glowstone"
   }
 }

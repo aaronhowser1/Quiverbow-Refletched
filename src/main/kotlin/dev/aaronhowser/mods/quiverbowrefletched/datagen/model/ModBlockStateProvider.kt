@@ -45,6 +45,8 @@ class ModBlockStateProvider(
                 val model = models()
                     .withExistingParent("fen_fire_${facing.name.lowercase()}", mcLoc("block/thin_block"))
                     .texture("texture", texture)
+                    .texture("particle", texture)
+
                     .element()
                     .from(1f, 0f, 1f)
                     .to(15f, 1f, 15f)
