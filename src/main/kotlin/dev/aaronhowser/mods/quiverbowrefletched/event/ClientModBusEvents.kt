@@ -8,6 +8,8 @@ import dev.aaronhowser.mods.quiverbowrefletched.item.base.BasicAmmoHoldingItem
 import dev.aaronhowser.mods.quiverbowrefletched.registry.ModDataComponents
 import dev.aaronhowser.mods.quiverbowrefletched.registry.ModEntityTypes
 import dev.aaronhowser.mods.quiverbowrefletched.registry.ModItems
+import dev.aaronhowser.mods.quiverbowrefletched.util.OtherUtil
+import dev.aaronhowser.mods.quiverbowrefletched.util.ScopeUtils
 import net.minecraft.client.renderer.entity.EntityRendererProvider
 import net.minecraft.client.renderer.entity.EntityRenderers
 import net.minecraft.client.renderer.entity.ThrownItemRenderer
@@ -107,7 +109,10 @@ object ClientModBusEvents {
 
     @SubscribeEvent
     fun registerGuiLayers(event: RegisterGuiLayersEvent) {
-
+        event.registerBelowAll(
+            OtherUtil.modResource("sniper_scope"),
+            ScopeUtils::renderScope
+        )
     }
 
 }
