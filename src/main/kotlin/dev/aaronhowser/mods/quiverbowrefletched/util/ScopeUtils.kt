@@ -1,8 +1,6 @@
 package dev.aaronhowser.mods.quiverbowrefletched.util
 
-import com.mojang.blaze3d.systems.RenderSystem
 import dev.aaronhowser.mods.quiverbowrefletched.registry.ModItems
-import net.minecraft.client.CameraType
 import net.minecraft.client.DeltaTracker
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.resources.ResourceLocation
@@ -33,7 +31,7 @@ object ScopeUtils {
     }
 
     fun renderScope(guiGraphics: GuiGraphics, deltaTracker: DeltaTracker) {
-        if (ClientUtil.options.cameraType != CameraType.FIRST_PERSON) {
+        if (!ClientUtil.options.cameraType.isFirstPerson) {
             isScoped = false
             return
         }
@@ -53,10 +51,11 @@ object ScopeUtils {
         }
 
         isScoped = true
-        RenderSystem.enableBlend()
-        RenderUtil.renderFullscreenTexture(
+
+        RenderUtil.renderCenteredTexture(
             guiGraphics,
-            OtherUtil.modResource("textures/overlay/scope.png")
+            OtherUtil.modResource("textures/overlay/scope.png"),
+            1f
         )
 
         RenderUtil.renderTexture(
