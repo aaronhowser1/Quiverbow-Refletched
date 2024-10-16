@@ -3,7 +3,6 @@ package dev.aaronhowser.mods.quiverbowrefletched.util
 import dev.aaronhowser.mods.quiverbowrefletched.registry.ModItems
 import net.minecraft.client.DeltaTracker
 import net.minecraft.client.gui.GuiGraphics
-import net.minecraft.resources.ResourceLocation
 import net.neoforged.neoforge.client.event.CalculatePlayerTurnEvent
 import net.neoforged.neoforge.client.event.ComputeFovModifierEvent
 import net.neoforged.neoforge.client.event.RenderHandEvent
@@ -54,17 +53,14 @@ object ScopeUtils {
 
         RenderUtil.renderCenteredTexture(
             guiGraphics,
-            OtherUtil.modResource("textures/overlay/scope.png"),
+            scopeTexture,
             1f
         )
 
-        RenderUtil.renderTexture(
-            guiGraphics,
-            ResourceLocation.withDefaultNamespace("textures/item/ender_eye.png"),
-            0, 0,
-            16, 16
-        )
+        //TODO: Render eyes of ender in the border around the overlay
 
     }
+
+    private val scopeTexture = OtherUtil.modResource("textures/overlay/scope.png")
 
 }
