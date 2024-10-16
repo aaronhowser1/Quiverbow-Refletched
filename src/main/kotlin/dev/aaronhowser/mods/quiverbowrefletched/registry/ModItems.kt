@@ -89,8 +89,8 @@ object ModItems {
         register("bow_with_quiver") { BowWithQuiver() }
     val ENDER_BOW: DeferredItem<EnderBow> =
         register("ender_bow") { EnderBow() }
-    val ENDER_RIFLE: DeferredItem<EnderRifle> =
-        register("ender_rifle") { EnderRifle() }
+    val ENDER_RIFLE: DeferredItem<BasicAmmoUsingProjectileWeapon> =
+        register("ender_rifle") { BasicAmmoUsingProjectileWeapon.ENDER_RIFLE }
     val FROST_LANCER =
         register("frost_lancer") { GenericAmmoHoldingItem(maxAmmo = 4) }
     val OBSIDIAN_SPLINTER_PISTOL =

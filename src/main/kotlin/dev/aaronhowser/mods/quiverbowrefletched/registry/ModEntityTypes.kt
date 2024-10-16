@@ -64,4 +64,14 @@ object ModEntityTypes {
                 .build("arrow_mortar_shot")
         })
 
+    val ENDER_RIFLE_ROUND_PROJECTILE: DeferredHolder<EntityType<*>, EntityType<EnderRifleRoundProjectile>> =
+        ENTITY_TYPE_REGISTRY.register("ender_rifle_round", Supplier {
+            EntityType.Builder.of(
+                ::EnderRifleRoundProjectile,
+                MobCategory.MISC
+            )
+                .sized(0.5f, 0.5f)
+                .build("ender_rifle_round")
+        })
+
 }

@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.quiverbowrefletched.item.weapon
 
+import dev.aaronhowser.mods.quiverbowrefletched.entity.EnderRifleRoundProjectile
 import dev.aaronhowser.mods.quiverbowrefletched.entity.FenFireProjectile
 import dev.aaronhowser.mods.quiverbowrefletched.entity.SilkenSpinnerProjectile
 import dev.aaronhowser.mods.quiverbowrefletched.item.base.BasicAmmoHoldingItem
@@ -101,6 +102,13 @@ class BasicAmmoUsingProjectileWeapon(
             reloadItems = mapOf(Items.GLOWSTONE to 4, Items.GLOWSTONE_DUST to 1),
             maxAmmo = 32,
             barColor = 0xFFA500
+        )
+
+        val ENDER_RIFLE = BasicAmmoUsingProjectileWeapon(
+            projectileSupplier = ::EnderRifleRoundProjectile,   //TODO: increase velocity a lot
+            reloadItems = mapOf(Items.IRON_INGOT to 1),
+            maxAmmo = 16,
+            barColor = 0x000000
         )
     }
 
