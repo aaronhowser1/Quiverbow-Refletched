@@ -19,6 +19,7 @@ import net.neoforged.bus.api.SubscribeEvent
 import net.neoforged.fml.common.EventBusSubscriber
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent
 import net.neoforged.neoforge.client.event.ModelEvent
+import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent
 import net.neoforged.neoforge.registries.DeferredHolder
 
 @EventBusSubscriber(
@@ -101,6 +102,11 @@ object ClientModBusEvents {
             val count = usedStack.getOrDefault(ModDataComponents.BASIC_AMMO_COMPONENT, 0)
             return@register count.toFloat() / maxAmmo.toFloat()
         }
+
+    }
+
+    @SubscribeEvent
+    fun registerGuiLayers(event: RegisterGuiLayersEvent) {
 
     }
 
