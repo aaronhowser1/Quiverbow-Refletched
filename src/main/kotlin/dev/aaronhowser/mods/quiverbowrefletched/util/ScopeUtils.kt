@@ -8,43 +8,56 @@ import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.resources.ResourceLocation
 import net.neoforged.neoforge.client.event.CalculatePlayerTurnEvent
 import net.neoforged.neoforge.client.event.ComputeFovModifierEvent
+import net.neoforged.neoforge.client.event.RenderHandEvent
 
 object ScopeUtils {
 
-    fun checkShouldZoom(event: ComputeFovModifierEvent) {
-        val player = event.player
-        if (!player.isCrouching) return
+    private var isScoped = false
 
-        val mainHandIsEnderRifle = player.mainHandItem.`is`(ModItems.ENDER_RIFLE)
-        val offHandIsEnderRifle = player.offhandItem.`is`(ModItems.ENDER_RIFLE)
-        if (!mainHandIsEnderRifle && !offHandIsEnderRifle) return
-
+    fun tryZoom(event: ComputeFovModifierEvent) {
+        if (!isScoped) return
         event.newFovModifier /= 7.5f
     }
 
-    fun checkShouldLowerMouseSensitivity(event: CalculatePlayerTurnEvent) {
-        val player = ClientUtil.localPlayer ?: return
-        if (!player.isCrouching) return
-
-        val mainHandIsEnderRifle = player.mainHandItem.`is`(ModItems.ENDER_RIFLE)
-        val offHandIsEnderRifle = player.offhandItem.`is`(ModItems.ENDER_RIFLE)
-        if (!mainHandIsEnderRifle && !offHandIsEnderRifle) return
+    fun tryLowerSensitivity(event: CalculatePlayerTurnEvent) {
+        if (!isScoped) return
 
         event.mouseSensitivity /= 1.5f
         event.cinematicCameraEnabled = true
     }
 
-    fun renderScope(guiGraphics: GuiGraphics, deltaTracker: DeltaTracker) {
-        if (ClientUtil.options.cameraType != CameraType.FIRST_PERSON) return
-        val player = ClientUtil.localPlayer ?: return
-        if (!player.isCrouching) return
+    fun tryHideHand(event: RenderHandEvent) {
+        if (!isScoped) return
 
+        event.isCanceled = true
+    }
+
+    fun renderScope(guiGraphics: GuiGraphics, deltaTracker: DeltaTracker) {
+        if (ClientUtil.options.cameraType != CameraType.FIRST_PERSON) {
+            isScoped = false
+            return
+        }
+
+        val player = ClientUtil.localPlayer ?: return
+
+        if (!player.isCrouching) {
+            isScoped = false
+            return
+        }
+
+        val mainHandIsEnderRifle = player.mainHandItem.`is`(ModItems.ENDER_RIFLE)
+        val offHandIsEnderRifle = player.offhandItem.`is`(ModItems.ENDER_RIFLE)
+        if (!mainHandIsEnderRifle && !offHandIsEnderRifle) {
+            isScoped = false
+            return
+        }
+
+        isScoped = true
         RenderSystem.enableBlend()
         ClientUtil.renderFullscreenTexture(
             guiGraphics,
             ResourceLocation.withDefaultNamespace("textures/misc/spyglass_scope.png")
         )
-
     }
 
 }

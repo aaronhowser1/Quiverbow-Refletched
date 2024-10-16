@@ -7,6 +7,7 @@ import net.neoforged.bus.api.SubscribeEvent
 import net.neoforged.fml.common.EventBusSubscriber
 import net.neoforged.neoforge.client.event.CalculatePlayerTurnEvent
 import net.neoforged.neoforge.client.event.ComputeFovModifierEvent
+import net.neoforged.neoforge.client.event.RenderHandEvent
 
 @EventBusSubscriber(
     modid = QuiverBowRefletched.ID,
@@ -16,12 +17,17 @@ object ClientEvents {
 
     @SubscribeEvent
     fun onFovModifierEvent(event: ComputeFovModifierEvent) {
-        ScopeUtils.checkShouldZoom(event)
+        ScopeUtils.tryZoom(event)
     }
 
     @SubscribeEvent
     fun onPlayerTurnEvent(event: CalculatePlayerTurnEvent) {
-        ScopeUtils.checkShouldLowerMouseSensitivity(event)
+        ScopeUtils.tryLowerSensitivity(event)
+    }
+
+    @SubscribeEvent
+    fun onRenderHandEvent(event: RenderHandEvent) {
+        ScopeUtils.tryHideHand(event)
     }
 
 
