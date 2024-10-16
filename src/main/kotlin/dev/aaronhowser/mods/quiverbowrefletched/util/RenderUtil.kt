@@ -1,9 +1,7 @@
 package dev.aaronhowser.mods.quiverbowrefletched.util
 
 import com.mojang.blaze3d.systems.RenderSystem
-import com.mojang.blaze3d.vertex.*
 import net.minecraft.client.gui.GuiGraphics
-import net.minecraft.client.renderer.GameRenderer
 import net.minecraft.resources.ResourceLocation
 
 
@@ -33,68 +31,30 @@ object RenderUtil {
         RenderSystem.enableDepthTest()
     }
 
-    fun renderScaledCustomSizedTexture(
-        matrixStack: PoseStack,
-        x: Float,
-        y: Float,
-        u: Float,
-        v: Float,
-        uWidth: Float,
-        vHeight: Float,
-        renderWidth: Float,
-        renderHeight: Float,
-        textureWidth: Float,
-        textureHeight: Float
+    fun renderTexture(
+        pGuiGraphics: GuiGraphics,
+        textureLocation: ResourceLocation,
+        x: Int, y: Int,
+        width: Int, height: Int
     ) {
-        val buffer = Tesselator.getInstance().begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX)
-        val pose = matrixStack.last().pose()
+        RenderSystem.disableDepthTest()
+        RenderSystem.depthMask(false)
 
-        val widthRatio = 1 / textureWidth
-        val heightRatio = 1 / textureHeight
-
-        RenderSystem.setShader(GameRenderer::getPositionTexShader)
-
-        buffer.addVertex(
-            pose,
-            x,
-            y + renderHeight,
-            0f
-        ).setUv(
-            u * widthRatio,
-            (v + vHeight) * heightRatio
-        )
-
-        buffer.addVertex(
-            pose,
-            x + renderWidth,
-            y + renderHeight,
-            0f
-        ).setUv(
-            (u + uWidth) * widthRatio,
-            (v + vHeight) * heightRatio
-        )
-
-        buffer.addVertex(
-            pose,
-            x + renderWidth,
-            y,
-            0f
-        ).setUv(
-            (u + uWidth) * widthRatio,
-            v * heightRatio
-        )
-
-        buffer.addVertex(
-            pose,
+        pGuiGraphics.blit(
+            textureLocation,
             x,
             y,
-            0f
-        ).setUv(
-            u * widthRatio,
-            v * heightRatio
+            -90,
+            0f,
+            0f,
+            width,
+            height,
+            width,
+            height
         )
 
-        BufferUploader.drawWithShader(buffer.buildOrThrow())
+        RenderSystem.depthMask(true)
+        RenderSystem.enableDepthTest()
     }
 
 }

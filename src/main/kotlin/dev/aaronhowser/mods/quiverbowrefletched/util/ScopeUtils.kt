@@ -56,15 +56,16 @@ object ScopeUtils {
         RenderSystem.enableBlend()
         RenderUtil.renderFullscreenTexture(
             guiGraphics,
-            ResourceLocation.withDefaultNamespace("textures/misc/spyglass_scope.png")
+            OtherUtil.modResource("textures/overlay/scope.png")
         )
 
-        RenderUtil.renderScaledCustomSizedTexture(
-            guiGraphics.pose(),
-            0f,
-            0f,
-
+        RenderUtil.renderTexture(
+            guiGraphics,
+            ResourceLocation.withDefaultNamespace("textures/item/ender_eye.png"),
+            0, 0,
+            16, 16
         )
+
     }
 
 }
