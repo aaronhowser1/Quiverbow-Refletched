@@ -54,9 +54,16 @@ object ScopeUtils {
 
         isScoped = true
         RenderSystem.enableBlend()
-        ClientUtil.renderFullscreenTexture(
+        RenderUtil.renderFullscreenTexture(
             guiGraphics,
             ResourceLocation.withDefaultNamespace("textures/misc/spyglass_scope.png")
+        )
+
+        RenderUtil.renderScaledCustomSizedTexture(
+            guiGraphics.pose(),
+            0f,
+            0f,
+
         )
     }
 
