@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.quiverbowrefletched.event
 
 import dev.aaronhowser.mods.quiverbowrefletched.QuiverBowRefletched
-import dev.aaronhowser.mods.quiverbowrefletched.item.weapon.EnderRifle
+import dev.aaronhowser.mods.quiverbowrefletched.util.ClientUtil
 import net.neoforged.api.distmarker.Dist
 import net.neoforged.bus.api.SubscribeEvent
 import net.neoforged.fml.common.EventBusSubscriber
@@ -16,12 +16,12 @@ object ClientEvents {
 
     @SubscribeEvent
     fun onFovModifierEvent(event: ComputeFovModifierEvent) {
-        EnderRifle.checkShouldZoom(event)
+        ClientUtil.checkShouldZoom(event)
     }
 
     @SubscribeEvent
     fun onPlayerTurnEvent(event: CalculatePlayerTurnEvent) {
-        EnderRifle.checkShouldLowerMouseSensitivity(event)
+        ClientUtil.checkShouldLowerMouseSensitivity(event)
     }
 
 
