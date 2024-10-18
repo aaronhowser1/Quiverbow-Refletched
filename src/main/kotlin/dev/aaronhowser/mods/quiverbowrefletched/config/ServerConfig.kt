@@ -265,7 +265,7 @@ class ServerConfig(
         lateinit var REDSTONE_SPRAYER_WITHER_DURATION: ModConfigSpec.IntValue
         lateinit var REDSTONE_SPRAYER_WITHER_STRENGTH: ModConfigSpec.IntValue
 
-        lateinit var SEED_SWEEPER_ACCURACY: ModConfigSpec.DoubleValue
+        lateinit var SEED_SWEEPER_INACCURACY: ModConfigSpec.DoubleValue
         lateinit var SEED_SWEEPER_PROJECTILE_SPEED: ModConfigSpec.DoubleValue
         lateinit var SEED_SWEEPER_COOLDOWN: ModConfigSpec.IntValue
         lateinit var SEED_SWEEPER_DAMAGE_MINIMUM: ModConfigSpec.DoubleValue
@@ -291,7 +291,7 @@ class ServerConfig(
 
         lateinit var SUGAR_ENGINE_PROJECTILE_SPEED: ModConfigSpec.DoubleValue
         lateinit var SUGAR_ENGINE_RECOIL: ModConfigSpec.DoubleValue     //TODO: Let this make you fly
-        lateinit var SUGAR_ENGINE_ACCURACY: ModConfigSpec.DoubleValue
+        lateinit var SUGAR_ENGINE_INACCURACY: ModConfigSpec.DoubleValue
         lateinit var SUGAR_ENGINE_WIND_UP_TIME: ModConfigSpec.IntValue
         lateinit var SUGAR_ENGINE_DAMAGE_MINIMUM: ModConfigSpec.DoubleValue
         lateinit var SUGAR_ENGINE_DAMAGE_MAXIMUM: ModConfigSpec.DoubleValue
@@ -344,12 +344,12 @@ class ServerConfig(
         powderKnuckle()
         proximityThornThrower()
         rayOfHope()
-//        redstoneSprayer()
-//        seedSweeper()
-//        seedling()
-//        silkenSpinner()
-//        snowCannon()
-//        soulCairn()
+        redstoneSprayer()
+        seedSweeper()
+        seedling()
+        silkenSpinner()
+        snowCannon()
+        soulCairn()
 //        sugarEngine()
 //        sunray()
 //        thornSpitter()
@@ -1360,6 +1360,146 @@ class ServerConfig(
         RAY_OF_HOPE_PROJECTILE_SPEED = builder
             .comment("How fast should Ray of Hope projectiles be?")
             .defineDouble("projectile_speed", 5)
+
+        builder.pop()
+    }
+
+    private fun redstoneSprayer() {
+        builder
+            .comment("Redstone Sprayer settings")
+            .push("redstone_sprayer")
+
+        REDSTONE_SPRAYER_PROJECTILE_SPEED = builder
+            .comment("How fast should Redstone Sprayer projectiles be?")
+            .defineDouble("projectile_speed", 0.5)
+
+        REDSTONE_SPRAYER_BLINDNESS_DURATION = builder
+            .comment("How long should targets be blinded for?")
+            .defineInteger("blindness_duration", 20)
+
+        REDSTONE_SPRAYER_WITHER_DURATION = builder
+            .comment("How long should targets be withered for?")
+            .defineInteger("wither_duration", 20)
+
+        REDSTONE_SPRAYER_WITHER_STRENGTH = builder
+            .comment("How strong should the wither effect be?")
+            .defineInteger("wither_strength", 2)
+
+        builder.pop()
+    }
+
+    private fun seedSweeper() {
+        builder
+            .comment("Seed Sweeper settings")
+            .push("seed_sweeper")
+
+        SEED_SWEEPER_PROJECTILE_SPEED = builder
+            .comment("How fast should Seed Sweeper projectiles be?")
+            .defineDouble("projectile_speed", 1.6)
+
+        SEED_SWEEPER_INACCURACY = builder
+            .comment("How inaccurate should the Seed Sweeper be? 0 is perfectly accurate.")
+            .defineDouble("inaccuracy", 26)
+
+        SEED_SWEEPER_COOLDOWN = builder
+            .comment("How long should the Seed Sweeper cooldown be?")
+            .defineInteger("cooldown", 15)
+
+        SEED_SWEEPER_DAMAGE_MINIMUM = builder
+            .comment("What is the minimum damage a Seed Sweeper can deal?")
+            .defineDouble("damage_minimum", 1)
+
+        SEED_SWEEPER_DAMAGE_MAXIMUM = builder
+            .comment("What is the maximum damage a Seed Sweeper can deal?")
+            .defineDouble("damage_maximum", 1)
+
+        builder.pop()
+    }
+
+    private fun seedling() {
+        builder
+            .comment("Seedling settings")
+            .push("seedling")
+
+        SEEDLING_PROJECTILE_SPEED = builder
+            .comment("How fast should Seedling projectiles be?")
+            .defineDouble("projectile_speed", 1.3)
+
+        SEEDLING_DAMAGE_MINIMUM = builder
+            .comment("What is the minimum damage a Seedling can deal?")
+            .defineDouble("damage_minimum", 1)
+
+        SEEDLING_DAMAGE_MAXIMUM = builder
+            .comment("What is the maximum damage a Seedling can deal?")
+            .defineDouble("damage_maximum", 1)
+
+        builder.pop()
+    }
+
+    private fun silkenSpinner() {
+        builder
+            .comment("Silken Spinner settings")
+            .push("silken_spinner")
+
+        SILKEN_SPINNER_PROJECTILE_SPEED = builder
+            .comment("How fast should Silken Spinner projectiles be?")
+            .defineDouble("projectile_speed", 1.5)
+
+        SILKEN_SPINNER_COOLDOWN = builder
+            .comment("How long should the Silken Spinner cooldown be?")
+            .defineInteger("cooldown", 20)
+
+        builder.pop()
+    }
+
+    private fun snowCannon() {
+        builder
+            .comment("Snow Cannon settings")
+            .push("snow_cannon")
+
+        SNOW_CANNON_PROJECTILE_SPEED = builder
+            .comment("How fast should Snow Cannon projectiles be?")
+            .defineDouble("projectile_speed", 1.5)
+
+        SNOW_CANNON_COOLDOWN = builder
+            .comment("How long should the Snow Cannon cooldown be?")
+            .defineInteger("cooldown", 15)
+
+        SNOW_CANNON_RECOIL = builder
+            .comment("How much recoil should the Snow Cannon have?")
+            .defineDouble("recoil", 2)
+
+        SNOW_CANNON_SLOWNESS_DURATION = builder
+            .comment("How long should targets be slowed for?")
+            .defineInteger("slowness_duration", 2 * 20)
+
+        SNOW_CANNON_SLOWNESS_STRENGTH = builder
+            .comment("How strong should the slowness effect be?")
+            .defineInteger("slowness_strength", 3)
+
+        SNOW_CANNON_DAMAGE_MINIMUM = builder
+            .comment("What is the minimum damage a Snow Cannon can deal?")
+            .defineDouble("damage_minimum", 1)
+
+        SNOW_CANNON_DAMAGE_MAXIMUM = builder
+            .comment("What is the maximum damage a Snow Cannon can deal?")
+            .defineDouble("damage_maximum", 2)
+
+        builder.pop()
+    }
+
+    private fun soulCairn() {
+        builder
+            .comment("Soul Cairn settings")
+            .push("soul_cairn")
+
+        SOUL_CAIRN_PROJECTILE_SPEED = builder
+            .comment("How fast should Soul Cairn projectiles be?")
+            .defineDouble("projectile_speed", 3)
+
+        SOUL_CAIRN_RECOIL = builder
+            .comment("How much recoil should the Soul Cairn have?")
+            .defineDouble("recoil", 4)
 
         builder.pop()
     }
