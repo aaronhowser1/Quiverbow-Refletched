@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.quiverbowrefletched.entity
 import dev.aaronhowser.mods.quiverbowrefletched.item.ammo.AdvancedAmmoClipItem
 import dev.aaronhowser.mods.quiverbowrefletched.registry.ModEntityTypes
 import dev.aaronhowser.mods.quiverbowrefletched.registry.ModItems
+import dev.aaronhowser.mods.quiverbowrefletched.util.OtherUtil
 import net.minecraft.core.Direction
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.LivingEntity
@@ -45,8 +46,7 @@ class ArrowMortarProjectile(
     }
 
     private fun shootBurst(angle: Vec3) {
-        val arrowStacks = AdvancedAmmoClipItem.getAmmoStacks(arrowBundle)
-            .flatMap { ammoStack -> List(ammoStack.count) { ammoStack.copyWithCount(1) } }
+        val arrowStacks = OtherUtil.separateStacks(AdvancedAmmoClipItem.getAmmoStacks(arrowBundle))
 
         for (arrowStack in arrowStacks) {
 

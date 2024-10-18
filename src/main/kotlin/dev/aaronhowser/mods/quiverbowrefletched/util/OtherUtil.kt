@@ -45,4 +45,8 @@ object OtherUtil {
         return output
     }
 
+    fun separateStacks(input: List<ItemStack>): List<ItemStack> {
+        return input.flatMap { stack -> List(stack.count) { stack.copyWithCount(1) } }
+    }
+
 }
