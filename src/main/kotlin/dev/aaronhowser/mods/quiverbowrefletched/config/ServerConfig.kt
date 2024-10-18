@@ -253,6 +253,7 @@ class ServerConfig(
         lateinit var PROXIMITY_THORN_THROWER_LIFESPAN: ModConfigSpec.IntValue
         lateinit var PROXIMITY_THORN_THROWER_CHECK_FREQUENCY: ModConfigSpec.IntValue
         lateinit var PROXIMITY_THORN_THROWER_CHECK_RADIUS: ModConfigSpec.DoubleValue
+        lateinit var PROXIMITY_THORN_THROWER_BURST_COUNT: ModConfigSpec.IntValue
         lateinit var PROXIMITY_THORN_THROWER_COOLDOWN: ModConfigSpec.IntValue
         lateinit var PROXIMITY_THORN_THROWER_DAMAGE_MINIMUM: ModConfigSpec.DoubleValue
         lateinit var PROXIMITY_THORN_THROWER_DAMAGE_MAXIMUM: ModConfigSpec.DoubleValue
@@ -336,13 +337,13 @@ class ServerConfig(
         modifiedCoinTosser()
         modifiedPowderKnuckle()
         netherBellows()
-//        obsidianSpearRifle()
-//        obsidianSplinterPistol()
-//        obsidianWitherRifle()
-//        potatosser()
-//        powderKnuckle()
-//        proximityThornThrower()
-//        rayOfHope()
+        obsidianSpearRifle()
+        obsidianSplinterPistol()
+        obsidianWitherRifle()
+        potatosser()
+        powderKnuckle()
+        proximityThornThrower()
+        rayOfHope()
 //        redstoneSprayer()
 //        seedSweeper()
 //        seedling()
@@ -1118,7 +1119,249 @@ class ServerConfig(
     }
 
     private fun netherBellows() {
+        builder
+            .comment("Nether Bellows settings")
+            .push("nether_bellows")
 
+        NETHER_BELLOWS_PROJECTILE_SPEED = builder
+            .comment("How fast should Nether Bellows projectiles be?")
+            .defineDouble("projectile_speed", 0.75)
+
+        NETHER_BELLOWS_TARGET_BURN_TIME = builder
+            .comment("How long should targets burn for?")
+            .defineInteger("target_burn_time", 3 * 20)
+
+        NETHER_BELLOWS_DAMAGE_PER_PROJECTILE = builder
+            .comment("How much damage should each projectile deal?")
+            .defineDouble("damage_per_projectile", 1)
+
+        builder.pop()
+    }
+
+    private fun obsidianSpearRifle() {
+        builder
+            .comment("Obsidian Spear Rifle settings")
+            .push("obsidian_spear_rifle")
+
+        OBSIDIAN_SPEAR_RIFLE_PROJECTILE_SPEED = builder
+            .comment("How fast should Obsidian Spear Rifle projectiles be?")
+            .defineDouble("projectile_speed", 3)
+
+        OBSIDIAN_SPEAR_RIFLE_RECOIL = builder
+            .comment("How much recoil should the Obsidian Spear Rifle have?")
+            .defineDouble("recoil", 4)
+
+        OBSIDIAN_SPEAR_RIFLE_KNOCKBACK = builder
+            .comment("How much knockback should the Obsidian Spear Rifle have?")
+            .defineDouble("knockback", 2)
+
+        OBSIDIAN_SPEAR_RIFLE_COOLDOWN = builder
+            .comment("How long should the Obsidian Spear Rifle cooldown be?")
+            .defineInteger("cooldown", 5 * 20)
+
+        OBSIDIAN_SPEAR_RIFLE_WITHER_DURATION = builder
+            .comment("How long should targets be withered for?")
+            .defineInteger("wither_duration", 3 * 20)
+
+        OBSIDIAN_SPEAR_RIFLE_WITHER_STRENGTH = builder
+            .comment("How strong should the wither effect be?")
+            .defineInteger("wither_strength", 3)
+
+        OBSIDIAN_SPEAR_RIFLE_DAMAGE_MINIMUM = builder
+            .comment("What is the minimum damage an Obsidian Spear Rifle can deal?")
+            .defineDouble("damage_minimum", 7)
+
+        OBSIDIAN_SPEAR_RIFLE_DAMAGE_MAXIMUM = builder
+            .comment("What is the maximum damage an Obsidian Spear Rifle can deal?")
+            .defineDouble("damage_maximum", 13)
+
+        builder.pop()
+    }
+
+    private fun obsidianSplinterPistol() {
+        builder
+            .comment("Obsidian Splinter Pistol settings")
+            .push("obsidian_splinter_pistol")
+
+        OBSIDIAN_SPLINTER_PISTOL_PROJECTILE_SPEED = builder
+            .comment("How fast should Obsidian Splinter Pistol projectiles be?")
+            .defineDouble("projectile_speed", 1.7)
+
+        OBSIDIAN_SPLINTER_PISTOL_WITHER_DURATION = builder
+            .comment("How long should targets be withered for?")
+            .defineInteger("wither_duration", 3 * 20)
+
+        OBSIDIAN_SPLINTER_PISTOL_WITHER_STRENGTH = builder
+            .comment("How strong should the wither effect be?")
+            .defineInteger("wither_strength", 1)
+
+        OBSIDIAN_SPLINTER_PISTOL_COOLDOWN = builder
+            .comment("How long should the Obsidian Splinter Pistol cooldown be?")
+            .defineInteger("cooldown", 15)
+
+        OBSIDIAN_SPLINTER_PISTOL_DAMAGE_MINIMUM = builder
+            .comment("What is the minimum damage an Obsidian Splinter Pistol can deal?")
+            .defineDouble("damage_minimum", 4)
+
+        OBSIDIAN_SPLINTER_PISTOL_DAMAGE_MAXIMUM = builder
+            .comment("What is the maximum damage an Obsidian Splinter Pistol can deal?")
+            .defineDouble("damage_maximum", 8)
+
+        builder.pop()
+    }
+
+    private fun obsidianWitherRifle() {
+        builder
+            .comment("Obsidian Wither Rifle settings")
+            .push("obsidian_wither_rifle")
+
+        OBSIDIAN_WITHER_RIFLE_PROJECTILE_SPEED = builder
+            .comment("How fast should Obsidian Wither Rifle projectiles be?")
+            .defineDouble("projectile_speed", 3)
+
+        OBSIDIAN_WITHER_RIFLE_RECOIL = builder
+            .comment("How much recoil should the Obsidian Wither Rifle have?")
+            .defineDouble("recoil", 6)
+
+        OBSIDIAN_WITHER_RIFLE_KNOCKBACK = builder
+            .comment("How much knockback should the Obsidian Wither Rifle have?")
+            .defineDouble("knockback", 2)
+
+        OBSIDIAN_WITHER_RIFLE_COOLDOWN = builder
+            .comment("How long should the Obsidian Wither Rifle cooldown be?")
+            .defineInteger("cooldown", 3 * 20)
+
+        OBSIDIAN_WITHER_RIFLE_WITHER_DURATION = builder
+            .comment("How long should targets be withered for?")
+            .defineInteger("wither_duration", 3 * 20)
+
+        OBSIDIAN_WITHER_RIFLE_WITHER_STRENGTH = builder
+            .comment("How strong should the wither effect be?")
+            .defineInteger("wither_strength", 3)
+
+        OBSIDIAN_WITHER_RIFLE_DAMAGE_MINIMUM = builder
+            .comment("What is the minimum damage an Obsidian Wither Rifle can deal?")
+            .defineDouble("damage_minimum", 7)
+
+        OBSIDIAN_WITHER_RIFLE_DAMAGE_MAXIMUM = builder
+            .comment("What is the maximum damage an Obsidian Wither Rifle can deal?")
+            .defineDouble("damage_maximum", 13)
+
+        OBSIDIAN_WITHER_RIFLE_MAGIC_DAMAGE_MINIMUM = builder
+            .comment("What is the minimum magic damage an Obsidian Wither Rifle can deal?")
+            .defineDouble("magic_damage_minimum", 6)
+
+        OBSIDIAN_WITHER_RIFLE_MAGIC_DAMAGE_MAXIMUM = builder
+            .comment("What is the maximum magic damage an Obsidian Wither Rifle can deal?")
+            .defineDouble("magic_damage_maximum", 14)
+
+        builder.pop()
+    }
+
+    private fun potatosser() {
+        builder
+            .comment("Potatosser settings")
+            .push("potatosser")
+
+        POTATOSSER_DROP_POTATO_ON_MISS = builder
+            .comment("Should projectiles that miss drop Potatoes?")
+            .define("drop_potatoes", true)
+
+        POTATOSSER_PROJECTILE_SPEED = builder
+            .comment("How fast should Potatosser projectiles be?")
+            .defineDouble("projectile_speed", 1.5)
+
+        POTATOSSER_COOLDOWN = builder
+            .comment("How long should the Potatosser cooldown be?")
+            .defineInteger("cooldown", 15)
+
+        POTATOSSER_DAMAGE_MINIMUM = builder
+            .comment("What is the minimum damage each projectile should deal?")
+            .defineDouble("damage_minimum", 2)
+
+        POTATOSSER_DAMAGE_MAXIMUM = builder
+            .comment("What is the maximum damage each projectile should deal?")
+            .defineDouble("damage_maximum", 5)
+
+        builder.pop()
+    }
+
+    private fun powderKnuckle() {
+        builder
+            .comment("Powder Knuckle settings")
+            .push("powder_knuckle")
+
+        POWDER_KNUCKLE_GRIEFING = builder
+            .comment("Can the Powder Knuckle destroy terrain when used by players?")
+            .define("griefing", true)
+
+        POWDER_KNUCKLE_EXPLOSION_RADIUS = builder
+            .comment("How large should Powder Knuckle explosions be? 4 is the same as a TNT block.")
+            .defineDouble("explosion_radius", 1.5)
+
+        POWDER_KNUCKLE_DAMAGE_WHEN_FULL = builder
+            .comment("How much damage should the Powder Knuckle do when not empty?")
+            .defineDouble("damage_full", 18)
+
+        POWDER_KNUCKLE_DAMAGE_WHEN_EMPTY = builder
+            .comment("How much damage should the Powder Knuckle do when empty?")
+            .defineDouble("damage_empty", 1)
+
+        builder.pop()
+    }
+
+    private fun proximityThornThrower() {
+        builder
+            .comment("Proximity Thorn Thrower settings")
+            .push("proximity_thorn_thrower")
+
+        PROXIMITY_THORN_THROWER_PROJECTILE_SPEED = builder
+            .comment("How fast should Proximity Thorn Thrower projectiles be?")
+            .defineDouble("projectile_speed", 2)
+
+        PROXIMITY_THORN_THROWER_RECOIL = builder
+            .comment("How much recoil should the Proximity Thorn Thrower have?")
+            .defineDouble("recoil", 2)
+
+        PROXIMITY_THORN_THROWER_COOLDOWN = builder
+            .comment("How long should the Proximity Thorn Thrower cooldown be?")
+            .defineInteger("cooldown", 20)
+
+        PROXIMITY_THORN_THROWER_LIFESPAN = builder
+            .comment("How long should Proximity Thorn Thrower projectiles last?")
+            .defineInteger("lifespan", 30 * 20)
+
+        PROXIMITY_THORN_THROWER_CHECK_FREQUENCY = builder
+            .comment("How often should the Proximity Thorn Thrower check for nearby entities?")
+            .defineInteger("check_frequency", 20)
+
+        PROXIMITY_THORN_THROWER_CHECK_RADIUS = builder
+            .comment("How far should the Proximity Thorn Thrower check for nearby entities?")
+            .defineDouble("check_radius", 2)
+
+        PROXIMITY_THORN_THROWER_BURST_COUNT = builder
+            .comment("How many thorns should the Proximity Thorn Thrower shoot out?")
+            .defineInteger("burst_count", 32)
+
+        PROXIMITY_THORN_THROWER_DAMAGE_MINIMUM = builder
+            .comment("What is the minimum damage a Proximity Thorn Thrower can deal?")
+            .defineDouble("damage_minimum", 1)
+
+        PROXIMITY_THORN_THROWER_DAMAGE_MAXIMUM = builder
+            .comment("What is the maximum damage a Proximity Thorn Thrower can deal?")
+            .defineDouble("damage_maximum", 2)
+    }
+
+    private fun rayOfHope() {
+        builder
+            .comment("Ray of Hope settings")
+            .push("ray_of_hope")
+
+        RAY_OF_HOPE_PROJECTILE_SPEED = builder
+            .comment("How fast should Ray of Hope projectiles be?")
+            .defineDouble("projectile_speed", 5)
+
+        builder.pop()
     }
 
 }
