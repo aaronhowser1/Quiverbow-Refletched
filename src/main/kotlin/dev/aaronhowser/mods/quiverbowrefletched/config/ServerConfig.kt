@@ -282,6 +282,54 @@ class ServerConfig(
         lateinit var THORN_SPITTER_DAMAGE_MAXIMUM: ModConfigSpec.DoubleValue
     }
 
+    init {
+        aquaAccelerator()
+        armsAssistant()
+        arrowMortar()
+        autoCrossbow()
+        blazeCrossbow()
+        coinTosser()
+//        compactCrossbow()
+//        doubleCrossbow()
+//        dragonBox()
+//        dragonMortar()
+//        enderBow()
+//        enderRailAccelerator()
+//        enderRifle()
+//        fenFire()
+//        fireworksRocketLauncher()
+//        flintDuster()
+//        fourHeadedDragonBox()
+//        frostLancer()
+//        hiddenEnderPistol()
+//        improvedAutoCrossbow()
+//        improvedRocketLauncher()
+//        lapisCoil()
+//        lightningRed()
+//        modifiedCoinTosser()
+//        modifiedPowderKnuckle()
+//        netherBellows()
+//        obsidianSpearRifle()
+//        obsidianSplinterPistol()
+//        obsidianWitherRifle()
+//        potatOsser()
+//        powderKnuckle()
+//        proximityThornThrower()
+//        rayOfHope()
+//        redstoneSprayer()
+//        seedSweeper()
+//        seedling()
+//        silkenSpinner()
+//        snowCannon()
+//        soulCairn()
+//        sugarEngine()
+//        sunray()
+//        thornSpitter()
+
+
+        builder.build()
+    }
+
     private fun aquaAccelerator() {
         builder
             .comment("Aqua Accelerator settings")
@@ -316,7 +364,7 @@ class ServerConfig(
             .defineInRange("projectile_speed", 1.5, 0.0, Double.MAX_VALUE)
 
         ARROW_MORTAR_RECOIL = builder
-            .comment("How much recoil should Arrow Mortar have?")
+            .comment("How much recoil should the Arrow Mortar have?")
             .defineInRange("recoil", 3.0, 0.0, Double.MAX_VALUE)
 
         ARROW_MORTAR_COOLDOWN = builder
@@ -402,6 +450,26 @@ class ServerConfig(
         COIN_TOSSER_DROP_NUGGET_ON_MISS = builder
             .comment("Should projectiles that miss drop Gold Nuggets?")
             .define("drop_nuggets", true)
+
+        COIN_TOSSER_PROJECTILE_SPEED = builder
+            .comment("How fast should Coin Tosser projectiles be?")
+            .defineInRange("projectile_speed", 2.5, 0.0, Double.MAX_VALUE)
+
+        COIN_TOSSER_RECOIL = builder
+            .comment("How much recoil should the Coin Tosser have?")
+            .defineInRange("recoil", 1.0, 0.0, Double.MAX_VALUE)
+
+        COIN_TOSSER_COOLDOWN = builder
+            .comment("How long should the Coin Tosser cooldown be?")
+            .defineInRange("cooldown", 15, 0, Integer.MAX_VALUE)
+
+        COIN_TOSSER_DAMAGE_MINIMUM = builder
+            .comment("What is the minimum damage each projectile should deal?")
+            .defineInRange("damage_minimum", 1.0, 0.0, Double.MAX_VALUE)
+
+        COIN_TOSSER_DAMAGE_MAXIMUM = builder
+            .comment("What is the maximum damage each projectile should deal?")
+            .defineInRange("damage_maximum", 3.0, 0.0, Double.MAX_VALUE)
 
         builder.pop()
     }
