@@ -22,4 +22,7 @@ class QuiverBowRefletched(
 
         LOGGER.log(Level.INFO, "Hello world!")
     }
+
+    //TODO: Check old quiverbow config for features it has that we don't (like projectile speeds, knockback, cooldown, etc
+
 }
