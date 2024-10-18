@@ -323,11 +323,11 @@ class ServerConfig(
         enderBow()
         enderRailAccelerator()
         enderRifle()
-//        fenFire()
-//        fireworksRocketLauncher()
-//        flintDuster()
-//        fourHeadedDragonBox()
-//        frostLancer()
+        fenFire()
+        fireworksRocketLauncher()
+        flintDuster()
+        fourHeadedDragonBox()
+        frostLancer()
 //        hiddenEnderPistol()
 //        improvedAutoCrossbow()
 //        improvedRocketLauncher()
@@ -721,6 +721,178 @@ class ServerConfig(
         ENDER_RIFLE_DAMAGE_MAXIMUM = builder
             .comment("What is the maximum damage an Ender Rifle can deal?")
             .defineDouble("damage_maximum", 16)
+
+        builder.pop()
+    }
+
+    private fun fenFire() {
+        builder
+            .comment("Fen Fire settings")
+            .push("fen_fire")
+
+        FEN_FIRE_PROJECTILE_SPEED = builder
+            .comment("How fast should Fen Fire projectiles be?")
+            .defineDouble("projectile_speed", 1.5)
+
+        FEN_FIRE_LIGHT_LIFESPAN = builder
+            .comment("How long should the light from Fen Fire last? -1 is forever.")
+            .defineInteger("light_lifespan", -1, 0)
+
+        FEN_FIRE_TARGET_BURN_TIME = builder
+            .comment("How long should targets burn for?")
+            .defineInteger("target_burn_time", 1 * 20)
+
+        FEN_FIRE_TARGET_GLOW_TIME = builder
+            .comment("How long should targets glow for?")
+            .defineInteger("target_glow_time", 3 * 20)
+
+        FEN_FIRE_COOLDOWN = builder
+            .comment("How long should the Fen Fire cooldown be?")
+            .defineInteger("cooldown", 20)
+
+        builder.pop()
+    }
+
+    private fun fireworksRocketLauncher() {
+        builder
+            .comment("Fireworks Rocket Launcher settings")
+            .push("fireworks_rocket_launcher")
+
+        FIREWORKS_ROCKET_LAUNCHER_GRIEFING = builder
+            .comment("Can the Fireworks Rocket Launcher destroy terrain when used by players?")
+            .define("griefing", true)
+
+        FIREWORKS_ROCKET_LAUNCHER_EXPLOSION_RADIUS = builder
+            .comment("How large should Fireworks Rocket Launcher explosions be? 4 is the same as a TNT block.")
+            .defineDouble("explosion_radius", 4)
+
+        FIREWORKS_ROCKET_LAUNCHER_PROJECTILE_SPEED = builder
+            .comment("How fast should Fireworks Rocket Launcher projectiles be?")
+            .defineDouble("projectile_speed", 2)
+
+        FIREWORKS_ROCKET_LAUNCHER_RECOIL = builder
+            .comment("How much recoil should the Fireworks Rocket Launcher have?")
+            .defineDouble("recoil", 3)
+
+        FIREWORKS_ROCKET_LAUNCHER_COOLDOWN = builder
+            .comment("How long should the Fireworks Rocket Launcher cooldown be?")
+            .defineInteger("cooldown", 20)
+
+        FIREWORKS_ROCKET_LAUNCHER_TIME_UNTIL_EXPLODE = builder
+            .comment("How long can rockets fly before exploding??")
+            .defineInteger("time_until_explode", 20)
+
+        builder.pop()
+    }
+
+    private fun flintDuster() {
+        builder
+            .comment("Flint Duster settings")
+            .push("flint_duster")
+
+        FLINT_DUSTER_RANGE = builder
+            .comment("How far should the Flint Duster reach?")
+            .defineDouble("range", 7)
+
+        FLINT_DUSTER_DAMAGE = builder
+            .comment("How much damage should the Flint Duster deal?")
+            .defineDouble("damage", 1)
+
+        builder.pop()
+    }
+
+    private fun fourHeadedDragonBox() {
+        builder
+            .comment("Four Headed Dragon Box settings")
+            .push("four_headed_dragon_box")
+
+        FOUR_HEADED_DRAGON_BOX_GRIEFING = builder
+            .comment("Can the Four Headed Dragon Box destroy terrain when used by players?")
+            .define("griefing", true)
+
+        FOUR_HEADED_DRAGON_BOX_EXPLOSION_RADIUS = builder
+            .comment("How large should Four Headed Dragon Box explosions be? 4 is the same as a TNT block.")
+            .defineDouble("explosion_radius", 1)
+
+        FOUR_HEADED_DRAGON_BOX_PROJECTILE_SPEED = builder
+            .comment("How fast should Four Headed Dragon Box projectiles be?")
+            .defineDouble("projectile_speed", 1.3)
+
+        FOUR_HEADED_DRAGON_BOX_RECOIL = builder
+            .comment("How much recoil should the Four Headed Dragon Box have?")
+            .defineDouble("recoil", 1)
+
+        FOUR_HEADED_DRAGON_BOX_KNOCKBACK = builder
+            .comment("How much knockback should the Four Headed Dragon Box have?")
+            .defineDouble("knockback", 2)
+
+        FOUR_HEADED_DRAGON_BOX_TARGET_BURN_TIME = builder
+            .comment("How long should targets burn for?")
+            .defineInteger("target_burn_time", 6 * 20)
+
+        FOUR_HEADED_DRAGON_BOX_COOLDOWN = builder
+            .comment("How long should the Four Headed Dragon Box cooldown be?")
+            .defineInteger("cooldown", 10)
+
+        FOUR_HEADED_DRAGON_BOX_DAMAGE_MINIMUM = builder
+            .comment("What is the minimum damage a Four Headed Dragon Box can deal?")
+            .defineDouble("damage_minimum", 4)
+
+        FOUR_HEADED_DRAGON_BOX_DAMAGE_MAXIMUM = builder
+            .comment("What is the maximum damage a Four Headed Dragon Box can deal?")
+            .defineDouble("damage_maximum", 6)
+
+        builder.pop()
+    }
+
+    private fun frostLancer() {
+        builder
+            .comment("Frost Lancer settings")
+            .push("frost_lancer")
+
+        FROST_LANCER_ZOOM_FACTOR = builder
+            .comment("What should the zoom factor be for the Frost Lancer? Your FOV is multiplied by this value.")
+            .defineDouble("zoom_factor", 0.2)
+
+        FROST_LANCER_PROJECTILE_SPEED = builder
+            .comment("How fast should Frost Lancer projectiles be?")
+            .defineDouble("projectile_speed", 3.5)
+
+        FROST_LANCER_RECOIL = builder
+            .comment("How much recoil should the Frost Lancer have?")
+            .defineDouble("recoil", 4)
+
+        FROST_LANCER_KNOCKBACK = builder
+            .comment("How much knockback should the Frost Lancer have?")
+            .defineDouble("knockback", 3)
+
+        FROST_LANCER_COOLDOWN = builder
+            .comment("How long should the Frost Lancer cooldown be?")
+            .defineInteger("cooldown", 40)
+
+        FROST_LANCER_NAUSEA_DURATION = builder
+            .comment("How long should targets be nauseated for?")
+            .defineInteger("nausea_duration", 6 * 20)
+
+        FROST_LANCER_SLOWNESS_DURATION = builder
+            .comment("How long should targets be slowed for?")
+            .defineInteger("slowness_duration", 6 * 20)
+
+        FROST_LANCER_SLOWNESS_STRENGTH = builder
+            .comment("How strong should the slowness effect be?")
+            .defineInteger("slowness_strength", 3)
+
+        FROST_LANCER_FREEZING_DURATION = builder
+            .comment("How long should targets be chilled for?")
+            .defineInteger("freezing_duration", 6 * 20)
+
+        FROST_LANCER_DAMAGE_MINIMUM = builder
+            .comment("What is the minimum damage a Frost Lancer can deal?")
+            .defineDouble("damage_minimum", 9)
+
+        FROST_LANCER_DAMAGE_MAXIMUM = builder
+            .comment("What is the maximum damage a Frost Lancer can deal?")
+            .defineDouble("damage_maximum", 18)
 
         builder.pop()
     }
