@@ -84,13 +84,13 @@ object ModItems {
     val POTATOSSER =
         register("potatosser") { GenericAmmoHoldingItem(maxAmmo = 14) }
     val SNOW_CANNON =
-        register("snow_cannon") { GenericAmmoHoldingItem(maxAmmo = 64) }
+        register("snow_cannon") { SnowCannon() }
     val BOW_WITH_QUIVER: DeferredItem<BowWithQuiver> =
         register("bow_with_quiver") { BowWithQuiver() }
     val ENDER_BOW: DeferredItem<EnderBow> =
         register("ender_bow") { EnderBow() }
-    val ENDER_RIFLE: DeferredItem<BasicAmmoUsingProjectileWeapon> =
-        register("ender_rifle") { BasicAmmoUsingProjectileWeapon.ENDER_RIFLE }
+    val ENDER_RIFLE: DeferredItem<ReloadableWeaponItem> =
+        register("ender_rifle") { ReloadableWeaponItem.ENDER_RIFLE }
     val FROST_LANCER =
         register("frost_lancer") { GenericAmmoHoldingItem(maxAmmo = 4) }
     val OBSIDIAN_SPLINTER_PISTOL =
@@ -99,8 +99,8 @@ object ModItems {
         register("obsidian_spear_rifle") { GenericAmmoHoldingItem(maxAmmo = 16) }
     val OBSIDIAN_WITHER_RIFLE =
         register("obsidian_wither_rifle") { GenericAmmoHoldingItem(maxAmmo = 16) }
-    val FEN_FIRE: DeferredItem<BasicAmmoUsingProjectileWeapon> =
-        register("fen_fire") { BasicAmmoUsingProjectileWeapon.FEN_FIRE }
+    val FEN_FIRE: DeferredItem<ReloadableWeaponItem> =
+        register("fen_fire") { ReloadableWeaponItem.FEN_FIRE }
     val FLINT_DUSTER: DeferredItem<FlintDuster> =
         register("flint_duster") { FlintDuster() }
     val LIGHTNING_RED =
@@ -119,8 +119,8 @@ object ModItems {
         register("soul_cairn") { GenericAmmoHoldingItem(maxAmmo = 1) }
     val AQUA_ACCELERATOR: DeferredItem<AquaAccelerator> =
         register("aqua_accelerator") { AquaAccelerator() }
-    val SILKEN_SPINNER: DeferredItem<BasicAmmoUsingProjectileWeapon> =
-        register("silken_spinner") { BasicAmmoUsingProjectileWeapon.SILKEN_SPINNER }
+    val SILKEN_SPINNER: DeferredItem<ReloadableWeaponItem> =
+        register("silken_spinner") { ReloadableWeaponItem.SILKEN_SPINNER }
     val SEED_SWEEPER =
         register("seed_sweeper") { GenericAmmoHoldingItem(maxAmmo = 512) }
     val RAY_OF_HOPE =

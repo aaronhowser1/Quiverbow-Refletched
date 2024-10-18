@@ -18,9 +18,9 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
 import net.minecraft.world.level.Level
 
-class BasicAmmoUsingProjectileWeapon(
-    private val projectileSupplier: (Player) -> Projectile,
-    private val reloadItems: Map<Item, Int>,
+open class ReloadableWeaponItem(
+    protected val projectileSupplier: (Player) -> Projectile,
+    protected val reloadItems: Map<Item, Int>,
     maxAmmo: Int,
     barColor: Int
 ) : BasicAmmoHoldingItem(
@@ -90,21 +90,21 @@ class BasicAmmoUsingProjectileWeapon(
     }
 
     companion object {
-        val SILKEN_SPINNER = BasicAmmoUsingProjectileWeapon(
+        val SILKEN_SPINNER = ReloadableWeaponItem(
             projectileSupplier = ::SilkenSpinnerProjectile,
             reloadItems = mapOf(Items.COBWEB to 1),
             maxAmmo = 8,
             barColor = 0x999999
         )
 
-        val FEN_FIRE = BasicAmmoUsingProjectileWeapon(
+        val FEN_FIRE = ReloadableWeaponItem(
             projectileSupplier = ::FenFireProjectile,
             reloadItems = mapOf(Items.GLOWSTONE to 4, Items.GLOWSTONE_DUST to 1),
             maxAmmo = 32,
             barColor = 0xFFA500
         )
 
-        val ENDER_RIFLE = BasicAmmoUsingProjectileWeapon(
+        val ENDER_RIFLE = ReloadableWeaponItem(
             projectileSupplier = ::EnderRifleRoundProjectile,   //TODO: increase velocity a lot
             reloadItems = mapOf(Items.IRON_INGOT to 1),
             maxAmmo = 16,
