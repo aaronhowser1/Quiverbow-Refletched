@@ -189,7 +189,7 @@ class ServerConfig(
         lateinit var LIGHTNING_RED_PROJECTILE_SPEED: ModConfigSpec.DoubleValue
         lateinit var LIGHTNING_RED_RECOIL: ModConfigSpec.DoubleValue
         lateinit var LIGHTNING_RED_COOLDOWN: ModConfigSpec.IntValue
-        lateinit var LIGHTNING_RED_BEAM_DURATION: ModConfigSpec.IntValue
+        lateinit var LIGHTNING_RED_BEAM_MAX_DURATION: ModConfigSpec.IntValue
         lateinit var LIGHTNING_RED_PIERCING_AMOUNT: ModConfigSpec.IntValue
         lateinit var LIGHTNING_RED_DAMAGE_MINIMUM: ModConfigSpec.DoubleValue
         lateinit var LIGHTNING_RED_DAMAGE_MAXIMUM: ModConfigSpec.DoubleValue
@@ -197,14 +197,14 @@ class ServerConfig(
         lateinit var MODIFIED_COIN_TOSSER_DROP_NUGGET_ON_MISS: ModConfigSpec.BooleanValue
         lateinit var MODIFIED_COIN_TOSSER_PROJECTILE_SPEED: ModConfigSpec.DoubleValue
         lateinit var MODIFIED_COIN_TOSSER_RECOIL: ModConfigSpec.DoubleValue
-        lateinit var MODIFIED_COIN_TOSSER_COOLDOWN: ModConfigSpec.DoubleValue
+        lateinit var MODIFIED_COIN_TOSSER_COOLDOWN: ModConfigSpec.IntValue
         lateinit var MODIFIED_COIN_TOSSER_DAMAGE_MINIMUM: ModConfigSpec.DoubleValue
         lateinit var MODIFIED_COIN_TOSSER_DAMAGE_MAXIMUM: ModConfigSpec.DoubleValue
 
         lateinit var MODIFIED_POWDER_KNUCKLE_GRIEFING: ModConfigSpec.BooleanValue
         lateinit var MODIFIED_POWDER_KNUCKLE_EXPLOSION_RADIUS: ModConfigSpec.DoubleValue
-        lateinit var MODIFIED_POWDER_KNUCKLE_DAMAGE_MINIMUM: ModConfigSpec.DoubleValue
-        lateinit var MODIFIED_POWDER_KNUCKLE_DAMAGE_MAXIMUM: ModConfigSpec.DoubleValue
+        lateinit var MODIFIED_POWDER_KNUCKLE_DAMAGE_WHEN_EMPTY: ModConfigSpec.DoubleValue
+        lateinit var MODIFIED_POWDER_KNUCKLE_DAMAGE_WHEN_FULL: ModConfigSpec.DoubleValue
 
         lateinit var NETHER_BELLOWS_TARGET_BURN_TIME: ModConfigSpec.IntValue
         lateinit var NETHER_BELLOWS_PROJECTILE_SPEED: ModConfigSpec.DoubleValue
@@ -245,8 +245,8 @@ class ServerConfig(
 
         lateinit var POWDER_KNUCKLE_GRIEFING: ModConfigSpec.BooleanValue
         lateinit var POWDER_KNUCKLE_EXPLOSION_RADIUS: ModConfigSpec.DoubleValue
-        lateinit var POWDER_KNUCKLE_DAMAGE_ON_EXPLODE: ModConfigSpec.DoubleValue
         lateinit var POWDER_KNUCKLE_DAMAGE_WHEN_EMPTY: ModConfigSpec.DoubleValue
+        lateinit var POWDER_KNUCKLE_DAMAGE_WHEN_FULL: ModConfigSpec.DoubleValue
 
         lateinit var PROXIMITY_THORN_THROWER_PROJECTILE_SPEED: ModConfigSpec.DoubleValue
         lateinit var PROXIMITY_THORN_THROWER_RECOIL: ModConfigSpec.DoubleValue
@@ -328,18 +328,18 @@ class ServerConfig(
         flintDuster()
         fourHeadedDragonBox()
         frostLancer()
-//        hiddenEnderPistol()
-//        improvedAutoCrossbow()
-//        improvedRocketLauncher()
-//        lapisCoil()
-//        lightningRed()
-//        modifiedCoinTosser()
-//        modifiedPowderKnuckle()
-//        netherBellows()
+        hiddenEnderPistol()
+        improvedAutoCrossbow()
+        improvedRocketLauncher()
+        lapisCoil()
+        lightningRed()
+        modifiedCoinTosser()
+        modifiedPowderKnuckle()
+        netherBellows()
 //        obsidianSpearRifle()
 //        obsidianSplinterPistol()
 //        obsidianWitherRifle()
-//        potatOsser()
+//        potatosser()
 //        powderKnuckle()
 //        proximityThornThrower()
 //        rayOfHope()
@@ -895,6 +895,230 @@ class ServerConfig(
             .defineDouble("damage_maximum", 18)
 
         builder.pop()
+    }
+
+    private fun hiddenEnderPistol() {
+        builder
+            .comment("Hidden Ender Pistol settings")
+            .push("hidden_ender_pistol")
+
+        HIDDEN_ENDER_PISTOL_PROJECTILE_SPEED = builder
+            .comment("How fast should Hidden Ender Pistol projectiles be?")
+            .defineDouble("projectile_speed", 5)
+
+        HIDDEN_ENDER_PISTOL_RECOIL = builder
+            .comment("How much recoil should the Hidden Ender Pistol have?")
+            .defineDouble("recoil", 1)
+
+        HIDDEN_ENDER_PISTOL_PROJECTILE_LIFESPAN = builder
+            .comment("How long should Hidden Ender Pistol projectiles last?")
+            .defineInteger("projectile_lifespan", 40)
+
+        HIDDEN_ENDER_PISTOL_COOLDOWN = builder
+            .comment("How long should the Hidden Ender Pistol cooldown be?")
+            .defineInteger("cooldown", 20)
+
+        HIDDEN_ENDER_PISTOL_DAMAGE_MINIMUM = builder
+            .comment("What is the minimum damage a Hidden Ender Pistol can deal?")
+            .defineDouble("damage_minimum", 16)
+
+        HIDDEN_ENDER_PISTOL_DAMAGE_MAXIMUM = builder
+            .comment("What is the maximum damage a Hidden Ender Pistol can deal?")
+            .defineDouble("damage_maximum", 24)
+
+        builder.pop()
+    }
+
+    private fun improvedAutoCrossbow() {
+        builder
+            .comment("Improved Auto Crossbow settings")
+            .push("improved_auto_crossbow")
+
+        IMPROVED_AUTO_CROSSBOW_PROJECTILE_SPEED = builder
+            .comment("How fast should Improved Auto Crossbow projectiles be?")
+            .defineDouble("projectile_speed", 2.5)
+
+        IMPROVED_AUTO_CROSSBOW_KNOCKBACK = builder
+            .comment("How much knockback should the Improved Auto Crossbow have?")
+            .defineDouble("knockback", 1)
+
+        IMPROVED_AUTO_CROSSBOW_COOLDOWN = builder
+            .comment("How long should the Improved Auto Crossbow cooldown be?")
+            .defineInteger("cooldown", 8)
+
+        IMPROVED_AUTO_CROSSBOW_DAMAGE_MINIMUM = builder
+            .comment("What is the minimum damage an Improved Auto Crossbow can deal?")
+            .defineDouble("damage_minimum", 10)
+
+        IMPROVED_AUTO_CROSSBOW_DAMAGE_MAXIMUM = builder
+            .comment("What is the maximum damage an Improved Auto Crossbow can deal?")
+            .defineDouble("damage_maximum", 16)
+
+        builder.pop()
+    }
+
+    private fun improvedRocketLauncher() {
+        builder
+            .comment("Improved Rocket Launcher settings")
+            .push("improved_rocket_launcher")
+
+        IMPROVED_ROCKET_LAUNCHER_GRIEFING = builder
+            .comment("Can the Improved Rocket Launcher destroy terrain when used by players?")
+            .define("griefing", true)
+
+        IMPROVED_ROCKET_LAUNCHER_EXPLOSION_RADIUS = builder
+            .comment("How large should Improved Rocket Launcher explosions be? 4 is the same as a TNT block.")
+            .defineDouble("explosion_radius", 4)
+
+        IMPROVED_ROCKET_LAUNCHER_PROJECTILE_SPEED = builder
+            .comment("How fast should Improved Rocket Launcher projectiles be?")
+            .defineDouble("projectile_speed", 2)
+
+        IMPROVED_ROCKET_LAUNCHER_RECOIL = builder
+            .comment("How much recoil should the Improved Rocket Launcher have?")
+            .defineDouble("recoil", 3)
+
+        builder.pop()
+    }
+
+    private fun lapisCoil() {
+        builder
+            .comment("Lapis Coil settings")
+            .push("lapis_coil")
+
+        LAPIS_COIL_PROJECTILE_SPEED = builder
+            .comment("How fast should Lapis Coil projectiles be?")
+            .defineDouble("projectile_speed", 2.5)
+
+        LAPIS_COIL_HUNGER_DURATION = builder
+            .comment("How long should targets be hungry for?")
+            .defineInteger("hunger_duration", 2 * 20)
+
+        LAPIS_COIL_NAUSEA_DURATION = builder
+            .comment("How long should targets be nauseated for?")
+            .defineInteger("nausea_duration", 2 * 20)
+
+        LAPIS_COIL_WEAKNESS_DURATION = builder
+            .comment("How long should targets be weakened for?")
+            .defineInteger("weakness_duration", 2 * 20)
+
+        LAPIS_COIL_HUNGER_STRENGTH = builder
+            .comment("How strong should the hunger effect be?")
+            .defineInteger("hunger_strength", 2)
+
+        LAPIS_COIL_WEAKNESS_STRENGTH = builder
+            .comment("How strong should the weakness effect be?")
+            .defineInteger("weakness_strength", 2)
+
+        LAPIS_COIL_COOLDOWN = builder
+            .comment("How long should the Lapis Coil cooldown be?")
+            .defineInteger("cooldown", 20)  //TODO: Check
+
+        LAPIS_COIL_DAMAGE_MINIMUM = builder
+            .comment("What is the minimum damage a Lapis Coil can deal?")
+            .defineDouble("damage_minimum", 1)
+
+        LAPIS_COIL_DAMAGE_MAXIMUM = builder
+            .comment("What is the maximum damage a Lapis Coil can deal?")
+            .defineDouble("damage_maximum", 3)
+
+        builder.pop()
+    }
+
+    private fun lightningRed() {
+        builder
+            .comment("Lightning Red settings")
+            .push("lightning_red")
+
+        LIGHTNING_RED_PROJECTILE_SPEED = builder
+            .comment("How fast should Lightning Red projectiles be?")
+            .defineDouble("projectile_speed", 5)
+
+        LIGHTNING_RED_RECOIL = builder
+            .comment("How much recoil should the Lightning Red have?")
+            .defineDouble("recoil", 3)
+
+        LIGHTNING_RED_BEAM_MAX_DURATION = builder
+            .comment("How long should the Lightning Red beam last at max?")
+            .defineInteger("beam_duration", 3 * 20)
+
+        LIGHTNING_RED_PIERCING_AMOUNT = builder
+            .comment("How many blocks and entities should the Lightning Red pierce through?")
+            .defineInteger("piercing_amount", 5)
+
+        LIGHTNING_RED_COOLDOWN = builder
+            .comment("How long should the Lightning Red cooldown be?")
+            .defineInteger("cooldown", 2 * 20)
+
+        LIGHTNING_RED_DAMAGE_MINIMUM = builder
+            .comment("What is the minimum damage a Lightning Red can deal?")
+            .defineDouble("damage_minimum", 8)
+
+        LIGHTNING_RED_DAMAGE_MAXIMUM = builder
+            .comment("What is the maximum damage a Lightning Red can deal?")
+            .defineDouble("damage_maximum", 16)
+
+        builder.pop()
+    }
+
+    private fun modifiedCoinTosser() {
+        builder
+            .comment("Modified Coin Tosser settings")
+            .push("modified_coin_tosser")
+
+        MODIFIED_COIN_TOSSER_DROP_NUGGET_ON_MISS = builder
+            .comment("Should projectiles that miss drop Gold Nuggets?")
+            .define("drop_nuggets", true)
+
+        MODIFIED_COIN_TOSSER_PROJECTILE_SPEED = builder
+            .comment("How fast should Modified Coin Tosser projectiles be?")
+            .defineDouble("projectile_speed", 2.5)
+
+        MODIFIED_COIN_TOSSER_RECOIL = builder
+            .comment("How much recoil should the Modified Coin Tosser have?")
+            .defineDouble("recoil", 1)
+
+        MODIFIED_COIN_TOSSER_COOLDOWN = builder
+            .comment("How much cooldown should the Modified Coin Tosser have?")
+            .defineInteger("cooldown", 15)
+
+        MODIFIED_COIN_TOSSER_DAMAGE_MINIMUM = builder
+            .comment("What is the minimum damage each projectile should deal?")
+            .defineDouble("damage_minimum", 8)
+
+        MODIFIED_COIN_TOSSER_DAMAGE_MAXIMUM = builder
+            .comment("What is the maximum damage each projectile should deal?")
+            .defineDouble("damage_maximum", 16)
+
+        builder.pop()
+    }
+
+    private fun modifiedPowderKnuckle() {
+        builder
+            .comment("Modified Power Knuckle settings")
+            .push("modified_power_knuckle")
+
+        MODIFIED_POWDER_KNUCKLE_GRIEFING = builder
+            .comment("Can the Modified Powder Knuckle destroy terrain when used by players?")
+            .define("griefing", true)
+
+        MODIFIED_POWDER_KNUCKLE_EXPLOSION_RADIUS = builder
+            .comment("How large should Modified Powder Knuckle explosions be? 4 is the same as a TNT block.")
+            .defineDouble("explosion_radius", 1.5)
+
+        MODIFIED_POWDER_KNUCKLE_DAMAGE_WHEN_FULL = builder
+            .comment("How much damage should the Modified Powder Knuckle do when not empty?")
+            .defineDouble("damage_full", 14)
+
+        MODIFIED_POWDER_KNUCKLE_DAMAGE_WHEN_EMPTY = builder
+            .comment("How much damage should the Modified Powder Knuckle do when empty?")
+            .defineDouble("damage_empty", 2)
+
+        builder.pop()
+    }
+
+    private fun netherBellows() {
+
     }
 
 }
