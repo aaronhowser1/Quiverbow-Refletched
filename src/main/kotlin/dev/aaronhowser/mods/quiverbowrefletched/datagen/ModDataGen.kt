@@ -4,6 +4,7 @@ import dev.aaronhowser.mods.quiverbowrefletched.QuiverBowRefletched
 import dev.aaronhowser.mods.quiverbowrefletched.datagen.model.ModBlockStateProvider
 import dev.aaronhowser.mods.quiverbowrefletched.datagen.model.ModItemModelProvider
 import dev.aaronhowser.mods.quiverbowrefletched.datagen.tag.ModBlockTagsProvider
+import dev.aaronhowser.mods.quiverbowrefletched.datagen.tag.ModEntityTypeTagsProvider
 import dev.aaronhowser.mods.quiverbowrefletched.datagen.tag.ModItemTagsProvider
 import net.minecraft.core.HolderLookup
 import net.minecraft.data.DataGenerator
@@ -51,6 +52,11 @@ object ModDataGen {
         val itemTagsProvider = generator.addProvider(
             event.includeServer(),
             ModItemTagsProvider(output, lookupProvider, blockTagsProvider.contentsGetter(), existingFileHelper)
+        )
+
+        val entityTypeTagProvider = generator.addProvider(
+            event.includeServer(),
+            ModEntityTypeTagsProvider(output, lookupProvider, existingFileHelper)
         )
 
     }
