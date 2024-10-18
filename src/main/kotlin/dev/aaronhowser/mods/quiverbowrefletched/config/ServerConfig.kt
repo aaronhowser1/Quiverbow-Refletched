@@ -64,7 +64,7 @@ class ServerConfig(
 
         lateinit var DOUBLE_CROSSBOW_PROJECTILE_SPEED: ModConfigSpec.DoubleValue
         lateinit var DOUBLE_CROSSBOW_KNOCKBACK: ModConfigSpec.DoubleValue
-        lateinit var DOUBLE_CROSSBOW_COOLDOWN: ModConfigSpec.DoubleValue
+        lateinit var DOUBLE_CROSSBOW_COOLDOWN: ModConfigSpec.IntValue
         lateinit var DOUBLE_CROSSBOW_DAMAGE_MINIMUM: ModConfigSpec.DoubleValue
         lateinit var DOUBLE_CROSSBOW_DAMAGE_MAXIMUM: ModConfigSpec.DoubleValue
 
@@ -303,10 +303,10 @@ class ServerConfig(
         autoCrossbow()
         blazeCrossbow()
         coinTosser()
-//        compactCrossbow()
-//        doubleCrossbow()
-//        dragonBox()
-//        dragonMortar()
+        compactCrossbow()
+        doubleCrossbow()
+        dragonBox()
+        dragonMortar()
 //        enderBow()
 //        enderRailAccelerator()
 //        enderRifle()
@@ -508,6 +508,114 @@ class ServerConfig(
         COMPACT_CROSSBOW_DAMAGE_MAXIMUM = builder
             .comment("What is the maximum damage a Compact Crossbow can deal?")
             .defineDouble("damage_maximum", 20)
+
+        builder.pop()
+    }
+
+    private fun doubleCrossbow() {
+        builder
+            .comment("Double Crossbow settings")
+            .push("double_crossbow")
+
+        DOUBLE_CROSSBOW_PROJECTILE_SPEED = builder
+            .comment("How fast should Double Crossbow projectiles be?")
+            .defineDouble("projectile_speed", 2.5)
+
+        DOUBLE_CROSSBOW_KNOCKBACK = builder
+            .comment("How much knockback should the Double Crossbow have?")
+            .defineDouble("knockback", 2)
+
+        DOUBLE_CROSSBOW_COOLDOWN = builder
+            .comment("How long should the Double Crossbow cooldown be?")
+            .defineInRange("cooldown", 25, 0, Integer.MAX_VALUE)
+
+        DOUBLE_CROSSBOW_DAMAGE_MINIMUM = builder
+            .comment("What is the minimum damage a Double Crossbow can deal?")
+            .defineDouble("damage_minimum", 14)
+
+        DOUBLE_CROSSBOW_DAMAGE_MAXIMUM = builder
+            .comment("What is the maximum damage a Double Crossbow can deal?")
+            .defineDouble("damage_maximum", 20)
+
+        builder.pop()
+    }
+
+    private fun dragonBox() {
+        builder
+            .comment("Dragon Box settings")
+            .push("dragon_box")
+
+        DRAGON_BOX_GRIEFING = builder
+            .comment("Can the Dragon Box destroy terrain when used by players?")
+            .define("griefing", true)
+
+        DRAGON_BOX_EXPLOSION_RADIUS = builder
+            .comment("How large should Dragon Box explosions be? 4 is the same as a TNT block.")
+            .defineDouble("explosion_radius", 1)
+
+        DRAGON_BOX_PROJECTILE_SPEED = builder
+            .comment("How fast should Dragon Box projectiles be?")
+            .defineDouble("projectile_speed", 1.3)
+
+        DRAGON_BOX_RECOIL = builder
+            .comment("How much recoil should the Dragon Box have?")
+            .defineDouble("recoil", 1)
+
+        DRAGON_BOX_KNOCKBACK = builder
+            .comment("How much knockback should the Dragon Box have?")
+            .defineDouble("knockback", 2)
+
+        DRAGON_BOX_TARGET_BURN_TIME = builder
+            .comment("How long should targets burn for?")
+            .defineInRange("target_burn_time", 6 * 20, 0, Integer.MAX_VALUE)
+
+        DRAGON_BOX_COOLDOWN = builder
+            .comment("How long should the Dragon Box cooldown be?")
+            .defineInRange("cooldown", 10, 0, Integer.MAX_VALUE)
+
+        DRAGON_BOX_DAMAGE_MINIMUM = builder
+            .comment("What is the minimum damage a Dragon Box can deal?")
+            .defineDouble("damage_minimum", 4)
+
+        DRAGON_BOX_DAMAGE_MAXIMUM = builder
+            .comment("What is the maximum damage a Dragon Box can deal?")
+            .defineDouble("damage_maximum", 6)
+
+        builder.pop()
+    }
+
+    private fun dragonMortar() {
+        builder
+            .comment("Dragon Mortar settings")
+            .push("dragon_mortar")
+
+        DRAGON_MORTAR_EXPLOSION_RADIUS = builder
+            .comment("How large should Dragon Mortar explosions be? 4 is the same as a TNT block.")
+            .defineDouble("explosion_radius", 1)
+
+        DRAGON_MORTAR_PROJECTILE_SPEED = builder
+            .comment("How fast should Dragon Mortar projectiles be?")
+            .defineDouble("projectile_speed", 1.5)
+
+        DRAGON_MORTAR_RECOIL = builder
+            .comment("How much recoil should the Dragon Mortar have?")
+            .defineDouble("recoil", 3)
+
+        DRAGON_MORTAR_TARGET_BURN_TIME = builder
+            .comment("How long should targets burn for?")
+            .defineInRange("target_burn_time", 6 * 20, 0, Integer.MAX_VALUE)
+
+        DRAGON_MORTAR_COOLDOWN = builder
+            .comment("How long should the Dragon Mortar cooldown be?")
+            .defineInRange("cooldown", 20, 0, Integer.MAX_VALUE)
+
+        DRAGON_MORTAR_DAMAGE_MINIMUM = builder
+            .comment("What is the minimum damage a Dragon Mortar can deal?")
+            .defineDouble("damage_minimum", 4)
+
+        DRAGON_MORTAR_DAMAGE_MAXIMUM = builder
+            .comment("What is the maximum damage a Dragon Mortar can deal?")
+            .defineDouble("damage_maximum", 6)
 
         builder.pop()
     }
