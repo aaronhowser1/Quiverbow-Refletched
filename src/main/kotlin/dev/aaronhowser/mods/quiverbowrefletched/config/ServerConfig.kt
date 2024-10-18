@@ -10,6 +10,20 @@ class ServerConfig(
     companion object {
         private val configPair: Pair<ServerConfig, ModConfigSpec> = ModConfigSpec.Builder().configure(::ServerConfig)
 
+        private fun ModConfigSpec.Builder.defineDouble(
+            name: String,
+            defaultValue: Number,
+            minValue: Number = 0.0,
+            maxValue: Number = Double.MAX_VALUE
+        ): ModConfigSpec.DoubleValue {
+            return this.defineInRange(
+                name,
+                defaultValue.toDouble(),
+                minValue.toDouble(),
+                maxValue.toDouble()
+            )
+        }
+
         val CONFIG: ServerConfig = configPair.left
         val CONFIG_SPEC: ModConfigSpec = configPair.right
 
@@ -337,7 +351,7 @@ class ServerConfig(
 
         AQUA_ACCELERATOR_PROJECTILE_SPEED = builder
             .comment("How fast should Aqua Accelerator projectiles travel?")
-            .defineInRange("projectile_speed", 1.5, 0.0, Double.MAX_VALUE)
+            .defineDouble("projectile_speed", 1.5)
 
         builder.pop()
     }
@@ -349,7 +363,7 @@ class ServerConfig(
 
         ARMS_ASSIStANT_RANGE = builder
             .comment("Arms Assistant range")
-            .defineInRange("range", 32.0, 0.0, Double.MAX_VALUE)
+            .defineDouble("range", 32)
 
         builder.pop()
     }
@@ -361,11 +375,11 @@ class ServerConfig(
 
         ARROW_MORTAR_PROJECTILE_SPEED = builder
             .comment("How fast should Arrow Mortar projectiles travel?")
-            .defineInRange("projectile_speed", 1.5, 0.0, Double.MAX_VALUE)
+            .defineDouble("projectile_speed", 1.5)
 
         ARROW_MORTAR_RECOIL = builder
             .comment("How much recoil should the Arrow Mortar have?")
-            .defineInRange("recoil", 3.0, 0.0, Double.MAX_VALUE)
+            .defineDouble("recoil", 3)
 
         ARROW_MORTAR_COOLDOWN = builder
             .comment("How long should the Arrow Mortar cooldown be?")
@@ -373,11 +387,11 @@ class ServerConfig(
 
         ARROW_MORTAR_DAMAGE_MINIMUM = builder
             .comment("What is the minimum damage Arrow Mortar can deal?")
-            .defineInRange("damage_minimum", 2.0, 0.0, Double.MAX_VALUE)
+            .defineDouble("damage_minimum", 2)
 
         ARROW_MORTAR_DAMAGE_MAXIMUM = builder
             .comment("What is the maximum damage Arrow Mortar can deal?")
-            .defineInRange("damage_maximum", 10.0, 0.0, Double.MAX_VALUE)
+            .defineDouble("damage_maximum", 10)
 
         builder.pop()
     }
@@ -389,11 +403,11 @@ class ServerConfig(
 
         AUTO_CROSSBOW_PROJECTILE_SPEED = builder
             .comment("How fast should Auto Crossbow projectiles travel?")
-            .defineInRange("projectile_speed", 2.5, 0.0, Double.MAX_VALUE)
+            .defineDouble("projectile_speed", 2.5)
 
         AUTO_CROSSBOW_KNOCKBACK = builder
             .comment("How much knockback should the Auto Crossbow have?")
-            .defineInRange("recoil", 1.0, 0.0, Double.MAX_VALUE)
+            .defineDouble("recoil", 1)
 
         AUTO_CROSSBOW_COOLDOWN = builder
             .comment("How long should the Auto Crossbow cooldown be?")
@@ -401,11 +415,11 @@ class ServerConfig(
 
         AUTO_CROSSBOW_DAMAGE_MINIMUM = builder
             .comment("What is the minimum damage Auto Crossbow can deal?")
-            .defineInRange("damage_minimum", 10.0, 0.0, Double.MAX_VALUE)
+            .defineDouble("damage_minimum", 10)
 
         AUTO_CROSSBOW_DAMAGE_MAXIMUM = builder
             .comment("What is the maximum damage Auto Crossbow can deal?")
-            .defineInRange("damage_maximum", 16.0, 0.0, Double.MAX_VALUE)
+            .defineDouble("damage_maximum", 16)
 
         builder.pop()
     }
@@ -417,11 +431,11 @@ class ServerConfig(
 
         BLAZE_CROSSBOW_PROJECTILE_SPEED = builder
             .comment("How fast should Blaze Crossbow projectiles travel?")
-            .defineInRange("projectile_speed", 3.0, 0.0, Double.MAX_VALUE)
+            .defineDouble("projectile_speed", 3)
 
         BLAZE_CROSSBOW_KNOCKBACK = builder
             .comment("How much knockback should the Blaze Crossbow have?")
-            .defineInRange("recoil", 2.0, 0.0, Double.MAX_VALUE)
+            .defineDouble("recoil", 2)
 
         BLAZE_CROSSBOW_BURN_TIME_AFTER_LANDING = builder
             .comment("How long should projectiles stay burning after landing on the ground?")
@@ -433,11 +447,11 @@ class ServerConfig(
 
         BLAZE_CROSSBOW_DAMAGE_MINIMUM = builder
             .comment("What is the minimum damage Blaze Crossbow can deal?")
-            .defineInRange("damage_minimum", 20.0, 0.0, Double.MAX_VALUE)
+            .defineDouble("damage_minimum", 20)
 
         BLAZE_CROSSBOW_DAMAGE_MAXIMUM = builder
             .comment("What is the maximum damage Blaze Crossbow can deal?")
-            .defineInRange("damage_maximum", 30.0, 0.0, Double.MAX_VALUE)
+            .defineDouble("damage_maximum", 30)
 
         builder.pop()
     }
@@ -453,11 +467,11 @@ class ServerConfig(
 
         COIN_TOSSER_PROJECTILE_SPEED = builder
             .comment("How fast should Coin Tosser projectiles be?")
-            .defineInRange("projectile_speed", 2.5, 0.0, Double.MAX_VALUE)
+            .defineDouble("projectile_speed", 2.5)
 
         COIN_TOSSER_RECOIL = builder
             .comment("How much recoil should the Coin Tosser have?")
-            .defineInRange("recoil", 1.0, 0.0, Double.MAX_VALUE)
+            .defineDouble("recoil", 1)
 
         COIN_TOSSER_COOLDOWN = builder
             .comment("How long should the Coin Tosser cooldown be?")
@@ -465,11 +479,35 @@ class ServerConfig(
 
         COIN_TOSSER_DAMAGE_MINIMUM = builder
             .comment("What is the minimum damage each projectile should deal?")
-            .defineInRange("damage_minimum", 1.0, 0.0, Double.MAX_VALUE)
+            .defineDouble("damage_minimum", 1)
 
         COIN_TOSSER_DAMAGE_MAXIMUM = builder
             .comment("What is the maximum damage each projectile should deal?")
-            .defineInRange("damage_maximum", 3.0, 0.0, Double.MAX_VALUE)
+            .defineDouble("damage_maximum", 3)
+
+        builder.pop()
+    }
+
+    private fun compactCrossbow() {
+        builder
+            .comment("Compact Crossbow settings")
+            .push("compact_crossbow")
+
+        COMPACT_CROSSBOW_PROJECTILE_SPEED = builder
+            .comment("How fast should Compact Crossbow projectiles be?")
+            .defineDouble("projectile_speed", 2.5)
+
+        COMPACT_CROSSBOW_KNOCKBACK = builder
+            .comment("How much knockback should the Compact Crossbow have?")
+            .defineDouble("knockback", 2)
+
+        COMPACT_CROSSBOW_DAMAGE_MINIMUM = builder
+            .comment("What is the minimum damage a Compact Crossbow can deal?")
+            .defineDouble("damage_minimum", 14)
+
+        COMPACT_CROSSBOW_DAMAGE_MAXIMUM = builder
+            .comment("What is the maximum damage a Compact Crossbow can deal?")
+            .defineDouble("damage_maximum", 20)
 
         builder.pop()
     }
