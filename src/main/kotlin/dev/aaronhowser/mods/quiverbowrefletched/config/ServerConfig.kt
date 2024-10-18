@@ -24,7 +24,7 @@ class ServerConfig(
         lateinit var ARROW_MORTAR_DAMAGE_MAXIMUM: ModConfigSpec.DoubleValue
 
         lateinit var AUTO_CROSSBOW_PROJECTILE_SPEED: ModConfigSpec.DoubleValue
-        lateinit var AUTO_CROSSBOW_RECOIL: ModConfigSpec.DoubleValue
+        lateinit var AUTO_CROSSBOW_KNOCKBACK: ModConfigSpec.DoubleValue
         lateinit var AUTO_CROSSBOW_COOLDOWN: ModConfigSpec.IntValue
         lateinit var AUTO_CROSSBOW_DAMAGE_MINIMUM: ModConfigSpec.DoubleValue
         lateinit var AUTO_CROSSBOW_DAMAGE_MAXIMUM: ModConfigSpec.DoubleValue
@@ -294,6 +294,18 @@ class ServerConfig(
         builder.pop()
     }
 
+    private fun armsAssistant() {
+        builder
+            .comment("Arms Assistant settings")
+            .push("arms_assistant")
+
+        ARMS_ASSIStANT_RANGE = builder
+            .comment("Arms Assistant range")
+            .defineInRange("range", 32.0, 0.0, Double.MAX_VALUE)
+
+        builder.pop()
+    }
+
     private fun arrowMortar() {
         builder
             .comment("Arrow Mortar settings")
@@ -305,7 +317,7 @@ class ServerConfig(
 
         ARROW_MORTAR_RECOIL = builder
             .comment("How much recoil should Arrow Mortar have?")
-            .defineInRange("recoil", 1.0, 3.0, Double.MAX_VALUE)
+            .defineInRange("recoil", 3.0, 0.0, Double.MAX_VALUE)
 
         ARROW_MORTAR_COOLDOWN = builder
             .comment("How long should the Arrow Mortar cooldown be?")
@@ -318,6 +330,78 @@ class ServerConfig(
         ARROW_MORTAR_DAMAGE_MAXIMUM = builder
             .comment("What is the maximum damage Arrow Mortar can deal?")
             .defineInRange("damage_maximum", 10.0, 0.0, Double.MAX_VALUE)
+
+        builder.pop()
+    }
+
+    private fun autoCrossbow() {
+        builder
+            .comment("Auto Crossbow settings")
+            .push("auto_crossbow")
+
+        AUTO_CROSSBOW_PROJECTILE_SPEED = builder
+            .comment("How fast should Auto Crossbow projectiles travel?")
+            .defineInRange("projectile_speed", 2.5, 0.0, Double.MAX_VALUE)
+
+        AUTO_CROSSBOW_KNOCKBACK = builder
+            .comment("How much knockback should the Auto Crossbow have?")
+            .defineInRange("recoil", 1.0, 0.0, Double.MAX_VALUE)
+
+        AUTO_CROSSBOW_COOLDOWN = builder
+            .comment("How long should the Auto Crossbow cooldown be?")
+            .defineInRange("cooldown", 10, 0, Integer.MAX_VALUE)
+
+        AUTO_CROSSBOW_DAMAGE_MINIMUM = builder
+            .comment("What is the minimum damage Auto Crossbow can deal?")
+            .defineInRange("damage_minimum", 10.0, 0.0, Double.MAX_VALUE)
+
+        AUTO_CROSSBOW_DAMAGE_MAXIMUM = builder
+            .comment("What is the maximum damage Auto Crossbow can deal?")
+            .defineInRange("damage_maximum", 16.0, 0.0, Double.MAX_VALUE)
+
+        builder.pop()
+    }
+
+    private fun blazeCrossbow() {
+        builder
+            .comment("Blaze Crossbow settings")
+            .push("blaze_crossbow")
+
+        BLAZE_CROSSBOW_PROJECTILE_SPEED = builder
+            .comment("How fast should Blaze Crossbow projectiles travel?")
+            .defineInRange("projectile_speed", 3.0, 0.0, Double.MAX_VALUE)
+
+        BLAZE_CROSSBOW_KNOCKBACK = builder
+            .comment("How much knockback should the Blaze Crossbow have?")
+            .defineInRange("recoil", 2.0, 0.0, Double.MAX_VALUE)
+
+        BLAZE_CROSSBOW_BURN_TIME_AFTER_LANDING = builder
+            .comment("How long should projectiles stay burning after landing on the ground?")
+            .defineInRange("burn_time_after_landing", 10 * 20, 0, Integer.MAX_VALUE)
+
+        BLAZE_CROSSBOW_TARGET_BURN_TIME = builder
+            .comment("How long should targets burn for?")
+            .defineInRange("target_burn_time", 15 * 20, 0, Integer.MAX_VALUE)
+
+        BLAZE_CROSSBOW_DAMAGE_MINIMUM = builder
+            .comment("What is the minimum damage Blaze Crossbow can deal?")
+            .defineInRange("damage_minimum", 20.0, 0.0, Double.MAX_VALUE)
+
+        BLAZE_CROSSBOW_DAMAGE_MAXIMUM = builder
+            .comment("What is the maximum damage Blaze Crossbow can deal?")
+            .defineInRange("damage_maximum", 30.0, 0.0, Double.MAX_VALUE)
+
+        builder.pop()
+    }
+
+    private fun coinTosser() {
+        builder
+            .comment("Coin Tosser settings")
+            .push("coin_tosser")
+
+        COIN_TOSSER_DROP_NUGGET_ON_MISS = builder
+            .comment("Should projectiles that miss drop Gold Nuggets?")
+            .define("drop_nuggets", true)
 
         builder.pop()
     }
