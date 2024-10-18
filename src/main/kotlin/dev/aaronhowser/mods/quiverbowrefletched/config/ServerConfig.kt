@@ -138,6 +138,148 @@ class ServerConfig(
         lateinit var HIDDEN_ENDER_PISTOL_DAMAGE_MINIMUM: ModConfigSpec.DoubleValue
         lateinit var HIDDEN_ENDER_PISTOL_DAMAGE_MAXIMUM: ModConfigSpec.DoubleValue  //TODO: What if it does more damage from behind
 
+        lateinit var IMPROVED_AUTO_CROSSBOW_PROJECTILE_SPEED: ModConfigSpec.DoubleValue
+        lateinit var IMPROVED_AUTO_CROSSBOW_KNOCKBACK: ModConfigSpec.DoubleValue
+        lateinit var IMPROVED_AUTO_CROSSBOW_COOLDOWN: ModConfigSpec.IntValue
+        lateinit var IMPROVED_AUTO_CROSSBOW_DAMAGE_MINIMUM: ModConfigSpec.DoubleValue
+        lateinit var IMPROVED_AUTO_CROSSBOW_DAMAGE_MAXIMUM: ModConfigSpec.DoubleValue
+
+        lateinit var IMPROVED_ROCKET_LAUNCHER_GRIEFING: ModConfigSpec.BooleanValue
+        lateinit var IMPROVED_ROCKET_LAUNCHER_EXPLOSION_RADIUS: ModConfigSpec.DoubleValue
+        lateinit var IMPROVED_ROCKET_LAUNCHER_PROJECTILE_SPEED: ModConfigSpec.DoubleValue
+        lateinit var IMPROVED_ROCKET_LAUNCHER_RECOIL: ModConfigSpec.DoubleValue
+
+        lateinit var LAPIS_COIL_PROJECTILE_SPEED: ModConfigSpec.DoubleValue
+        lateinit var LAPIS_COIL_HUNGER_DURATION: ModConfigSpec.IntValue
+        lateinit var LAPIS_COIL_NAUSEA_DURATION: ModConfigSpec.IntValue
+        lateinit var LAPIS_COIL_WEAKNESS_DURATION: ModConfigSpec.IntValue
+        lateinit var LAPIS_COIL_HUNGER_STRENGTH: ModConfigSpec.IntValue
+        lateinit var LAPIS_COIL_WEAKNESS_STRENGTH: ModConfigSpec.IntValue
+        lateinit var LAPIS_COIL_COOLDOWN: ModConfigSpec.IntValue
+        lateinit var LAPIS_COIL_DAMAGE_MINIMUM: ModConfigSpec.DoubleValue
+        lateinit var LAPIS_COIL_DAMAGE_MAXIMUM: ModConfigSpec.DoubleValue
+
+        lateinit var LIGHTNING_RED_PROJECTILE_SPEED: ModConfigSpec.DoubleValue
+        lateinit var LIGHTNING_RED_RECOIL: ModConfigSpec.DoubleValue
+        lateinit var LIGHTNING_RED_COOLDOWN: ModConfigSpec.IntValue
+        lateinit var LIGHTNING_RED_BEAM_DURATION: ModConfigSpec.IntValue
+        lateinit var LIGHTNING_RED_PIERCING_AMOUNT: ModConfigSpec.IntValue
+        lateinit var LIGHTNING_RED_DAMAGE_MINIMUM: ModConfigSpec.DoubleValue
+        lateinit var LIGHTNING_RED_DAMAGE_MAXIMUM: ModConfigSpec.DoubleValue
+
+        lateinit var MODIFIED_COIN_TOSSER_DROP_NUGGET_ON_MISS: ModConfigSpec.BooleanValue
+        lateinit var MODIFIED_COIN_TOSSER_PROJECTILE_SPEED: ModConfigSpec.DoubleValue
+        lateinit var MODIFIED_COIN_TOSSER_RECOIL: ModConfigSpec.DoubleValue
+        lateinit var MODIFIED_COIN_TOSSER_COOLDOWN: ModConfigSpec.DoubleValue
+        lateinit var MODIFIED_COIN_TOSSER_DAMAGE_MINIMUM: ModConfigSpec.DoubleValue
+        lateinit var MODIFIED_COIN_TOSSER_DAMAGE_MAXIMUM: ModConfigSpec.DoubleValue
+
+        lateinit var MODIFIED_POWDER_KNUCKLE_GRIEFING: ModConfigSpec.BooleanValue
+        lateinit var MODIFIED_POWDER_KNUCKLE_EXPLOSION_RADIUS: ModConfigSpec.DoubleValue
+        lateinit var MODIFIED_POWDER_KNUCKLE_DAMAGE_MINIMUM: ModConfigSpec.DoubleValue
+        lateinit var MODIFIED_POWDER_KNUCKLE_DAMAGE_MAXIMUM: ModConfigSpec.DoubleValue
+
+        lateinit var NETHER_BELLOWS_TARGET_BURN_TIME: ModConfigSpec.IntValue
+        lateinit var NETHER_BELLOWS_PROJECTILE_SPEED: ModConfigSpec.DoubleValue
+        lateinit var NETHER_BELLOWS_DAMAGE_PER_PROJECTILE: ModConfigSpec.DoubleValue
+
+        lateinit var OBSIDIAN_SPEAR_RIFLE_PROJECTILE_SPEED: ModConfigSpec.DoubleValue
+        lateinit var OBSIDIAN_SPEAR_RIFLE_RECOIL: ModConfigSpec.DoubleValue
+        lateinit var OBSIDIAN_SPEAR_RIFLE_KNOCKBACK: ModConfigSpec.DoubleValue
+        lateinit var OBSIDIAN_SPEAR_RIFLE_WITHER_DURATION: ModConfigSpec.IntValue
+        lateinit var OBSIDIAN_SPEAR_RIFLE_WITHER_STRENGTH: ModConfigSpec.IntValue
+        lateinit var OBSIDIAN_SPEAR_RIFLE_COOLDOWN: ModConfigSpec.IntValue
+        lateinit var OBSIDIAN_SPEAR_RIFLE_DAMAGE_MINIMUM: ModConfigSpec.DoubleValue
+        lateinit var OBSIDIAN_SPEAR_RIFLE_DAMAGE_MAXIMUM: ModConfigSpec.DoubleValue
+
+        lateinit var OBSIDIAN_SPLINTER_PISTOL_PROJECTILE_SPEED: ModConfigSpec.DoubleValue
+        lateinit var OBSIDIAN_SPLINTER_PISTOL_WITHER_DURATION: ModConfigSpec.IntValue
+        lateinit var OBSIDIAN_SPLINTER_PISTOL_WITHER_STRENGTH: ModConfigSpec.IntValue
+        lateinit var OBSIDIAN_SPLINTER_PISTOL_COOLDOWN: ModConfigSpec.IntValue
+        lateinit var OBSIDIAN_SPLINTER_PISTOL_DAMAGE_MINIMUM: ModConfigSpec.DoubleValue
+        lateinit var OBSIDIAN_SPLINTER_PISTOL_DAMAGE_MAXIMUM: ModConfigSpec.DoubleValue
+
+        lateinit var OBSIDIAN_WITHER_RIFLE_PROJECTILE_SPEED: ModConfigSpec.DoubleValue
+        lateinit var OBSIDIAN_WITHER_RIFLE_RECOIL: ModConfigSpec.DoubleValue
+        lateinit var OBSIDIAN_WITHER_RIFLE_KNOCKBACK: ModConfigSpec.DoubleValue
+        lateinit var OBSIDIAN_WITHER_RIFLE_WITHER_DURATION: ModConfigSpec.IntValue
+        lateinit var OBSIDIAN_WITHER_RIFLE_WITHER_STRENGTH: ModConfigSpec.IntValue
+        lateinit var OBSIDIAN_WITHER_RIFLE_COOLDOWN: ModConfigSpec.IntValue
+        lateinit var OBSIDIAN_WITHER_RIFLE_DAMAGE_MINIMUM: ModConfigSpec.DoubleValue
+        lateinit var OBSIDIAN_WITHER_RIFLE_DAMAGE_MAXIMUM: ModConfigSpec.DoubleValue
+        lateinit var OBSIDIAN_WITHER_RIFLE_MAGIC_DAMAGE_MINIMUM: ModConfigSpec.DoubleValue
+        lateinit var OBSIDIAN_WITHER_RIFLE_MAGIC_DAMAGE_MAXIMUM: ModConfigSpec.DoubleValue
+
+        lateinit var POTATOSSER_DROP_POTATO_ON_MISS: ModConfigSpec.BooleanValue
+        lateinit var POTATOSSER_PROJECTILE_SPEED: ModConfigSpec.DoubleValue
+        lateinit var POTATOSSER_COOLDOWN: ModConfigSpec.IntValue
+        lateinit var POTATOSSER_DAMAGE_MINIMUM: ModConfigSpec.DoubleValue
+        lateinit var POTATOSSER_DAMAGE_MAXIMUM: ModConfigSpec.DoubleValue
+
+        lateinit var POWDER_KNUCKLE_GRIEFING: ModConfigSpec.BooleanValue
+        lateinit var POWDER_KNUCKLE_EXPLOSION_RADIUS: ModConfigSpec.DoubleValue
+        lateinit var POWDER_KNUCKLE_DAMAGE_ON_EXPLODE: ModConfigSpec.DoubleValue
+        lateinit var POWDER_KNUCKLE_DAMAGE_WHEN_EMPTY: ModConfigSpec.DoubleValue
+
+        lateinit var PROXIMITY_THORN_THROWER_PROJECTILE_SPEED: ModConfigSpec.DoubleValue
+        lateinit var PROXIMITY_THORN_THROWER_RECOIL: ModConfigSpec.DoubleValue
+        lateinit var PROXIMITY_THORN_THROWER_LIFESPAN: ModConfigSpec.IntValue
+        lateinit var PROXIMITY_THORN_THROWER_CHECK_FREQUENCY: ModConfigSpec.IntValue
+        lateinit var PROXIMITY_THORN_THROWER_CHECK_RADIUS: ModConfigSpec.DoubleValue
+        lateinit var PROXIMITY_THORN_THROWER_COOLDOWN: ModConfigSpec.IntValue
+        lateinit var PROXIMITY_THORN_THROWER_DAMAGE_MINIMUM: ModConfigSpec.DoubleValue
+        lateinit var PROXIMITY_THORN_THROWER_DAMAGE_MAXIMUM: ModConfigSpec.DoubleValue
+
+        lateinit var RAY_OF_HOPE_PROJECTILE_SPEED: ModConfigSpec.DoubleValue
+
+        lateinit var REDSTONE_SPRAYER_PROJECTILE_SPEED: ModConfigSpec.DoubleValue
+        lateinit var REDSTONE_SPRAYER_BLINDNESS_DURATION: ModConfigSpec.IntValue
+        lateinit var REDSTONE_SPRAYER_WITHER_DURATION: ModConfigSpec.IntValue
+        lateinit var REDSTONE_SPRAYER_WITHER_STRENGTH: ModConfigSpec.IntValue
+
+        lateinit var SEED_SWEEPER_ACCURACY: ModConfigSpec.DoubleValue
+        lateinit var SEED_SWEEPER_PROJECTILE_SPEED: ModConfigSpec.DoubleValue
+        lateinit var SEED_SWEEPER_COOLDOWN: ModConfigSpec.IntValue
+        lateinit var SEED_SWEEPER_DAMAGE_MINIMUM: ModConfigSpec.DoubleValue
+        lateinit var SEED_SWEEPER_DAMAGE_MAXIMUM: ModConfigSpec.DoubleValue
+
+        lateinit var SEEDLING_PROJECTILE_SPEED: ModConfigSpec.DoubleValue
+        lateinit var SEEDLING_DAMAGE_MINIMUM: ModConfigSpec.DoubleValue
+        lateinit var SEEDLING_DAMAGE_MAXIMUM: ModConfigSpec.DoubleValue
+
+        lateinit var SILKEN_SPINNER_PROJECTILE_SPEED: ModConfigSpec.DoubleValue
+        lateinit var SILKEN_SPINNER_COOLDOWN: ModConfigSpec.IntValue
+
+        lateinit var SNOW_CANNON_PROJECTILE_SPEED: ModConfigSpec.DoubleValue
+        lateinit var SNOW_CANNON_RECOIL: ModConfigSpec.DoubleValue
+        lateinit var SNOW_CANNON_COOLDOWN: ModConfigSpec.IntValue
+        lateinit var SNOW_CANNON_SLOWNESS_DURATION: ModConfigSpec.IntValue
+        lateinit var SNOW_CANNON_SLOWNESS_STRENGTH: ModConfigSpec.IntValue
+        lateinit var SNOW_CANNON_DAMAGE_MINIMUM: ModConfigSpec.DoubleValue
+        lateinit var SNOW_CANNON_DAMAGE_MAXIMUM: ModConfigSpec.DoubleValue
+
+        lateinit var SOUL_CAIRN_PROJECTILE_SPEED: ModConfigSpec.DoubleValue
+        lateinit var SOUL_CAIRN_RECOIL: ModConfigSpec.DoubleValue
+
+        lateinit var SUGAR_ENGINE_PROJECTILE_SPEED: ModConfigSpec.DoubleValue
+        lateinit var SUGAR_ENGINE_RECOIL: ModConfigSpec.DoubleValue     //TODO: Let this make you fly
+        lateinit var SUGAR_ENGINE_ACCURACY: ModConfigSpec.DoubleValue
+        lateinit var SUGAR_ENGINE_WIND_UP_TIME: ModConfigSpec.IntValue
+        lateinit var SUGAR_ENGINE_DAMAGE_MINIMUM: ModConfigSpec.DoubleValue
+        lateinit var SUGAR_ENGINE_DAMAGE_MAXIMUM: ModConfigSpec.DoubleValue
+
+        lateinit var SUNRAY_RECOIL: ModConfigSpec.DoubleValue   //TODO: Grow plants instantly
+        lateinit var SUNRAY_BEAM_LIFESPAN: ModConfigSpec.IntValue
+        lateinit var SUNRAY_TARGET_BURN_TIME: ModConfigSpec.IntValue
+        lateinit var SUNRAY_COOLDOWN: ModConfigSpec.IntValue
+        lateinit var SUNRAY_DAMAGE_MINIMUM: ModConfigSpec.DoubleValue
+        lateinit var SUNRAY_DAMAGE_MAXIMUM: ModConfigSpec.DoubleValue
+        lateinit var SUNRAY_LIGHT_LEVEL_REQUIRED: ModConfigSpec.IntValue
+
+        lateinit var THORN_SPITTER_PROJECTILE_SPEED: ModConfigSpec.DoubleValue
+        lateinit var THORN_SPITTER_COOLDOWN: ModConfigSpec.IntValue
+        lateinit var THORN_SPITTER_DAMAGE_MINIMUM: ModConfigSpec.DoubleValue
+        lateinit var THORN_SPITTER_DAMAGE_MAXIMUM: ModConfigSpec.DoubleValue
     }
 
     private fun aquaAccelerator() {
