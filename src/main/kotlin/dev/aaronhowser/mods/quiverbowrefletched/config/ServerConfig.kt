@@ -24,6 +24,20 @@ class ServerConfig(
             )
         }
 
+        private fun ModConfigSpec.Builder.defineInteger(
+            name: String,
+            defaultValue: Int,
+            minValue: Int = 0,
+            maxValue: Int = Int.MAX_VALUE
+        ): ModConfigSpec.IntValue {
+            return this.defineInRange(
+                name,
+                defaultValue,
+                minValue,
+                maxValue
+            )
+        }
+
         val CONFIG: ServerConfig = configPair.left
         val CONFIG_SPEC: ModConfigSpec = configPair.right
 
@@ -92,17 +106,16 @@ class ServerConfig(
         lateinit var ENDER_RAIL_ACCELERATOR_GRIEFING: ModConfigSpec.BooleanValue
         lateinit var ENDER_RAIL_ACCELERATOR_HIT_EXPLOSION_RADIUS: ModConfigSpec.DoubleValue
         lateinit var ENDER_RAIL_ACCELERATOR_SHOOT_EXPLOSION_RADIUS: ModConfigSpec.DoubleValue
-        lateinit var ENDER_RAIL_ACCELERATOR_KNOCKBACK: ModConfigSpec.DoubleValue
         lateinit var ENDER_RAIL_ACCELERATOR_PROJECTILE_SPEED: ModConfigSpec.DoubleValue
         lateinit var ENDER_RAIL_ACCELERATOR_RECOIL: ModConfigSpec.DoubleValue
-        lateinit var ENDER_RAIL_ACCELERATOR_COOLDOWN: ModConfigSpec.IntValue
         lateinit var ENDER_RAIL_ACCELERATOR_DAMAGE_MINIMUM: ModConfigSpec.DoubleValue
         lateinit var ENDER_RAIL_ACCELERATOR_DAMAGE_MAXIMUM: ModConfigSpec.DoubleValue
 
-        lateinit var ENDER_RIFLE_DAMAGE_INCREASE_PER_TICK: ModConfigSpec.DoubleValue
+        lateinit var ENDER_RIFLE_DAMAGE_INCREASE_PER_TICK: ModConfigSpec.DoubleValue    //TODO: IMO this should be a factor of distance traveled, not time in air
         lateinit var ENDER_RIFLE_PROJECTILE_SPEED: ModConfigSpec.DoubleValue
         lateinit var ENDER_RIFLE_ZOOM_FACTOR: ModConfigSpec.DoubleValue
         lateinit var ENDER_RIFLE_RECOIL: ModConfigSpec.DoubleValue
+        lateinit var ENDER_RIFLE_KNOCKBACK: ModConfigSpec.DoubleValue
         lateinit var ENDER_RIFLE_COOLDOWN: ModConfigSpec.IntValue
         lateinit var ENDER_RIFLE_DAMAGE_MINIMUM: ModConfigSpec.DoubleValue
         lateinit var ENDER_RIFLE_DAMAGE_MAXIMUM: ModConfigSpec.DoubleValue
@@ -307,9 +320,9 @@ class ServerConfig(
         doubleCrossbow()
         dragonBox()
         dragonMortar()
-//        enderBow()
-//        enderRailAccelerator()
-//        enderRifle()
+        enderBow()
+        enderRailAccelerator()
+        enderRifle()
 //        fenFire()
 //        fireworksRocketLauncher()
 //        flintDuster()
@@ -383,7 +396,7 @@ class ServerConfig(
 
         ARROW_MORTAR_COOLDOWN = builder
             .comment("How long should the Arrow Mortar cooldown be?")
-            .defineInRange("cooldown", 20, 0, Integer.MAX_VALUE)
+            .defineInteger("cooldown", 20)
 
         ARROW_MORTAR_DAMAGE_MINIMUM = builder
             .comment("What is the minimum damage Arrow Mortar can deal?")
@@ -411,7 +424,7 @@ class ServerConfig(
 
         AUTO_CROSSBOW_COOLDOWN = builder
             .comment("How long should the Auto Crossbow cooldown be?")
-            .defineInRange("cooldown", 10, 0, Integer.MAX_VALUE)
+            .defineInteger("cooldown", 10)
 
         AUTO_CROSSBOW_DAMAGE_MINIMUM = builder
             .comment("What is the minimum damage Auto Crossbow can deal?")
@@ -439,11 +452,11 @@ class ServerConfig(
 
         BLAZE_CROSSBOW_BURN_TIME_AFTER_LANDING = builder
             .comment("How long should projectiles stay burning after landing on the ground?")
-            .defineInRange("burn_time_after_landing", 10 * 20, 0, Integer.MAX_VALUE)
+            .defineInteger("burn_time_after_landing", 10 * 20)
 
         BLAZE_CROSSBOW_TARGET_BURN_TIME = builder
             .comment("How long should targets burn for?")
-            .defineInRange("target_burn_time", 15 * 20, 0, Integer.MAX_VALUE)
+            .defineInteger("target_burn_time", 15 * 20)
 
         BLAZE_CROSSBOW_DAMAGE_MINIMUM = builder
             .comment("What is the minimum damage Blaze Crossbow can deal?")
@@ -475,7 +488,7 @@ class ServerConfig(
 
         COIN_TOSSER_COOLDOWN = builder
             .comment("How long should the Coin Tosser cooldown be?")
-            .defineInRange("cooldown", 15, 0, Integer.MAX_VALUE)
+            .defineInteger("cooldown", 15)
 
         COIN_TOSSER_DAMAGE_MINIMUM = builder
             .comment("What is the minimum damage each projectile should deal?")
@@ -527,7 +540,7 @@ class ServerConfig(
 
         DOUBLE_CROSSBOW_COOLDOWN = builder
             .comment("How long should the Double Crossbow cooldown be?")
-            .defineInRange("cooldown", 25, 0, Integer.MAX_VALUE)
+            .defineInteger("cooldown", 25)
 
         DOUBLE_CROSSBOW_DAMAGE_MINIMUM = builder
             .comment("What is the minimum damage a Double Crossbow can deal?")
@@ -567,11 +580,11 @@ class ServerConfig(
 
         DRAGON_BOX_TARGET_BURN_TIME = builder
             .comment("How long should targets burn for?")
-            .defineInRange("target_burn_time", 6 * 20, 0, Integer.MAX_VALUE)
+            .defineInteger("target_burn_time", 6 * 20)
 
         DRAGON_BOX_COOLDOWN = builder
             .comment("How long should the Dragon Box cooldown be?")
-            .defineInRange("cooldown", 10, 0, Integer.MAX_VALUE)
+            .defineInteger("cooldown", 10)
 
         DRAGON_BOX_DAMAGE_MINIMUM = builder
             .comment("What is the minimum damage a Dragon Box can deal?")
@@ -603,11 +616,11 @@ class ServerConfig(
 
         DRAGON_MORTAR_TARGET_BURN_TIME = builder
             .comment("How long should targets burn for?")
-            .defineInRange("target_burn_time", 6 * 20, 0, Integer.MAX_VALUE)
+            .defineInteger("target_burn_time", 6 * 20)
 
         DRAGON_MORTAR_COOLDOWN = builder
             .comment("How long should the Dragon Mortar cooldown be?")
-            .defineInRange("cooldown", 20, 0, Integer.MAX_VALUE)
+            .defineInteger("cooldown", 20, 0)
 
         DRAGON_MORTAR_DAMAGE_MINIMUM = builder
             .comment("What is the minimum damage a Dragon Mortar can deal?")
@@ -616,6 +629,98 @@ class ServerConfig(
         DRAGON_MORTAR_DAMAGE_MAXIMUM = builder
             .comment("What is the maximum damage a Dragon Mortar can deal?")
             .defineDouble("damage_maximum", 6)
+
+        builder.pop()
+    }
+
+    private fun enderBow() {
+        builder
+            .comment("Ender Bow settings")
+            .push("ender_bow")
+
+        ENDER_BOW_ZOOM_FACTOR = builder
+            .comment("What should the zoom factor be for the Ender Bow? Your FOV is multiplied by this value.")
+            .defineDouble("zoom_factor", 0.3)
+
+        ENDER_BOW_GUIDE_FREQUENCY = builder
+            .comment("How often should the Ender Bow shoot out a guiding projectile??")
+            .defineInteger("guide_frequency", 5)
+
+        builder.pop()
+    }
+
+    private fun enderRailAccelerator() {
+        builder
+            .comment("Ender Rail Accelerator settings")
+            .push("ender_rail_accelerator")
+
+        ENDER_RAIL_ACCELERATOR_GRIEFING = builder
+            .comment("Can the Ender Rail Accelerator destroy terrain when used by players?")
+            .define("griefing", true)
+
+        ENDER_RAIL_ACCELERATOR_HIT_EXPLOSION_RADIUS = builder
+            .comment("How large should the explosion be when the projectile hits a target? 4 is the same as a TNT block.")
+            .defineDouble("hit_explosion_radius", 8)
+
+        ENDER_RAIL_ACCELERATOR_SHOOT_EXPLOSION_RADIUS = builder
+            .comment("How large should the explosion be when the projectile leaves the rifle")
+            .defineDouble("shoot_explosion_radius", 4)
+
+        ENDER_RAIL_ACCELERATOR_PROJECTILE_SPEED = builder
+            .comment("How fast should Ender Rail Accelerator projectiles be?")
+            .defineDouble("projectile_speed", 10)   //TODO: Check me
+
+        ENDER_RAIL_ACCELERATOR_RECOIL = builder
+            .comment("How much recoil should the Ender Rail Accelerator have?")
+            .defineDouble("recoil", 30)
+
+        ENDER_RAIL_ACCELERATOR_DAMAGE_MINIMUM = builder
+            .comment("What is the minimum damage an Ender Rail Accelerator can deal?")
+            .defineDouble("damage_minimum", 120)
+
+        ENDER_RAIL_ACCELERATOR_DAMAGE_MAXIMUM = builder
+            .comment("What is the maximum damage an Ender Rail Accelerator can deal?")
+            .defineDouble("damage_maximum", 150)
+
+        builder.pop()
+    }
+
+    private fun enderRifle() {
+        builder
+            .comment("Ender Rifle settings")
+            .push("ender_rifle")
+
+        ENDER_RIFLE_DAMAGE_INCREASE_PER_TICK = builder
+            .comment("How much should the damage increase per tick?")
+            .defineDouble("damage_increase_per_tick", 1)
+
+        ENDER_RIFLE_PROJECTILE_SPEED = builder
+            .comment("How fast should Ender Rifle projectiles be?")
+            .defineDouble("projectile_speed", 1.5)  //TODO: Check me
+
+        ENDER_RIFLE_ZOOM_FACTOR = builder
+            .comment("What should the zoom factor be for the Ender Rifle? Your FOV is multiplied by this value.")
+            .defineDouble("zoom_factor", 0.3)
+
+        ENDER_RIFLE_RECOIL = builder
+            .comment("How much recoil should the Ender Rifle have?")
+            .defineDouble("recoil", 3)
+
+        ENDER_RIFLE_KNOCKBACK = builder
+            .comment("How much knockback should the Ender Rifle have?")
+            .defineDouble("knockback", 1)
+
+        ENDER_RIFLE_COOLDOWN = builder
+            .comment("How long should the Ender Rifle cooldown be?")
+            .defineInteger("cooldown", 25)
+
+        ENDER_RIFLE_DAMAGE_MINIMUM = builder
+            .comment("What is the minimum damage an Ender Rifle can deal?")
+            .defineDouble("damage_minimum", 4)
+
+        ENDER_RIFLE_DAMAGE_MAXIMUM = builder
+            .comment("What is the maximum damage an Ender Rifle can deal?")
+            .defineDouble("damage_maximum", 16)
 
         builder.pop()
     }
