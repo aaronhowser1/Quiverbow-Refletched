@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.quiverbowrefletched.item.weapon
 
+import dev.aaronhowser.mods.quiverbowrefletched.config.ServerConfig
 import dev.aaronhowser.mods.quiverbowrefletched.item.base.BasicAmmoHoldingItem
 import net.minecraft.ChatFormatting
 import net.minecraft.core.BlockPos
@@ -30,9 +31,12 @@ class PowderKnuckle(
     maxAmmo = 8
 ) {
 
-    companion object {
-        private const val EXPLOSION_RADIUS = 1.5f
-    }
+    private val explosionRadius: Float
+        get() = if (!isModified) {
+            ServerConfig.POWDER_KNUCKLE_EXPLOSION_RADIUS.get()
+        } else {
+            ServerConfig.MODIFIED_POWDER_KNUCKLE_EXPLOSION_RADIUS.get()
+        }.toFloat()
 
     override fun onLeftClickEntity(stack: ItemStack, player: Player, entity: Entity): Boolean {
         if (player.level().isClientSide) return false
@@ -41,14 +45,20 @@ class PowderKnuckle(
         val canShoot = entityUse(player, stack)
         if (!canShoot) return false
 
+        val shouldDamageBlocks = if (!isModified) {
+            ServerConfig.POWDER_KNUCKLE_GRIEFING.get()
+        } else {
+            ServerConfig.MODIFIED_POWDER_KNUCKLE_GRIEFING.get()
+        }
+
         entity.remainingFireTicks = 2 * 20
         entity.level().explode(
             player,
             entity.x,
             entity.y,
             entity.z,
-            EXPLOSION_RADIUS,
-            Level.ExplosionInteraction.TNT
+            explosionRadius,
+            if (shouldDamageBlocks) Level.ExplosionInteraction.TNT else Level.ExplosionInteraction.NONE
         )
 
         return true
@@ -69,7 +79,7 @@ class PowderKnuckle(
             clickedPos.x + 0.5,
             clickedPos.y + 0.5,
             clickedPos.z + 0.5,
-            EXPLOSION_RADIUS,
+            explosionRadius,
             if (isModified) Level.ExplosionInteraction.NONE else Level.ExplosionInteraction.TNT
         )
 
@@ -164,7 +174,7 @@ class PowderKnuckle(
     ) {
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag)
 
-        tooltipComponents.add(Component.literal("Explosion with radius $EXPLOSION_RADIUS on hit").withStyle(ChatFormatting.GREEN))
+        tooltipComponents.add(Component.literal("Explosion with radius $explosionRadius on hit").withStyle(ChatFormatting.GREEN))
 
         if (isModified) {
             tooltipComponents.add(Component.literal("Right-click block for 3x3x3 silk touch mining").withStyle(ChatFormatting.GREEN))

@@ -1,6 +1,9 @@
 package dev.aaronhowser.mods.quiverbowrefletched.item.weapon
 
+import dev.aaronhowser.mods.quiverbowrefletched.config.ServerConfig
 import dev.aaronhowser.mods.quiverbowrefletched.entity.SnowCannonProjectile
+import dev.aaronhowser.mods.quiverbowrefletched.registry.ModItems
+import dev.aaronhowser.mods.quiverbowrefletched.util.OtherUtil
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResultHolder
 import net.minecraft.world.entity.player.Player
@@ -25,6 +28,10 @@ class SnowCannon : ReloadableWeaponItem(
     ): InteractionResultHolder<ItemStack> {
         val usedStack = player.getItemInHand(usedHand)
 
+        if (player.cooldowns.isOnCooldown(ModItems.SNOW_CANNON.get())) {
+            return InteractionResultHolder.fail(usedStack)
+        }
+
         repeat(4) {
             if (!entityUse(player, usedStack)) {
                 return InteractionResultHolder.fail(usedStack)
@@ -37,10 +44,17 @@ class SnowCannon : ReloadableWeaponItem(
                 player.xRot,
                 player.yRot,
                 0.0f,
-                1.5f,
+                ServerConfig.SNOW_CANNON_PROJECTILE_SPEED.get().toFloat(),
                 6.0f
             )
         }
+
+        player.cooldowns.addCooldown(
+            ModItems.SNOW_CANNON.get(),
+            ServerConfig.SNOW_CANNON_COOLDOWN.get()
+        )
+
+        OtherUtil.recoil(player, ServerConfig.SNOW_CANNON_RECOIL.get().toFloat())
 
         return InteractionResultHolder.sidedSuccess(usedStack, level.isClientSide)
     }

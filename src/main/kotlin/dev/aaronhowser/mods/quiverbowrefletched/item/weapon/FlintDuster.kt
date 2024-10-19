@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.quiverbowrefletched.item.weapon
 
+import dev.aaronhowser.mods.quiverbowrefletched.config.ServerConfig
 import dev.aaronhowser.mods.quiverbowrefletched.item.base.BasicAmmoHoldingItem
 import dev.aaronhowser.mods.quiverbowrefletched.registry.ModItems
 import net.minecraft.core.BlockPos
@@ -68,6 +69,7 @@ class FlintDuster : BasicAmmoHoldingItem(
         return true
     }
 
+    //TODO: Implement targeting entities
     override fun use(
         level: Level,
         player: Player,
@@ -79,7 +81,10 @@ class FlintDuster : BasicAmmoHoldingItem(
             ClipContext(
                 player.eyePosition,
                 player.eyePosition.add(
-                    player.calculateViewVector(player.xRot, player.yRot).normalize().scale(7.0)
+                    player
+                        .calculateViewVector(player.xRot, player.yRot)
+                        .normalize()
+                        .scale(ServerConfig.FLINT_DUSTER_RANGE.get())
                 ),
                 ClipContext.Block.OUTLINE,
                 ClipContext.Fluid.NONE,

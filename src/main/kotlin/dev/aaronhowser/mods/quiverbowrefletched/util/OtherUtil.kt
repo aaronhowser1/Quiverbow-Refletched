@@ -50,10 +50,10 @@ object OtherUtil {
         return input.flatMap { stack -> List(stack.count) { stack.copyWithCount(1) } }
     }
 
-    fun recoil(livingEntity: LivingEntity, amount: Double) {
+    fun recoil(livingEntity: LivingEntity, amount: Number) {
         val direction = livingEntity.lookAngle
         livingEntity.knockback(
-            amount * 0.08f,
+            amount.toDouble() * 0.08f,
             direction.x,
             direction.z
         )
