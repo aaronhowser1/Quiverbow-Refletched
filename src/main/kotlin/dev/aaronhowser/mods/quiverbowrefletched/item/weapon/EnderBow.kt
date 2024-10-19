@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.quiverbowrefletched.item.weapon
 
+import dev.aaronhowser.mods.quiverbowrefletched.config.ServerConfig
 import dev.aaronhowser.mods.quiverbowrefletched.entity.EnderBowGuideProjectile
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.entity.LivingEntity
@@ -26,8 +27,7 @@ class EnderBow : BowItem(
         super.onUseTick(level, livingEntity, stack, remainingUseDuration)
 
         if (level is ServerLevel) {
-
-            if (level.gameTime % 5 != 0L) return
+            if (level.gameTime % ServerConfig.ENDER_BOW_GUIDE_FREQUENCY.get() != 0L) return
 
             val projectileStack = livingEntity.getProjectile(stack)
             if (projectileStack.isEmpty) return

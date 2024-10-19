@@ -98,8 +98,8 @@ class ServerConfig(
         lateinit var DRAGON_MORTAR_DAMAGE_MINIMUM: ModConfigSpec.DoubleValue
         lateinit var DRAGON_MORTAR_DAMAGE_MAXIMUM: ModConfigSpec.DoubleValue
 
-        lateinit var ENDER_BOW_ZOOM_FACTOR: ModConfigSpec.DoubleValue
-        lateinit var ENDER_BOW_GUIDE_FREQUENCY: ModConfigSpec.IntValue      //TODO: Clientside? Don't think it can be
+        lateinit var ENDER_BOW_ZOOM_FACTOR: ModConfigSpec.DoubleValue       //TODO: Move this to client config (and also check if it even should be there, and implement if so)
+        lateinit var ENDER_BOW_GUIDE_FREQUENCY: ModConfigSpec.IntValue
 
         lateinit var ENDER_RAIL_ACCELERATOR_GRIEFING: ModConfigSpec.BooleanValue
         lateinit var ENDER_RAIL_ACCELERATOR_HIT_EXPLOSION_RADIUS: ModConfigSpec.DoubleValue
@@ -111,7 +111,7 @@ class ServerConfig(
 
         lateinit var ENDER_RIFLE_DAMAGE_INCREASE_PER_TICK: ModConfigSpec.DoubleValue    //TODO: IMO this should be a factor of distance traveled, not time in air
         lateinit var ENDER_RIFLE_PROJECTILE_SPEED: ModConfigSpec.DoubleValue
-        lateinit var ENDER_RIFLE_ZOOM_FACTOR: ModConfigSpec.DoubleValue
+        lateinit var ENDER_RIFLE_ZOOM_FACTOR: ModConfigSpec.DoubleValue         //TODO: Move this to client config
         lateinit var ENDER_RIFLE_RECOIL: ModConfigSpec.DoubleValue
         lateinit var ENDER_RIFLE_KNOCKBACK: ModConfigSpec.DoubleValue
         lateinit var ENDER_RIFLE_COOLDOWN: ModConfigSpec.IntValue
@@ -144,7 +144,7 @@ class ServerConfig(
         lateinit var FOUR_HEADED_DRAGON_BOX_DAMAGE_MINIMUM: ModConfigSpec.DoubleValue
         lateinit var FOUR_HEADED_DRAGON_BOX_DAMAGE_MAXIMUM: ModConfigSpec.DoubleValue
 
-        lateinit var FROST_LANCER_ZOOM_FACTOR: ModConfigSpec.DoubleValue
+        lateinit var FROST_LANCER_ZOOM_FACTOR: ModConfigSpec.DoubleValue            //TODO: Move this to client config
         lateinit var FROST_LANCER_PROJECTILE_SPEED: ModConfigSpec.DoubleValue
         lateinit var FROST_LANCER_RECOIL: ModConfigSpec.DoubleValue
         lateinit var FROST_LANCER_KNOCKBACK: ModConfigSpec.DoubleValue
