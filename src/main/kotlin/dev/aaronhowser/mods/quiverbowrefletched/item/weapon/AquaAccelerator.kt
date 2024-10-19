@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.quiverbowrefletched.item.weapon
 
+import dev.aaronhowser.mods.quiverbowrefletched.config.ServerConfig
 import dev.aaronhowser.mods.quiverbowrefletched.entity.AquaAcceleratorProjectile
 import dev.aaronhowser.mods.quiverbowrefletched.item.base.BasicAmmoHoldingItem
 import net.minecraft.world.InteractionHand
@@ -39,7 +40,7 @@ class AquaAccelerator : BasicAmmoHoldingItem(
             player.xRot,
             player.yRot,
             0.0f,
-            1.5f,
+            ServerConfig.AQUA_ACCELERATOR_PROJECTILE_SPEED.get().toFloat(),
             1.0f
         )
 

@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.quiverbowrefletched.item.weapon
 
+import dev.aaronhowser.mods.quiverbowrefletched.config.ServerConfig
 import dev.aaronhowser.mods.quiverbowrefletched.entity.ArrowMortarProjectile
 import dev.aaronhowser.mods.quiverbowrefletched.item.ammo.AdvancedAmmoClipItem
 import dev.aaronhowser.mods.quiverbowrefletched.registry.ModItems
@@ -24,6 +25,10 @@ class ArrowMortar : AdvancedAmmoClipItem(
         usedHand: InteractionHand
     ): InteractionResultHolder<ItemStack> {
         val usedStack = player.getItemInHand(usedHand)
+
+        if (player.cooldowns.isOnCooldown(ModItems.ARROW_MORTAR.get()) && !player.hasInfiniteMaterials()) {
+            return InteractionResultHolder.fail(usedStack)
+        }
 
         if (getAmmoCount(usedStack) <= 0 && !player.hasInfiniteMaterials()) {
             return InteractionResultHolder.fail(usedStack)
@@ -55,8 +60,20 @@ class ArrowMortar : AdvancedAmmoClipItem(
             player.xRot,
             player.yRot,
             0.0f,
-            1.5f,
+            ServerConfig.ARROW_MORTAR_PROJECTILE_SPEED.get().toFloat(),
             1.0f
+        )
+
+        if (!player.hasInfiniteMaterials()) {
+            player.cooldowns.addCooldown(
+                ModItems.ARROW_MORTAR.get(),
+                ServerConfig.ARROW_MORTAR_COOLDOWN.get()
+            )
+        }
+
+        OtherUtil.recoil(
+            player,
+            ServerConfig.ARROW_MORTAR_RECOIL.get()
         )
 
         return InteractionResultHolder.sidedSuccess(usedStack, level.isClientSide)

@@ -48,8 +48,6 @@ class ServerConfig(
         lateinit var ARROW_MORTAR_PROJECTILE_SPEED: ModConfigSpec.DoubleValue
         lateinit var ARROW_MORTAR_RECOIL: ModConfigSpec.DoubleValue
         lateinit var ARROW_MORTAR_COOLDOWN: ModConfigSpec.IntValue
-        lateinit var ARROW_MORTAR_DAMAGE_MINIMUM: ModConfigSpec.DoubleValue
-        lateinit var ARROW_MORTAR_DAMAGE_MAXIMUM: ModConfigSpec.DoubleValue
 
         lateinit var AUTO_CROSSBOW_PROJECTILE_SPEED: ModConfigSpec.DoubleValue
         lateinit var AUTO_CROSSBOW_KNOCKBACK: ModConfigSpec.DoubleValue
@@ -412,14 +410,6 @@ class ServerConfig(
         ARROW_MORTAR_COOLDOWN = builder
             .comment("How long should the Arrow Mortar cooldown be?")
             .defineInteger("cooldown", 20)
-
-        ARROW_MORTAR_DAMAGE_MINIMUM = builder
-            .comment("What is the minimum damage Arrow Mortar can deal?")
-            .defineDouble("damage_minimum", 2)
-
-        ARROW_MORTAR_DAMAGE_MAXIMUM = builder
-            .comment("What is the maximum damage Arrow Mortar can deal?")
-            .defineDouble("damage_maximum", 10)
 
         builder.pop()
     }
