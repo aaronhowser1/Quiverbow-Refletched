@@ -311,49 +311,63 @@ class ServerConfig(
     }
 
     init {
-        aquaAccelerator()
-        armsAssistant()
-        arrowMortar()
-        autoCrossbow()
-        blazeCrossbow()
-        coinTosser()
         compactCrossbow()
+        blazeCrossbow()
         doubleCrossbow()
-        dragonBox()
-        dragonMortar()
-        enderBow()
-        enderRailAccelerator()
-        enderRifle()
-        fenFire()
-        fireworksRocketLauncher()
-        flintDuster()
-        fourHeadedDragonBox()
-        frostLancer()
-        hiddenEnderPistol()
+        autoCrossbow()
         improvedAutoCrossbow()
-        improvedRocketLauncher()
-        lapisCoil()
-        lightningRed()
-        modifiedCoinTosser()
+        arrowMortar()
+
+        dragonMortar()
+        dragonBox()
+        fourHeadedDragonBox()
+
+        powderKnuckle()
         modifiedPowderKnuckle()
-        netherBellows()
+
+        flintDuster()
+
+        enderBow()
+        enderRifle()
+        frostLancer()
+
+        coinTosser()
+        modifiedCoinTosser()
+
+        fireworksRocketLauncher()
+        improvedRocketLauncher()
+
+        lapisCoil()
+
         obsidianSpearRifle()
         obsidianSplinterPistol()
         obsidianWitherRifle()
-        potatosser()
-        powderKnuckle()
-        proximityThornThrower()
-        rayOfHope()
-        redstoneSprayer()
-        seedSweeper()
-        seedling()
-        silkenSpinner()
-        snowCannon()
-        soulCairn()
-//        sugarEngine()
-//        sunray()
-//        thornSpitter()
 
+        redstoneSprayer()
+        netherBellows()
+
+        snowCannon()
+
+        potatosser()
+        seedling()
+        thornSpitter()
+        proximityThornThrower()
+        seedSweeper()
+        sugarEngine()
+
+        fenFire()
+        aquaAccelerator()
+        silkenSpinner()
+
+        hiddenEnderPistol()
+        soulCairn()
+
+        lightningRed()
+        sunray()
+        rayOfHope()
+
+        enderRailAccelerator()
+        armsAssistant()
 
         builder.build()
     }
@@ -1500,6 +1514,98 @@ class ServerConfig(
         SOUL_CAIRN_RECOIL = builder
             .comment("How much recoil should the Soul Cairn have?")
             .defineDouble("recoil", 4)
+
+        builder.pop()
+    }
+
+    private fun sugarEngine() {
+        builder
+            .comment("Sugar Engine settings")
+            .push("sugar_engine")
+
+        SUGAR_ENGINE_PROJECTILE_SPEED = builder
+            .comment("How fast should Sugar Engine projectiles be?")
+            .defineDouble("projectile_speed", 2)
+
+        SUGAR_ENGINE_INACCURACY = builder
+            .comment("How inaccurate should the Sugar Engine be? 0 is perfectly accurate.")
+            .defineDouble("inaccuracy", 10)
+
+        SUGAR_ENGINE_RECOIL = builder
+            .comment("How much recoil should the Sugar Engine have?")
+            .defineDouble("recoil", 1)
+
+        SUGAR_ENGINE_WIND_UP_TIME = builder
+            .comment("How long should the Sugar Engine take to wind up?")
+            .defineInteger("wind_up_time", 10)  //TODO: Check
+
+        SUGAR_ENGINE_DAMAGE_MINIMUM = builder
+            .comment("What is the minimum damage a Sugar Engine can deal?")
+            .defineDouble("damage_minimum", 1)
+
+        SUGAR_ENGINE_DAMAGE_MAXIMUM = builder
+            .comment("What is the maximum damage a Sugar Engine can deal?")
+            .defineDouble("damage_maximum", 3)
+
+        builder.pop()
+    }
+
+    private fun sunray() {
+        builder
+            .comment("Sunray settings")
+            .push("sunray")
+
+        SUNRAY_RECOIL = builder
+            .comment("How much recoil should the Sunray have?")
+            .defineDouble("recoil", 3)
+
+        SUNRAY_BEAM_LIFESPAN = builder
+            .comment("How long should the Sunray beam last, at max?")
+            .defineInteger("beam_lifespan", 3 * 20)
+
+        SUNRAY_TARGET_BURN_TIME = builder
+            .comment("How long should targets burn for?")
+            .defineInteger("target_burn_time", 10 * 20)
+
+        SUNRAY_COOLDOWN = builder
+            .comment("How long should the Sunray cooldown be?")
+            .defineInteger("cooldown", 6 * 20)
+
+        SUNRAY_DAMAGE_MINIMUM = builder
+            .comment("What is the minimum damage a Sunray can deal?")
+            .defineDouble("damage_minimum", 14)
+
+        SUNRAY_DAMAGE_MAXIMUM = builder
+            .comment("What is the maximum damage a Sunray can deal?")
+            .defineDouble("damage_maximum", 20)
+
+        SUNRAY_LIGHT_LEVEL_REQUIRED = builder
+            .comment("What light level of sunlight is required for the Sunray to recharge??")
+            .defineInteger("light_level_required", 12)
+
+        builder.pop()
+    }
+
+    private fun thornSpitter() {
+        builder
+            .comment("Thorn Spitter settings")
+            .push("thorn_spitter")
+
+        THORN_SPITTER_PROJECTILE_SPEED = builder
+            .comment("How fast should Thorn Spitter projectiles be?")
+            .defineDouble("projectile_speed", 1.75)
+
+        THORN_SPITTER_COOLDOWN = builder
+            .comment("How long should the Thorn Spitter cooldown be?")
+            .defineInteger("cooldown", 10)
+
+        THORN_SPITTER_DAMAGE_MINIMUM = builder
+            .comment("What is the minimum damage a Thorn Spitter can deal?")
+            .defineDouble("damage_minimum", 1)
+
+        THORN_SPITTER_DAMAGE_MAXIMUM = builder
+            .comment("What is the maximum damage a Thorn Spitter can deal?")
+            .defineDouble("damage_maximum", 2)
 
         builder.pop()
     }
