@@ -28,13 +28,15 @@ class SnowCannon : ReloadableWeaponItem(
     ): InteractionResultHolder<ItemStack> {
         val usedStack = player.getItemInHand(usedHand)
 
-        if (player.cooldowns.isOnCooldown(ModItems.SNOW_CANNON.get())) {
+        if (!player.hasInfiniteMaterials() && player.cooldowns.isOnCooldown(ModItems.SNOW_CANNON.get())) {
             return InteractionResultHolder.fail(usedStack)
         }
 
-        repeat(4) {
+        var success = true
+        for (i in 0 until 4) {
             if (!entityUse(player, usedStack)) {
-                return InteractionResultHolder.fail(usedStack)
+                success = false
+                break
             }
 
             val projectile = projectileSupplier(player)
@@ -49,10 +51,16 @@ class SnowCannon : ReloadableWeaponItem(
             )
         }
 
-        player.cooldowns.addCooldown(
-            ModItems.SNOW_CANNON.get(),
-            ServerConfig.SNOW_CANNON_COOLDOWN.get()
-        )
+        if (!success) {
+            return InteractionResultHolder.fail(usedStack)
+        }
+
+        if (!player.hasInfiniteMaterials()) {
+            player.cooldowns.addCooldown(
+                ModItems.SNOW_CANNON.get(),
+                ServerConfig.SNOW_CANNON_COOLDOWN.get()
+            )
+        }
 
         OtherUtil.recoil(player, ServerConfig.SNOW_CANNON_RECOIL.get().toFloat())
 
