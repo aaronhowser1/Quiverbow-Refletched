@@ -84,6 +84,16 @@ object ModEntityTypes {
                 .build("ender_rifle_round")
         })
 
+    val COIN_TOSSER_PROJECTILE: DeferredHolder<EntityType<*>, EntityType<CoinTosserProjectile>> =
+        ENTITY_TYPE_REGISTRY.register("coin_tosser_shot", Supplier {
+            EntityType.Builder.of(
+                ::CoinTosserProjectile,
+                MobCategory.MISC
+            )
+                .sized(0.5f, 0.5f)
+                .build("coin_tosser_shot")
+        })
+
     val FROST_LANCER_PROJECTILE: DeferredHolder<EntityType<*>, EntityType<FrostLancerProjectile>> =
         ENTITY_TYPE_REGISTRY.register("frost_lancer_round", Supplier {
             EntityType.Builder.of(
