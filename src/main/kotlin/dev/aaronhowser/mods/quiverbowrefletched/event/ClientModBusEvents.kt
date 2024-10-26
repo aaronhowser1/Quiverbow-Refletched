@@ -51,6 +51,7 @@ object ClientModBusEvents {
         registerEntityRenderer(ModEntityTypes.SILKEN_SPINNER_PROJECTILE, ::ThrownItemRenderer)
         registerEntityRenderer(ModEntityTypes.FEN_FIRE_PROJECTILE, ::ThrownItemRenderer)
         registerEntityRenderer(ModEntityTypes.SNOW_CANNON_PROJECTILE, ::ThrownItemRenderer)
+        registerEntityRenderer(ModEntityTypes.COIN_TOSSER_PROJECTILE, ::ThrownItemRenderer)
     }
 
     @SubscribeEvent

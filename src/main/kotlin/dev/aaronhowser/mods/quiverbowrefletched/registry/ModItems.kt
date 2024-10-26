@@ -56,7 +56,7 @@ object ModItems {
     val IMPROVED_AUTO_CROSSBOW =
         register("auto_crossbow_improved") { GenericAmmoHoldingItem(maxAmmo = 16) }
     val COIN_TOSSER =
-        register("coin_tosser") { GenericAmmoHoldingItem(maxAmmo = 72) }
+        register("coin_tosser") { ReloadableWeaponItem.COIN_TOSSER }
     val MODIFIED_COIN_TOSSER =
         register("coin_tosser_modified") { GenericAmmoHoldingItem(maxAmmo = 72) }
     val DRAGON_BOX =
