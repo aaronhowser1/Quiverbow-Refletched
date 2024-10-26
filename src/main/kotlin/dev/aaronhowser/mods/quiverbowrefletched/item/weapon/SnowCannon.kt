@@ -7,21 +7,32 @@ import dev.aaronhowser.mods.quiverbowrefletched.util.OtherUtil
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResultHolder
 import net.minecraft.world.entity.player.Player
+import net.minecraft.world.entity.projectile.Projectile
+import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
 import net.minecraft.world.level.Level
 
 class SnowCannon : ReloadableWeaponItem(
-    projectileSupplier = ::SnowCannonProjectile,
-    projectileSpeedSupplier = { ServerConfig.SNOW_CANNON_PROJECTILE_SPEED.get().toFloat() },
-    cooldownSupplier = { ServerConfig.SNOW_CANNON_COOLDOWN.get() },
-    reloadItems = mapOf(
-        Items.SNOWBALL to 1,
-        Items.SNOW_BLOCK to 4
-    ),
     maxAmmo = 32,
     barColor = 0xFFFFFF
 ) {
+
+    override fun getProjectile(player: Player): Projectile {
+        return SnowCannonProjectile(player)
+    }
+
+    override val projectileSpeed: Float
+        get() = ServerConfig.SNOW_CANNON_PROJECTILE_SPEED.get().toFloat()
+
+    override val cooldown: Int
+        get() = ServerConfig.SNOW_CANNON_COOLDOWN.get()
+
+    override val reloadItems: Map<Item, Int>
+        get() = mapOf(
+            Items.SNOWBALL to 1,
+            Items.SNOW_BLOCK to 4
+        )
 
     override fun use(
         level: Level,
@@ -41,7 +52,7 @@ class SnowCannon : ReloadableWeaponItem(
                 break
             }
 
-            val projectile = projectileSupplier(player)
+            val projectile = getProjectile(player)
             level.addFreshEntity(projectile)
             projectile.shootFromRotation(
                 player,

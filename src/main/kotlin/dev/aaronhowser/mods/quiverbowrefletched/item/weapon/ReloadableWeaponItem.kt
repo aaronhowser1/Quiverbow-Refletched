@@ -19,17 +19,19 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
 import net.minecraft.world.level.Level
 
-open class ReloadableWeaponItem(
-    protected val projectileSupplier: (Player) -> Projectile,
-    protected val projectileSpeedSupplier: () -> Float,
-    protected val cooldownSupplier: () -> Int,
-    protected val reloadItems: Map<Item, Int>,
+abstract class ReloadableWeaponItem(
     maxAmmo: Int,
     barColor: Int
 ) : BasicAmmoHoldingItem(
     maxAmmo = maxAmmo,
     barColor = barColor
 ) {
+
+    protected abstract fun getProjectile(player: Player): Projectile
+
+    protected abstract val projectileSpeed: Float
+    protected abstract val cooldown: Int
+    protected abstract val reloadItems: Map<Item, Int>
 
     override fun use(
         level: Level,
@@ -46,19 +48,19 @@ open class ReloadableWeaponItem(
             return InteractionResultHolder.fail(usedStack)
         }
 
-        val projectile = projectileSupplier(player)
+        val projectile = getProjectile(player)
         level.addFreshEntity(projectile)
         projectile.shootFromRotation(
             player,
             player.xRot,
             player.yRot,
             0.0f,
-            projectileSpeedSupplier(),
+            projectileSpeed,
             1.0f
         )
 
         if (!player.hasInfiniteMaterials()) {
-            player.cooldowns.addCooldown(this, cooldownSupplier())
+            player.cooldowns.addCooldown(this, cooldown)
         }
 
         return InteractionResultHolder.sidedSuccess(usedStack, level.isClientSide)
@@ -101,32 +103,59 @@ open class ReloadableWeaponItem(
     }
 
     companion object {
-        val SILKEN_SPINNER = ReloadableWeaponItem(
-            projectileSupplier = ::SilkenSpinnerProjectile,
-            projectileSpeedSupplier = { ServerConfig.SILKEN_SPINNER_PROJECTILE_SPEED.get().toFloat() },
-            cooldownSupplier = { ServerConfig.SILKEN_SPINNER_COOLDOWN.get() },
-            reloadItems = mapOf(Items.COBWEB to 1),
+        val SILKEN_SPINNER = object : ReloadableWeaponItem(
             maxAmmo = 8,
             barColor = 0x999999
-        )
+        ) {
+            override fun getProjectile(player: Player): Projectile {
+                return SilkenSpinnerProjectile(player)
+            }
 
-        val FEN_FIRE = ReloadableWeaponItem(
-            projectileSupplier = ::FenFireProjectile,
-            projectileSpeedSupplier = { ServerConfig.FEN_FIRE_PROJECTILE_SPEED.get().toFloat() },
-            cooldownSupplier = { ServerConfig.FEN_FIRE_COOLDOWN.get() },
-            reloadItems = mapOf(Items.GLOWSTONE to 4, Items.GLOWSTONE_DUST to 1),
+            override val projectileSpeed: Float
+                get() = ServerConfig.SILKEN_SPINNER_PROJECTILE_SPEED.get().toFloat()
+
+            override val cooldown: Int
+                get() = ServerConfig.SILKEN_SPINNER_COOLDOWN.get()
+
+            override val reloadItems: Map<Item, Int> = mapOf(Items.COBWEB to 1)
+        }
+
+        val FEN_FIRE = object : ReloadableWeaponItem(
             maxAmmo = 32,
             barColor = 0xFFA500
-        )
+        ) {
+            override fun getProjectile(player: Player): Projectile {
+                return FenFireProjectile(player)
+            }
 
-        val ENDER_RIFLE = ReloadableWeaponItem(
-            projectileSupplier = ::EnderRifleRoundProjectile,
-            projectileSpeedSupplier = { ServerConfig.ENDER_RIFLE_PROJECTILE_SPEED.get().toFloat() },
-            cooldownSupplier = { ServerConfig.ENDER_RIFLE_COOLDOWN.get() },
-            reloadItems = mapOf(Items.IRON_INGOT to 1),
+            override val projectileSpeed: Float
+                get() = ServerConfig.FEN_FIRE_PROJECTILE_SPEED.get().toFloat()
+
+            override val cooldown: Int
+                get() = ServerConfig.FEN_FIRE_COOLDOWN.get()
+
+            override val reloadItems: Map<Item, Int> = mapOf(
+                Items.GLOWSTONE to 4,
+                Items.GLOWSTONE_DUST to 1
+            )
+        }
+
+        val ENDER_RIFLE = object : ReloadableWeaponItem(
             maxAmmo = 16,
-            barColor = 0x000000
-        )
+            barColor = 0x5A2991
+        ) {
+            override fun getProjectile(player: Player): Projectile {
+                return EnderRifleRoundProjectile(player)
+            }
+
+            override val projectileSpeed: Float
+                get() = ServerConfig.ENDER_RIFLE_PROJECTILE_SPEED.get().toFloat()
+
+            override val cooldown: Int
+                get() = ServerConfig.ENDER_RIFLE_COOLDOWN.get()
+
+            override val reloadItems: Map<Item, Int> = mapOf(Items.IRON_INGOT to 1)
+        }
     }
 
 }
