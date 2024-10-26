@@ -153,14 +153,14 @@ abstract class AmmoClipHoldingItem(
         return true
     }
 
+    override fun getBarColor(stack: ItemStack): Int {
+        val clipStack = getClip(stack)
+        return clipStack.item.getBarColor(clipStack)
+    }
+
     override fun getBarWidth(stack: ItemStack): Int {
         val clipStack = getClip(stack)
-        val clipItem = clipStack.item
-        if (clipItem !is BasicAmmoHoldingItem) return 0
-
-        val maxAmmo = clipItem.maxAmmo
-
-        return (BasicAmmoHoldingItem.getAmmoCount(clipStack) / maxAmmo.toFloat() * 13).toInt()
+        return clipStack.item.getBarWidth(clipStack)
     }
 
     override fun isBarVisible(stack: ItemStack): Boolean {
