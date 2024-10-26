@@ -71,6 +71,15 @@ class FrostLancerProjectile(
             )
         }
 
+        val knockback = ServerConfig.FROST_LANCER_KNOCKBACK.get()
+        if (knockback > 0) {
+            hitEntity.knockback(
+                knockback * 0.6 / this.deltaMovement.length(),
+                -this.deltaMovement.x,
+                -this.deltaMovement.z
+            )
+        }
+
     }
 
     override fun getDefaultPickupItem(): ItemStack {
