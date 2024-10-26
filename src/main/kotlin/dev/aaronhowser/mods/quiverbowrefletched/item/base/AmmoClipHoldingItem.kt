@@ -48,17 +48,40 @@ abstract class AmmoClipHoldingItem(
         ): Boolean {
             require(amount > 0) { "Amount must be a positive number" }
             if (livingEntity.hasInfiniteMaterials()) return true
-            return consumeClipAmmo(stack, amount)
+            val success = consumeClipAmmo(stack, amount)
+
+            if (getClipAmmo(stack) == 0 && livingEntity is Player) {
+                ejectClip(stack, livingEntity)
+                livingEntity.level().playSound(
+                    null,
+                    livingEntity.blockPosition(),
+                    SoundEvents.ITEM_PICKUP,
+                    SoundSource.PLAYERS,
+                    1f,
+                    0.33f
+                )
+            }
+
+            return success
         }
 
         protected fun consumeClipAmmo(stack: ItemStack, amount: Int): Boolean {
-            val clipStack = getClip(stack)
-            val currentAmount = clipStack.get(ModDataComponents.BASIC_AMMO_COMPONENT.get()) ?: return false
+            val currentAmount = getClipAmmo(stack)
             if (currentAmount < amount) return false
 
             val newAmount = currentAmount - amount
-            clipStack.set(ModDataComponents.BASIC_AMMO_COMPONENT.get(), newAmount)
-            stack.set(ModDataComponents.ADVANCED_AMMO_COMPONENT.get(), ItemStackListComponent(clipStack))
+
+            val clipStack = getClip(stack).copy()
+            clipStack.set(
+                ModDataComponents.BASIC_AMMO_COMPONENT.get(),
+                newAmount
+            )
+
+            stack.set(
+                ModDataComponents.ADVANCED_AMMO_COMPONENT.get(),
+                ItemStackListComponent(clipStack)
+            )
+
             return true
         }
 
