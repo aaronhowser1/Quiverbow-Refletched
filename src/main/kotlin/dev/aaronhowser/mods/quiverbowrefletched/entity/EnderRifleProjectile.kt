@@ -32,14 +32,14 @@ class EnderRifleProjectile(
 
     override fun onHitEntity(result: EntityHitResult) {
         val hitEntity = result.entity as? LivingEntity ?: return
-
         val damageSource = this.damageSources().thrown(this, owner)
 
-        val damage = minOf(
-            ServerConfig.ENDER_RIFLE_DAMAGE_MINIMUM.get()
-                    + (this.tickCount * ServerConfig.ENDER_RIFLE_DAMAGE_INCREASE_PER_TICK.get()),
-            ServerConfig.ENDER_RIFLE_DAMAGE_MAXIMUM.get()
-        )
+        val damage =
+            minOf(
+                ServerConfig.ENDER_RIFLE_DAMAGE_MINIMUM.get()
+                        + (this.tickCount * ServerConfig.ENDER_RIFLE_DAMAGE_INCREASE_PER_TICK.get()),
+                ServerConfig.ENDER_RIFLE_DAMAGE_MAXIMUM.get()
+            )
 
         hitEntity.hurt(damageSource, damage.toFloat())
         hitEntity.knockback(
