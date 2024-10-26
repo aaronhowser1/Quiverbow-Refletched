@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.quiverbowrefletched.entity
 
+import dev.aaronhowser.mods.quiverbowrefletched.config.ServerConfig
 import dev.aaronhowser.mods.quiverbowrefletched.registry.ModEntityTypes
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.LivingEntity
@@ -9,6 +10,7 @@ import net.minecraft.world.item.Items
 import net.minecraft.world.level.Level
 import net.minecraft.world.phys.BlockHitResult
 import net.minecraft.world.phys.EntityHitResult
+import kotlin.random.Random
 
 class EnderRifleProjectile(
     entityType: EntityType<EnderRifleProjectile>,
@@ -23,8 +25,8 @@ class EnderRifleProjectile(
         this.owner = shooter
     }
 
-    override fun isNoGravity(): Boolean {
-        return true
+    override fun getDefaultGravity(): Double {
+        return super.getDefaultGravity() / 2
     }
 
     //TODO: Maybe increase scale with time? Maybe add a trail effect?
@@ -34,8 +36,17 @@ class EnderRifleProjectile(
 
         val damageSource = this.damageSources().thrown(this, owner)
 
-        // TODO: Update the damage value
-        hitEntity.hurt(damageSource, 4f + (this.tickCount * 0.1f))
+        val damage = Random.nextDouble(
+            from = ServerConfig.ENDER_RIFLE_DAMAGE_MINIMUM.get().toDouble(),
+            until = ServerConfig.ENDER_RIFLE_DAMAGE_MAXIMUM.get().toDouble()
+        ) + (this.tickCount * ServerConfig.ENDER_RIFLE_DAMAGE_INCREASE_PER_TICK.get())
+
+        hitEntity.hurt(damageSource, damage.toFloat())
+        hitEntity.knockback(
+            ServerConfig.ENDER_RIFLE_KNOCKBACK.get(),
+            hitEntity.x - this.x,
+            hitEntity.z - this.z
+        )
 
         this.discard()
     }
