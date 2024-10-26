@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.quiverbowrefletched.item.weapon
 
+import dev.aaronhowser.mods.quiverbowrefletched.config.ServerConfig
 import dev.aaronhowser.mods.quiverbowrefletched.entity.EnderRifleRoundProjectile
 import dev.aaronhowser.mods.quiverbowrefletched.entity.FenFireProjectile
 import dev.aaronhowser.mods.quiverbowrefletched.entity.SilkenSpinnerProjectile
@@ -20,6 +21,8 @@ import net.minecraft.world.level.Level
 
 open class ReloadableWeaponItem(
     protected val projectileSupplier: (Player) -> Projectile,
+    protected val projectileSpeedSupplier: () -> Float,
+    protected val cooldownSupplier: () -> Int,
     protected val reloadItems: Map<Item, Int>,
     maxAmmo: Int,
     barColor: Int
@@ -35,6 +38,10 @@ open class ReloadableWeaponItem(
     ): InteractionResultHolder<ItemStack> {
         val usedStack = player.getItemInHand(usedHand)
 
+        if (player.cooldowns.isOnCooldown(this) && !player.hasInfiniteMaterials()) {
+            return InteractionResultHolder.fail(usedStack)
+        }
+
         if (!entityUse(player, usedStack)) {
             return InteractionResultHolder.fail(usedStack)
         }
@@ -46,9 +53,13 @@ open class ReloadableWeaponItem(
             player.xRot,
             player.yRot,
             0.0f,
-            1.5f,
+            projectileSpeedSupplier(),
             1.0f
         )
+
+        if (!player.hasInfiniteMaterials()) {
+            player.cooldowns.addCooldown(this, cooldownSupplier())
+        }
 
         return InteractionResultHolder.sidedSuccess(usedStack, level.isClientSide)
     }
@@ -92,6 +103,8 @@ open class ReloadableWeaponItem(
     companion object {
         val SILKEN_SPINNER = ReloadableWeaponItem(
             projectileSupplier = ::SilkenSpinnerProjectile,
+            projectileSpeedSupplier = { ServerConfig.SILKEN_SPINNER_PROJECTILE_SPEED.get().toFloat() },
+            cooldownSupplier = { ServerConfig.SILKEN_SPINNER_COOLDOWN.get() },
             reloadItems = mapOf(Items.COBWEB to 1),
             maxAmmo = 8,
             barColor = 0x999999
@@ -99,13 +112,17 @@ open class ReloadableWeaponItem(
 
         val FEN_FIRE = ReloadableWeaponItem(
             projectileSupplier = ::FenFireProjectile,
+            projectileSpeedSupplier = { ServerConfig.FEN_FIRE_PROJECTILE_SPEED.get().toFloat() },
+            cooldownSupplier = { ServerConfig.FEN_FIRE_COOLDOWN.get() },
             reloadItems = mapOf(Items.GLOWSTONE to 4, Items.GLOWSTONE_DUST to 1),
             maxAmmo = 32,
             barColor = 0xFFA500
         )
 
         val ENDER_RIFLE = ReloadableWeaponItem(
-            projectileSupplier = ::EnderRifleRoundProjectile,   //TODO: increase velocity a lot
+            projectileSupplier = ::EnderRifleRoundProjectile,
+            projectileSpeedSupplier = { ServerConfig.ENDER_RIFLE_PROJECTILE_SPEED.get().toFloat() },
+            cooldownSupplier = { ServerConfig.ENDER_RIFLE_COOLDOWN.get() },
             reloadItems = mapOf(Items.IRON_INGOT to 1),
             maxAmmo = 16,
             barColor = 0x000000

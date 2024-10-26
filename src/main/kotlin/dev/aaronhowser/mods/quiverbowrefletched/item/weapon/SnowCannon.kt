@@ -12,8 +12,10 @@ import net.minecraft.world.item.Items
 import net.minecraft.world.level.Level
 
 class SnowCannon : ReloadableWeaponItem(
-    ::SnowCannonProjectile,
-    mapOf(
+    projectileSupplier = ::SnowCannonProjectile,
+    projectileSpeedSupplier = { ServerConfig.SNOW_CANNON_PROJECTILE_SPEED.get().toFloat() },
+    cooldownSupplier = { ServerConfig.SNOW_CANNON_COOLDOWN.get() },
+    reloadItems = mapOf(
         Items.SNOWBALL to 1,
         Items.SNOW_BLOCK to 4
     ),
