@@ -20,6 +20,10 @@ class FrostLancerProjectile(
         this.owner = shooter
     }
 
+    override fun getDefaultGravity(): Double {
+        return super.getDefaultGravity() / 2
+    }
+
     override fun getDefaultPickupItem(): ItemStack {
         return ItemStack.EMPTY
     }

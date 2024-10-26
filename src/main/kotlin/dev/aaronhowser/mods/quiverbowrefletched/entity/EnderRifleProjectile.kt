@@ -10,7 +10,6 @@ import net.minecraft.world.item.Items
 import net.minecraft.world.level.Level
 import net.minecraft.world.phys.BlockHitResult
 import net.minecraft.world.phys.EntityHitResult
-import kotlin.random.Random
 
 class EnderRifleProjectile(
     entityType: EntityType<EnderRifleProjectile>,
@@ -36,10 +35,11 @@ class EnderRifleProjectile(
 
         val damageSource = this.damageSources().thrown(this, owner)
 
-        val damage = Random.nextDouble(
-            from = ServerConfig.ENDER_RIFLE_DAMAGE_MINIMUM.get().toDouble(),
-            until = ServerConfig.ENDER_RIFLE_DAMAGE_MAXIMUM.get().toDouble()
-        ) + (this.tickCount * ServerConfig.ENDER_RIFLE_DAMAGE_INCREASE_PER_TICK.get())
+        val damage = minOf(
+            ServerConfig.ENDER_RIFLE_DAMAGE_MINIMUM.get()
+                    + (this.tickCount * ServerConfig.ENDER_RIFLE_DAMAGE_INCREASE_PER_TICK.get()),
+            ServerConfig.ENDER_RIFLE_DAMAGE_MAXIMUM.get()
+        )
 
         hitEntity.hurt(damageSource, damage.toFloat())
         hitEntity.knockback(
