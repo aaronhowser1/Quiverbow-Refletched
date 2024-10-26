@@ -31,7 +31,7 @@ class CoinTosser(
 
         var success = true
         for (i in 0 until timesToShoot) {
-            if (!entityUse(player, usedStack)) {
+            if (!tryEntityUse(player, usedStack)) {
                 success = false
                 break
             }

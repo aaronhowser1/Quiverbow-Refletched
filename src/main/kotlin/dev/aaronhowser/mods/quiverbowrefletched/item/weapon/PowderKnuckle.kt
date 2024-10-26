@@ -42,7 +42,7 @@ class PowderKnuckle(
         if (player.level().isClientSide) return false
         if (entity !is LivingEntity) return false
 
-        val canShoot = entityUse(player, stack)
+        val canShoot = tryEntityUse(player, stack)
         if (!canShoot) return false
 
         val shouldDamageBlocks = if (!isModified) {
@@ -67,7 +67,7 @@ class PowderKnuckle(
     override fun useOn(context: UseOnContext): InteractionResult {
         val player = context.player ?: return InteractionResult.FAIL
 
-        val canUse = entityUse(player, context.itemInHand)
+        val canUse = tryEntityUse(player, context.itemInHand)
         if (!canUse) return InteractionResult.FAIL
 
         val level = context.level

@@ -123,7 +123,7 @@ class FlintDuster : BasicAmmoHoldingItem(
 
         if (!CommonHooks.canEntityDestroy(level, blockPos, player)) return false
 
-        if (!entityUse(player, tool)) return false
+        if (!tryEntityUse(player, tool)) return false
 
         Block.dropResources(
             blockState,

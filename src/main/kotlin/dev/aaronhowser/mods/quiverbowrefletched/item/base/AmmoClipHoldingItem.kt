@@ -7,8 +7,6 @@ import dev.aaronhowser.mods.quiverbowrefletched.registry.ModDataComponents
 import net.minecraft.network.chat.Component
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.sounds.SoundSource
-import net.minecraft.world.InteractionHand
-import net.minecraft.world.InteractionResultHolder
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.SlotAccess
 import net.minecraft.world.entity.player.Player
@@ -17,7 +15,6 @@ import net.minecraft.world.inventory.Slot
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.TooltipFlag
-import net.minecraft.world.level.Level
 
 abstract class AmmoClipHoldingItem(
     private val clipItem: BasicAmmoClipItem,
@@ -40,8 +37,11 @@ abstract class AmmoClipHoldingItem(
             return clipStack.get(ModDataComponents.BASIC_AMMO_COMPONENT.get()) ?: -1
         }
 
+        /**
+         * @return true if the entity successfully uses the ammo, either because they have infinite or the ammo was used
+         */
         @JvmStatic
-        protected fun entityUse(
+        protected fun tryEntityUse(
             livingEntity: LivingEntity,
             stack: ItemStack,
             amount: Int = 1
@@ -109,11 +109,25 @@ abstract class AmmoClipHoldingItem(
         return true
     }
 
-    override fun use(level: Level, player: Player, usedHand: InteractionHand): InteractionResultHolder<ItemStack> {
-        val usedStack = player.getItemInHand(usedHand)
-        if (player.isSecondaryUseActive && !level.isClientSide) ejectClip(usedStack, player)
+    override fun overrideStackedOnOther(
+        thisStack: ItemStack,
+        slot: Slot,
+        action: ClickAction,
+        player: Player
+    ): Boolean {
+        if (thisStack.count != 1) return false
+        if (action != ClickAction.SECONDARY || !slot.allowModification(player)) return false
 
-        return super.use(level, player, usedHand)
+        val clipStack = getClip(thisStack)
+        if (clipStack.isEmpty) return false
+
+        val otherStack = slot.item
+        if (!otherStack.isEmpty) return false
+
+        slot.set(clipStack.copy())
+        thisStack.set(ModDataComponents.ADVANCED_AMMO_COMPONENT.get(), ItemStackListComponent(1))
+
+        return true
     }
 
     override fun getBarWidth(stack: ItemStack): Int {

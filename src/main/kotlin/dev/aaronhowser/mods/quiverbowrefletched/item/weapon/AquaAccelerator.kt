@@ -29,7 +29,7 @@ class AquaAccelerator : BasicAmmoHoldingItem(
             return InteractionResultHolder.sidedSuccess(usedStack, level.isClientSide)
         }
 
-        if (!entityUse(player, usedStack)) {
+        if (!tryEntityUse(player, usedStack)) {
             return InteractionResultHolder.fail(usedStack)
         }
 
