@@ -9,6 +9,7 @@ import net.minecraft.sounds.SoundEvents
 import net.minecraft.sounds.SoundSource
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResultHolder
+import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.SlotAccess
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.inventory.ClickAction
@@ -39,7 +40,18 @@ abstract class AmmoClipHoldingItem(
             return clipStack.get(ModDataComponents.BASIC_AMMO_COMPONENT.get()) ?: -1
         }
 
-        fun consumeClipAmmo(stack: ItemStack, amount: Int): Boolean {
+        @JvmStatic
+        protected fun entityUse(
+            livingEntity: LivingEntity,
+            stack: ItemStack,
+            amount: Int = 1
+        ): Boolean {
+            require(amount > 0) { "Amount must be a positive number" }
+            if (livingEntity.hasInfiniteMaterials()) return true
+            return consumeClipAmmo(stack, amount)
+        }
+
+        protected fun consumeClipAmmo(stack: ItemStack, amount: Int): Boolean {
             val clipStack = getClip(stack)
             val currentAmount = clipStack.get(ModDataComponents.BASIC_AMMO_COMPONENT.get()) ?: return false
             if (currentAmount < amount) return false

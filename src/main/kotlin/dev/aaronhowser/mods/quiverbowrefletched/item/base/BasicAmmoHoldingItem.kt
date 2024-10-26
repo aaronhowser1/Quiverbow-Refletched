@@ -35,7 +35,8 @@ abstract class BasicAmmoHoldingItem(
         /**
          * @return true if the entity successfully uses the ammo, either because they have infinite or the ammo was used
          */
-        fun entityUse(
+        @JvmStatic
+        protected fun entityUse(
             livingEntity: LivingEntity,
             stack: ItemStack,
             amount: Int = 1

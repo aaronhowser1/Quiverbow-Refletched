@@ -200,26 +200,6 @@ abstract class ReloadableWeaponItem(
                     Items.SNOW_BLOCK to 4
                 )
         }
-
-        val COIN_TOSSER = object : ReloadableWeaponItem(
-            maxAmmo = 72,
-            barColor = 0xFFFF00
-        ) {
-            override fun getProjectile(player: Player): Projectile = CoinTosserProjectile(player, isModified = false)
-
-            override val projectileSpeed: Float
-                get() = ServerConfig.COIN_TOSSER_PROJECTILE_SPEED.get().toFloat()
-
-            override val cooldown: Int
-                get() = ServerConfig.COIN_TOSSER_COOLDOWN.get()
-
-            override val reloadItems: Map<Item, Int>
-                get() = mapOf(Items.GOLD_NUGGET to 1)
-
-            override val timesToShoot: Int = 9
-
-            override val inaccuracy: Float = 9f
-        }
     }
 
 }
