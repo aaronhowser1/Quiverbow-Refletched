@@ -4,6 +4,8 @@ import dev.aaronhowser.mods.quiverbowrefletched.config.ServerConfig
 import dev.aaronhowser.mods.quiverbowrefletched.registry.ModItems
 import net.minecraft.client.DeltaTracker
 import net.minecraft.client.gui.GuiGraphics
+import net.minecraft.world.entity.player.Player
+import net.minecraft.world.item.Item
 import net.neoforged.neoforge.client.event.CalculatePlayerTurnEvent
 import net.neoforged.neoforge.client.event.ComputeFovModifierEvent
 import net.neoforged.neoforge.client.event.RenderHandEvent
@@ -31,6 +33,8 @@ object ScopeUtils {
         event.isCanceled = true
     }
 
+    private fun eitherHandIs(player: Player, item: Item) = player.mainHandItem.`is`(item) || player.offhandItem.`is`(item)
+
     fun renderScope(guiGraphics: GuiGraphics, deltaTracker: DeltaTracker) {
         if (!ClientUtil.options.cameraType.isFirstPerson) {
             isScoped = false
@@ -46,16 +50,21 @@ object ScopeUtils {
             return
         }
 
-        val mainHandIsEnderRifle = player.mainHandItem.`is`(ModItems.ENDER_RIFLE)
-        val offHandIsEnderRifle = player.offhandItem.`is`(ModItems.ENDER_RIFLE)
-        if (!mainHandIsEnderRifle && !offHandIsEnderRifle) {
+
+        val zoomLevel = if (eitherHandIs(player, ModItems.ENDER_RIFLE.get())) {
+            ServerConfig.ENDER_BOW_ZOOM_FACTOR.get().toFloat()
+        } else if (eitherHandIs(player, ModItems.FROST_LANCER.get())) {
+            ServerConfig.FROST_LANCER_ZOOM_FACTOR.get().toFloat()
+        } else if (eitherHandIs(player, ModItems.ENDER_BOW.get())) {
+            ServerConfig.ENDER_BOW_ZOOM_FACTOR.get().toFloat()
+        } else {
             isScoped = false
             zoomFactor = 1f
             return
         }
 
         isScoped = true
-        zoomFactor = ServerConfig.ENDER_BOW_ZOOM_FACTOR.get().toFloat()     //TODO: Make this depend on what scoped item is being held
+        zoomFactor = zoomLevel
 
         RenderUtil.renderCenteredTexture(
             guiGraphics,
