@@ -68,51 +68,11 @@ class ModItemModelProvider(
 
         lapisMagazine()
 
-        val weapons = listOf(
-            ModItems.COMPACT_CROSSBOW,
-            ModItems.DOUBLE_CROSSBOW,
-            ModItems.BLAZE_CROSSBOW,
-            ModItems.AUTO_CROSSBOW,
-            ModItems.IMPROVED_AUTO_CROSSBOW,
-            ModItems.COIN_TOSSER,
-            ModItems.MODIFIED_COIN_TOSSER,
-            ModItems.DRAGON_BOX,
-            ModItems.FOUR_HEADED_DRAGON_BOX,
-            ModItems.LAPIS_COIL,
-            ModItems.THORN_SPITTER,
-            ModItems.PROXIMITY_THORN_THROWER,
-            ModItems.SUGAR_ENGINE,
-            ModItems.FIREWORKS_ROCKET_LAUNCHER,
-            ModItems.IMPROVED_ROCKET_LAUNCHER,
-            ModItems.ARROW_MORTAR,
-            ModItems.DRAGON_MORTAR,
-            ModItems.SEEDLING,
-            ModItems.POTATOSSER,
-            ModItems.SNOW_CANNON,
-            ModItems.ENDER_RIFLE,
-            ModItems.FROST_LANCER,
-            ModItems.OBSIDIAN_SPLINTER_PISTOL,
-            ModItems.OBSIDIAN_SPEAR_RIFLE,
-            ModItems.OBSIDIAN_WITHER_RIFLE,
-            ModItems.FEN_FIRE,
-            ModItems.FLINT_DUSTER,
-            ModItems.LIGHTNING_RED,
-            ModItems.SUNRAY,
-            ModItems.POWDER_KNUCKLE,
-            ModItems.MODIFIED_POWDER_KNUCKLE,
-            ModItems.NETHER_BELLOWS,
-            ModItems.REDSTONE_SPRAYER,
-            ModItems.SOUL_CAIRN,
-            ModItems.AQUA_ACCELERATOR,
-            ModItems.SILKEN_SPINNER,
-            ModItems.SEED_SWEEPER,
-            ModItems.RAY_OF_HOPE,
-            ModItems.ENDER_RAIL_ACCELERATOR,
+        val basicWeapons = listOf(
             ModItems.ARMS_ASSISTANT_TARGETING_HELPER,
-            ModItems.HIDDEN_ENDER_PISTOL,
         )
 
-        for (weapon in weapons) {
+        for (weapon in basicWeapons) {
             weapon(weapon.get())
         }
 
@@ -125,7 +85,7 @@ class ModItemModelProvider(
             pullingItem(item.get())
         }
 
-        val possiblyEmptyItems = listOf(
+        val possiblyEmptyAmmo = listOf(
             ModItems.GOLD_MAGAZINE,
             ModItems.LARGE_NETHERRACK_MAGAZINE,
             ModItems.LARGE_REDSTONE_MAGAZINE,
@@ -137,8 +97,55 @@ class ModItemModelProvider(
             ModItems.ENDER_QUARTZ_CLIP
         )
 
-        for (item in possiblyEmptyItems) {
+        for (item in possiblyEmptyAmmo) {
             ammoCanBeEmpty(item.get())
+        }
+
+        val possiblyEmptyWeapons = listOf(
+            ModItems.ARROW_MORTAR,
+            ModItems.AQUA_ACCELERATOR,
+            ModItems.AUTO_CROSSBOW,
+            ModItems.IMPROVED_AUTO_CROSSBOW,
+            ModItems.BLAZE_CROSSBOW,
+            ModItems.COIN_TOSSER,
+            ModItems.COMPACT_CROSSBOW,
+            ModItems.DOUBLE_CROSSBOW,
+            ModItems.DRAGON_BOX,
+            ModItems.DRAGON_MORTAR,
+            ModItems.ENDER_RAIL_ACCELERATOR,
+            ModItems.ENDER_RIFLE,
+            ModItems.FEN_FIRE,
+            ModItems.FIREWORKS_ROCKET_LAUNCHER,
+            ModItems.FLINT_DUSTER,
+            ModItems.FOUR_HEADED_DRAGON_BOX,
+            ModItems.FROST_LANCER,
+            ModItems.HIDDEN_ENDER_PISTOL,
+            ModItems.IMPROVED_ROCKET_LAUNCHER,
+            ModItems.LAPIS_COIL,
+            ModItems.LIGHTNING_RED,
+            ModItems.NETHER_BELLOWS,
+            ModItems.OBSIDIAN_SPEAR_RIFLE,
+            ModItems.OBSIDIAN_SPLINTER_PISTOL,
+            ModItems.OBSIDIAN_WITHER_RIFLE,
+            ModItems.POTATOSSER,
+            ModItems.POWDER_KNUCKLE,
+            ModItems.MODIFIED_COIN_TOSSER,
+            ModItems.MODIFIED_POWDER_KNUCKLE,
+            ModItems.RAY_OF_HOPE,
+            ModItems.REDSTONE_SPRAYER,
+            ModItems.SEED_SWEEPER,
+            ModItems.SEEDLING,
+            ModItems.SILKEN_SPINNER,
+            ModItems.SNOW_CANNON,
+            ModItems.SOUL_CAIRN,
+            ModItems.SUGAR_ENGINE,
+            ModItems.SUNRAY,
+            ModItems.THORN_SPITTER,
+            ModItems.PROXIMITY_THORN_THROWER
+        )
+
+        for (item in possiblyEmptyWeapons) {
+            weaponCanBeEmpty(item.get())
         }
 
     }
@@ -167,6 +174,20 @@ class ModItemModelProvider(
                 .end()
         }
 
+    }
+
+    private fun weaponCanBeEmpty(item: Item) {
+        val itemRl = BuiltInRegistries.ITEM.getKey(item)
+
+        val emptyModel = getBuilder(itemRl.toString() + "_empty")
+            .parent(ModelFile.UncheckedModelFile("item/generated"))
+            .texture("layer0", modLoc("item/weapon/${itemRl.path}_empty"))
+
+        weapon(item)
+            .override()
+            .predicate(isEmpty, 1f)
+            .model(emptyModel)
+            .end()
     }
 
     private fun ammoCanBeEmpty(item: Item) {

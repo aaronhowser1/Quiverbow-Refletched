@@ -1,5 +1,13 @@
 {
   "parent": "minecraft:item/generated",
+  "overrides": [
+    {
+      "model": "quiverbow_refletched:item/obsidian_spear_rifle_empty",
+      "predicate": {
+        "quiverbow_refletched:is_empty": 1.0
+      }
+    }
+  ],
   "textures": {
     "layer0": "quiverbow_refletched:item/weapon/obsidian_spear_rifle"
   }

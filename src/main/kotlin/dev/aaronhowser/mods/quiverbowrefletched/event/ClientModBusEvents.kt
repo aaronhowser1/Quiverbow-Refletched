@@ -6,6 +6,8 @@ import dev.aaronhowser.mods.quiverbowrefletched.entity.render.ArrowMortarProject
 import dev.aaronhowser.mods.quiverbowrefletched.entity.render.EnderBowGuideProjectileRenderer
 import dev.aaronhowser.mods.quiverbowrefletched.entity.render.EnderRifleProjectileRenderer
 import dev.aaronhowser.mods.quiverbowrefletched.entity.render.FrostLancerProjectileRenderer
+import dev.aaronhowser.mods.quiverbowrefletched.item.ammo.AdvancedAmmoClipItem
+import dev.aaronhowser.mods.quiverbowrefletched.item.base.AmmoClipHoldingItem
 import dev.aaronhowser.mods.quiverbowrefletched.item.base.BasicAmmoHoldingItem
 import dev.aaronhowser.mods.quiverbowrefletched.registry.ModDataComponents
 import dev.aaronhowser.mods.quiverbowrefletched.registry.ModEntityTypes
@@ -25,6 +27,7 @@ import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent
 import net.neoforged.neoforge.client.event.ModelEvent
 import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent
 import net.neoforged.neoforge.registries.DeferredHolder
+import net.neoforged.neoforge.registries.DeferredItem
 
 @EventBusSubscriber(
     modid = QuiverBowRefletched.ID,
@@ -80,24 +83,55 @@ object ClientModBusEvents {
             }
         }
 
-        val possiblyEmptyItems = listOf(
+        val possiblyEmptyBasicAmmoItems: List<DeferredItem<out BasicAmmoHoldingItem>> = listOf(
+            // Weapons
+            ModItems.AQUA_ACCELERATOR,
+
+            // Ammo
             ModItems.GOLD_MAGAZINE,
             ModItems.LARGE_NETHERRACK_MAGAZINE,
             ModItems.LARGE_REDSTONE_MAGAZINE,
             ModItems.OBSIDIAN_MAGAZINE,
             ModItems.REDSTONE_MAGAZINE,
-            ModItems.SEED_JAR,
             ModItems.SUGAR_ROD_CLIP,
             ModItems.THORN_MAGAZINE,
             ModItems.ENDER_QUARTZ_CLIP
         )
 
-        for (item in possiblyEmptyItems) {
+        for (item in possiblyEmptyBasicAmmoItems) {
             ItemProperties.register(
                 item.get(),
                 ModItemModelProvider.isEmpty
             ) { usedStack, _, _, _ ->
-                if (usedStack.getOrDefault(ModDataComponents.BASIC_AMMO_COMPONENT, 0) == 0) 1f else 0f
+                if (BasicAmmoHoldingItem.getAmmoCount(usedStack) > 0) 0f else 1f
+            }
+        }
+
+        val possiblyEmptyAdvancedAmmoItems: List<DeferredItem<out AdvancedAmmoClipItem>> = listOf(
+            ModItems.ARROW_MORTAR,
+            ModItems.SEED_JAR
+        )
+
+        for (item in possiblyEmptyAdvancedAmmoItems) {
+            ItemProperties.register(
+                item.get(),
+                ModItemModelProvider.isEmpty
+            ) { usedStack, _, _, _ ->
+                if (AdvancedAmmoClipItem.getAmmoCount(usedStack) > 0) 0f else 1f
+            }
+        }
+
+        val possiblyEmptyAdvancedAmmoClipHoldingItems = listOf(
+            ModItems.COIN_TOSSER,
+            ModItems.MODIFIED_COIN_TOSSER
+        )
+
+        for (item in possiblyEmptyAdvancedAmmoClipHoldingItems) {
+            ItemProperties.register(
+                item.get(),
+                ModItemModelProvider.isEmpty
+            ) { usedStack, _, _, _ ->
+                if (AmmoClipHoldingItem.getClipAmmo(usedStack) > 0) 0f else 1f
             }
         }
 

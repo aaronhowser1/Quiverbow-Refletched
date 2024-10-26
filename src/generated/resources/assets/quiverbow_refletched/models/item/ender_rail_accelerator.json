@@ -1,5 +1,13 @@
 {
   "parent": "minecraft:item/generated",
+  "overrides": [
+    {
+      "model": "quiverbow_refletched:item/ender_rail_accelerator_empty",
+      "predicate": {
+        "quiverbow_refletched:is_empty": 1.0
+      }
+    }
+  ],
   "textures": {
     "layer0": "quiverbow_refletched:item/weapon/ender_rail_accelerator"
   }
