@@ -58,7 +58,7 @@ object ModItems {
     val COIN_TOSSER: DeferredItem<CoinTosser> =
         register("coin_tosser") { CoinTosser(isModified = false) }
     val MODIFIED_COIN_TOSSER =
-        register("coin_tosser_modified") { GenericAmmoHoldingItem(maxAmmo = 72) }
+        register("coin_tosser_modified") { CoinTosser(isModified = true) }
     val DRAGON_BOX =
         register("dragon_box") { GenericAmmoHoldingItem(maxAmmo = 64) }
     val FOUR_HEADED_DRAGON_BOX =

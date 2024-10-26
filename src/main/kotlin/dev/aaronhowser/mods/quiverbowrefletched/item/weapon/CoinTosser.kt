@@ -16,7 +16,7 @@ class CoinTosser(
     clipItem = ModItems.GOLD_MAGAZINE.get()
 ) {
 
-    val timesToShoot = if (isModified) 4 else 9
+    private val timesToShoot = if (isModified) 4 else 9
 
     override fun use(
         level: Level,
