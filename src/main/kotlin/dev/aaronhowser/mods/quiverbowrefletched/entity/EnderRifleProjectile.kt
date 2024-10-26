@@ -10,13 +10,13 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.phys.BlockHitResult
 import net.minecraft.world.phys.EntityHitResult
 
-class EnderRifleRoundProjectile(
-    entityType: EntityType<EnderRifleRoundProjectile>,
+class EnderRifleProjectile(
+    entityType: EntityType<EnderRifleProjectile>,
     level: Level
 ) : AbstractArrow(entityType, level) {
 
     constructor(shooter: LivingEntity) : this(
-        ModEntityTypes.ENDER_RIFLE_ROUND_PROJECTILE.get(),
+        ModEntityTypes.ENDER_RIFLE_PROJECTILE.get(),
         shooter.level()
     ) {
         this.moveTo(shooter.x, shooter.eyeY, shooter.z)

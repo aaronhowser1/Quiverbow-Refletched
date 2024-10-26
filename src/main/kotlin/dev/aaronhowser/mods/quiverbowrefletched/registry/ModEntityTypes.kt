@@ -64,16 +64,6 @@ object ModEntityTypes {
                 .build("arrow_mortar_shot")
         })
 
-    val ENDER_RIFLE_ROUND_PROJECTILE: DeferredHolder<EntityType<*>, EntityType<EnderRifleRoundProjectile>> =
-        ENTITY_TYPE_REGISTRY.register("ender_rifle_round", Supplier {
-            EntityType.Builder.of(
-                ::EnderRifleRoundProjectile,
-                MobCategory.MISC
-            )
-                .sized(0.5f, 0.5f)
-                .build("ender_rifle_round")
-        })
-
     val SNOW_CANNON_PROJECTILE: DeferredHolder<EntityType<*>, EntityType<SnowCannonProjectile>> =
         ENTITY_TYPE_REGISTRY.register("snow_cannon_shot", Supplier {
             EntityType.Builder.of(
@@ -82,6 +72,26 @@ object ModEntityTypes {
             )
                 .sized(0.5f, 0.5f)
                 .build("snow_cannon_shot")
+        })
+
+    val ENDER_RIFLE_PROJECTILE: DeferredHolder<EntityType<*>, EntityType<EnderRifleProjectile>> =
+        ENTITY_TYPE_REGISTRY.register("ender_rifle_round", Supplier {
+            EntityType.Builder.of(
+                ::EnderRifleProjectile,
+                MobCategory.MISC
+            )
+                .sized(0.5f, 0.5f)
+                .build("ender_rifle_round")
+        })
+
+    val FROST_LANCER_PROJECTILE: DeferredHolder<EntityType<*>, EntityType<FrostLancerProjectile>> =
+        ENTITY_TYPE_REGISTRY.register("frost_lancer_round", Supplier {
+            EntityType.Builder.of(
+                ::FrostLancerProjectile,
+                MobCategory.MISC
+            )
+                .sized(0.5f, 0.5f)
+                .build("ender_rifle_shot")
         })
 
 }

@@ -1,10 +1,12 @@
 package dev.aaronhowser.mods.quiverbowrefletched.item.weapon
 
 import dev.aaronhowser.mods.quiverbowrefletched.config.ServerConfig
-import dev.aaronhowser.mods.quiverbowrefletched.entity.EnderRifleRoundProjectile
+import dev.aaronhowser.mods.quiverbowrefletched.entity.EnderRifleProjectile
 import dev.aaronhowser.mods.quiverbowrefletched.entity.FenFireProjectile
+import dev.aaronhowser.mods.quiverbowrefletched.entity.FrostLancerProjectile
 import dev.aaronhowser.mods.quiverbowrefletched.entity.SilkenSpinnerProjectile
 import dev.aaronhowser.mods.quiverbowrefletched.item.base.BasicAmmoHoldingItem
+import dev.aaronhowser.mods.quiverbowrefletched.registry.ModItems
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.sounds.SoundSource
 import net.minecraft.world.InteractionHand
@@ -107,9 +109,7 @@ abstract class ReloadableWeaponItem(
             maxAmmo = 8,
             barColor = 0x999999
         ) {
-            override fun getProjectile(player: Player): Projectile {
-                return SilkenSpinnerProjectile(player)
-            }
+            override fun getProjectile(player: Player): Projectile = SilkenSpinnerProjectile(player)
 
             override val projectileSpeed: Float
                 get() = ServerConfig.SILKEN_SPINNER_PROJECTILE_SPEED.get().toFloat()
@@ -124,9 +124,7 @@ abstract class ReloadableWeaponItem(
             maxAmmo = 32,
             barColor = 0xFFA500
         ) {
-            override fun getProjectile(player: Player): Projectile {
-                return FenFireProjectile(player)
-            }
+            override fun getProjectile(player: Player): Projectile = FenFireProjectile(player)
 
             override val projectileSpeed: Float
                 get() = ServerConfig.FEN_FIRE_PROJECTILE_SPEED.get().toFloat()
@@ -144,9 +142,7 @@ abstract class ReloadableWeaponItem(
             maxAmmo = 16,
             barColor = 0x5A2991
         ) {
-            override fun getProjectile(player: Player): Projectile {
-                return EnderRifleRoundProjectile(player)
-            }
+            override fun getProjectile(player: Player): Projectile = EnderRifleProjectile(player)
 
             override val projectileSpeed: Float
                 get() = ServerConfig.ENDER_RIFLE_PROJECTILE_SPEED.get().toFloat()
@@ -155,6 +151,21 @@ abstract class ReloadableWeaponItem(
                 get() = ServerConfig.ENDER_RIFLE_COOLDOWN.get()
 
             override val reloadItems: Map<Item, Int> = mapOf(Items.IRON_INGOT to 1)
+        }
+
+        val FROST_LANCER = object : ReloadableWeaponItem(
+            maxAmmo = 4,
+            barColor = 0x00FFFF
+        ) {
+            override fun getProjectile(player: Player): Projectile = FrostLancerProjectile(player)
+
+            override val projectileSpeed: Float
+                get() = ServerConfig.FROST_LANCER_PROJECTILE_SPEED.get().toFloat()
+
+            override val cooldown: Int
+                get() = ServerConfig.FROST_LANCER_COOLDOWN.get()
+
+            override val reloadItems: Map<Item, Int> = mapOf(ModItems.COLD_IRON_CLIP.get() to 4)
         }
     }
 

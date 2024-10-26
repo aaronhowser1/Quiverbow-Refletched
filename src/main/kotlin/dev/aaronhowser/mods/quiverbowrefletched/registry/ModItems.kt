@@ -23,7 +23,7 @@ object ModItems {
     val BIG_ROCKET =
         basic("big_rocket")
     val COLD_IRON_CLIP =
-        basic("cold_iron_clip")
+        register("cold_iron_clip") { Item(Item.Properties().stacksTo(16)) }
     val BOX_FLINT_DUST: DeferredItem<Item> =
         register("box_flint_dust") { Item(Item.Properties().stacksTo(8)) }
     val SEED_JAR: DeferredItem<AdvancedAmmoClipItem> =
@@ -91,8 +91,8 @@ object ModItems {
         register("ender_bow") { EnderBow() }
     val ENDER_RIFLE: DeferredItem<ReloadableWeaponItem> =
         register("ender_rifle") { ReloadableWeaponItem.ENDER_RIFLE }
-    val FROST_LANCER =
-        register("frost_lancer") { GenericAmmoHoldingItem(maxAmmo = 4) }
+    val FROST_LANCER: DeferredItem<ReloadableWeaponItem> =
+        register("frost_lancer") { ReloadableWeaponItem.FROST_LANCER }
     val OBSIDIAN_SPLINTER_PISTOL =
         register("obsidian_splinter_pistol") { GenericAmmoHoldingItem(maxAmmo = 16) }
     val OBSIDIAN_SPEAR_RIFLE =

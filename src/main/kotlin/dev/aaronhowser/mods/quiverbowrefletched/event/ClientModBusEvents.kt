@@ -4,7 +4,8 @@ import dev.aaronhowser.mods.quiverbowrefletched.QuiverBowRefletched
 import dev.aaronhowser.mods.quiverbowrefletched.datagen.model.ModItemModelProvider
 import dev.aaronhowser.mods.quiverbowrefletched.entity.render.ArrowMortarProjectileRenderer
 import dev.aaronhowser.mods.quiverbowrefletched.entity.render.EnderBowGuideProjectileRenderer
-import dev.aaronhowser.mods.quiverbowrefletched.entity.render.EnderRifleRoundProjectileRenderer
+import dev.aaronhowser.mods.quiverbowrefletched.entity.render.EnderRifleProjectileRenderer
+import dev.aaronhowser.mods.quiverbowrefletched.entity.render.FrostLancerProjectileRenderer
 import dev.aaronhowser.mods.quiverbowrefletched.item.base.BasicAmmoHoldingItem
 import dev.aaronhowser.mods.quiverbowrefletched.registry.ModDataComponents
 import dev.aaronhowser.mods.quiverbowrefletched.registry.ModEntityTypes
@@ -43,7 +44,8 @@ object ClientModBusEvents {
 
         registerEntityRenderer(ModEntityTypes.ENDER_BOW_GUIDE_PROJECTILE, ::EnderBowGuideProjectileRenderer)
         registerEntityRenderer(ModEntityTypes.ARROW_MORTAR_PROJECTILE, ::ArrowMortarProjectileRenderer)
-        registerEntityRenderer(ModEntityTypes.ENDER_RIFLE_ROUND_PROJECTILE, ::EnderRifleRoundProjectileRenderer)
+        registerEntityRenderer(ModEntityTypes.ENDER_RIFLE_PROJECTILE, ::EnderRifleProjectileRenderer)
+        registerEntityRenderer(ModEntityTypes.FROST_LANCER_PROJECTILE, ::FrostLancerProjectileRenderer)
 
         registerEntityRenderer(ModEntityTypes.AQUA_ACCELERATOR_PROJECTILE, ::ThrownItemRenderer)
         registerEntityRenderer(ModEntityTypes.SILKEN_SPINNER_PROJECTILE, ::ThrownItemRenderer)
