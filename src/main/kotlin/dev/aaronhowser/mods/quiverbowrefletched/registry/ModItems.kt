@@ -83,8 +83,8 @@ object ModItems {
         register("seedling") { GenericAmmoHoldingItem(1) }
     val POTATOSSER =
         register("potatosser") { GenericAmmoHoldingItem(maxAmmo = 14) }
-    val SNOW_CANNON: DeferredItem<SnowCannon> =
-        register("snow_cannon") { SnowCannon() }
+    val SNOW_CANNON: DeferredItem<ReloadableWeaponItem> =
+        register("snow_cannon") { ReloadableWeaponItem.SNOW_CANNON }
     val BOW_WITH_QUIVER: DeferredItem<BowWithQuiver> =
         register("bow_with_quiver") { BowWithQuiver() }
     val ENDER_BOW: DeferredItem<EnderBow> =

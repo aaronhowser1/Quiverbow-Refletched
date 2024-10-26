@@ -1,12 +1,10 @@
 package dev.aaronhowser.mods.quiverbowrefletched.item.weapon
 
 import dev.aaronhowser.mods.quiverbowrefletched.config.ServerConfig
-import dev.aaronhowser.mods.quiverbowrefletched.entity.EnderRifleProjectile
-import dev.aaronhowser.mods.quiverbowrefletched.entity.FenFireProjectile
-import dev.aaronhowser.mods.quiverbowrefletched.entity.FrostLancerProjectile
-import dev.aaronhowser.mods.quiverbowrefletched.entity.SilkenSpinnerProjectile
+import dev.aaronhowser.mods.quiverbowrefletched.entity.*
 import dev.aaronhowser.mods.quiverbowrefletched.item.base.BasicAmmoHoldingItem
 import dev.aaronhowser.mods.quiverbowrefletched.registry.ModItems
+import dev.aaronhowser.mods.quiverbowrefletched.util.OtherUtil
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.sounds.SoundSource
 import net.minecraft.world.InteractionHand
@@ -33,6 +31,8 @@ abstract class ReloadableWeaponItem(
 
     protected abstract val projectileSpeed: Float
     protected abstract val cooldown: Int
+    protected open val recoil: Double = 0.0
+    protected open val timesToShoot: Int = 1
     protected abstract val reloadItems: Map<Item, Int>
 
     override fun use(
@@ -46,24 +46,32 @@ abstract class ReloadableWeaponItem(
             return InteractionResultHolder.fail(usedStack)
         }
 
-        if (!entityUse(player, usedStack)) {
-            return InteractionResultHolder.fail(usedStack)
+        var success = true
+        for (i in 0 until timesToShoot) {
+            if (!entityUse(player, usedStack)) {
+                success = false
+                break
+            }
+
+            val projectile = getProjectile(player)
+            level.addFreshEntity(projectile)
+            projectile.shootFromRotation(
+                player,
+                player.xRot,
+                player.yRot,
+                0.0f,
+                projectileSpeed,
+                1.0f
+            )
         }
 
-        val projectile = getProjectile(player)
-        level.addFreshEntity(projectile)
-        projectile.shootFromRotation(
-            player,
-            player.xRot,
-            player.yRot,
-            0.0f,
-            projectileSpeed,
-            1.0f
-        )
+        if (!success) return InteractionResultHolder.fail(usedStack)
 
         if (!player.hasInfiniteMaterials()) {
             player.cooldowns.addCooldown(this, cooldown)
         }
+
+        OtherUtil.recoil(player, recoil)
 
         return InteractionResultHolder.sidedSuccess(usedStack, level.isClientSide)
     }
@@ -166,6 +174,30 @@ abstract class ReloadableWeaponItem(
                 get() = ServerConfig.FROST_LANCER_COOLDOWN.get()
 
             override val reloadItems: Map<Item, Int> = mapOf(ModItems.COLD_IRON_CLIP.get() to 4)
+        }
+
+        val SNOW_CANNON = object : ReloadableWeaponItem(
+            maxAmmo = 32,
+            barColor = 0xFFFFFF
+        ) {
+            override fun getProjectile(player: Player): Projectile = SnowCannonProjectile(player)
+
+            override val projectileSpeed: Float
+                get() = ServerConfig.SNOW_CANNON_PROJECTILE_SPEED.get().toFloat()
+
+            override val cooldown: Int
+                get() = ServerConfig.SNOW_CANNON_COOLDOWN.get()
+
+            override val timesToShoot: Int = 4
+
+            override val recoil: Double
+                get() = ServerConfig.SNOW_CANNON_RECOIL.get()
+
+            override val reloadItems: Map<Item, Int>
+                get() = mapOf(
+                    Items.SNOWBALL to 1,
+                    Items.SNOW_BLOCK to 4
+                )
         }
     }
 
