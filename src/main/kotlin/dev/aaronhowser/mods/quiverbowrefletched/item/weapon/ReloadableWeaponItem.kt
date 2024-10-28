@@ -4,7 +4,7 @@ import dev.aaronhowser.mods.quiverbowrefletched.config.ServerConfig
 import dev.aaronhowser.mods.quiverbowrefletched.entity.*
 import dev.aaronhowser.mods.quiverbowrefletched.item.base.BasicAmmoHoldingItem
 import dev.aaronhowser.mods.quiverbowrefletched.registry.ModItems
-import dev.aaronhowser.mods.quiverbowrefletched.util.OtherUtil
+import dev.aaronhowser.mods.quiverbowrefletched.util.WeaponUtils
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.sounds.SoundSource
 import net.minecraft.world.InteractionHand
@@ -72,7 +72,7 @@ abstract class ReloadableWeaponItem(
             player.cooldowns.addCooldown(this, cooldown)
         }
 
-        OtherUtil.recoil(player, recoil)
+        WeaponUtils.recoil(player, recoil)
 
         return InteractionResultHolder.sidedSuccess(usedStack, level.isClientSide)
     }

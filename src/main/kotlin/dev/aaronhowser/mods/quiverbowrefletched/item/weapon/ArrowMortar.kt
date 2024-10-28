@@ -5,6 +5,7 @@ import dev.aaronhowser.mods.quiverbowrefletched.entity.ArrowMortarProjectile
 import dev.aaronhowser.mods.quiverbowrefletched.item.ammo.AdvancedAmmoClipItem
 import dev.aaronhowser.mods.quiverbowrefletched.registry.ModItems
 import dev.aaronhowser.mods.quiverbowrefletched.util.OtherUtil
+import dev.aaronhowser.mods.quiverbowrefletched.util.WeaponUtils
 import net.minecraft.advancements.critereon.ItemPredicate
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResultHolder
@@ -71,7 +72,7 @@ class ArrowMortar : AdvancedAmmoClipItem(
             )
         }
 
-        OtherUtil.recoil(
+        WeaponUtils.recoil(
             player,
             ServerConfig.ARROW_MORTAR_RECOIL.get()
         )
