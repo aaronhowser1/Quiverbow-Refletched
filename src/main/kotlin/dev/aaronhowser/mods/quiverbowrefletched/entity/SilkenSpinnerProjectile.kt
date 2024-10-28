@@ -92,6 +92,8 @@ class SilkenSpinnerProjectile(
 
             level().addFreshEntity(cobwebDrop)
         }
+
+        this.discard()
     }
 
     override fun getDefaultItem(): Item {
