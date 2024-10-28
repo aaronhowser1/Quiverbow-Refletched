@@ -8,6 +8,9 @@ import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.TooltipFlag
 
+/**
+ * Knows only how much ammo it holds, but doesn't know what form that ammo takes.
+ */
 abstract class BasicAmmoHoldingItem(
     val maxAmmo: Int,
     private val barColor: Int = 0x00FF00,

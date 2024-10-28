@@ -16,6 +16,9 @@ import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.TooltipFlag
 
+/**
+ * Holds a [BasicAmmoHoldingItem]
+ */
 abstract class AmmoClipHoldingItem(
     private val clipItem: BasicAmmoClipItem,
     properties: Properties = Properties()

@@ -10,6 +10,9 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
 import net.minecraft.world.item.TooltipFlag
 
+/**
+ * Holds 8 `#arrows`, possibly spread over multiple ItemStacks.
+ */
 class ArrowBundleItem(
     properties: Properties = Properties()
         .stacksTo(64)
