@@ -6,7 +6,6 @@ import dev.aaronhowser.mods.quiverbowrefletched.item.ammo.AdvancedAmmoClipItem
 import dev.aaronhowser.mods.quiverbowrefletched.registry.ModItems
 import dev.aaronhowser.mods.quiverbowrefletched.util.OtherUtil
 import dev.aaronhowser.mods.quiverbowrefletched.util.WeaponUtils
-import net.minecraft.advancements.critereon.ItemPredicate
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResultHolder
@@ -17,7 +16,7 @@ import kotlin.random.Random
 
 class ArrowMortar : AdvancedAmmoClipItem(
     maxAmmo = 16,
-    ammoPredicate = ItemPredicate.Builder.item().of(ModItems.ARROW_BUNDLE).build(),
+    ammoPredicate = { it.item == ModItems.ARROW_BUNDLE.get() },
     properties = getDefaultProperties(64).durability(384)
 ) {
 
