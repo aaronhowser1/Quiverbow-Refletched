@@ -67,6 +67,15 @@ class ArrowMortarProjectile(
                 75f
             )
 
+            if (projectile is AbstractArrow) {
+                projectile.owner = this.owner
+
+                val owner = this.owner
+                if (owner is LivingEntity && owner.hasInfiniteMaterials()) {
+                    projectile.pickup = Pickup.CREATIVE_ONLY
+                }
+            }
+
             level().addFreshEntity(projectile)
         }
     }
