@@ -16,6 +16,10 @@ import net.minecraft.world.item.Items
 import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.level.Level
 
+/**
+ * Knows only how much ammo it holds, doesn't store the actual ItemStacks.
+ * Can only accept a single type of Item, and returns that item's default instance when emptied.
+ */
 class BasicAmmoClipItem(
     maxAmmo: Int,
     private val ammoItem: Item,

@@ -16,6 +16,9 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.TooltipFlag
 import net.neoforged.neoforge.common.Tags
 
+/**
+ * Stores the ItemStacks of ammo it holds.
+ */
 open class AdvancedAmmoClipItem(
     protected val maxAmmo: Int,
     private val barColor: Int = 0x00FF00,
