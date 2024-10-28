@@ -4,6 +4,8 @@ import dev.aaronhowser.mods.quiverbowrefletched.config.ServerConfig
 import dev.aaronhowser.mods.quiverbowrefletched.entity.CoinTosserProjectile
 import dev.aaronhowser.mods.quiverbowrefletched.item.base.AmmoClipHoldingItem
 import dev.aaronhowser.mods.quiverbowrefletched.registry.ModItems
+import dev.aaronhowser.mods.quiverbowrefletched.util.WeaponUtils
+import net.minecraft.sounds.SoundEvents
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResultHolder
 import net.minecraft.world.entity.player.Player
@@ -29,10 +31,9 @@ class CoinTosser(
             return InteractionResultHolder.fail(usedStack)
         }
 
-        var success = true
+        var success = false
         for (i in 0 until timesToShoot) {
             if (!tryEntityUse(player, usedStack)) {
-                success = false
                 break
             }
 
@@ -46,6 +47,8 @@ class CoinTosser(
                 ServerConfig.COIN_TOSSER_PROJECTILE_SPEED.get().toFloat(),
                 if (isModified) 4f else 9f
             )
+
+            success = true
         }
 
         if (!success) return InteractionResultHolder.fail(usedStack)
@@ -53,6 +56,11 @@ class CoinTosser(
         if (!player.hasInfiniteMaterials()) {
             player.cooldowns.addCooldown(this, ServerConfig.COIN_TOSSER_COOLDOWN.get())
         }
+
+        WeaponUtils.gunSounds(
+            player,
+            WeaponUtils.SoundInfo(SoundEvents.ITEM_BREAK, 1f, 3f)
+        )
 
         return InteractionResultHolder.sidedSuccess(usedStack, level.isClientSide)
     }
