@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.quiverbowrefletched.item.weapon
 import dev.aaronhowser.mods.quiverbowrefletched.config.ServerConfig
 import dev.aaronhowser.mods.quiverbowrefletched.item.base.BasicAmmoHoldingItem
 import dev.aaronhowser.mods.quiverbowrefletched.registry.ModItems
+import dev.aaronhowser.mods.quiverbowrefletched.util.WeaponUtils
 import net.minecraft.core.BlockPos
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.sounds.SoundSource
@@ -101,6 +102,11 @@ class FlintDuster : BasicAmmoHoldingItem(
                 usedStack
             )
         ) {
+            WeaponUtils.gunSounds(
+                player,
+                WeaponUtils.SoundInfo(SoundEvents.BAT_TAKEOFF, 0.5f, 0.6f)
+            )
+
             InteractionResultHolder.sidedSuccess(usedStack, level.isClientSide)
         } else {
             InteractionResultHolder.fail(usedStack)
