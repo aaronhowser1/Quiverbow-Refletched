@@ -74,6 +74,25 @@ class BowWithQuiver : AdvancedAmmoClipItem(
         if (livingEntity !is Player) return
         if (level !is ServerLevel) return
 
+        val ammoStack: ItemStack
+        val ammoStacks = getAmmoStacks(stack)
+
+        if (ammoStacks.isEmpty()) {
+            if (livingEntity.hasInfiniteMaterials()) {
+                ammoStack = Items.ARROW.defaultInstance
+            } else {
+                return
+            }
+        } else {
+            val randomArrowIndex = Random.nextInt(ammoStacks.size)
+            ammoStack = ammoStacks[randomArrowIndex].copyWithCount(1)
+
+            if (!livingEntity.hasInfiniteMaterials()) {
+                ammoStacks[randomArrowIndex].shrink(1)
+                setAmmo(stack, OtherUtil.flattenStacks(ammoStacks))
+            }
+        }
+
         var i = this.getUseDuration(stack, livingEntity) - timeLeft
         i = EventHooks.onArrowLoose(stack, level, livingEntity, i, true)
         if (i < 0) return
@@ -81,20 +100,12 @@ class BowWithQuiver : AdvancedAmmoClipItem(
         val powerForTime = BowItem.getPowerForTime(i)
         if (powerForTime < 0.1) return
 
-        val ammoStacks = getAmmoStacks(stack)
-
-        val randomArrowIndex = Random.nextInt(ammoStacks.size)
-        val randomArrowStack = ammoStacks[randomArrowIndex].copyWithCount(1)
-        ammoStacks[randomArrowIndex].shrink(1)
-
-        setAmmo(stack, OtherUtil.flattenStacks(ammoStacks))
-
         (Items.BOW as BowItem).shoot(
             level,
             livingEntity,
             livingEntity.usedItemHand,
             stack,
-            listOf(randomArrowStack),
+            listOf(ammoStack),
             powerForTime * 3f,
             1f,
             powerForTime == 1f,
