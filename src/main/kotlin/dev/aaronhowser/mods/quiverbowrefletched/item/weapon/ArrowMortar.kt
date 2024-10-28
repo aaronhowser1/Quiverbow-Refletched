@@ -7,6 +7,7 @@ import dev.aaronhowser.mods.quiverbowrefletched.registry.ModItems
 import dev.aaronhowser.mods.quiverbowrefletched.util.OtherUtil
 import dev.aaronhowser.mods.quiverbowrefletched.util.WeaponUtils
 import net.minecraft.advancements.critereon.ItemPredicate
+import net.minecraft.sounds.SoundEvents
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResultHolder
 import net.minecraft.world.entity.player.Player
@@ -75,6 +76,13 @@ class ArrowMortar : AdvancedAmmoClipItem(
         WeaponUtils.recoil(
             player,
             ServerConfig.ARROW_MORTAR_RECOIL.get()
+        )
+
+        WeaponUtils.gunSounds(
+            player,
+            WeaponUtils.SoundInfo(SoundEvents.PISTON_EXTEND, 1f, 2f),
+            WeaponUtils.SoundInfo(SoundEvents.UI_BUTTON_CLICK.value(), 0.6f, 2f),
+            ServerConfig.ARROW_MORTAR_COOLDOWN.get()
         )
 
         return InteractionResultHolder.sidedSuccess(usedStack, level.isClientSide)

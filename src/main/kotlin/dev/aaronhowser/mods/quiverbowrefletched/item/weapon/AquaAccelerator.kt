@@ -3,6 +3,8 @@ package dev.aaronhowser.mods.quiverbowrefletched.item.weapon
 import dev.aaronhowser.mods.quiverbowrefletched.config.ServerConfig
 import dev.aaronhowser.mods.quiverbowrefletched.entity.AquaAcceleratorProjectile
 import dev.aaronhowser.mods.quiverbowrefletched.item.base.BasicAmmoHoldingItem
+import dev.aaronhowser.mods.quiverbowrefletched.util.WeaponUtils
+import net.minecraft.sounds.SoundEvents
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResultHolder
 import net.minecraft.world.entity.player.Player
@@ -43,6 +45,8 @@ class AquaAccelerator : BasicAmmoHoldingItem(
             ServerConfig.AQUA_ACCELERATOR_PROJECTILE_SPEED.get().toFloat(),
             1.0f
         )
+
+        WeaponUtils.gunSounds(player, WeaponUtils.SoundInfo(SoundEvents.PISTON_EXTEND, 1f, 2f))
 
         return InteractionResultHolder.sidedSuccess(usedStack, level.isClientSide)
     }
