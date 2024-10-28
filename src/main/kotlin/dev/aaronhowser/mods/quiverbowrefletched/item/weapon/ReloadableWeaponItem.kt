@@ -36,6 +36,9 @@ abstract class ReloadableWeaponItem(
     protected open val inaccuracy: Float = 1F
     protected abstract val reloadItems: Map<Item, Int>
 
+    protected open val shootSound: WeaponUtils.SoundInfo? = null
+    protected open val readySound: WeaponUtils.SoundInfo? = null
+
     override fun use(
         level: Level,
         player: Player,
@@ -47,10 +50,9 @@ abstract class ReloadableWeaponItem(
             return InteractionResultHolder.fail(usedStack)
         }
 
-        var success = true
+        var success = false
         for (i in 0 until timesToShoot) {
             if (!tryEntityUse(player, usedStack)) {
-                success = false
                 break
             }
 
@@ -64,9 +66,20 @@ abstract class ReloadableWeaponItem(
                 projectileSpeed,
                 inaccuracy
             )
+
+            success = true
         }
 
         if (!success) return InteractionResultHolder.fail(usedStack)
+
+        if (shootSound != null) {
+            WeaponUtils.gunSounds(
+                player,
+                shootSound!!,
+                readySound,
+                cooldown
+            )
+        }
 
         if (!player.hasInfiniteMaterials()) {
             player.cooldowns.addCooldown(this, cooldown)
@@ -126,7 +139,9 @@ abstract class ReloadableWeaponItem(
             override val cooldown: Int
                 get() = ServerConfig.SILKEN_SPINNER_COOLDOWN.get()
 
-            override val reloadItems: Map<Item, Int> = mapOf(Items.COBWEB to 1)
+            override val reloadItems = mapOf(Items.COBWEB to 1)
+
+            override val shootSound = WeaponUtils.SoundInfo(SoundEvents.PISTON_EXTEND, 1f, 2f)
         }
 
         val FEN_FIRE = object : ReloadableWeaponItem(
@@ -141,7 +156,7 @@ abstract class ReloadableWeaponItem(
             override val cooldown: Int
                 get() = ServerConfig.FEN_FIRE_COOLDOWN.get()
 
-            override val reloadItems: Map<Item, Int> = mapOf(
+            override val reloadItems = mapOf(
                 Items.GLOWSTONE to 4,
                 Items.GLOWSTONE_DUST to 1
             )
@@ -159,7 +174,10 @@ abstract class ReloadableWeaponItem(
             override val cooldown: Int
                 get() = ServerConfig.ENDER_RIFLE_COOLDOWN.get()
 
-            override val reloadItems: Map<Item, Int> = mapOf(Items.IRON_INGOT to 1)
+            override val reloadItems = mapOf(Items.IRON_INGOT to 1)
+
+            override val shootSound = WeaponUtils.SoundInfo(SoundEvents.ITEM_BREAK, 1f, 0.5f)
+            override val readySound = WeaponUtils.SoundInfo(SoundEvents.UI_BUTTON_CLICK.value(), 0.7f, 0.2f)
         }
 
         val FROST_LANCER = object : ReloadableWeaponItem(
@@ -174,7 +192,11 @@ abstract class ReloadableWeaponItem(
             override val cooldown: Int
                 get() = ServerConfig.FROST_LANCER_COOLDOWN.get()
 
-            override val reloadItems: Map<Item, Int> = mapOf(ModItems.COLD_IRON_CLIP.get() to 4)
+            override val reloadItems = mapOf(ModItems.COLD_IRON_CLIP.get() to 4)
+
+            override val shootSound = WeaponUtils.SoundInfo(SoundEvents.GENERIC_EXPLODE.value(), 0.8f, 1.5f)
+            override val readySound = WeaponUtils.SoundInfo(SoundEvents.UI_BUTTON_CLICK.value(), 0.7f, 0.2f)
+
         }
 
         val SNOW_CANNON = object : ReloadableWeaponItem(
@@ -199,6 +221,8 @@ abstract class ReloadableWeaponItem(
                     Items.SNOWBALL to 1,
                     Items.SNOW_BLOCK to 4
                 )
+
+            override val shootSound = WeaponUtils.SoundInfo(SoundEvents.ITEM_BREAK, 1f, 0.5f)
         }
     }
 
