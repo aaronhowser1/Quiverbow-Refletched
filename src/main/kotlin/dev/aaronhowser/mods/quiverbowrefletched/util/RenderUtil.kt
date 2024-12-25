@@ -70,9 +70,9 @@ object RenderUtil {
         // Fill borders with black
 
         guiGraphics.fill(RenderType.guiOverlay(), 0, bottomEdge, guiGraphics.guiWidth(), guiGraphics.guiHeight(), -90, -16777216)
-        guiGraphics.fill(RenderType.guiOverlay(), 0, 0, guiGraphics.guiWidth(), offsetY, -90,  -16777216)
-        guiGraphics.fill(RenderType.guiOverlay(), 0, offsetY, offsetX, bottomEdge, -90,  -16777216)
-        guiGraphics.fill(RenderType.guiOverlay(), rightEdge, offsetY, guiGraphics.guiWidth(), bottomEdge, -90,  -16777216)
+        guiGraphics.fill(RenderType.guiOverlay(), 0, 0, guiGraphics.guiWidth(), offsetY, -90, -16777216)
+        guiGraphics.fill(RenderType.guiOverlay(), 0, offsetY, offsetX, bottomEdge, -90, -16777216)
+        guiGraphics.fill(RenderType.guiOverlay(), rightEdge, offsetY, guiGraphics.guiWidth(), bottomEdge, -90, -16777216)
     }
 
     fun renderTexture(
